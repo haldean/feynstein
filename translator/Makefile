@@ -20,4 +20,4 @@ lex.yy.c: y.tab.h
 	${LEX} lexer.l
 
 clean:
-	rm *.o *.c *.h ${EXEC}
+	rm *.o *.c *.h *.gch ${EXEC}
