@@ -1,0 +1,29 @@
+#!/bin/bash
+
+usage() {
+    echo feync - The Feynstein compiler
+    echo Usage: feync [source file]
+}
+
+if [ $# -eq 0 ]; then
+    usage
+    exit
+fi
+
+if [ ! -f translator/feync ] || [ "$2" = recomp ]; then
+    cd translator
+    make clean > /dev/null
+    make > /dev/null || exit
+    cd ..
+fi
+
+if [ ! -f $1 ]; then
+    usage
+    exit
+fi
+
+translator/feync < $1 > $1.java && \
+    translator/jacobe -overwrite $1.java 2> /dev/null && \
+    mv $1.java $1.sc && rm $1.java.jacobe && exit 0
+
+exit 1
