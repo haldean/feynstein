@@ -9,6 +9,19 @@ def method_for(method):
 
     return '@Override private void %s' % method
 
+# Matches strings of whitespace
+whitespace = re.compile(r'[\n\t ]+')
+
+# Matches open or close braces and puts the matched brace in group 0
+braces = re.compile(r'([{}])')
+
+# Matches single-line comments of the // variety
+line_comments = re.compile(r'//.*')
+
+# Matches multiline comments, but only after all newlines have been
+# removed.
+multiline_comments = re.compile(r'/\*.*?\*/')
+
 # Matches lowercase keywords.
 keyword = re.compile(r'[a-z]+')
 
