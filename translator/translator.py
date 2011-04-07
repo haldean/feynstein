@@ -1,5 +1,23 @@
 #!/usr/bin/env python3
 
+'''
+The Feynstein compiler. (Mostly) written early one morning, with the
+help of lots of beer. I'm going to bed now, I think.
+
+TODO
+
+-- Comments (both in this code and supporting them) 
+
+-- Check to ensure that all of the blocks are there (maybe emit a
+   warning if they aren't?)
+
+-- Test how this mangles strings when they contain something that
+   looks like either builder syntax or shape accessors. Shape
+   accessors should already be immune to string literals, but it's
+   untested.
+
+'''
+
 import matchers, re, sys
 
 class SyntaxException(Exception): pass
