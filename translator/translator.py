@@ -6,8 +6,6 @@ help of lots of beer. I'm going to bed now, I think.
 
 TODO
 
--- Comments
-
 -- Test how this mangles strings when they contain something that
    looks like either builder syntax or shape accessors. Shape
    accessors should already be immune to string literals, but it's

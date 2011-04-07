@@ -20,6 +20,7 @@ def check_blocks(scene):
     if not scene.get_by_tag('forces'):
         raise SyntaxException('No forces block found.')
     if not scene.get_by_tag('properties'):
-        print('Warning: no properties block found. Inserting empty properties block.')
+        raise SyntaxException('No properties block found.')
     if not scene.get_by_tag('onFrame'):
-        print('Warning: no onFrame block found. Inserting empty frame update method.')
+        print('Warning: no onFrame block found. ' +
+              'An empty frame update method will be used.')

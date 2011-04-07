@@ -20,7 +20,7 @@ class Block:
         Convert a block to Java syntax.
         '''
 
-        rest = '  ' * tab_level + '%s {\n' % (self.block_id)
+        rest = '  ' * tab_level + '%s { \n' % (self.block_id)
         for child in self.children:
             if isinstance(child, Block):
                 rest += child.block_to_string(tab_level+1)

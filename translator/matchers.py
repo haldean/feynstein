@@ -9,6 +9,15 @@ def method_for(method):
 
     return '@Override private void %s' % method
 
+def for_unit(unit_name):
+    '''
+    Returns a pattern that matches a unit value, with the value in
+    group 0.
+    '''
+
+    pattern = r'(\d+\.?\d*(?:[eE]\d+)?)\s*%ss?' % unit_name
+    return re.compile(pattern)
+
 # Matches strings of whitespace
 whitespace = re.compile(r'[\n\t ]+')
 
@@ -32,7 +41,7 @@ identifier = re.compile(r'[a-zA-Z][a-zA-Z0-9_]*')
 # it is a good guess. A negative match means that an expression is
 # conclusively not in builder syntax. A positive match means that an
 # expression probably uses builder syntax.
-builder_hint = re.compile(r'\s*[a-zA-Z][a-zA-Z0-9_]*\(' +
+builder_hint = re.compile(r'[a-zA-Z][a-zA-Z0-9_]*\(' +
                           r'[a-zA-Z][a-zA-Z0-9_]*=[^=]')
 
 # Matches an identifier followed by a paren-wrapped string. First

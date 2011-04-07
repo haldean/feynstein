@@ -2,7 +2,7 @@
 
 from translator import SyntaxException
 
-import blocks, matchers, re
+import blocks, matchers, re, units
 
 def translate_block_id(block):
     '''
@@ -86,8 +86,10 @@ def is_builder(expr):
     expression that contains builder syntax. Note that the result of
     this method is not guaranteed to be correct.
     '''
-
-    return re.search(matchers.builder_hint, expr) != None
+    match = re.search(matchers.builder_hint, expr)
+    if match and expr.count('"', 0, match.start()) % 2 == 0:
+        return True
+    return False
 
 def translate_builder(expr):
     '''
@@ -117,7 +119,7 @@ def translate_builder(expr):
             nest_level += 1
         elif char == ')':
             nest_level -= 1
-        elif (char == ',' or char == ')') and nest_level == 0:
+        elif (char == ',' or char == ')') and nest_level == 0 and in_quote == False:
             params.append(param_list[last_boundary:i])
             last_boundary = i
 
@@ -126,7 +128,7 @@ def translate_builder(expr):
 
     # Process each key-value pair
     for i, p in enumerate(params):
-        attr, eql, value = p.strip().partition('=')
+        attr, eql, value = p.strip(' ,').partition('=')
 
         # If the value starts with a parenthesis, we remove a set of
         # parentheses from the outside of this statement. This is for
@@ -194,6 +196,7 @@ def translate(root):
 
     translate_ids(root)
     disperse_tags(root)
+    translate_shape_accessors(root)
     translate_builders(root)
     translate_block_directives(root)
-    translate_shape_accessors(root)
+    units.translate_units(root)
