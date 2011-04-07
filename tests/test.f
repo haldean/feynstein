@@ -1,15 +1,27 @@
 MyScene {
-    public int sum(int i, int j) {
-	return i + j;
+    public void trickyParts(int i, int j) {
+	/* Make sure that builder syntax is untouched in string
+	 * literals */
+	String thisString = "Builder(key=vale)";
+
+	/* Make sure that builder syntax doesn't effect the equality
+	 * operator. */
+	Builder(key==value);
+
+	/* Compare to the actual output outside quotes. */
+	Builder(key=value);
+
+	/* Make sure that shape accessors don't mangle string
+	 * literal. */
+	String x = "#testString";
     }
 	
     shapes {
-	shape Cylinder(radius=10, location=(20, 30));
-	booleanFunc(willit==work);
+	shape Cylinder(name="cyl1", radius=10cm, location=(20mi, 30yd));
 
-	if (4 + 2 = 6) {
-	    // a line comment
-	    print("Hey look!"); // sneaky comment.
+	// Nested blocks
+	if (4 newtons + 2.7e10 forcelb == 6 dynes) {
+	    print("Something happened");
 	}
     }
 
@@ -17,12 +29,12 @@ MyScene {
      * Creates some super-special forces.
      */
     forces {
-	force Force(location=(123, 123), someProperty=aVariable);
-	Shape(asdf="#anotherTest");
+	force SpringForce(actsOn=#cyl1, length=10mi, strength=4);
     }
 
+    properties { }
+
     onFrame {
-	#myShape;
-	#aDifferentShape;
+	#myShape.set_radius(20);
     }
 }
