@@ -1,9 +1,9 @@
 import java.awt.*;
 import javax.media.opengl.*;
-import java.swing.*
+import java.swing.*;
 import com.sun.opengl.util.*;
 
-public class  extends GLCanvas implements GLEventListener {
+public class FeynsteinRenderer extends GLCanvas implements GLEventListener {
 
     private static GLU glu;
     private FPSAnimator animator;
@@ -79,7 +79,7 @@ public class  extends GLCanvas implements GLEventListener {
         System.exit(0);
     }
     
-    public void setTriangleLocation(a1,b1,c1,a2,b2,c2,a3,b3,c3){
+    public void setTriangleLocation(float a1,float b1,float c1,float a2,float b2,float c2,float a3,float b3,float c3){
     	x1 = a1;
     	y1 = b1;
     	z1 = c1;
