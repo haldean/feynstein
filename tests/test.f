@@ -17,7 +17,8 @@ MyScene {
     }
 	
     shapes {
-	shape Cylinder(name="cyl1", radius=10cm, location=(20mi, 30yd));
+	shape Cylinder(name="cyl1", radius=10cm, 
+		       location=(20mi, 30yd), height=50cm);
 
 	// Nested blocks
 	if (4 newtons + 2.7e10 forcelb == 6 dynes) {

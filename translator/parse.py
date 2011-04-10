@@ -62,7 +62,11 @@ def parse(exprs):
     to ensure that the syntax tree is rooted at a single node.
     '''
 
-    return blocks.Block(None, make_blocks(exprs), 'root')
+    root = blocks.Block(None, make_blocks(exprs), 'root')
+    root.children.insert(0, 'import feynstein.shapes.*;')
+    root.children.insert(0, 'import feynstein.forces.*;')
+    root.children.insert(0, 'import feynstein.*;')
+    return root
 
 def make_blocks(exprs):
     '''

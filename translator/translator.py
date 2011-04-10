@@ -20,7 +20,7 @@ class SyntaxException(Exception):
     '''
     pass
 
-import blocks, matchers, parse, re, sys, syntax, translate
+import blocks, matchers, os, parse, re, sys, syntax, translate
 
 def create_java(root):
     '''
@@ -29,28 +29,41 @@ def create_java(root):
 
     return '\n'.join([str(x) for x in root.children])
 
-def feync(source):
+def feync(source, path):
     '''
-    Compile a source file.
+    Compile a source file, returning a tuple with the Java source code
+    and the name of the scene.
     '''
 
     exprs = parse.split(source)
     root = parse.parse(exprs)
     translate.translate(root)
     syntax.check_syntax(root)
-    return create_java(root)
 
-def main(infile, outfile):
+    package = os.path.dirname(path).replace('/', '.')
+    root.children.insert(0, 'package %s;' % package)
+
+    scene_name = root.get_by_tag('scene').name
+    main_method = 'public static void main' + \
+        '(String[] args) { new %s(); }' % scene_name
+    root.get_by_tag('scene').children.append(main_method)
+    return create_java(root), scene_name
+
+def main(infile):
     '''
     Compile infile and save the output to outfile.
     '''
 
     with open(infile) as f:
         source = f.read()
-    with open(outfile, 'w') as f:
-        f.write(feync(source))
+
+    source, scene_name = feync(source, infile)
+    output_file = '%s/%s.java' % (os.path.dirname(infile), scene_name)
+
+    with open(output_file, 'w') as f:
+        f.write(source)
+    print('Compiled to %s' % output_file)
 
 if __name__ == '__main__':
     infile = sys.argv[1]
-    outfile = '%s.scene' % sys.argv[1]
-    main(infile, outfile)
+    main(infile)

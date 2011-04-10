@@ -14,6 +14,7 @@ class Block:
         self.block_id = block_id
         self.children = children
         self.tag = tag
+        self.name = None
 
     def block_to_string(self, tab_level=0):
         '''
@@ -36,7 +37,8 @@ class Block:
         '''
 
         for child in self.children:
-            if child.tag == tag: return child
+            if isinstance(child, Block) and child.tag == tag: 
+                return child
         return None
 
     def __str__(self):

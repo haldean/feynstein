@@ -7,7 +7,7 @@ def method_for(method):
     Return a private instance method for a given method signature.
     '''
 
-    return '@Override private void %s' % method
+    return '@Override protected void %s' % method
 
 def for_unit(unit_name):
     '''

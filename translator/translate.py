@@ -23,6 +23,7 @@ def translate_root_id(block):
     corresponding class definition.
     '''
 
+    block.name = block.block_id
     block.block_id = 'public class %s extends Scene' % block.block_id
     block.tag = 'scene'
 
