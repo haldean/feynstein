@@ -3,14 +3,6 @@
 '''
 The Feynstein compiler. (Mostly) written early one morning, with the
 help of lots of beer. I'm going to bed now, I think.
-
-TODO
-
--- Test how this mangles strings when they contain something that
-   looks like either builder syntax or shape accessors. Shape
-   accessors should already be immune to string literals, but it's
-   untested.
-
 '''
 
 class SyntaxException(Exception): 
@@ -51,7 +43,8 @@ def feync(source, path):
 
 def main(infile):
     '''
-    Compile infile and save the output to outfile.
+    Compile infile and return the filename of the generated Java
+    source code.
     '''
 
     with open(infile) as f:
@@ -63,6 +56,8 @@ def main(infile):
     with open(output_file, 'w') as f:
         f.write(source)
     print('Compiled to %s' % output_file)
+    
+    return output_file
 
 if __name__ == '__main__':
     infile = sys.argv[1]
