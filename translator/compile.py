@@ -8,11 +8,12 @@ def get_classpath():
 def compile_feynstein(infile):
     java_source = translator.main(infile)
     subprocess.call(['javac', '-classpath', get_classpath(), java_source])
+    return java_source
 
 def run_feynstein(infile):
-    subprocess.call(['java', '-classpath', get_classpath(), java_source])
+    package = '.'.join(infile.replace('.', '/').split('/')[:-1])
+    subprocess.call(['java', '-classpath', get_classpath(), package])
 
 if __name__ == '__main__':
     infile = sys.argv[1]
-    compile_feynstein(infile)
-    run_feynstein(infile)
+    run_feynstein(compile_feynstein(infile))
