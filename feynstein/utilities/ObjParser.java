@@ -39,7 +39,7 @@ public class ObjParser {
 		triangles = new ArrayList<Triangle>();
 	}
 
-	public void parse() throws FileNotFoundException {
+	public Mesh parse() throws FileNotFoundException {
 		long startTime = Calendar.getInstance().getTimeInMillis();
 		
 		BufferedReader buffer = new BufferedReader(
@@ -110,6 +110,8 @@ public class ObjParser {
 
 		long endTime = Calendar.getInstance().getTimeInMillis();
 		System.out.println("End time " + (endTime - startTime));
+
+		return null;
 	}
 
 	public Triangle parseTriangleFace(String line, int faceLength) {
