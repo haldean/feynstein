@@ -39,12 +39,4 @@ public abstract class Scene {
     protected abstract void createForces();
 
     protected void onFrame() {}
-
-    public static void main(String args[]) {
-	try {
-	    Scene s = (Scene) (new ClassGetter()).getCurrentClass().newInstance();
-	} catch (Exception e) {
-	    print("Failed.");
-	}
-    }
 }

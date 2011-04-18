@@ -1,3 +1,7 @@
 package feynstein.forces;
 
-public abstract class Force {}
+import feynstein.Built;
+
+public abstract class Force<E extends Force> extends Built<E> {
+    protected String objectType = "Force";
+}

@@ -2,7 +2,9 @@ package feynstein.forces;
 
 import feynstein.shapes.*;
 
-public class SpringForce extends Force {
+public class SpringForce extends Force<SpringForce> {
+    protected String objectType = "SpringForce";
+
     private Shape actsOn;
     private double length, strength;
 
@@ -19,10 +21,5 @@ public class SpringForce extends Force {
     public SpringForce set_strength(double strength) {
 	this.strength = strength;
 	return this;
-    }
-
-    public String toString() {
-	return "SpringForce\n\tactsOn: " + actsOn.getName() + 
-	    "\n\tlength: " + length + "\n\tstrength: " + strength;
     }
 }
