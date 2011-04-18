@@ -1,0 +1,4 @@
+#!/bin/sh
+
+export CLASSPATH=`find ./libs/ -name '*.jar' | xargs | sed "s/ /:/g"`:. 
+javac $1 && java -Djava.library.path=/lib/:libs/ `echo $1 | sed "s+/+.+g" | sed "s/\.java$//"`
