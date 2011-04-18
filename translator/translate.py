@@ -79,7 +79,8 @@ def disperse_tags(root):
             raise SyntaxException('Source must contain a scene.')
     
     for child in root.children:
-        set_child_tags(child, child.tag)
+        if isinstance(child, blocks.Block):
+            set_child_tags(child, child.tag)
 
 def is_builder(expr):
     '''
@@ -141,7 +142,7 @@ def translate_builder(expr):
 
     # Return a formatted string, leaving the prefix to the builder
     # syntax intact.
-    return '%s(new %s()).%s' % (expr[:match.start()], class_name, '.'.join(params))
+    return '%s(new %s()).%s.compile()' % (expr[:match.start()], class_name, '.'.join(params))
 
 def translate_builders(block):
     '''
@@ -190,11 +191,24 @@ def translate_shape_accessors(block):
             block.children[i] = '"'.join(bits)
         else: translate_shape_accessors(expr)
 
+def translate_empty_blocks(block):
+    '''
+    Recursively translate the "block none;" construct.
+    '''
+
+    for i, expr in enumerate(block.children):
+        if not isinstance(expr, blocks.Block):
+            if expr.endswith(' none'):
+                block.children[i] = blocks.Block(expr[:-5], [])
+        else:
+            translate_empty_blocks(expr)
+
 def translate(root):
     '''
     Perform all translation tasks on a syntax tree.
     '''
 
+    translate_empty_blocks(root)
     translate_ids(root)
     disperse_tags(root)
     translate_shape_accessors(root)
