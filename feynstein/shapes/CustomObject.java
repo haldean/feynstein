@@ -3,9 +3,11 @@ package feynstein.shapes;
 import java.io.File;
 
 public class CustomObject extends Shape<CustomObject> {
-    protected String objectType = "CustomObject";
-
     private File sourceFile;
+
+    public CustomObject() {
+	objectType = "CustomObject";
+    }
     
     public CustomObject set_file(String filename) {
 	try {

@@ -1,9 +1,11 @@
 package feynstein.shapes;
 
 public class Cylinder extends Shape<Cylinder> {
-    protected String objectType = "Cylinder";
-
     private double radius1, radius2, height;
+
+    public Cylinder() {
+	objectType = "Cylinder";
+    }
     
     public Cylinder set_radius(double r) {
 	radius1 = r;

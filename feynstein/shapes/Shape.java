@@ -5,7 +5,10 @@ import feynstein.Built;
 public abstract class Shape<E extends Shape> extends Built<E> {
     protected double location_x, location_y, mass;
     protected String name = null;
-    protected String objectType = "Shape";
+
+    public Shape() {
+	objectType = "Shape";
+    }
 
     public String getName() {
 	return name;

@@ -3,10 +3,12 @@ package feynstein.forces;
 import feynstein.shapes.*;
 
 public class SpringForce extends Force<SpringForce> {
-    protected String objectType = "SpringForce";
-
     private Shape actsOn;
     private double length, strength;
+
+    public SpringForce() {
+	objectType = "SpringForce";
+    }
 
     public SpringForce set_actsOn(Shape s) {
 	actsOn = s;
