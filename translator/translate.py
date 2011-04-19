@@ -93,7 +93,7 @@ def is_builder(expr):
         return True
     return False
 
-def translate_builder(expr):
+def translate_builder(expr, parent_ref=False):
     '''
     Given an expresion in builder syntax, output the corresponding
     Java translation.
@@ -140,9 +140,17 @@ def translate_builder(expr):
 
         params[i] = 'set_%s(%s)' % (attr, value)
 
+    # If a parent reference is required, add one. This is usually only
+    # necessary for properties.
+    if parent_ref:
+        constructor_args = 'this';
+    else:
+        constrcutor_args = '';
+
     # Return a formatted string, leaving the prefix to the builder
     # syntax intact.
-    return '%s(new %s()).%s.compile()' % (expr[:match.start()], class_name, '.'.join(params))
+    return '%s(new %s(%s)).%s.compile()' % (
+        expr[:match.start()], class_name, constructor_args, '.'.join(params))
 
 def translate_builders(block):
     '''
@@ -154,7 +162,7 @@ def translate_builders(block):
             translate_builders(expr)
         else:
             if is_builder(expr):
-                block.children[i] = translate_builder(expr)
+                block.children[i] = translate_builder(expr, block.tag == 'properties')
 
 def translate_block_directives(block):
     '''
@@ -171,6 +179,8 @@ def translate_block_directives(block):
                 block.children[i] = 'addShape(%s)' % expr[len('shape '):]
             elif block.tag == 'forces' and expr.startswith('force '):
                 block.children[i] = 'addForce(%s)' % expr[len('force '):]
+            elif block.tag == 'properties' and expr.startswith('property '):
+                block.children[i] = 'addProperty(%s)' % expr[len('property '):]
         else: translate_block_directives(expr)
 
 def translate_shape_accessors(block):

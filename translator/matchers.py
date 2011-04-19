@@ -15,7 +15,7 @@ def for_unit(unit_name):
     group 0.
     '''
 
-    pattern = r'(\d+\.?\d*(?:[eE]\d+)?)\s*%ss?' % unit_name
+    pattern = r'(\d+\.?\d*(?:[eE]\d+)?)\s*%s[^a-zA-Z]' % unit_name
     return re.compile(pattern)
 
 # Matches strings of whitespace
