@@ -145,7 +145,7 @@ def translate_builder(expr, parent_ref=False):
     if parent_ref:
         constructor_args = 'this';
     else:
-        constrcutor_args = '';
+        constructor_args = '';
 
     # Return a formatted string, leaving the prefix to the builder
     # syntax intact.
