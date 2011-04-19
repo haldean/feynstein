@@ -6,8 +6,6 @@ import java.io.IOException;
 import java.io.FileReader;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
 import java.util.StringTokenizer;
 
 public class ObjParser {
@@ -15,75 +13,72 @@ public class ObjParser {
 	private final String FACE = "f";
 	private final String TEXCOORD = "vt";
 	private final String NORMAL = "vn";
-	//private final String OBJECT = "o";
+	// Shit we may need later for materials
+	/*
+	 private final String OBJECT = "o";
 	private final String MATERIAL_LIB = "mtllib";
 	private final String USE_MATERIAL = "usemtl";
 	private final String NEW_MATERIAL = "newmtl";
 	private final String DIFFUSE_TEX_MAP = "map_Kd";
-
-	private HashMap<String, ObjMaterial> materialMap;
-	private ArrayList<Vector3d> vertices;
-	private ArrayList<Vector3d> normals;
-	private ArrayList<Triangle> triangles;
+	//private HashMap<String, ObjMaterial> materialMap;
+	 */
+	
 	private String fileName;
 
+	private ArrayList<Particle> verts;
+	private ArrayList<Edge> edges;
+	private ArrayList<Triangle> tris;
+	private ArrayList<Vector3d> normals;
+	
+	private Mesh mesh;
+	
 	/**
 	 * Creates a new OBJ parser instance
 	 * 
 	 */
 	public ObjParser(String fileName) throws FileNotFoundException {
 		this.fileName = fileName;
-		materialMap = new HashMap<String, ObjMaterial>();
-		vertices = new ArrayList<Vector3d>();
-		normals = new ArrayList<Vector3d>();
-		triangles = new ArrayList<Triangle>();
+		mesh = parse();
+		//materialMap = new HashMap<String, ObjMaterial>();
 	}
 
-	public Mesh parse() throws FileNotFoundException {
-		long startTime = Calendar.getInstance().getTimeInMillis();
+	public Mesh getMesh() {
+		return mesh;
+	}
+	
+	private Mesh parse() throws FileNotFoundException {
+		verts = new ArrayList<Particle>();
+		edges = new ArrayList<Edge>();
+		tris = new ArrayList<Triangle>();
+		normals = new ArrayList<Vector3d>();
 		
 		BufferedReader buffer = new BufferedReader(
 				new FileReader(fileName));
 		String line;
-		//co = new ParseObjectData(vertices, texCoords, normals);
-		//parseObjects.add(co);
-
-		//System.out.println("Start parsing object " + resourceID);
-		System.out.println("Start time " + startTime);
-
 		try {
 			while ((line = buffer.readLine()) != null) {
 				// remove duplicate whitespace
-				// line = line.replaceAll("\\s+", " ");
-				// String[] parts = line.split(" ");
 				StringTokenizer parts = new StringTokenizer(line, " ");
 				int numTokens = parts.countTokens();
 				if (numTokens == 0)
 					continue;
 				String type = parts.nextToken();
 
+				// add vertex to particles list
 				if (type.equals(VERTEX)) {
-					//System.out.println("ADD Vertex: "+line);
-					
 					double x = Float.parseFloat(parts.nextToken());
 					double y = Float.parseFloat(parts.nextToken());
 					double z = Float.parseFloat(parts.nextToken());
 					
 					Vector3d vertex = new Vector3d(x,y,z);
-					vertices.add(vertex);
+					verts.add(new Particle(vertex));
+					
 				} else if (type.equals(FACE)) {
-					if (numTokens == 4) {
-						//System.out.println("ADD Face: "+line);
-						//co.numFaces++;
-						//co.faces.add(new ObjFace(line, currentMaterialKey, 3));
-					} else if (numTokens == 5) {
-						System.out.println("ADD Face 5: "+line);
-						//co.numFaces += 2;
-						//co.faces.add(new ObjFace(line, currentMaterialKey, 4));
-					}
-					parseTriangleFace(line, numTokens-1);
+					
+					Triangle newTri = parseTriangleFace(line, numTokens-1);
+					tris.add(newTri);
+					
 				} else if (type.equals(NORMAL)) {
-					System.out.println("Store normal: "+line);
 					double x = Float.parseFloat(parts.nextToken());
 					double y = Float.parseFloat(parts.nextToken());
 					double z = Float.parseFloat(parts.nextToken());
@@ -108,13 +103,10 @@ public class ObjParser {
 			e.printStackTrace();
 		}
 
-		long endTime = Calendar.getInstance().getTimeInMillis();
-		System.out.println("End time " + (endTime - startTime));
-
-		return null;
+		return new Mesh(verts, edges, tris);
 	}
 
-	public Triangle parseTriangleFace(String line, int faceLength) {
+	private Triangle parseTriangleFace(String line, int faceLength) {
 		boolean emptyVt = line.indexOf("//") > -1;
 		if(emptyVt) {
 			line = line.replace("//", "/");
@@ -127,9 +119,7 @@ public class ObjParser {
 		boolean hasn = partLength == 3 || (partLength == 2 && emptyVt);
 		
 		int [] v = new int[faceLength];
-		//if (hasuv)
 		int [] uv = new int[faceLength];
-		//if (hasn)
 		int [] n = new int[faceLength];
 		
 		for (int i = 0; i < faceLength; i++) {
@@ -153,6 +143,7 @@ public class ObjParser {
 		return t;
 	}
 	
+	// Materials shit we may need later
 	/*private void readMaterialLib(String libID) {
 		StringBuffer resourceID = new StringBuffer(packageID);
 		StringBuffer libIDSbuf = new StringBuffer(libID);
@@ -207,7 +198,7 @@ public class ObjParser {
 			e.printStackTrace();
 		}
 	}
-	 */
+	
 	
 	private class ObjMaterial {
 		public String name;
@@ -218,5 +209,5 @@ public class ObjParser {
 		public ObjMaterial(String name) {
 			this.name = name;
 		}
-	}
+	}*/
 }

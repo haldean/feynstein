@@ -2,8 +2,8 @@ package feynstein.geometry;
 import feynstein.utilities.Vector3d;
 
 public class Triangle {
-    int [] idx;
-	Vector3d [] normals;
+    private int [] idx;
+	private Vector3d [] normals;
 	
     public Triangle(int [] idx) {
 		this.idx = idx;
@@ -14,5 +14,11 @@ public class Triangle {
 		normals[0] = n1;
 		normals[1] = n2;
 		normals[2] = n3;
+	}
+	
+	public int getIdx(int index) {
+		if(index < 3)
+			return idx[index];
+		return -1;
 	}
 }
