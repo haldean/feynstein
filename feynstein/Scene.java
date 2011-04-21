@@ -2,6 +2,7 @@ package feynstein;
 
 import feynstein.forces.*;
 import feynstein.geometry.*;
+import feynstein.properties.*;
 import feynstein.shapes.*;
 import feynstein.utilities.*;
 
@@ -12,11 +13,13 @@ import java.util.Map;
 public abstract class Scene {
 	Map<String, Shape> shapes;
     Map<String, Force> forces;
+	ArrayList<Property> properties;
 	Mesh mesh;
 
     public Scene() {
 		shapes = new HashMap<String, Shape>();
 		forces = new HashMap<String, Force>();
+		properties = new ArrayList<Property>();
 		setProperties();
 		createShapes();
 		createForces();
@@ -89,8 +92,10 @@ public abstract class Scene {
     protected abstract void createShapes();
     protected abstract void createForces();
 
-    protected void onFrame() {
+    public void onFrame() {
 		// TODO(sainsley) : call this from inside the renderer's update function
 		// integrator.step();
+		for(Property property : properties) 
+			property.update();
 	}
 }
