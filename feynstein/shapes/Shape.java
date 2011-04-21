@@ -6,6 +6,12 @@ public abstract class Shape<E extends Shape> extends Built<E> {
     protected double location_x, location_y, mass;
     protected String name = null;
 
+	/*
+	 * Suggestion: Each Shape class takes a Mesh instance 
+	 * in its constructor. My constructing this shape, we
+	 * automatically append it's vertices and triangles
+	 * to the mesh.
+	 */
     public Shape() {
 	objectType = "Shape";
     }
@@ -38,4 +44,5 @@ public abstract class Shape<E extends Shape> extends Built<E> {
 
 	return (E) this;
     }
+	
 }
