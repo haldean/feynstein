@@ -6,10 +6,11 @@ import feynstein.utilities.*;
 
 import java.util.ArrayList;
 
-public class SemiImplicitEuler extends Integrator {
+public class SemiImplicitEuler extends Integrator<SemiImplicitEuler> {
 	
 	public SemiImplicitEuler(double stepSize, Scene scene) {
 		super(stepSize,scene);
+		objectType = "SemiImplicitEuler";
 	}
 	
 	public void update() {
