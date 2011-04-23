@@ -4,11 +4,15 @@ import feynstein.*;
 import feynstein.properties.*;
 
 public abstract class Integrator extends Property<Integrator> {
-	final double h;
+    double h;
 	
-	public Integrator(double stepSize, Scene scene) {
-		super(scene);
-		objectType = "Integrator";
-		h = stepSize;
-	}
+    public Integrator(Scene scene) {
+	super(scene);
+	objectType = "Integrator";
+	h = 0.01;
+    }
+
+    public Integrator set_stepSize(double step) {
+	h = step;
+    }
 }
