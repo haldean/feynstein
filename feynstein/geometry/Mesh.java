@@ -8,6 +8,12 @@ public class Mesh {
 	private ArrayList<Edge> edges;
 	private ArrayList<Triangle> triangles;
 	
+	public Mesh() {
+		this.particles = new ArrayList<Particle>();
+		this.edges = new ArrayList<Edge>();
+		this.triangles = new ArrayList<Triangle>();
+	}
+	
 	public Mesh(ArrayList<Particle> particles, ArrayList<Edge> edges, 
 				ArrayList<Triangle> triangles) {
 		this.particles = particles;
