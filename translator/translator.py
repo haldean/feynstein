@@ -36,9 +36,13 @@ def feync(source, path):
     root.children.insert(0, 'package %s;' % package)
 
     scene_name = root.get_by_tag('scene').name
-    main_method = 'public static void main' + \
-        '(String[] args) { new %s(); }' % scene_name
-    root.get_by_tag('scene').children.append(main_method)
+
+    main_file = "%s/main.txt" % os.path.dirname(__file__)
+    with open(main_file) as f:
+        main_method = f.read().replace('SceneClass', scene_name);
+        if main_method:
+            root.get_by_tag('scene').children.append(main_method)
+
     return create_java(root), scene_name
 
 def main(infile):
