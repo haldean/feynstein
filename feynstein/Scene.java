@@ -101,10 +101,9 @@ public abstract class Scene {
     }
 
     public void update() {
-	// TODO(sainsley) : call this from inside the renderer's update function
-	// integrator.step();
-	for (Property property : properties) 
-	    property.update();
+		for (Property property : properties) 
+			property.update();
+		onFrame();
     }
 
     public abstract void setProperties();
