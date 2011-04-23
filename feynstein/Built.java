@@ -8,6 +8,7 @@ public abstract class Built<E extends Built> {
      */
     protected String objectType;
 
+    @SuppressWarnings("unchecked")
     public E compile() {
 	return (E) this;
     }

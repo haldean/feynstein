@@ -208,26 +208,6 @@ public class Renderer implements GLEventListener, KeyListener, MouseListener, Mo
         System.exit(0);
     }
  
-    public static void main(String[] args) throws FileNotFoundException {
-		String filename = "scenes/ReefKnot.obj";
-		ObjParser parser = new ObjParser(filename);
-		TestScene scene = new TestScene();
-		scene.setMesh(parser.getMesh());
-        canvas.addGLEventListener(new Renderer(scene));
-        frame.add(canvas);
-        frame.setSize(640, 480);
-        frame.setUndecorated(true);
-        frame.setExtendedState(Frame.MAXIMIZED_BOTH);
-        frame.addWindowListener(new WindowAdapter() {
-		public void windowClosing(WindowEvent e) {
-		    exit();
-		}
-	    });
-        frame.setVisible(true);
-        animator.start();
-        canvas.requestFocus();
-    }
- 
     public void dispose(GLAutoDrawable gLDrawable) {
         // do nothing
     }
