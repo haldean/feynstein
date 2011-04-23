@@ -4,7 +4,6 @@ import glob, os, subprocess, sys, translator
 
 def get_classpath():
     libs = ':'.join(glob.glob('./libs/*.jar'))
-    print(libs)
     return '.:%s:%s' % (os.getcwd(), libs)
 
 def get_jvm_vars():
