@@ -28,9 +28,12 @@ public abstract class Scene {
 	shapes = new HashMap<String, Shape>();
 	forces = new HashMap<String, Force>();
 	properties = new ArrayList<Property>();
+
 	setProperties();
 	createShapes();
 	createForces();
+
+	mesh = new Mesh();
     }
 
     protected static void print(String str) {
