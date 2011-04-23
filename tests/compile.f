@@ -4,7 +4,7 @@ MyScene {
 		       location=(20mi, 30yd), height=50m);
 
 	// Nested blocks
-	if (4 newtons + 2.7e10 forcelb == 6 dynes) {
+	if (4 newton + 2.7e10 forcelb == 6 dyne) {
 	    print("Something happened");
 	}
     }
