@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 from translator import SyntaxException
+import matchers
 
 def check_syntax(root):
     '''
@@ -15,12 +16,13 @@ def check_blocks(scene):
     Ensure that all of the correct blocks are present.
     '''
 
-    # if not scene.get_by_tag('shapes'):
-    #     raise SyntaxException('No shapes block found.')
-    # if not scene.get_by_tag('forces'):
-    #     raise SyntaxException('No forces block found.')
-    # if not scene.get_by_tag('properties'):
-    #     raise SyntaxException('No properties block found.')
+    if not scene.get_by_tag('shapes'):
+        raise SyntaxException('No shapes block found.')
+    if not scene.get_by_tag('forces'):
+        raise SyntaxException('No forces block found.')
+    if not scene.get_by_tag('properties'):
+        raise SyntaxException('No properties block found.')
     if not scene.get_by_tag('onFrame'):
         print('Warning: no onFrame block found. ' +
               'An empty frame update method will be used.')
+        scene.children.append('%s() {}' % matchers.method_for('onFrame'))

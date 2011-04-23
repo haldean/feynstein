@@ -4,7 +4,7 @@ import re
 
 from translator import SyntaxException
 
-import blocks, matchers
+import blocks, imports, matchers
 
 def split(source):
     '''
@@ -63,9 +63,8 @@ def parse(exprs):
     '''
 
     root = blocks.Block(None, make_blocks(exprs), 'root')
-    root.children.insert(0, 'import feynstein.shapes.*;')
-    root.children.insert(0, 'import feynstein.forces.*;')
-    root.children.insert(0, 'import feynstein.*;')
+    for imp in imports.get_imports():
+        root.children.insert(0, 'import %s;' % imp)
     return root
 
 def make_blocks(exprs):

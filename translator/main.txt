@@ -1,31 +1,17 @@
-import feynstein.renderer.Renderer;
-
-import java.awt.Frame;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-
-import javax.media.opengl.awt.GLCanvas;
-
-import com.jogamp.opengl.util.Animator;
-
-static GLCanvas canvas = new GLCanvas();
- 
-static Frame frame = new Frame("Feynstein");
- 
-static Animator animator = new Animator(canvas);
-
 public static void main(String[] args) {
-	canvas.addGLEventListener(new Renderer(SceneClass));
-        frame.add(canvas);
-        frame.setSize(640, 480);
-        frame.setUndecorated(true);
-        frame.setExtendedState(Frame.MAXIMIZED_BOTH);
-        frame.addWindowListener(new WindowAdapter() {
-		public void windowClosing(WindowEvent e) {
-		    exit();
-		}
-	    });
-        frame.setVisible(true);
-        animator.start();
-        canvas.requestFocus();
-    }
+    SceneClass scene = new SceneClass();
+    canvas.addGLEventListener(new Renderer(scene));
+
+    frame.add(canvas);
+    frame.setSize(640, 480);
+    frame.setUndecorated(true);
+    frame.setExtendedState(Frame.MAXIMIZED_BOTH);
+    frame.addWindowListener(new WindowAdapter() {
+	    public void windowClosing(WindowEvent e) {
+		System.exit(0);
+	    }
+	});
+    frame.setVisible(true);
+    animator.start();
+    canvas.requestFocus();
+}

@@ -1,9 +1,14 @@
 #!/usr/bin/env python3
 
-import os, subprocess, sys, translator
+import glob, os, subprocess, sys, translator
 
 def get_classpath():
-    return '.:%s' % os.getcwd()
+    libs = ':'.join(glob.glob('./libs/*.jar'))
+    print(libs)
+    return '.:%s:%s' % (os.getcwd(), libs)
+
+def get_jvm_vars():
+    return '-Djava.library.path=/lib/:libs/'
 
 def compile_feynstein(infile):
     java_source = translator.main(infile)
@@ -13,7 +18,8 @@ def compile_feynstein(infile):
 
 def run_feynstein(infile):
     package = '.'.join(infile.replace('.', '/').split('/')[:-1])
-    subprocess.call(['java', '-classpath', get_classpath(), package])
+    subprocess.call(['java', '-classpath', get_classpath(), 
+                     get_jvm_vars(), package])
 
 if __name__ == '__main__':
     infile = sys.argv[1]

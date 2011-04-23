@@ -7,7 +7,7 @@ def method_for(method):
     Return a private instance method for a given method signature.
     '''
 
-    return '@Override protected void %s' % method
+    return '@Override public void %s' % method
 
 def for_unit(unit_name):
     '''
@@ -15,7 +15,7 @@ def for_unit(unit_name):
     group 0.
     '''
 
-    pattern = r'(\d+\.?\d*(?:[eE]\d+)?)\s*%s[^a-zA-Z]' % unit_name
+    pattern = r'(\d+\.?\d*(?:[eE]\d+)?)\s*%s(?=[^a-zA-Z])' % unit_name
     return re.compile(pattern)
 
 # Matches strings of whitespace

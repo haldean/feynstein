@@ -21,16 +21,20 @@ def create_java(root):
 
     return '\n'.join([str(x) for x in root.children])
 
+def src2blocks(source):
+    exprs = parse.split(source)
+    root = parse.parse(exprs)
+    translate.translate(root)
+    syntax.check_syntax(root)
+    return root
+
 def feync(source, path):
     '''
     Compile a source file, returning a tuple with the Java source code
     and the name of the scene.
     '''
 
-    exprs = parse.split(source)
-    root = parse.parse(exprs)
-    translate.translate(root)
-    syntax.check_syntax(root)
+    root = src2blocks(source)
 
     package = os.path.dirname(path).replace('/', '.')
     root.children.insert(0, 'package %s;' % package)
