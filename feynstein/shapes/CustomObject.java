@@ -20,12 +20,8 @@ public class CustomObject extends Shape<CustomObject> {
     }
     
     public CustomObject set_file(String filename) {
-	try {
-	    sourceFile = new File(filename);
-	    return this;
-	} catch (IOException e) {
-	    throw new RuntimeException(e);
-	}
+	sourceFile = new File(filename);
+	return this;
     }
 
     public CustomObject compile() {

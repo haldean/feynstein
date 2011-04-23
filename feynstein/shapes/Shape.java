@@ -1,8 +1,11 @@
 package feynstein.shapes;
 
 import feynstein.Built;
+import feynstein.geometry.Mesh;
 
 public abstract class Shape<E extends Shape> extends Built<E> {
+    public static Mesh mesh;
+
     protected double location_x, location_y, mass;
     protected String name = null;
 

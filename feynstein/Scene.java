@@ -25,6 +25,9 @@ public abstract class Scene {
     protected Mesh mesh;
 
     public Scene() {
+	mesh = new Mesh();
+	Shape.mesh = mesh;
+
 	shapes = new HashMap<String, Shape>();
 	forces = new HashMap<String, Force>();
 	properties = new ArrayList<Property>();
@@ -32,8 +35,6 @@ public abstract class Scene {
 	setProperties();
 	createShapes();
 	createForces();
-
-	mesh = new Mesh();
     }
 
     protected static void print(String str) {
