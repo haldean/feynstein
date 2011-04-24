@@ -43,19 +43,19 @@ public abstract class Shape<E extends Shape> extends Built<E> {
     }
 
     @SuppressWarnings("unchecked")
-    public E finalizeShape() {
+    public E compile() {
 	if (name == null) {
 	    throw new RuntimeException("Name missing for " + objectType
 				       + "\nYou must specify the name attribute "
 				       + "for all shapes.");
 	}
 
-	compile();
+	compileShape();
 	return (E) this;
     }
 	
     @SuppressWarnings("unchecked")
-    public E compile() {
+    public E compileShape() {
 	/* Can be overridden by shapes if they require it. */
 	return (E) this;
     }

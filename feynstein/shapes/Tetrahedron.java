@@ -33,7 +33,7 @@ public class Tetrahedron extends Shape<Tetrahedron> {
 	return this;
     }
 
-    public Tetrahedron compile() {
+    public Tetrahedron compileShape() {
 	/* The particles are just the four points. */
 	ArrayList<Particle> particles = new ArrayList<Particle>(
 	    Arrays.asList(new Particle[] {

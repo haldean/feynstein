@@ -27,7 +27,7 @@ public class Cube extends Shape<Cube> {
 	return this;
     }
 
-    public Cube compile() {
+    public Cube compileShape() {
 	/*
 	 * A cube is defined by 8 points; below, these are referred to
 	 * in terms of the "reference corner" (which is the point that the

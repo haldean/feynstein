@@ -49,7 +49,7 @@ public class Cylinder extends Shape<Cylinder> {
 	return this;
     }
 
-    public Cylinder compile() {
+    public Cylinder compileShape() {
 	ArrayList<Particle> particles = new ArrayList<Particle>();
 	ArrayList<Edge> edges = new ArrayList<Edge>();
 	ArrayList<Triangle> triangles = new ArrayList<Triangle>();
