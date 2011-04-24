@@ -33,4 +33,11 @@ public class SpringForce extends Force<SpringForce> {
 		return this;
     }
 	
+	public double[] getLocalForce(double [] globalPositions,
+								  double [] globalVelocities,
+								  double [] globalMasses) {
+		int n = stencil.size();
+		if(localForce == null)
+			localForce = new double[3*n];
+	}
 }

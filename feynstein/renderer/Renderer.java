@@ -100,7 +100,7 @@ public class Renderer implements GLEventListener, KeyListener, MouseListener, Mo
         // increasing rotation for the next iteration                                 
         rotateT += 0.2f; 
 		if(!paused)
-			scene.onFrame();
+			scene.update();
     }
  
     public void displayChanged(GLAutoDrawable gLDrawable, boolean modeChanged, boolean deviceChanged) {

@@ -24,6 +24,12 @@ public abstract class Scene {
     protected Map<String, Force> forces;
     protected ArrayList<Property> properties;
     protected Mesh mesh;
+	
+	double[] globalForces;
+	double[] globalPositions;
+	double[] globalVelocities;
+	double[] globalMasses;
+	
 
     public Scene() {
 	mesh = new Mesh();
@@ -35,6 +41,12 @@ public abstract class Scene {
 	setProperties();
 	createShapes();
 	createForces();
+		
+	globalForces = new double[3*mesh.size()];
+	globalPositions = new double[3*mesh.size()];
+	globalVelocities = new double[3*mesh.size()];
+	globalMasses = new double[3*mesh.size()];
+		
     }
 
     protected static void print(String str) {
@@ -53,6 +65,7 @@ public abstract class Scene {
 
     public void addForce(Force f) {
 	print("Adding a " + f.toString());
+		forces.put(f.toString(), f);
     }
 	
 	public void addProperty(Property p) {
@@ -65,37 +78,52 @@ public abstract class Scene {
      * potentials, evaluates each force potential, and then 
      * update a global force magnitude list 
      */	
-    public ArrayList<Vector3d> globalForceMagnitude() {
-	ArrayList<Vector3d> F = new ArrayList<Vector3d>();
-				
-	// TODO(sainsley): implement this and change this to an array of size n
-	// and flatten into 3n array
-	/*
-	  C++ implementation for future reference
-		 
-	  int n = X.getn();
-	  Vector F (n);
-	  //initialize forces to 0
-	  for(int i = 0; i < n; i++){
-	  F[i] = 0;
-	  }
-	  //for each force potential
-	  for(int i = 0; i < (int)g_forces.size(); i++){
-	  Force current_force = g_forces[i];
-	  //get the local force vector
-	  Vector local_force = get_localForce(current_force, X, V);
-	  //add to the global force vector at cooresponding particle
-	  //indicies
-	  for(int j = 0; j < (int)current_force.stencil.size(); j++){
-	  F[3*current_force.stencil[j]] += local_force[3*j];
-	  F[3*current_force.stencil[j]+1] += local_force[3*j+1];
-	  F[3*current_force.stencil[j]+2] += local_force[3*j+2];
-	  }
-	  }
-	  return F;
-	*/
+    public double[] globalForceMagnitude() {
 		
-	return F;
+		// build global force, position, velocity, and mass vectors
+		// this will be convient when we get to implicit time stepping
+		for(int i = 0; i < mesh.size(); i++) {
+			// clear global fores
+			globalForces[3*i] = 0;
+			globalForces[3*i+1] = 0;
+			globalForces[3*i+2] = 0;
+			// get global positions
+			globalPositions[3*i] = mesh.getParticles().get(i).getPos().x();
+			globalPositions[3*i+1] = mesh.getParticles().get(i).getPos().y();
+			globalPositions[3*i+2] = mesh.getParticles().get(i).getPos().z();
+			// get global velocitiyes
+			globalVelocities[3*i] = mesh.getParticles().get(i).getVel().x();
+			globalVelocities[3*i+1] = mesh.getParticles().get(i).getVel().y();
+			globalVelocities[3*i+2] = mesh.getParticles().get(i).getVel().z();
+			// get global masses
+			globalMasses[3*i] = mesh.getParticles().get(i).getMass();
+			globalMasses[3*i+1] = mesh.getParticles().get(i).getMass();
+			globalMasses[3*i+2] = mesh.getParticles().get(i).getMass();
+		}
+		
+		//for each force potential
+		for(Force force : forces.values()){
+			//get the local force vector
+			double [] localForce = force.getLocalForce(globalPositions,
+								     globalVelocities, globalMasses);
+			//add to the global force vector at cooresponding particle
+			//indicies
+			if(force.isGlobal()) {
+				for(int i = 0; i < localForce.length; i++){
+					globalForces[3*i] += localForce[3*i];
+					globalForces[3*i+1] += localForce[3*i+1];
+					globalForces[3*i+2] += localForce[3*i+2];
+				}
+			} else {
+				for(int i = 0; i < localForce.length; i++){
+					globalForces[3*force.getStencilIdx(i)] += localForce[3*i];
+					globalForces[3*force.getStencilIdx(i)+1] += localForce[3*i+1];
+					globalForces[3*force.getStencilIdx(i)+2] += localForce[3*i+2];
+				}
+			}
+		}
+		
+		return globalForces;
     }
 	
     public Mesh getMesh() {
