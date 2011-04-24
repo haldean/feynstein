@@ -27,6 +27,10 @@ public class Particle {
 		return fixed;
 	}
 	
+	public void setFixed(boolean fixed) {
+		this.fixed = fixed;
+	}
+	
 	public Vector3d getPos() {
 		return pos;
 	}

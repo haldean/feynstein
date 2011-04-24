@@ -39,5 +39,25 @@ public class SpringForce extends Force<SpringForce> {
 		int n = stencil.size();
 		if(localForce == null)
 			localForce = new double[3*n];
+		
+		for(int i = 0; i < stencil.size(); i += stencilSize) {
+			//edge vectors xi and xj
+			double xi, xj, yi, yj, zi, zj;
+			xi = globalPositions[3*stencil.get(i)];
+			yi = globalPositions[3*stencil.get(i)+1];
+			zi = globalPositions[3*stencil.get(i)+2];
+			xj = globalPositions[3*stencil.get(i+1)];
+			yj = globalPositions[3*stencil.get(i+1)+1];
+			zj = globalPositions[3*stencil.get(i+1)+2];
+			double normEij = Math.sqrt((xi - xj)*(xi - xj) + (yi - yj)*(yi - yj) + (zi - zj)*(zi - zj));
+			localForce[3*i] = -(strength*(xi - xj)*(-length + normEij))/(length*normEij);
+			localForce[3*i+1] = -(strength*(yi - yj)*(-length + normEij))/(length*normEij);
+			localForce[3*i+2] = -(strength*(zi - zj)*(-length + normEij))/(length*normEij);
+			localForce[3*i+3] = -localForce[3*i];
+			localForce[3*i+4] = -localForce[3*i+1];
+			localForce[3*i+5] = -localForce[3*i+2];
+		}
+		
+		return localForce;
 	}
 }
