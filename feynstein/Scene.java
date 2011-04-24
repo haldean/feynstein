@@ -27,7 +27,6 @@ public abstract class Scene {
 
     public Scene() {
 	mesh = new Mesh();
-	Shape.mesh = mesh;
 
 	shapes = new HashMap<String, Shape>();
 	forces = new HashMap<String, Force>();
@@ -43,13 +42,10 @@ public abstract class Scene {
     }
 
     public void addShape(Shape s) {
-	print("Adding a " + s.toString());
-	shapes.put(s.getName(), s);
-	// TODO (sainsley): append global mesh when adding a shape
-	// TODO (sainsley): define an ObjShape class that takes
-	// a file name as a param and creates a shape
-	// that way, parsed meshes can be included with other objects
-    }
+		print("Adding a " + s.toString());
+		shapes.put(s.getName(), s);
+		mesh.append(s.getLocalMesh());
+	}
 
     public Shape getShape(String name) {
 	return shapes.get(name);
@@ -60,7 +56,8 @@ public abstract class Scene {
     }
 	
 	public void addProperty(Property p) {
-	print("Adding a " + p.toString());
+		print("Adding a " + p.toString());
+		properties.add(p);
 	}
 
     /**

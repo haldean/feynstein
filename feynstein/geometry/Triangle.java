@@ -5,7 +5,14 @@ public class Triangle {
     private int [] idx;
 	private Vector3d [] normals;
 	
-    public Triangle(int [] idx) {
+	public Triangle(int idx0, int idx1, int idx2) {
+		idx = new int [3];
+		idx[0] = idx0;
+		idx[1] = idx1;
+		idx[2] = idx2;
+    }
+	
+	public Triangle(int [] idx) {
 		this.idx = idx;
     }
 	
