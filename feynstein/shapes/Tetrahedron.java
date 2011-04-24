@@ -35,10 +35,12 @@ public class Tetrahedron extends Shape<Tetrahedron> {
     }
 
     public Tetrahedron compile() {
+	/* The particles are just the four points. */
 	List<Particle> particles = Arrays.asList(new Particle[] {
 		new Particle(point1), new Particle(point2), 
 		new Particle(point3), new Particle(point4)});
 
+	/* Edges exist between every pair of particles. */
 	List<Edge> edges = new ArrayList<Edge>();
 	for (int i=0; i<4; i++) {
 	    for (int j=0; j<4; j++) {
@@ -46,16 +48,10 @@ public class Tetrahedron extends Shape<Tetrahedron> {
 	    }
 	}
 
-	List<Triangle> triangles = new ArrayList<Triangle>();
-	for (int i=0; i<4; i++) {
-	    for (int j=0; j<4; j++) {
-		for (int k=0; k<4; k++) {
-		    if (i != j && j != k && i != k) {
-			triangles.add(new Triangle(i, j, k));
-		    }
-		}
-	    }
-	}
+	/* Four triangles (all possible combinations of four take three) */
+	List<Triangle> triangles = Arrays.asList(new Triangle[] {
+		new Triangle(0,1,2), new Triangle(0,1,3),
+		new Triangle(0,2,3), new Triangle(1,2,3)});
 
 	localMesh = new Mesh(particles, edges, triangles);
 	return this;
