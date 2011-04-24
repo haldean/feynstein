@@ -43,7 +43,7 @@ public abstract class Shape<E extends Shape> extends Built<E> {
     }
 
     @SuppressWarnings("unchecked")
-    public E compile() {
+    public final E compile() {
 	if (name == null) {
 	    throw new RuntimeException("Name missing for " + objectType
 				       + "\nYou must specify the name attribute "

@@ -39,7 +39,7 @@ public class CustomObject extends Shape<CustomObject> {
 	return this;
     }
 
-    public CustomObject compile() {
+    public CustomObject compileShape() {
 	if (sourceFile == null) {
 	    throw new RuntimeException("You must specify the file " +
 				       "attribute of a CustomObject.");

@@ -30,12 +30,15 @@ public class RegularPolygon extends Shape<RegularPolygon> {
 	ArrayList<Edge> edges = new ArrayList<Edge>();
 	ArrayList<Triangle> triangles = new ArrayList<Triangle>();
 
+	/* The center is the location plus the radius in the X and Y
+	 * direction. */
 	Vector3d point, center = location.plus(new Vector3d(radius, radius, 0));
 	particles.add(new Particle(center));
 
 	double theta = 2 * Math.PI / (double) verteces;
 	int index = -1;
 
+	/* Sweep through the polygon and add the verteces. */
 	for (int i=0; i<verteces; i++) {
 	    index = particles.size();
 	    point = center.plus(new Vector3d(radius * Math.cos(theta * i),
