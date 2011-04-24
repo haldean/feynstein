@@ -6,6 +6,8 @@ import feynstein.utilities.Vector3d;
 import java.util.ArrayList;
 import java.util.List;
 
+/* TODO haldean: support two-radius cylinders */
+
 public class Cylinder extends Shape<Cylinder> {
     private double radius1, radius2, height;
 
@@ -48,23 +50,22 @@ public class Cylinder extends Shape<Cylinder> {
     }
 
     public Cylinder compile() {
-	List<Particle> particles = new ArrayList<Particle>();
-	List<Edge> edges = new ArrayList<Edge>();
-	List<Triangle> triangles = new ArrayList<Triangle>();
+	ArrayList<Particle> particles = new ArrayList<Particle>();
+	ArrayList<Edge> edges = new ArrayList<Edge>();
+	ArrayList<Triangle> triangles = new ArrayList<Triangle>();
 
 	List<Vector3d> bottom_ring = new ArrayList<Vector3d>();
 
 	Vector3d point;
-	double r = radius1,
-	    theta = 2 * Math.PI / (double) circle_verts;
+	double theta = 2 * Math.PI / (double) circle_verts;
 	
 	/* Generate the bottom cap. */
 	Vector3d bottom_center = location.plus(new Vector3d(radius1, radius1, 0));
 	particles.add(new Particle(bottom_center));
 
 	for (int i=0; i<circle_verts; i++) {
-	    point = bottom_center.plus(new Vector3d(r * Math.cos(theta * i),
-						    r * Math.sin(theta * i), 0));
+	    point = bottom_center.plus(new Vector3d(radius1 * Math.cos(theta * i),
+						    radius1 * Math.sin(theta * i), 0));
 	    int index = particles.size();
 	    particles.add(new Particle(point));
 	    bottom_ring.add(point);
@@ -100,7 +101,8 @@ public class Cylinder extends Shape<Cylinder> {
 	 * corresponding pairs of adjacent points on the caps. */
 	for (bottom_index = 0; bottom_index < top_center_index-1; bottom_index++) {
 	    top_index = particles.size();
-	    point = bottom_ring.get(bottom_index).plus(height_vector);
+	    point = top_center.plus(new Vector3d(radius2 * Math.cos(theta * bottom_index),
+						 radius2 * Math.sin(theta * bottom_index), 0));
 
 	    /* Add the particle and its edge to the corresponding
 	     * particle in the bottom cap. */

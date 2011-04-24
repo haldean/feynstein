@@ -2,12 +2,11 @@ package feynstein.geometry;
 import feynstein.utilities.Vector3d;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Mesh {
-    private List<Particle> particles;
-    private List<Edge> edges;
-    private List<Triangle> triangles;
+    private ArrayList<Particle> particles;
+    private ArrayList<Edge> edges;
+    private ArrayList<Triangle> triangles;
 	
     public Mesh() {
 	this.particles = new ArrayList<Particle>();
@@ -15,22 +14,22 @@ public class Mesh {
 	this.triangles = new ArrayList<Triangle>();
     }
 	
-    public Mesh(List<Particle> particles, List<Edge> edges, 
-		List<Triangle> triangles) {
+    public Mesh(ArrayList<Particle> particles, ArrayList<Edge> edges, 
+		ArrayList<Triangle> triangles) {
 	this.particles = particles;
 	this.edges = edges;
 	this.triangles = triangles;
     }
 	
-    public List<Particle> getParticles() {
+    public ArrayList<Particle> getParticles() {
 	return particles;
     }
 	
-    public List<Edge> getEdges() {
+    public ArrayList<Edge> getEdges() {
 	return edges;
     }
 	
-    public List<Triangle> getTriangles() {
+    public ArrayList<Triangle> getTriangles() {
 	return triangles;
     }
 	
