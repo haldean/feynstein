@@ -3,6 +3,7 @@ package feynstein;
 import feynstein.forces.*;
 import feynstein.geometry.*;
 import feynstein.properties.*;
+import feynstein.properties.integrators.*;
 import feynstein.shapes.*;
 import feynstein.utilities.*;
 
@@ -57,6 +58,10 @@ public abstract class Scene {
     public void addForce(Force f) {
 	print("Adding a " + f.toString());
     }
+	
+	public void addProperty(Property p) {
+	print("Adding a " + p.toString());
+	}
 
     /**
      * This method steps through the list of local force 

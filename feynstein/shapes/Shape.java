@@ -5,6 +5,7 @@ import feynstein.geometry.Mesh;
 
 public abstract class Shape<E extends Shape> extends Built<E> {
     public static Mesh mesh;
+	protected Mesh localMesh;
 
     protected double location_x, location_y, mass;
     protected String name = null;
@@ -16,12 +17,17 @@ public abstract class Shape<E extends Shape> extends Built<E> {
 	 * to the mesh.
 	 */
     public Shape() {
-	objectType = "Shape";
+		objectType = "Shape";
+		localMesh = new Mesh();
     }
 
     public String getName() {
 	return name;
     }
+	
+	public Mesh getLocalMesh() {
+		return localMesh;
+	}
 
     @SuppressWarnings("unchecked")
     public E set_name(String name) {
