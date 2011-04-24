@@ -32,14 +32,13 @@ public class SemiImplicitEuler extends Integrator<SemiImplicitEuler> {
 	}*/
 		
 	
-		for (int i = 0; i < F.length/3; i++) {
+		for (int i = 0; i < parts.size(); i++) {
 			Vector3d force = new Vector3d(F[3*i],F[3*i+1],F[3*i+2]);
 			// v[1] = v[0] + a*dt = v[0] + dt*f/m
 			Vector3d newVel = parts.get(i).getVel().plus(force.dot(h/parts.get(i).getMass()));
 			// x[1] = x[0] + v*dt
 			Vector3d newPos = parts.get(i).getPos().plus(newVel.dot(h));
 			parts.get(i).update(newPos, newVel);
-			i++;
 		}
     }
 
