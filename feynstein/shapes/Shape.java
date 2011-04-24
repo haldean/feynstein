@@ -7,7 +7,7 @@ import feynstein.utilities.Vector3d;
 public abstract class Shape<E extends Shape> extends Built<E> {
     protected Mesh localMesh;
 
-    protected Vector3d location;
+    protected Vector3d location = new Vector3d();
     protected double mass;
     protected String name = null;
 
