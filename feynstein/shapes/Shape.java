@@ -2,13 +2,13 @@ package feynstein.shapes;
 
 import feynstein.Built;
 import feynstein.geometry.Mesh;
-import feynstein.geometry.Vector3d;
+import feynstein.utilities.Vector3d;
 
 public abstract class Shape<E extends Shape> extends Built<E> {
     protected Mesh localMesh;
 
     protected Vector3d location;
-    protected mass;
+    protected double mass;
     protected String name = null;
 
 	/*
