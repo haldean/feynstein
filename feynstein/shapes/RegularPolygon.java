@@ -44,6 +44,8 @@ public class RegularPolygon extends Shape<RegularPolygon> {
 	    point = center.plus(new Vector3d(radius * Math.cos(theta * i),
 					     radius * Math.sin(theta * i), 0));
 	    particles.add(new Particle(point));
+	    edges.add(new Edge(0, index));
+
 	    if (i > 0) {
 		edges.add(new Edge(index-1, index));
 		triangles.add(new Triangle(0, index-1, index));
