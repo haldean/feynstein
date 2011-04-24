@@ -14,22 +14,22 @@ public class Tetrahedron extends Shape<Tetrahedron> {
     }
 
     public Tetrahedron set_point1(double x, double y, double z) {
-	point1 = location.plus(new Vector3d(x, y, z));
+	point1 = new Vector3d(x, y, z);
 	return this;
     }
 
     public Tetrahedron set_point2(double x, double y, double z) {
-	point2 = location.plus(new Vector3d(x, y, z));
+	point2 = new Vector3d(x, y, z);
 	return this;
     }
 
     public Tetrahedron set_point3(double x, double y, double z) {
-	point3 = location.plus(new Vector3d(x, y, z));
+	point3 = new Vector3d(x, y, z);
 	return this;
     }
 
     public Tetrahedron set_point4(double x, double y, double z) {
-	point4 = location.plus(new Vector3d(x, y, z));
+	point4 = new Vector3d(x, y, z);
 	return this;
     }
 
@@ -37,8 +37,10 @@ public class Tetrahedron extends Shape<Tetrahedron> {
 	/* The particles are just the four points. */
 	ArrayList<Particle> particles = new ArrayList<Particle>(
 	    Arrays.asList(new Particle[] {
-		new Particle(point1), new Particle(point2), 
-		new Particle(point3), new Particle(point4)}));
+		    new Particle(point1.plus(location)), 
+		    new Particle(point2.plus(location)), 
+		    new Particle(point3.plus(location)), 
+		    new Particle(point4.plus(location))}));
 
 	/* Edges exist between every pair of particles. */
 	ArrayList<Edge> edges = new ArrayList<Edge>();

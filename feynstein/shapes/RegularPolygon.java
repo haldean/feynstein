@@ -42,7 +42,7 @@ public class RegularPolygon extends Shape<RegularPolygon> {
 	for (int i=0; i<verteces; i++) {
 	    index = particles.size();
 	    point = center.plus(new Vector3d(radius * Math.cos(theta * i),
-					       radius * Math.sin(theta * i), 0));
+					     radius * Math.sin(theta * i), 0));
 	    particles.add(new Particle(point));
 	    if (i > 0) {
 		edges.add(new Edge(index-1, index));
