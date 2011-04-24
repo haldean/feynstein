@@ -28,10 +28,6 @@ public class Cube extends Shape<Cube> {
     }
 
     public Cube compile() {
-	List<Particle> particles;
-	List<Edge> edges;
-	List<Triangle> triangles;
-
 	/*
 	 * A cube is defined by 8 points; below, these are referred to
 	 * in terms of the "reference corner" (which is the point that the
@@ -61,7 +57,7 @@ public class Cube extends Shape<Cube> {
 	 * Particle IDs are counted as if x, y and z combined to form
 	 * a binary number, where x is the MSB and z is the LSB.
 	 */
-	particles = Arrays.asList(new Particle[] {
+	List<Particle> particles = Arrays.asList(new Particle[] {
 		reference, reference_z, reference_y, reference_yz, 
 		reference_x, reference_xz, reference_xy, reference_xyz});
 
@@ -70,14 +66,14 @@ public class Cube extends Shape<Cube> {
 	 * on the same cube edge that it does (i.e., reference_x and
 	 * reference_xz). Also, there are diagonals along each face.
 	 */
-	edges = Arrays.asList(new Edge[] {
+	List<Edge> edges = Arrays.asList(new Edge[] {
 		new Edge(0,1), new Edge(0,2), new Edge(0,3), new Edge(0,4),
 		new Edge(0,5), new Edge(0,6), new Edge(1,3), new Edge(1,5),
 		new Edge(1,7), new Edge(2,3), new Edge(2,6), new Edge(2,7), 
 		new Edge(3,7), new Edge(4,5), new Edge(4,6), new Edge(4,7), 
 		new Edge(5,7), new Edge(6,7)});
 
-	triangles = Arrays.asList(new Triangle[] {
+	List<Triangle> triangles = Arrays.asList(new Triangle[] {
 		new Triangle(0,1,3), new Triangle(0,1,5), new Triangle(0,2,3),
 		new Triangle(0,2,6), new Triangle(0,4,5), new Triangle(0,4,6),
 		new Triangle(1,3,7), new Triangle(1,5,7), new Triangle(2,3,7),
