@@ -11,15 +11,9 @@ public abstract class Shape<E extends Shape> extends Built<E> {
     protected double mass;
     protected String name = null;
 
-	/*
-	 * Suggestion: Each Shape class takes a Mesh instance 
-	 * in its constructor. My constructing this shape, we
-	 * automatically append it's vertices and triangles
-	 * to the mesh.
-	 */
     public Shape() {
-		objectType = "Shape";
-		localMesh = new Mesh();
+	objectType = "Shape";
+	localMesh = new Mesh();
     }
 
     public String getName() {
@@ -49,13 +43,20 @@ public abstract class Shape<E extends Shape> extends Built<E> {
     }
 
     @SuppressWarnings("unchecked")
-    public E compile() {
+    public E finalizeShape() {
 	if (name == null) {
-	    throw new RuntimeException("You must specify the name " +
-				       "attribute for all shapes.");
+	    throw new RuntimeException("Name missing for " + objectType
+				       + "\nYou must specify the name attribute "
+				       + "for all shapes.");
 	}
 
+	compile();
 	return (E) this;
     }
 	
+    @SuppressWarnings("unchecked")
+    public E compile() {
+	/* Can be overridden by shapes if they require it. */
+	return (E) this;
+    }
 }

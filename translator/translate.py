@@ -149,7 +149,7 @@ def translate_builder(expr, parent_ref=False):
 
     # Return a formatted string, leaving the prefix to the builder
     # syntax intact.
-    return '%s(new %s(%s)).%s.compile()' % (
+    return '%s(new %s(%s)).%s.finalizeShape()' % (
         expr[:match.start()], class_name, constructor_args, '.'.join(params))
 
 def translate_builders(block):
