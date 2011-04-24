@@ -3,7 +3,6 @@ package feynstein.shapes;
 import feynstein.geometry.*;
 import feynstein.utilities.Vector3d;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -31,7 +30,7 @@ public class Cube extends Shape<Cube> {
     public Cube compile() {
 	List<Particle> particles;
 	List<Edge> edges;
-	List<Triangle> triangles = new ArrayList<Triangle>();
+	List<Triangle> triangles;
 
 	/*
 	 * A cube is defined by 8 points; below, these are referred to
