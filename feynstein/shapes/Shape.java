@@ -2,11 +2,13 @@ package feynstein.shapes;
 
 import feynstein.Built;
 import feynstein.geometry.Mesh;
+import feynstein.geometry.Vector3d;
 
 public abstract class Shape<E extends Shape> extends Built<E> {
-	protected Mesh localMesh;
+    protected Mesh localMesh;
 
-    protected double location_x, location_y, mass;
+    protected Vector3d location;
+    protected mass;
     protected String name = null;
 
 	/*
@@ -24,9 +26,9 @@ public abstract class Shape<E extends Shape> extends Built<E> {
 	return name;
     }
 	
-	public Mesh getLocalMesh() {
-		return localMesh;
-	}
+    public Mesh getLocalMesh() {
+	return localMesh;
+    }
 
     @SuppressWarnings("unchecked")
     public E set_name(String name) {
@@ -35,9 +37,8 @@ public abstract class Shape<E extends Shape> extends Built<E> {
     }
 
     @SuppressWarnings("unchecked")
-    public E set_location(double x, double y) {
-	location_x = x;
-	location_y = y;
+    public E set_location(double x, double y, double z) {
+	location = new Vector3d(x, y, z);
 	return (E) this;
     }
 
