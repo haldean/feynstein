@@ -110,12 +110,10 @@ public abstract class Scene {
 			//indicies
 			if(force.isGlobal()) {
 				for(int i = 0; i < localForce.length; i++){
-					globalForces[3*i] += localForce[3*i];
-					globalForces[3*i+1] += localForce[3*i+1];
-					globalForces[3*i+2] += localForce[3*i+2];
+					globalForces[i] += localForce[i];
 				}
 			} else {
-				for(int i = 0; i < localForce.length; i++){
+				for(int i = 0; i < localForce.length/3; i++){
 					globalForces[3*force.getStencilIdx(i)] += localForce[3*i];
 					globalForces[3*force.getStencilIdx(i)+1] += localForce[3*i+1];
 					globalForces[3*force.getStencilIdx(i)+2] += localForce[3*i+2];
