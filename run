@@ -1,3 +1,4 @@
 #!/bin/bash
 
+./clean
 python3 translator/compile.py $1
