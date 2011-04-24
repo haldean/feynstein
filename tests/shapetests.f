@@ -5,6 +5,7 @@ ShapeScene {
       shape Cylinder(name="cyl2", radius1=5, radius2=20, height=50, location=(0,40,0));
       shape Tetrahedron(name="tetra", point1=(0,0,0), point2=(20,0,0), 
 			point3=(0,20,0), point4=(0,0,20));
+      shape RegularPolygon(name="penta", radius=10, verteces=5, location=(0,-40,0));
   }
   
   forces none;
