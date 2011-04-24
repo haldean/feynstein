@@ -79,10 +79,9 @@ public class Renderer implements GLEventListener, KeyListener, MouseListener, Mo
       
 		Vector3d pos;
 		
-		gl.glPolygonMode(GL.GL_FRONT_AND_BACK, GL2GL3.GL_LINE);
-		gl.glColor3f(0.7f, 0.7f, 0.7f);
+		gl.glPolygonMode(GL.GL_FRONT_AND_BACK, GL2GL3.GL_FILL);
+		gl.glColor3f(0.0f, 1.0f, 1.0f);
 		gl.glBegin(GL.GL_TRIANGLES);
-		
 		for (Triangle tri: scene.getMesh().getTriangles())
 		{
 			pos = scene.getMesh().getParticles().get(tri.getIdx(0)).getPos();
@@ -95,6 +94,18 @@ public class Renderer implements GLEventListener, KeyListener, MouseListener, Mo
 			
 		}
 		gl.glEnd();
+		
+		gl.glColor3f(0.0f, 0.0f, 0.0f);
+		gl.glBegin(GL.GL_LINES);
+		for (Edge e: scene.getMesh().getEdges())
+		{
+			pos = scene.getMesh().getParticles().get(e.getIdx(0)).getPos();
+			gl.glVertex3d(pos.x(), pos.y(), pos.z());
+			pos = scene.getMesh().getParticles().get(e.getIdx(1)).getPos();
+			gl.glVertex3d(pos.x(), pos.y(), pos.z());
+		}
+		gl.glEnd();
+		
 		gl.glPopMatrix();
 
         // increasing rotation for the next iteration                                 
@@ -117,6 +128,35 @@ public class Renderer implements GLEventListener, KeyListener, MouseListener, Mo
         ((Component) gLDrawable).addKeyListener(this);
 		((Component) gLDrawable).addMouseListener(this);
 		((Component) gLDrawable).addMouseMotionListener(this);
+		// turn on lighting
+		gl.glEnable (gl.GL_LIGHTING);
+		
+		// Setup and enable light 0
+		gl.glEnable (gl.GL_LIGHT0);
+		
+		// specify the values for the ambient, specular, and diffuse terms:
+		float  ambLight[] = { 0.1f, 0.1f, 0.1f, 1.0f };
+		float  specLight[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+		float  diffLight[] = { 0.25f, 0.25f, 0.25f, 1.0f };
+		
+		// set light 0 to use those values:
+		gl.glLightfv (gl.GL_LIGHT0, gl.GL_AMBIENT, ambLight, 0);
+		gl.glLightfv (gl.GL_LIGHT0, gl.GL_SPECULAR, specLight, 0);
+		gl.glLightfv (gl.GL_LIGHT0, gl.GL_DIFFUSE, diffLight, 0);
+		
+		// after this call, any color you set on an object becomes the
+		// color for the material, a very useful shortcut:
+		gl.glEnable (gl.GL_COLOR_MATERIAL);
+		
+		// after this call, all the materials used will have specular++
+		// on the front side of geometry
+		gl.glMaterialfv (gl.GL_FRONT, gl.GL_SPECULAR, specLight, 0);
+		gl.glMateriali (gl.GL_FRONT, gl.GL_SHININESS, 100);
+		
+		// put the light in a fixed position RELATIVE TO THE CAMERA
+		float     lightXYZ[] = { 50.f, 50.0f, 100.0f, 0.0f };
+		gl.glLightfv (gl.GL_LIGHT0, gl.GL_POSITION, lightXYZ, 0);
+		
     }
  
     public void reshape(GLAutoDrawable gLDrawable, int x, int y, int width, int height) {
