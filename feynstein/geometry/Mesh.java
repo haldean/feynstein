@@ -10,9 +10,9 @@ public class Mesh {
 	private List<Triangle> triangles;
 	
 	public Mesh() {
-		this.particles = new List<Particle>();
-		this.edges = new List<Edge>();
-		this.triangles = new List<Triangle>();
+		this.particles = new ArrayList<Particle>();
+		this.edges = new ArrayList<Edge>();
+		this.triangles = new ArrayList<Triangle>();
 	}
 	
 	public Mesh(List<Particle> particles, List<Edge> edges, 
