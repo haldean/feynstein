@@ -99,7 +99,7 @@ public class Cylinder extends Shape<Cylinder> {
 	/* Add corresponding particles for each particle in the bottom
 	 * ring, and create faces out of the rectangles defined by two
 	 * corresponding pairs of adjacent points on the caps. */
-	for (bottom_index = 0; bottom_index < top_center_index-1; bottom_index++) {
+	for (bottom_index = 1; bottom_index < top_center_index; bottom_index++) {
 	    top_index = particles.size();
 	    point = top_center.plus(new Vector3d(radius2 * Math.cos(theta * bottom_index),
 						 radius2 * Math.sin(theta * bottom_index), 0));
@@ -108,33 +108,33 @@ public class Cylinder extends Shape<Cylinder> {
 	     * particle in the bottom cap. */
 	    particles.add(new Particle(point));
 	    edges.add(new Edge(bottom_index, top_index));
+	    edges.add(new Edge(top_center_index, top_index));
 
-	    if (bottom_index > 0) {
-		/* Create the edge and triangle with its neighbor. */
+	    /* Create the edge and triangle with its neighbor. */
+	    if (top_index-1 > top_center_index) {
 		edges.add(new Edge(top_index-1, top_index));
 		triangles.add(new Triangle(top_center_index, top_index-1, top_index));
+	    }
 
-		/* Create the face defined by this point, it's
-		 * neighbor and the corresponding points in the bottom
-		 * cap. */
-		if (bottom_index > 1) {
-		    edges.add(new Edge(top_index, bottom_index-1));
-		    triangles.add(new Triangle(bottom_index-1, top_index-1, top_index));
-		    triangles.add(new Triangle(bottom_index-1, bottom_index, top_index));
-		}
-	    } else {
-		/* Create a triangle between the first point in
-		 * the top and the first and last point in the
-		 * bottom. */
-		edges.add(new Edge(last_bottom_index, top_index));
-		triangles.add(new Triangle(1, last_bottom_index, top_index));
+	    /* Create the face defined by this point, it's
+	     * neighbor and the corresponding points in the bottom
+	     * cap. */
+	    if (bottom_index > 1) {
+		edges.add(new Edge(top_index, bottom_index-1));
+		triangles.add(new Triangle(bottom_index-1, top_index-1, top_index));
+		triangles.add(new Triangle(bottom_index-1, bottom_index, top_index));
 	    }
 	}
+
+	/* Finish the cap. */
+	edges.add(new Edge(top_center_index+1, top_index));
+	triangles.add(new Triangle(top_center_index, top_center_index+1, top_index));
 
 	/* Finish the last face with a triangle between the first and
 	 * last points in the top and the last point in the bottom. */
 	edges.add(new Edge(top_center_index+1, top_index));
 	triangles.add(new Triangle(last_bottom_index, top_center_index+1, top_index));
+	triangles.add(new Triangle(1, last_bottom_index, top_center_index+1));
 
 	localMesh = new Mesh(particles, edges, triangles);
 	return this;
