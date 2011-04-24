@@ -72,7 +72,7 @@ public class CustomObject extends Shape<CustomObject> {
 					// add edge for each vertex pair
 					for (int i = 0; i < 3; i++) {
 						for (int j = i+1; j < 3; j++) {
-							edges.add(new Edge(i,j));
+							edges.add(new Edge(newTri.getIdx(i),newTri.getIdx(j)));
 						}
 					}
 					

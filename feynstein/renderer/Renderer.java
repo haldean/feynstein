@@ -80,7 +80,7 @@ public class Renderer implements GLEventListener, KeyListener, MouseListener, Mo
 		Vector3d pos;
 		
 		gl.glPolygonMode(GL.GL_FRONT_AND_BACK, GL2GL3.GL_FILL);
-		gl.glColor3f(0.0f, 1.0f, 1.0f);
+		gl.glColor3f(0.4f, 1.0f, 0.0f);
 		gl.glBegin(GL.GL_TRIANGLES);
 		for (Triangle tri: scene.getMesh().getTriangles())
 		{
@@ -95,7 +95,7 @@ public class Renderer implements GLEventListener, KeyListener, MouseListener, Mo
 		}
 		gl.glEnd();
 		
-		gl.glColor3f(0.0f, 0.0f, 0.0f);
+		gl.glColor3f(1.0f, 1.0f, 1.0f);
 		gl.glBegin(GL.GL_LINES);
 		for (Edge e: scene.getMesh().getEdges())
 		{
