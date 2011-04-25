@@ -12,8 +12,9 @@ public abstract class Shape<E extends Shape> extends Built<E> {
     protected String name = null;
 
     public Shape() {
-	objectType = "Shape";
-	localMesh = new Mesh();
+		objectType = "Shape";
+		localMesh = new Mesh();
+		mass = 1;
     }
 
     public String getName() {
