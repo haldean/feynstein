@@ -35,8 +35,10 @@ public class SpringChain extends Shape<SpringChain> {
 		for (Integer idx : fixedIdx) {
 			localMesh.getParticles().get(idx).setFixed(true);
 		}
-		for (int i = 0; i < localMesh.size()-1; i++) {
-			localMesh.getEdges().add(new Edge(i, i+1));
+		for (int i = 0; i < localMesh.size(); i++) {
+			if(i < localMesh.size() - 1 )
+				localMesh.getEdges().add(new Edge(i, i+1));
+			localMesh.getParticles().get(i).setMass(mass);
 		}
 		return this;
     }
