@@ -9,12 +9,14 @@ public abstract class Shape<E extends Shape> extends Built<E> {
 
     protected Vector3d location = new Vector3d();
     protected double mass;
+	protected float particleRadius;
     protected String name = null;
 
     public Shape() {
 		objectType = "Shape";
 		localMesh = new Mesh();
 		mass = 1;
+		particleRadius = 0;
     }
 
     public String getName() {
@@ -41,6 +43,12 @@ public abstract class Shape<E extends Shape> extends Built<E> {
     public E set_mass(double m) {
 	mass = m;
 	return (E) this;
+    }
+	
+	@SuppressWarnings("unchecked")
+    public E set_particleRadius(float rad) {
+		particleRadius = rad;
+		return (E) this;
     }
 
     @SuppressWarnings("unchecked")

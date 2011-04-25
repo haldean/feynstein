@@ -11,16 +11,23 @@ public class Particle {
 	private boolean fixed;
 	//mass
 	private double mass;
+	//render size
+	private float size;
 	
 	public Particle(Vector3d initialPos) {
 		pos = initialPos;
 		vel = new Vector3d(0,0,0);
 		fixed = false;
+		size = 0;
 		mass = 1;
 	}
 	
 	public void setMass(double mass) {
 		this.mass = mass;
+	}
+	
+	public void setSize(float size) {
+		this.size = size;
 	}
 	
 	public boolean isFixed() {
@@ -41,6 +48,10 @@ public class Particle {
 	
 	public double getMass() {
 		return mass;
+	}
+	
+	public float getSize() {
+		return size;
 	}
 	
 	public void update(Vector3d pos, Vector3d vel) {

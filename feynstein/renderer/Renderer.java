@@ -26,6 +26,7 @@ import javax.media.opengl.awt.GLCanvas;
 import javax.media.opengl.fixedfunc.GLLightingFunc;
 import javax.media.opengl.fixedfunc.GLMatrixFunc;
 import javax.media.opengl.glu.GLU;
+import com.sun.opengl.util.GLUT; 
  
 import com.jogamp.opengl.util.Animator;
 
@@ -34,10 +35,11 @@ public class Renderer implements GLEventListener, KeyListener, MouseListener, Mo
     float rotateT = 0.0f;
 	
 	GLU glu = new GLU();
- 
+	GLUT glut = new GLUT();
+
     static GLCanvas canvas = new GLCanvas();
  
-	static Frame frame = new Frame("Jogl Quad drawing");
+	static Frame frame = new Frame("Feynstein");
  
     static Animator animator = new Animator(canvas);
 	
@@ -79,6 +81,7 @@ public class Renderer implements GLEventListener, KeyListener, MouseListener, Mo
       
 		Vector3d pos;
 		
+		// render tris
 		gl.glPolygonMode(GL.GL_FRONT_AND_BACK, GL2GL3.GL_FILL);
 		gl.glColor3f(0.4f, 1.0f, 0.0f);
 		gl.glBegin(GL.GL_TRIANGLES);
@@ -95,6 +98,7 @@ public class Renderer implements GLEventListener, KeyListener, MouseListener, Mo
 		}
 		gl.glEnd();
 		
+		// render edges
 		gl.glColor3f(1.0f, 1.0f, 1.0f);
 		gl.glBegin(GL.GL_LINES);
 		for (Edge e: scene.getMesh().getEdges())
@@ -106,8 +110,24 @@ public class Renderer implements GLEventListener, KeyListener, MouseListener, Mo
 		}
 		gl.glEnd();
 		
+		gl.glPolygonMode(GL.GL_FRONT_AND_BACK, GL2GL3.GL_FILL);
+		// render particles
+		for (Particle p: scene.getMesh().getParticles())
+		{
+			if(p.getSize() > 0) {
+				if (p.isFixed())
+					gl.glColor3f(1.0f, 0.4f, 0.0f);
+				else
+					gl.glColor3f(0.0f, 1.0f, 0.4f);
+			
+				gl.glPushMatrix();
+				gl.glTranslated(p.getPos().x(), p.getPos().y(), p.getPos().z());
+				glut.glutSolidSphere(p.getSize(), 20, 20);
+				gl.glPopMatrix();
+			}
+		}
+		
 		gl.glPopMatrix();
-
         // increasing rotation for the next iteration                                 
         rotateT += 0.2f; 
 		if(!paused)

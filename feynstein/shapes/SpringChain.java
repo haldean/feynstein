@@ -17,6 +17,7 @@ public class SpringChain extends Shape<SpringChain> {
 	
 	public SpringChain() {
 		objectType = "SpringChain";
+		particleRadius = 1.0f;
 		fixedIdx = new ArrayList<Integer>();
 	}
     
@@ -39,6 +40,7 @@ public class SpringChain extends Shape<SpringChain> {
 			if(i < localMesh.size() - 1 )
 				localMesh.getEdges().add(new Edge(i, i+1));
 			localMesh.getParticles().get(i).setMass(mass);
+			localMesh.getParticles().get(i).setSize(particleRadius);
 		}
 		return this;
     }
