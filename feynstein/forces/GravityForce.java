@@ -41,6 +41,7 @@ public class GravityForce extends Force<GravityForce> {
 			localForce = new double[n];
 		
 		for(int i = 0; i < n/3; i++){
+			System.out.println("MASS: "+globalMasses[3*i]);
 			localForce[3*i] = globalMasses[3*i]*gx;
 			localForce[3*i+1] = globalMasses[3*i]*gy;
 			localForce[3*i+2] = globalMasses[3*i]*gz;
