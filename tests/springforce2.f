@@ -4,10 +4,10 @@ ShapeScene {
   }
   
   forces {
-      force SpringForce(actsOn=#penta, strength=100, length=15);
+      force SpringForce(actsOn=#penta, strength=10, length=20);
   }
 
   properties {
-      property SemiImplicitEuler(stepSize=0.005);
+      property SemiImplicitEuler(stepSize=0.001);
   }
 }

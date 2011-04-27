@@ -17,7 +17,7 @@ public class SpringChain extends Shape<SpringChain> {
 	
 	public SpringChain() {
 		objectType = "SpringChain";
-		particleRadius = 1.0f;
+		particleRadius = 0.6f;
 		fixedIdx = new ArrayList<Integer>();
 	}
     
