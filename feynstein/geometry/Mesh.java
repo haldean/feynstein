@@ -42,17 +42,22 @@ public class Mesh {
     }
 	
     public void append(Mesh localMesh) {
-	// note: this will not work if we have mutliple shapes 
-	// (which we obviously will, because the indexes 
-	// need to be adjusted
-	// TODO: fix this
-	int shift = particles.size();
-	for (Particle p : localMesh.getParticles())
-	    particles.add(p);
-	for (Edge e : localMesh.getEdges())
-	    edges.add(new Edge(e.getIdx(0)+shift, e.getIdx(1)+shift));
-	for (Triangle t : localMesh.getTriangles())
-	    triangles.add(new Triangle(t.getIdx(0)+shift, t.getIdx(1)+shift, t.getIdx(2)+shift));
-    }
+		int shift = particles.size();
+		for (Particle p : localMesh.getParticles()) {
+			particles.add(p);
+		}
+		for (int i = 0; i < localMesh.getEdges().size(); i++) {
+			Edge e = localMesh.getEdges().get(i);
+			e = new Edge(e.getIdx(0)+shift, e.getIdx(1)+shift);
+			localMesh.getEdges().set(i, e);
+			edges.add(e);
+		}
+		for (int i = 0; i < localMesh.getTriangles().size(); i++) {
+			Triangle t = localMesh.getTriangles().get(i);
+			t = new Triangle(t.getIdx(0)+shift, t.getIdx(1)+shift, t.getIdx(2)+shift);
+			localMesh.getTriangles().set(i, t);
+			triangles.add(t);
+		}
+	}
 	
 }

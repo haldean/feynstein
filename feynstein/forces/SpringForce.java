@@ -11,6 +11,8 @@ public class SpringForce extends Force<SpringForce> {
 
     public SpringForce() {
 		super(2);
+		length = 1.0;
+		strength = 10.0;
 		objectType = "SpringForce";
     }
 
@@ -40,9 +42,9 @@ public class SpringForce extends Force<SpringForce> {
 		if(localForce == null)
 			localForce = new double[3*n];
 		
+		double xi, xj, yi, yj, zi, zj;
 		for(int i = 0; i < stencil.size(); i += stencilSize) {
 			//edge vectors xi and xj
-			double xi, xj, yi, yj, zi, zj;
 			xi = globalPositions[3*stencil.get(i)];
 			yi = globalPositions[3*stencil.get(i)+1];
 			zi = globalPositions[3*stencil.get(i)+2];

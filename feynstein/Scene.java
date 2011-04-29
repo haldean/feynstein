@@ -21,7 +21,8 @@ public abstract class Scene {
     public static Animator animator = new Animator(canvas);
 
     protected Map<String, Shape> shapes;
-    protected Map<String, Force> forces;
+    //protected Map<String, Force> forces;
+	protected ArrayList<Force> forces;
     protected ArrayList<Property> properties;
     protected Mesh mesh;
 	
@@ -35,7 +36,8 @@ public abstract class Scene {
 	mesh = new Mesh();
 
 	shapes = new HashMap<String, Shape>();
-	forces = new HashMap<String, Force>();
+	//forces = new HashMap<String, Force>();
+	forces = new ArrayList<Force>();
 	properties = new ArrayList<Property>();
 
 	setProperties();
@@ -65,7 +67,7 @@ public abstract class Scene {
 
     public void addForce(Force f) {
 	print("Adding a " + f.toString());
-		forces.put(f.toString(), f);
+		forces.add(f);
     }
 	
 	public void addProperty(Property p) {
@@ -102,7 +104,7 @@ public abstract class Scene {
 		}
 		
 		//for each force potential
-		for(Force force : forces.values()){
+		for(Force force : forces){
 			//get the local force vector
 			double [] localForce = force.getLocalForce(globalPositions,
 								     globalVelocities, globalMasses);
@@ -120,7 +122,9 @@ public abstract class Scene {
 				}
 			}
 		}
-		
+		//System.out.println("Global");
+		//for(int i = 0; i < globalForces.length; i++)
+		//	System.out.println(i+": "+globalForces[i]);
 		return globalForces;
     }
 	
