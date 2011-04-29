@@ -89,756 +89,756 @@ public class TriangleForce extends Force<TriangleForce> {
 			// Particle 1, Force x
 			//--------------------
 			
-			double Fx1 = -(Y*((((2*(-1 + nu)*(x1d - x3d)*(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + 
-														  Math.pow(z1u - z2u,2)))/
-								(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									  (z1u - z2u)*(z1u - z3u),2) + 
-								 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) + 
+			double Fx1 = -(Y*((((2*(-1 + nu)*(x1d - x3d)*(square(x1u - x2u) + square(y1u - y2u) + 
+														  square(z1u - z2u)))/
+								(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									  (z1u - z2u)*(z1u - z3u)) + 
+								 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) + 
 								nu*(-(((-2*x1d + x2d + x3d)*
 									   ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 										(z1u - z2u)*(z1u - z3u)))/
-									  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-											(z1u - z2u)*(z1u - z3u),2) + 
-									   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-									   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
-									(2*(-x1d + x2d)*(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + 
-													 Math.pow(z1u - z3u,2)))/
-									(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-										  (z1u - z2u)*(z1u - z3u),2) + 
-									 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-									 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) - 
+									  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+											(z1u - z2u)*(z1u - z3u)) + 
+									   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+									   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
+									(2*(-x1d + x2d)*(square(x1u - x3u) + square(y1u - y3u) + 
+													 square(z1u - z3u)))/
+									(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+										  (z1u - z2u)*(z1u - z3u)) + 
+									 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+									 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) - 
 								((-1 + nu)*(2*x1d - x2d - x3d)*
 								 ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 								  (z1u - z2u)*(z1u - z3u)))/
-								(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									  (z1u - z2u)*(z1u - z3u),2) + 
-								 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
-							   (-1 + ((Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-									  (Math.pow(x1d - x3d,2) + Math.pow(y1d - y3d,2) + Math.pow(z1d - z3d,2)))/
-								(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									  (z1u - z2u)*(z1u - z3u),2) + 
-								 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
-								((Math.pow(x1d,2) + x2d*x3d - x1d*(x2d + x3d) + Math.pow(y1d,2) + y2d*y3d - 
+								(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									  (z1u - z2u)*(z1u - z3u)) + 
+								 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
+							   (-1 + ((square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+									  (square(x1d - x3d) + square(y1d - y3d) + square(z1d - z3d)))/
+								(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									  (z1u - z2u)*(z1u - z3u)) + 
+								 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
+								((square(x1d) + x2d*x3d - x1d*(x2d + x3d) + square(y1d) + y2d*y3d - 
 								  y1d*(y2d + y3d) + (z1d - z2d)*(z1d - z3d))*
 								 ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 								  (z1u - z2u)*(z1u - z3u)))/
-								(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									  (z1u - z2u)*(z1u - z3u),2) + 
-								 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))))/
-							  (-1 + 2*nu) + ((-(x3d*((2*(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + 
-														 Math.pow(z1u - z2u,2)))/
-													 (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-														   (z1u - z2u)*(z1u - z3u),2) + 
-													  (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-													  (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
+								(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									  (z1u - z2u)*(z1u - z3u)) + 
+								 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))))/
+							  (-1 + 2*nu) + ((-(x3d*((2*(square(x1u - x2u) + square(y1u - y2u) + 
+														 square(z1u - z2u)))/
+													 (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+														   (z1u - z2u)*(z1u - z3u)) + 
+													  (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+													  (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
 													 ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 													  (z1u - z2u)*(z1u - z3u))/
-													 (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-														   (z1u - z2u)*(z1u - z3u),2) + 
-													  (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-													  (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))) + 
-											  (2*x1d*(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2)))/
-											  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													(z1u - z2u)*(z1u - z3u),2) + 
-											   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
+													 (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+														   (z1u - z2u)*(z1u - z3u)) + 
+													  (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+													  (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))) + 
+											  (2*x1d*(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u)))/
+											  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													(z1u - z2u)*(z1u - z3u)) + 
+											   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
 											  (2*x1d*((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 													  (z1u - z2u)*(z1u - z3u)))/
-											  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													(z1u - z2u)*(z1u - z3u),2) + 
-											   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) + 
+											  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													(z1u - z2u)*(z1u - z3u)) + 
+											   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) + 
 											  (x2d*((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 													(z1u - z2u)*(z1u - z3u)))/
-											  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													(z1u - z2u)*(z1u - z3u),2) + 
-											   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
-											 (1 + ((-1 + nu)*(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												   (Math.pow(x1d - x3d,2) + Math.pow(y1d - y3d,2) + Math.pow(z1d - z3d,2)))/
-											  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													(z1u - z2u)*(z1u - z3u),2) + 
-											   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
-											  nu*(-((((x1d - x2d)*(x1d - x3d) + Math.pow(y1d,2) + y2d*y3d - y1d*(y2d + y3d) + 
+											  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													(z1u - z2u)*(z1u - z3u)) + 
+											   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
+											 (1 + ((-1 + nu)*(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												   (square(x1d - x3d) + square(y1d - y3d) + square(z1d - z3d)))/
+											  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													(z1u - z2u)*(z1u - z3u)) + 
+											   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
+											  nu*(-((((x1d - x2d)*(x1d - x3d) + square(y1d) + y2d*y3d - y1d*(y2d + y3d) + 
 													  (z1d - z2d)*(z1d - z3d))*
 													 ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 													  (z1u - z2u)*(z1u - z3u)))/
-													(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-														  (z1u - z2u)*(z1u - z3u),2) + 
-													 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-													 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
-												  ((Math.pow(x1d - x2d,2) + Math.pow(y1d - y2d,2) + Math.pow(z1d - z2d,2))*
-												   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-												  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-														(z1u - z2u)*(z1u - z3u),2) + 
-												   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) - 
-											  ((-1 + nu)*(Math.pow(x1d,2) + x2d*x3d - x1d*(x2d + x3d) + Math.pow(y1d,2) + 
+													(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+														  (z1u - z2u)*(z1u - z3u)) + 
+													 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+													 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
+												  ((square(x1d - x2d) + square(y1d - y2d) + square(z1d - z2d))*
+												   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+												  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+														(z1u - z2u)*(z1u - z3u)) + 
+												   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) - 
+											  ((-1 + nu)*(square(x1d) + x2d*x3d - x1d*(x2d + x3d) + square(y1d) + 
 														  y2d*y3d - y1d*(y2d + y3d) + (z1d - z2d)*(z1d - z3d))*
 											   ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 												(z1u - z2u)*(z1u - z3u)))/
-											  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													(z1u - z2u)*(z1u - z3u),2) + 
-											   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))))/
-							  (-1 + 2*nu) + 2*(((Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												(Math.pow(x1d,2) + x2d*x3d - x1d*(x2d + x3d) + Math.pow(y1d,2) + y2d*y3d - 
+											  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													(z1u - z2u)*(z1u - z3u)) + 
+											   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))))/
+							  (-1 + 2*nu) + 2*(((square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												(square(x1d) + x2d*x3d - x1d*(x2d + x3d) + square(y1d) + y2d*y3d - 
 												 y1d*(y2d + y3d) + (z1d - z2d)*(z1d - z3d)))/
-											   (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													 (z1u - z2u)*(z1u - z3u),2) + 
-												(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
-											   ((Math.pow(x1d - x2d,2) + Math.pow(y1d - y2d,2) + Math.pow(z1d - z2d,2))*
+											   (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													 (z1u - z2u)*(z1u - z3u)) + 
+												(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
+											   ((square(x1d - x2d) + square(y1d - y2d) + square(z1d - z2d))*
 												((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + (z1u - z2u)*(z1u - z3u)))
-											   /(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													  (z1u - z2u)*(z1u - z3u),2) + 
-												 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
+											   /(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													  (z1u - z2u)*(z1u - z3u)) + 
+												 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
 							  (-(x3d*((-2*((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 										   (z1u - z2u)*(z1u - z3u)))/
-									  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-											(z1u - z2u)*(z1u - z3u),2) + 
-									   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-									   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) + 
-									  (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))/
-									  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-											(z1u - z2u)*(z1u - z3u),2) + 
-									   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-									   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))) - 
+									  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+											(z1u - z2u)*(z1u - z3u)) + 
+									   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+									   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) + 
+									  (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))/
+									  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+											(z1u - z2u)*(z1u - z3u)) + 
+									   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+									   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))) - 
 							   (2*x1d*((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 									   (z1u - z2u)*(z1u - z3u)))/
-							   (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									 (z1u - z2u)*(z1u - z3u),2) + 
-								(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) + 
-							   (2*x1d*(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-							   (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									 (z1u - z2u)*(z1u - z3u),2) + 
-								(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
-							   (x2d*(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-							   (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									 (z1u - z2u)*(z1u - z3u),2) + 
-								(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
-							  ((nu*((2*(-x1d + x3d)*(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + 
-													 Math.pow(z1u - z2u,2)))/
-									(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-										  (z1u - z2u)*(z1u - z3u),2) + 
-									 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-									 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
+							   (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									 (z1u - z2u)*(z1u - z3u)) + 
+								(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) + 
+							   (2*x1d*(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+							   (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									 (z1u - z2u)*(z1u - z3u)) + 
+								(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
+							   (x2d*(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+							   (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									 (z1u - z2u)*(z1u - z3u)) + 
+								(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
+							  ((nu*((2*(-x1d + x3d)*(square(x1u - x2u) + square(y1u - y2u) + 
+													 square(z1u - z2u)))/
+									(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+										  (z1u - z2u)*(z1u - z3u)) + 
+									 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+									 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
 									((-2*x1d + x2d + x3d)*
 									 ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 									  (z1u - z2u)*(z1u - z3u)))/
-									(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-										  (z1u - z2u)*(z1u - z3u),2) + 
-									 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-									 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) - 
+									(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+										  (z1u - z2u)*(z1u - z3u)) + 
+									 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+									 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) - 
 								((-1 + nu)*(2*x1d - x2d - x3d)*
 								 ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 								  (z1u - z2u)*(z1u - z3u)))/
-								(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									  (z1u - z2u)*(z1u - z3u),2) + 
-								 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) + 
+								(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									  (z1u - z2u)*(z1u - z3u)) + 
+								 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) + 
 								(2*(-1 + nu)*(x1d - x2d)*
-								 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-								(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									  (z1u - z2u)*(z1u - z3u),2) + 
-								 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
-							   (-1 - (((x1d - x2d)*(x1d - x3d) + Math.pow(y1d,2) + y2d*y3d - y1d*(y2d + y3d) + 
+								 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+								(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									  (z1u - z2u)*(z1u - z3u)) + 
+								 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
+							   (-1 - (((x1d - x2d)*(x1d - x3d) + square(y1d) + y2d*y3d - y1d*(y2d + y3d) + 
 									   (z1d - z2d)*(z1d - z3d))*
 									  ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 									   (z1u - z2u)*(z1u - z3u)))/
-								(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									  (z1u - z2u)*(z1u - z3u),2) + 
-								 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) + 
-								((Math.pow(x1d - x2d,2) + Math.pow(y1d - y2d,2) + Math.pow(z1d - z2d,2))*
-								 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-								(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									  (z1u - z2u)*(z1u - z3u),2) + 
-								 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))))/
+								(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									  (z1u - z2u)*(z1u - z3u)) + 
+								 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) + 
+								((square(x1d - x2d) + square(y1d - y2d) + square(z1d - z2d))*
+								 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+								(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									  (z1u - z2u)*(z1u - z3u)) + 
+								 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))))/
 							  (-1 + 2*nu) + ((-(((2*x1d - x2d - x3d)*
 												 ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 												  (z1u - z2u)*(z1u - z3u)))/
-												(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													  (z1u - z2u)*(z1u - z3u),2) + 
-												 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
-											  (2*(x1d - x2d)*(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-											  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													(z1u - z2u)*(z1u - z3u),2) + 
-											   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
-											 (1 - nu*(((Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-													   (Math.pow(x1d - x3d,2) + Math.pow(y1d - y3d,2) + Math.pow(z1d - z3d,2)))/
-													  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-															(z1u - z2u)*(z1u - z3u),2) + 
-													   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-													   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
-													  (((x1d - x2d)*(x1d - x3d) + Math.pow(y1d,2) + y2d*y3d - y1d*(y2d + y3d) + 
+												(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													  (z1u - z2u)*(z1u - z3u)) + 
+												 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
+											  (2*(x1d - x2d)*(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+											  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													(z1u - z2u)*(z1u - z3u)) + 
+											   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
+											 (1 - nu*(((square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+													   (square(x1d - x3d) + square(y1d - y3d) + square(z1d - z3d)))/
+													  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+															(z1u - z2u)*(z1u - z3u)) + 
+													   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+													   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
+													  (((x1d - x2d)*(x1d - x3d) + square(y1d) + y2d*y3d - y1d*(y2d + y3d) + 
 														(z1d - z2d)*(z1d - z3d))*
 													   ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 														(z1u - z2u)*(z1u - z3u)))/
-													  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-															(z1u - z2u)*(z1u - z3u),2) + 
-													   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-													   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) - 
-											  ((-1 + nu)*((x1d - x2d)*(x1d - x3d) + Math.pow(y1d,2) + y2d*y3d - 
+													  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+															(z1u - z2u)*(z1u - z3u)) + 
+													   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+													   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) - 
+											  ((-1 + nu)*((x1d - x2d)*(x1d - x3d) + square(y1d) + y2d*y3d - 
 														  y1d*(y2d + y3d) + (z1d - z2d)*(z1d - z3d))*
 											   ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 												(z1u - z2u)*(z1u - z3u)))/
-											  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													(z1u - z2u)*(z1u - z3u),2) + 
-											   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) + 
-											  ((-1 + nu)*(Math.pow(x1d - x2d,2) + Math.pow(y1d - y2d,2) + Math.pow(z1d - z2d,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-											  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													(z1u - z2u)*(z1u - z3u),2) + 
-											   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))))/
+											  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													(z1u - z2u)*(z1u - z3u)) + 
+											   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) + 
+											  ((-1 + nu)*(square(x1d - x2d) + square(y1d - y2d) + square(z1d - z2d))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+											  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													(z1u - z2u)*(z1u - z3u)) + 
+											   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))))/
 							  (-1 + 2*nu) + 2*(((2*x1d - x2d - x3d)*
-												(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2)))/
-											   (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													 (z1u - z2u)*(z1u - z3u),2) + 
-												(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
+												(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u)))/
+											   (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													 (z1u - z2u)*(z1u - z3u)) + 
+												(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
 											   (2*(x1d - x2d)*((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 															   (z1u - z2u)*(z1u - z3u)))/
-											   (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													 (z1u - z2u)*(z1u - z3u),2) + 
-												(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
-							  (-(((Math.pow(x1d - x3d,2) + Math.pow(y1d - y3d,2) + Math.pow(z1d - z3d,2))*
+											   (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													 (z1u - z2u)*(z1u - z3u)) + 
+												(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
+							  (-(((square(x1d - x3d) + square(y1d - y3d) + square(z1d - z3d))*
 								  ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 								   (z1u - z2u)*(z1u - z3u)))/
-								 (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									   (z1u - z2u)*(z1u - z3u),2) + 
-								  (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								  (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
-							   ((Math.pow(x1d,2) + x2d*x3d - x1d*(x2d + x3d) + Math.pow(y1d,2) + y2d*y3d - 
+								 (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									   (z1u - z2u)*(z1u - z3u)) + 
+								  (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								  (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
+							   ((square(x1d) + x2d*x3d - x1d*(x2d + x3d) + square(y1d) + y2d*y3d - 
 								 y1d*(y2d + y3d) + (z1d - z2d)*(z1d - z3d))*
-								(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-							   (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									 (z1u - z2u)*(z1u - z3u),2) + 
-								(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))))*
-						   Math.sqrt(Math.pow(Math.abs(x2u*y1u - x3u*y1u - x1u*y2u + x3u*y2u + x1u*y3u - x2u*y3u),2) + 
-								Math.pow(Math.abs(x2u*z1u - x3u*z1u - x1u*z2u + x3u*z2u + x1u*z3u - x2u*z3u),2) + 
-								Math.pow(Math.abs(y2u*z1u - y3u*z1u - y1u*z2u + y3u*z2u + y1u*z3u - y2u*z3u),2)))/
+								(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+							   (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									 (z1u - z2u)*(z1u - z3u)) + 
+								(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))))*
+						   Math.sqrt(square(Math.abs(x2u*y1u - x3u*y1u - x1u*y2u + x3u*y2u + x1u*y3u - x2u*y3u)) + 
+								square(Math.abs(x2u*z1u - x3u*z1u - x1u*z2u + x3u*z2u + x1u*z3u - x2u*z3u)) + 
+								square(Math.abs(y2u*z1u - y3u*z1u - y1u*z2u + y3u*z2u + y1u*z3u - y2u*z3u))))/
 			(16.*(1 + nu));
 			
 			
 			// Particle 1, Force y
 			//--------------------
 			
-			double Fy1 = -(Y*((((2*(-1 + nu)*(y1d - y3d)*(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + 
-														  Math.pow(z1u - z2u,2)))/
-								(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									  (z1u - z2u)*(z1u - z3u),2) + 
-								 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) + 
+			double Fy1 = -(Y*((((2*(-1 + nu)*(y1d - y3d)*(square(x1u - x2u) + square(y1u - y2u) + 
+														  square(z1u - z2u)))/
+								(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									  (z1u - z2u)*(z1u - z3u)) + 
+								 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) + 
 								nu*(-(((-2*y1d + y2d + y3d)*
 									   ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 										(z1u - z2u)*(z1u - z3u)))/
-									  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-											(z1u - z2u)*(z1u - z3u),2) + 
-									   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-									   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
-									(2*(-y1d + y2d)*(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + 
-													 Math.pow(z1u - z3u,2)))/
-									(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-										  (z1u - z2u)*(z1u - z3u),2) + 
-									 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-									 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) - 
+									  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+											(z1u - z2u)*(z1u - z3u)) + 
+									   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+									   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
+									(2*(-y1d + y2d)*(square(x1u - x3u) + square(y1u - y3u) + 
+													 square(z1u - z3u)))/
+									(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+										  (z1u - z2u)*(z1u - z3u)) + 
+									 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+									 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) - 
 								((-1 + nu)*(2*y1d - y2d - y3d)*
 								 ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 								  (z1u - z2u)*(z1u - z3u)))/
-								(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									  (z1u - z2u)*(z1u - z3u),2) + 
-								 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
-							   (-1 + ((Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-									  (Math.pow(x1d - x3d,2) + Math.pow(y1d - y3d,2) + Math.pow(z1d - z3d,2)))/
-								(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									  (z1u - z2u)*(z1u - z3u),2) + 
-								 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
-								((Math.pow(x1d,2) + x2d*x3d - x1d*(x2d + x3d) + Math.pow(y1d,2) + y2d*y3d - 
+								(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									  (z1u - z2u)*(z1u - z3u)) + 
+								 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
+							   (-1 + ((square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+									  (square(x1d - x3d) + square(y1d - y3d) + square(z1d - z3d)))/
+								(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									  (z1u - z2u)*(z1u - z3u)) + 
+								 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
+								((square(x1d) + x2d*x3d - x1d*(x2d + x3d) + square(y1d) + y2d*y3d - 
 								  y1d*(y2d + y3d) + (z1d - z2d)*(z1d - z3d))*
 								 ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 								  (z1u - z2u)*(z1u - z3u)))/
-								(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									  (z1u - z2u)*(z1u - z3u),2) + 
-								 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))))/
-							  (-1 + 2*nu) + ((-(y3d*((2*(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + 
-														 Math.pow(z1u - z2u,2)))/
-													 (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-														   (z1u - z2u)*(z1u - z3u),2) + 
-													  (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-													  (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
+								(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									  (z1u - z2u)*(z1u - z3u)) + 
+								 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))))/
+							  (-1 + 2*nu) + ((-(y3d*((2*(square(x1u - x2u) + square(y1u - y2u) + 
+														 square(z1u - z2u)))/
+													 (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+														   (z1u - z2u)*(z1u - z3u)) + 
+													  (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+													  (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
 													 ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 													  (z1u - z2u)*(z1u - z3u))/
-													 (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-														   (z1u - z2u)*(z1u - z3u),2) + 
-													  (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-													  (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))) + 
-											  (2*y1d*(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2)))/
-											  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													(z1u - z2u)*(z1u - z3u),2) + 
-											   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
+													 (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+														   (z1u - z2u)*(z1u - z3u)) + 
+													  (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+													  (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))) + 
+											  (2*y1d*(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u)))/
+											  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													(z1u - z2u)*(z1u - z3u)) + 
+											   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
 											  (2*y1d*((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 													  (z1u - z2u)*(z1u - z3u)))/
-											  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													(z1u - z2u)*(z1u - z3u),2) + 
-											   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) + 
+											  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													(z1u - z2u)*(z1u - z3u)) + 
+											   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) + 
 											  (y2d*((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 													(z1u - z2u)*(z1u - z3u)))/
-											  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													(z1u - z2u)*(z1u - z3u),2) + 
-											   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
-											 (1 + ((-1 + nu)*(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												   (Math.pow(x1d - x3d,2) + Math.pow(y1d - y3d,2) + Math.pow(z1d - z3d,2)))/
-											  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													(z1u - z2u)*(z1u - z3u),2) + 
-											   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
-											  nu*(-((((x1d - x2d)*(x1d - x3d) + Math.pow(y1d,2) + y2d*y3d - y1d*(y2d + y3d) + 
+											  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													(z1u - z2u)*(z1u - z3u)) + 
+											   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
+											 (1 + ((-1 + nu)*(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												   (square(x1d - x3d) + square(y1d - y3d) + square(z1d - z3d)))/
+											  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													(z1u - z2u)*(z1u - z3u)) + 
+											   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
+											  nu*(-((((x1d - x2d)*(x1d - x3d) + square(y1d) + y2d*y3d - y1d*(y2d + y3d) + 
 													  (z1d - z2d)*(z1d - z3d))*
 													 ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 													  (z1u - z2u)*(z1u - z3u)))/
-													(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-														  (z1u - z2u)*(z1u - z3u),2) + 
-													 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-													 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
-												  ((Math.pow(x1d - x2d,2) + Math.pow(y1d - y2d,2) + Math.pow(z1d - z2d,2))*
-												   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-												  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-														(z1u - z2u)*(z1u - z3u),2) + 
-												   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) - 
-											  ((-1 + nu)*(Math.pow(x1d,2) + x2d*x3d - x1d*(x2d + x3d) + Math.pow(y1d,2) + 
+													(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+														  (z1u - z2u)*(z1u - z3u)) + 
+													 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+													 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
+												  ((square(x1d - x2d) + square(y1d - y2d) + square(z1d - z2d))*
+												   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+												  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+														(z1u - z2u)*(z1u - z3u)) + 
+												   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) - 
+											  ((-1 + nu)*(square(x1d) + x2d*x3d - x1d*(x2d + x3d) + square(y1d) + 
 														  y2d*y3d - y1d*(y2d + y3d) + (z1d - z2d)*(z1d - z3d))*
 											   ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 												(z1u - z2u)*(z1u - z3u)))/
-											  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													(z1u - z2u)*(z1u - z3u),2) + 
-											   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))))/
-							  (-1 + 2*nu) + 2*(((Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												(Math.pow(x1d,2) + x2d*x3d - x1d*(x2d + x3d) + Math.pow(y1d,2) + y2d*y3d - 
+											  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													(z1u - z2u)*(z1u - z3u)) + 
+											   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))))/
+							  (-1 + 2*nu) + 2*(((square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												(square(x1d) + x2d*x3d - x1d*(x2d + x3d) + square(y1d) + y2d*y3d - 
 												 y1d*(y2d + y3d) + (z1d - z2d)*(z1d - z3d)))/
-											   (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													 (z1u - z2u)*(z1u - z3u),2) + 
-												(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
-											   ((Math.pow(x1d - x2d,2) + Math.pow(y1d - y2d,2) + Math.pow(z1d - z2d,2))*
+											   (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													 (z1u - z2u)*(z1u - z3u)) + 
+												(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
+											   ((square(x1d - x2d) + square(y1d - y2d) + square(z1d - z2d))*
 												((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + (z1u - z2u)*(z1u - z3u)))
-											   /(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													  (z1u - z2u)*(z1u - z3u),2) + 
-												 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
+											   /(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													  (z1u - z2u)*(z1u - z3u)) + 
+												 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
 							  (-(y3d*((-2*((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 										   (z1u - z2u)*(z1u - z3u)))/
-									  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-											(z1u - z2u)*(z1u - z3u),2) + 
-									   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-									   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) + 
-									  (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))/
-									  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-											(z1u - z2u)*(z1u - z3u),2) + 
-									   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-									   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))) - 
+									  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+											(z1u - z2u)*(z1u - z3u)) + 
+									   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+									   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) + 
+									  (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))/
+									  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+											(z1u - z2u)*(z1u - z3u)) + 
+									   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+									   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))) - 
 							   (2*y1d*((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 									   (z1u - z2u)*(z1u - z3u)))/
-							   (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									 (z1u - z2u)*(z1u - z3u),2) + 
-								(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) + 
-							   (2*y1d*(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-							   (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									 (z1u - z2u)*(z1u - z3u),2) + 
-								(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
-							   (y2d*(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-							   (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									 (z1u - z2u)*(z1u - z3u),2) + 
-								(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
-							  ((nu*((2*(-y1d + y3d)*(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + 
-													 Math.pow(z1u - z2u,2)))/
-									(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-										  (z1u - z2u)*(z1u - z3u),2) + 
-									 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-									 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
+							   (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									 (z1u - z2u)*(z1u - z3u)) + 
+								(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) + 
+							   (2*y1d*(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+							   (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									 (z1u - z2u)*(z1u - z3u)) + 
+								(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
+							   (y2d*(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+							   (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									 (z1u - z2u)*(z1u - z3u)) + 
+								(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
+							  ((nu*((2*(-y1d + y3d)*(square(x1u - x2u) + square(y1u - y2u) + 
+													 square(z1u - z2u)))/
+									(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+										  (z1u - z2u)*(z1u - z3u)) + 
+									 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+									 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
 									((-2*y1d + y2d + y3d)*
 									 ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 									  (z1u - z2u)*(z1u - z3u)))/
-									(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-										  (z1u - z2u)*(z1u - z3u),2) + 
-									 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-									 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) - 
+									(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+										  (z1u - z2u)*(z1u - z3u)) + 
+									 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+									 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) - 
 								((-1 + nu)*(2*y1d - y2d - y3d)*
 								 ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 								  (z1u - z2u)*(z1u - z3u)))/
-								(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									  (z1u - z2u)*(z1u - z3u),2) + 
-								 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) + 
+								(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									  (z1u - z2u)*(z1u - z3u)) + 
+								 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) + 
 								(2*(-1 + nu)*(y1d - y2d)*
-								 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-								(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									  (z1u - z2u)*(z1u - z3u),2) + 
-								 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
-							   (-1 - (((x1d - x2d)*(x1d - x3d) + Math.pow(y1d,2) + y2d*y3d - y1d*(y2d + y3d) + 
+								 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+								(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									  (z1u - z2u)*(z1u - z3u)) + 
+								 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
+							   (-1 - (((x1d - x2d)*(x1d - x3d) + square(y1d) + y2d*y3d - y1d*(y2d + y3d) + 
 									   (z1d - z2d)*(z1d - z3d))*
 									  ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 									   (z1u - z2u)*(z1u - z3u)))/
-								(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									  (z1u - z2u)*(z1u - z3u),2) + 
-								 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) + 
-								((Math.pow(x1d - x2d,2) + Math.pow(y1d - y2d,2) + Math.pow(z1d - z2d,2))*
-								 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-								(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									  (z1u - z2u)*(z1u - z3u),2) + 
-								 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))))/
+								(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									  (z1u - z2u)*(z1u - z3u)) + 
+								 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) + 
+								((square(x1d - x2d) + square(y1d - y2d) + square(z1d - z2d))*
+								 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+								(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									  (z1u - z2u)*(z1u - z3u)) + 
+								 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))))/
 							  (-1 + 2*nu) + ((-(((2*y1d - y2d - y3d)*
 												 ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 												  (z1u - z2u)*(z1u - z3u)))/
-												(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													  (z1u - z2u)*(z1u - z3u),2) + 
-												 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
-											  (2*(y1d - y2d)*(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-											  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													(z1u - z2u)*(z1u - z3u),2) + 
-											   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
-											 (1 - nu*(((Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-													   (Math.pow(x1d - x3d,2) + Math.pow(y1d - y3d,2) + Math.pow(z1d - z3d,2)))/
-													  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-															(z1u - z2u)*(z1u - z3u),2) + 
-													   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-													   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
-													  (((x1d - x2d)*(x1d - x3d) + Math.pow(y1d,2) + y2d*y3d - y1d*(y2d + y3d) + 
+												(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													  (z1u - z2u)*(z1u - z3u)) + 
+												 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
+											  (2*(y1d - y2d)*(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+											  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													(z1u - z2u)*(z1u - z3u)) + 
+											   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
+											 (1 - nu*(((square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+													   (square(x1d - x3d) + square(y1d - y3d) + square(z1d - z3d)))/
+													  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+															(z1u - z2u)*(z1u - z3u)) + 
+													   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+													   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
+													  (((x1d - x2d)*(x1d - x3d) + square(y1d) + y2d*y3d - y1d*(y2d + y3d) + 
 														(z1d - z2d)*(z1d - z3d))*
 													   ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 														(z1u - z2u)*(z1u - z3u)))/
-													  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-															(z1u - z2u)*(z1u - z3u),2) + 
-													   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-													   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) - 
-											  ((-1 + nu)*((x1d - x2d)*(x1d - x3d) + Math.pow(y1d,2) + y2d*y3d - 
+													  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+															(z1u - z2u)*(z1u - z3u)) + 
+													   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+													   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) - 
+											  ((-1 + nu)*((x1d - x2d)*(x1d - x3d) + square(y1d) + y2d*y3d - 
 														  y1d*(y2d + y3d) + (z1d - z2d)*(z1d - z3d))*
 											   ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 												(z1u - z2u)*(z1u - z3u)))/
-											  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													(z1u - z2u)*(z1u - z3u),2) + 
-											   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) + 
-											  ((-1 + nu)*(Math.pow(x1d - x2d,2) + Math.pow(y1d - y2d,2) + Math.pow(z1d - z2d,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-											  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													(z1u - z2u)*(z1u - z3u),2) + 
-											   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))))/
+											  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													(z1u - z2u)*(z1u - z3u)) + 
+											   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) + 
+											  ((-1 + nu)*(square(x1d - x2d) + square(y1d - y2d) + square(z1d - z2d))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+											  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													(z1u - z2u)*(z1u - z3u)) + 
+											   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))))/
 							  (-1 + 2*nu) + 2*(((2*y1d - y2d - y3d)*
-												(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2)))/
-											   (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													 (z1u - z2u)*(z1u - z3u),2) + 
-												(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
+												(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u)))/
+											   (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													 (z1u - z2u)*(z1u - z3u)) + 
+												(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
 											   (2*(y1d - y2d)*((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 															   (z1u - z2u)*(z1u - z3u)))/
-											   (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													 (z1u - z2u)*(z1u - z3u),2) + 
-												(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
-							  (-(((Math.pow(x1d - x3d,2) + Math.pow(y1d - y3d,2) + Math.pow(z1d - z3d,2))*
+											   (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													 (z1u - z2u)*(z1u - z3u)) + 
+												(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
+							  (-(((square(x1d - x3d) + square(y1d - y3d) + square(z1d - z3d))*
 								  ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 								   (z1u - z2u)*(z1u - z3u)))/
-								 (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									   (z1u - z2u)*(z1u - z3u),2) + 
-								  (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								  (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
-							   ((Math.pow(x1d,2) + x2d*x3d - x1d*(x2d + x3d) + Math.pow(y1d,2) + y2d*y3d - 
+								 (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									   (z1u - z2u)*(z1u - z3u)) + 
+								  (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								  (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
+							   ((square(x1d) + x2d*x3d - x1d*(x2d + x3d) + square(y1d) + y2d*y3d - 
 								 y1d*(y2d + y3d) + (z1d - z2d)*(z1d - z3d))*
-								(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-							   (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									 (z1u - z2u)*(z1u - z3u),2) + 
-								(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))))*
-						   Math.sqrt(Math.pow(Math.abs(x2u*y1u - x3u*y1u - x1u*y2u + x3u*y2u + x1u*y3u - x2u*y3u),2) + 
-								Math.pow(Math.abs(x2u*z1u - x3u*z1u - x1u*z2u + x3u*z2u + x1u*z3u - x2u*z3u),2) + 
-								Math.pow(Math.abs(y2u*z1u - y3u*z1u - y1u*z2u + y3u*z2u + y1u*z3u - y2u*z3u),2)))/
+								(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+							   (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									 (z1u - z2u)*(z1u - z3u)) + 
+								(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))))*
+						   Math.sqrt(square(Math.abs(x2u*y1u - x3u*y1u - x1u*y2u + x3u*y2u + x1u*y3u - x2u*y3u)) + 
+								square(Math.abs(x2u*z1u - x3u*z1u - x1u*z2u + x3u*z2u + x1u*z3u - x2u*z3u)) + 
+								square(Math.abs(y2u*z1u - y3u*z1u - y1u*z2u + y3u*z2u + y1u*z3u - y2u*z3u))))/
 			(16.*(1 + nu));
 			
 			
 			// Particle 1, Force z
 			//--------------------
 			
-			double Fz1 = -(Y*(((-(z3d*((2*(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2)))/
-									   (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-											 (z1u - z2u)*(z1u - z3u),2) + 
-										(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-										(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
+			double Fz1 = -(Y*(((-(z3d*((2*(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u)))/
+									   (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+											 (z1u - z2u)*(z1u - z3u)) + 
+										(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+										(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
 									   ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 										(z1u - z2u)*(z1u - z3u))/
-									   (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-											 (z1u - z2u)*(z1u - z3u),2) + 
-										(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-										(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))) + 
-								(2*z1d*(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2)))/
-								(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									  (z1u - z2u)*(z1u - z3u),2) + 
-								 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
+									   (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+											 (z1u - z2u)*(z1u - z3u)) + 
+										(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+										(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))) + 
+								(2*z1d*(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u)))/
+								(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									  (z1u - z2u)*(z1u - z3u)) + 
+								 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
 								(2*z1d*((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 										(z1u - z2u)*(z1u - z3u)))/
-								(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									  (z1u - z2u)*(z1u - z3u),2) + 
-								 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) + 
+								(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									  (z1u - z2u)*(z1u - z3u)) + 
+								 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) + 
 								(z2d*((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 									  (z1u - z2u)*(z1u - z3u)))/
-								(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									  (z1u - z2u)*(z1u - z3u),2) + 
-								 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
-							   (1 + ((-1 + nu)*(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-									 (Math.pow(x1d - x3d,2) + Math.pow(y1d - y3d,2) + Math.pow(z1d - z3d,2)))/
-								(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									  (z1u - z2u)*(z1u - z3u),2) + 
-								 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
-								nu*(-((((x1d - x2d)*(x1d - x3d) + Math.pow(y1d,2) + y2d*y3d - y1d*(y2d + y3d) + 
+								(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									  (z1u - z2u)*(z1u - z3u)) + 
+								 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
+							   (1 + ((-1 + nu)*(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+									 (square(x1d - x3d) + square(y1d - y3d) + square(z1d - z3d)))/
+								(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									  (z1u - z2u)*(z1u - z3u)) + 
+								 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
+								nu*(-((((x1d - x2d)*(x1d - x3d) + square(y1d) + y2d*y3d - y1d*(y2d + y3d) + 
 										(z1d - z2d)*(z1d - z3d))*
 									   ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 										(z1u - z2u)*(z1u - z3u)))/
-									  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-											(z1u - z2u)*(z1u - z3u),2) + 
-									   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-									   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
-									((Math.pow(x1d - x2d,2) + Math.pow(y1d - y2d,2) + Math.pow(z1d - z2d,2))*
-									 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-									(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-										  (z1u - z2u)*(z1u - z3u),2) + 
-									 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-									 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) - 
-								((-1 + nu)*(Math.pow(x1d,2) + x2d*x3d - x1d*(x2d + x3d) + Math.pow(y1d,2) + 
+									  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+											(z1u - z2u)*(z1u - z3u)) + 
+									   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+									   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
+									((square(x1d - x2d) + square(y1d - y2d) + square(z1d - z2d))*
+									 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+									(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+										  (z1u - z2u)*(z1u - z3u)) + 
+									 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+									 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) - 
+								((-1 + nu)*(square(x1d) + x2d*x3d - x1d*(x2d + x3d) + square(y1d) + 
 											y2d*y3d - y1d*(y2d + y3d) + (z1d - z2d)*(z1d - z3d))*
 								 ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 								  (z1u - z2u)*(z1u - z3u)))/
-								(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									  (z1u - z2u)*(z1u - z3u),2) + 
-								 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))))/
-							  (-1 + 2*nu) + ((-1 + ((Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + 
-													 Math.pow(z1u - z2u,2))*
-													(Math.pow(x1d - x3d,2) + Math.pow(y1d - y3d,2) + Math.pow(z1d - z3d,2)))/
-											  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													(z1u - z2u)*(z1u - z3u),2) + 
-											   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
-											  ((Math.pow(x1d,2) + x2d*x3d - x1d*(x2d + x3d) + Math.pow(y1d,2) + y2d*y3d - 
+								(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									  (z1u - z2u)*(z1u - z3u)) + 
+								 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))))/
+							  (-1 + 2*nu) + ((-1 + ((square(x1u - x2u) + square(y1u - y2u) + 
+													 square(z1u - z2u))*
+													(square(x1d - x3d) + square(y1d - y3d) + square(z1d - z3d)))/
+											  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													(z1u - z2u)*(z1u - z3u)) + 
+											   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
+											  ((square(x1d) + x2d*x3d - x1d*(x2d + x3d) + square(y1d) + y2d*y3d - 
 												y1d*(y2d + y3d) + (z1d - z2d)*(z1d - z3d))*
 											   ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 												(z1u - z2u)*(z1u - z3u)))/
-											  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													(z1u - z2u)*(z1u - z3u),2) + 
-											   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
-											 ((2*(-1 + nu)*(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
+											  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													(z1u - z2u)*(z1u - z3u)) + 
+											   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
+											 ((2*(-1 + nu)*(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
 											   (z1d - z3d))/
-											  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													(z1u - z2u)*(z1u - z3u),2) + 
-											   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) + 
+											  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													(z1u - z2u)*(z1u - z3u)) + 
+											   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) + 
 											  nu*(-(((-2*z1d + z2d + z3d)*
 													 ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 													  (z1u - z2u)*(z1u - z3u)))/
-													(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-														  (z1u - z2u)*(z1u - z3u),2) + 
-													 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-													 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
-												  (2*(-z1d + z2d)*(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + 
-																   Math.pow(z1u - z3u,2)))/
-												  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-														(z1u - z2u)*(z1u - z3u),2) + 
-												   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) - 
+													(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+														  (z1u - z2u)*(z1u - z3u)) + 
+													 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+													 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
+												  (2*(-z1d + z2d)*(square(x1u - x3u) + square(y1u - y3u) + 
+																   square(z1u - z3u)))/
+												  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+														(z1u - z2u)*(z1u - z3u)) + 
+												   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) - 
 											  ((-1 + nu)*(2*z1d - z2d - z3d)*
 											   ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 												(z1u - z2u)*(z1u - z3u)))/
-											  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													(z1u - z2u)*(z1u - z3u),2) + 
-											   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))))/
-							  (-1 + 2*nu) + ((1 - nu*(((Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + 
-														Math.pow(z1u - z2u,2))*
-													   (Math.pow(x1d - x3d,2) + Math.pow(y1d - y3d,2) + Math.pow(z1d - z3d,2)))/
-													  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-															(z1u - z2u)*(z1u - z3u),2) + 
-													   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-													   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
-													  (((x1d - x2d)*(x1d - x3d) + Math.pow(y1d,2) + y2d*y3d - y1d*(y2d + y3d) + 
+											  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													(z1u - z2u)*(z1u - z3u)) + 
+											   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))))/
+							  (-1 + 2*nu) + ((1 - nu*(((square(x1u - x2u) + square(y1u - y2u) + 
+														square(z1u - z2u))*
+													   (square(x1d - x3d) + square(y1d - y3d) + square(z1d - z3d)))/
+													  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+															(z1u - z2u)*(z1u - z3u)) + 
+													   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+													   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
+													  (((x1d - x2d)*(x1d - x3d) + square(y1d) + y2d*y3d - y1d*(y2d + y3d) + 
 														(z1d - z2d)*(z1d - z3d))*
 													   ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 														(z1u - z2u)*(z1u - z3u)))/
-													  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-															(z1u - z2u)*(z1u - z3u),2) + 
-													   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-													   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) - 
-											  ((-1 + nu)*((x1d - x2d)*(x1d - x3d) + Math.pow(y1d,2) + y2d*y3d - 
+													  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+															(z1u - z2u)*(z1u - z3u)) + 
+													   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+													   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) - 
+											  ((-1 + nu)*((x1d - x2d)*(x1d - x3d) + square(y1d) + y2d*y3d - 
 														  y1d*(y2d + y3d) + (z1d - z2d)*(z1d - z3d))*
 											   ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 												(z1u - z2u)*(z1u - z3u)))/
-											  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													(z1u - z2u)*(z1u - z3u),2) + 
-											   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) + 
-											  ((-1 + nu)*(Math.pow(x1d - x2d,2) + Math.pow(y1d - y2d,2) + Math.pow(z1d - z2d,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-											  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													(z1u - z2u)*(z1u - z3u),2) + 
-											   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
+											  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													(z1u - z2u)*(z1u - z3u)) + 
+											   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) + 
+											  ((-1 + nu)*(square(x1d - x2d) + square(y1d - y2d) + square(z1d - z2d))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+											  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													(z1u - z2u)*(z1u - z3u)) + 
+											   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
 											 (-(((2*z1d - z2d - z3d)*((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 																	  (z1u - z2u)*(z1u - z3u)))/
-												(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													  (z1u - z2u)*(z1u - z3u),2) + 
-												 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
-											  (2*(z1d - z2d)*(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-											  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													(z1u - z2u)*(z1u - z3u),2) + 
-											   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))))/
-							  (-1 + 2*nu) + ((-1 - (((x1d - x2d)*(x1d - x3d) + Math.pow(y1d,2) + y2d*y3d - 
+												(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													  (z1u - z2u)*(z1u - z3u)) + 
+												 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
+											  (2*(z1d - z2d)*(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+											  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													(z1u - z2u)*(z1u - z3u)) + 
+											   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))))/
+							  (-1 + 2*nu) + ((-1 - (((x1d - x2d)*(x1d - x3d) + square(y1d) + y2d*y3d - 
 													 y1d*(y2d + y3d) + (z1d - z2d)*(z1d - z3d))*
 													((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 													 (z1u - z2u)*(z1u - z3u)))/
-											  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													(z1u - z2u)*(z1u - z3u),2) + 
-											   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) + 
-											  ((Math.pow(x1d - x2d,2) + Math.pow(y1d - y2d,2) + Math.pow(z1d - z2d,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-											  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													(z1u - z2u)*(z1u - z3u),2) + 
-											   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
-											 (nu*((2*(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
+											  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													(z1u - z2u)*(z1u - z3u)) + 
+											   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) + 
+											  ((square(x1d - x2d) + square(y1d - y2d) + square(z1d - z2d))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+											  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													(z1u - z2u)*(z1u - z3u)) + 
+											   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
+											 (nu*((2*(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
 												   (-z1d + z3d))/
-												  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-														(z1u - z2u)*(z1u - z3u),2) + 
-												   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
+												  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+														(z1u - z2u)*(z1u - z3u)) + 
+												   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
 												  ((-2*z1d + z2d + z3d)*
 												   ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 													(z1u - z2u)*(z1u - z3u)))/
-												  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-														(z1u - z2u)*(z1u - z3u),2) + 
-												   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) - 
+												  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+														(z1u - z2u)*(z1u - z3u)) + 
+												   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) - 
 											  ((-1 + nu)*(2*z1d - z2d - z3d)*
 											   ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 												(z1u - z2u)*(z1u - z3u)))/
-											  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													(z1u - z2u)*(z1u - z3u),2) + 
-											   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) + 
+											  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													(z1u - z2u)*(z1u - z3u)) + 
+											   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) + 
 											  (2*(-1 + nu)*(z1d - z2d)*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-											  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													(z1u - z2u)*(z1u - z3u),2) + 
-											   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))))/
-							  (-1 + 2*nu) + 2*(((Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												(Math.pow(x1d,2) + x2d*x3d - x1d*(x2d + x3d) + Math.pow(y1d,2) + y2d*y3d - 
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+											  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													(z1u - z2u)*(z1u - z3u)) + 
+											   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))))/
+							  (-1 + 2*nu) + 2*(((square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												(square(x1d) + x2d*x3d - x1d*(x2d + x3d) + square(y1d) + y2d*y3d - 
 												 y1d*(y2d + y3d) + (z1d - z2d)*(z1d - z3d)))/
-											   (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													 (z1u - z2u)*(z1u - z3u),2) + 
-												(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
-											   ((Math.pow(x1d - x2d,2) + Math.pow(y1d - y2d,2) + Math.pow(z1d - z2d,2))*
+											   (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													 (z1u - z2u)*(z1u - z3u)) + 
+												(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
+											   ((square(x1d - x2d) + square(y1d - y2d) + square(z1d - z2d))*
 												((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + (z1u - z2u)*(z1u - z3u)))
-											   /(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													  (z1u - z2u)*(z1u - z3u),2) + 
-												 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
+											   /(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													  (z1u - z2u)*(z1u - z3u)) + 
+												 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
 							  (-(z3d*((-2*((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 										   (z1u - z2u)*(z1u - z3u)))/
-									  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-											(z1u - z2u)*(z1u - z3u),2) + 
-									   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-									   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) + 
-									  (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))/
-									  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-											(z1u - z2u)*(z1u - z3u),2) + 
-									   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-									   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))) - 
+									  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+											(z1u - z2u)*(z1u - z3u)) + 
+									   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+									   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) + 
+									  (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))/
+									  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+											(z1u - z2u)*(z1u - z3u)) + 
+									   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+									   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))) - 
 							   (2*z1d*((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 									   (z1u - z2u)*(z1u - z3u)))/
-							   (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									 (z1u - z2u)*(z1u - z3u),2) + 
-								(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) + 
-							   (2*z1d*(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-							   (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									 (z1u - z2u)*(z1u - z3u),2) + 
-								(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
-							   (z2d*(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-							   (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									 (z1u - z2u)*(z1u - z3u),2) + 
-								(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
-							  2*(((Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
+							   (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									 (z1u - z2u)*(z1u - z3u)) + 
+								(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) + 
+							   (2*z1d*(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+							   (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									 (z1u - z2u)*(z1u - z3u)) + 
+								(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
+							   (z2d*(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+							   (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									 (z1u - z2u)*(z1u - z3u)) + 
+								(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
+							  2*(((square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
 								  (2*z1d - z2d - z3d))/
-								 (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									   (z1u - z2u)*(z1u - z3u),2) + 
-								  (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								  (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
+								 (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									   (z1u - z2u)*(z1u - z3u)) + 
+								  (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								  (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
 								 (2*(z1d - z2d)*((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 												 (z1u - z2u)*(z1u - z3u)))/
-								 (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									   (z1u - z2u)*(z1u - z3u),2) + 
-								  (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								  (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
-							  (-(((Math.pow(x1d - x3d,2) + Math.pow(y1d - y3d,2) + Math.pow(z1d - z3d,2))*
+								 (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									   (z1u - z2u)*(z1u - z3u)) + 
+								  (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								  (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
+							  (-(((square(x1d - x3d) + square(y1d - y3d) + square(z1d - z3d))*
 								  ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 								   (z1u - z2u)*(z1u - z3u)))/
-								 (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									   (z1u - z2u)*(z1u - z3u),2) + 
-								  (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								  (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
-							   ((Math.pow(x1d,2) + x2d*x3d - x1d*(x2d + x3d) + Math.pow(y1d,2) + y2d*y3d - 
+								 (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									   (z1u - z2u)*(z1u - z3u)) + 
+								  (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								  (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
+							   ((square(x1d) + x2d*x3d - x1d*(x2d + x3d) + square(y1d) + y2d*y3d - 
 								 y1d*(y2d + y3d) + (z1d - z2d)*(z1d - z3d))*
-								(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-							   (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									 (z1u - z2u)*(z1u - z3u),2) + 
-								(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))))*
-						   Math.sqrt(Math.pow(Math.abs(x2u*y1u - x3u*y1u - x1u*y2u + x3u*y2u + x1u*y3u - x2u*y3u),2) + 
-								Math.pow(Math.abs(x2u*z1u - x3u*z1u - x1u*z2u + x3u*z2u + x1u*z3u - x2u*z3u),2) + 
-								Math.pow(Math.abs(y2u*z1u - y3u*z1u - y1u*z2u + y3u*z2u + y1u*z3u - y2u*z3u),2)))/
+								(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+							   (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									 (z1u - z2u)*(z1u - z3u)) + 
+								(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))))*
+						   Math.sqrt(square(Math.abs(x2u*y1u - x3u*y1u - x1u*y2u + x3u*y2u + x1u*y3u - x2u*y3u)) + 
+								square(Math.abs(x2u*z1u - x3u*z1u - x1u*z2u + x3u*z2u + x1u*z3u - x2u*z3u)) + 
+								square(Math.abs(y2u*z1u - y3u*z1u - y1u*z2u + y3u*z2u + y1u*z3u - y2u*z3u))))/
 			(16.*(1 + nu));
 			
 			// Particle 2, Force x
@@ -846,191 +846,191 @@ public class TriangleForce extends Force<TriangleForce> {
 			
 			double Fx2 = -(Y*(((nu*(-(((x1d - x3d)*((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 													(z1u - z2u)*(z1u - z3u)))/
-									  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-											(z1u - z2u)*(z1u - z3u),2) + 
-									   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-									   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
-									(2*(x1d - x2d)*(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + 
-													Math.pow(z1u - z3u,2)))/
-									(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-										  (z1u - z2u)*(z1u - z3u),2) + 
-									 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-									 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
+									  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+											(z1u - z2u)*(z1u - z3u)) + 
+									   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+									   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
+									(2*(x1d - x2d)*(square(x1u - x3u) + square(y1u - y3u) + 
+													square(z1u - z3u)))/
+									(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+										  (z1u - z2u)*(z1u - z3u)) + 
+									 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+									 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
 								((-1 + nu)*(x1d - x3d)*((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 														(z1u - z2u)*(z1u - z3u)))/
-								(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									  (z1u - z2u)*(z1u - z3u),2) + 
-								 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
-							   (-1 + ((Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-									  (Math.pow(x1d - x3d,2) + Math.pow(y1d - y3d,2) + Math.pow(z1d - z3d,2)))/
-								(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									  (z1u - z2u)*(z1u - z3u),2) + 
-								 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
-								((Math.pow(x1d,2) + x2d*x3d - x1d*(x2d + x3d) + Math.pow(y1d,2) + y2d*y3d - 
+								(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									  (z1u - z2u)*(z1u - z3u)) + 
+								 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
+							   (-1 + ((square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+									  (square(x1d - x3d) + square(y1d - y3d) + square(z1d - z3d)))/
+								(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									  (z1u - z2u)*(z1u - z3u)) + 
+								 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
+								((square(x1d) + x2d*x3d - x1d*(x2d + x3d) + square(y1d) + y2d*y3d - 
 								  y1d*(y2d + y3d) + (z1d - z2d)*(z1d - z3d))*
 								 ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 								  (z1u - z2u)*(z1u - z3u)))/
-								(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									  (z1u - z2u)*(z1u - z3u),2) + 
-								 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))))/
+								(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									  (z1u - z2u)*(z1u - z3u)) + 
+								 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))))/
 							  (-1 + 2*nu) - (((x1d - x3d)*
 											  (-(((-1 + nu)*((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 															 (z1u - z2u)*(z1u - z3u)))/
-												 (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													   (z1u - z2u)*(z1u - z3u),2) + 
-												  (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												  (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
+												 (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													   (z1u - z2u)*(z1u - z3u)) + 
+												  (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												  (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
 											   (nu*((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 													(z1u - z2u)*(z1u - z3u)))/
-											   (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													 (z1u - z2u)*(z1u - z3u),2) + 
-												(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
+											   (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													 (z1u - z2u)*(z1u - z3u)) + 
+												(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
 											  (2*(-1 + nu)*(x1d - x2d)*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-											  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													(z1u - z2u)*(z1u - z3u),2) + 
-											   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
-											 (-1 - (((x1d - x2d)*(x1d - x3d) + Math.pow(y1d,2) + y2d*y3d - y1d*(y2d + y3d) + 
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+											  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													(z1u - z2u)*(z1u - z3u)) + 
+											   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
+											 (-1 - (((x1d - x2d)*(x1d - x3d) + square(y1d) + y2d*y3d - y1d*(y2d + y3d) + 
 													 (z1d - z2d)*(z1d - z3d))*
 													((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 													 (z1u - z2u)*(z1u - z3u)))/
-											  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													(z1u - z2u)*(z1u - z3u),2) + 
-											   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) + 
-											  ((Math.pow(x1d - x2d,2) + Math.pow(y1d - y2d,2) + Math.pow(z1d - z2d,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-											  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													(z1u - z2u)*(z1u - z3u),2) + 
-											   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))))/
+											  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													(z1u - z2u)*(z1u - z3u)) + 
+											   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) + 
+											  ((square(x1d - x2d) + square(y1d - y2d) + square(z1d - z2d))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+											  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													(z1u - z2u)*(z1u - z3u)) + 
+											   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))))/
 							  (-1 + 2*nu) - ((-(((x1d - x3d)*
 												 ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 												  (z1u - z2u)*(z1u - z3u)))/
-												(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													  (z1u - z2u)*(z1u - z3u),2) + 
-												 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
-											  (2*(x1d - x2d)*(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-											  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													(z1u - z2u)*(z1u - z3u),2) + 
-											   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
-											 (1 - nu*(((Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-													   (Math.pow(x1d - x3d,2) + Math.pow(y1d - y3d,2) + Math.pow(z1d - z3d,2)))/
-													  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-															(z1u - z2u)*(z1u - z3u),2) + 
-													   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-													   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
-													  (((x1d - x2d)*(x1d - x3d) + Math.pow(y1d,2) + y2d*y3d - y1d*(y2d + y3d) + 
+												(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													  (z1u - z2u)*(z1u - z3u)) + 
+												 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
+											  (2*(x1d - x2d)*(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+											  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													(z1u - z2u)*(z1u - z3u)) + 
+											   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
+											 (1 - nu*(((square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+													   (square(x1d - x3d) + square(y1d - y3d) + square(z1d - z3d)))/
+													  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+															(z1u - z2u)*(z1u - z3u)) + 
+													   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+													   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
+													  (((x1d - x2d)*(x1d - x3d) + square(y1d) + y2d*y3d - y1d*(y2d + y3d) + 
 														(z1d - z2d)*(z1d - z3d))*
 													   ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 														(z1u - z2u)*(z1u - z3u)))/
-													  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-															(z1u - z2u)*(z1u - z3u),2) + 
-													   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-													   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) - 
-											  ((-1 + nu)*((x1d - x2d)*(x1d - x3d) + Math.pow(y1d,2) + y2d*y3d - 
+													  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+															(z1u - z2u)*(z1u - z3u)) + 
+													   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+													   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) - 
+											  ((-1 + nu)*((x1d - x2d)*(x1d - x3d) + square(y1d) + y2d*y3d - 
 														  y1d*(y2d + y3d) + (z1d - z2d)*(z1d - z3d))*
 											   ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 												(z1u - z2u)*(z1u - z3u)))/
-											  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													(z1u - z2u)*(z1u - z3u),2) + 
-											   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) + 
-											  ((-1 + nu)*(Math.pow(x1d - x2d,2) + Math.pow(y1d - y2d,2) + Math.pow(z1d - z2d,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-											  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													(z1u - z2u)*(z1u - z3u),2) + 
-											   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))))/
+											  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													(z1u - z2u)*(z1u - z3u)) + 
+											   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) + 
+											  ((-1 + nu)*(square(x1d - x2d) + square(y1d - y2d) + square(z1d - z2d))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+											  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													(z1u - z2u)*(z1u - z3u)) + 
+											   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))))/
 							  (-1 + 2*nu) + 2*(((-x1d + x3d)*
-												(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2)))/
-											   (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													 (z1u - z2u)*(z1u - z3u),2) + 
-												(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
+												(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u)))/
+											   (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													 (z1u - z2u)*(z1u - z3u)) + 
+												(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
 											   (2*(-x1d + x2d)*((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 																(z1u - z2u)*(z1u - z3u)))/
-											   (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													 (z1u - z2u)*(z1u - z3u),2) + 
-												(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
-							  (-(((Math.pow(x1d - x3d,2) + Math.pow(y1d - y3d,2) + Math.pow(z1d - z3d,2))*
+											   (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													 (z1u - z2u)*(z1u - z3u)) + 
+												(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
+							  (-(((square(x1d - x3d) + square(y1d - y3d) + square(z1d - z3d))*
 								  ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 								   (z1u - z2u)*(z1u - z3u)))/
-								 (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									   (z1u - z2u)*(z1u - z3u),2) + 
-								  (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								  (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
-							   ((Math.pow(x1d,2) + x2d*x3d - x1d*(x2d + x3d) + Math.pow(y1d,2) + y2d*y3d - 
+								 (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									   (z1u - z2u)*(z1u - z3u)) + 
+								  (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								  (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
+							   ((square(x1d) + x2d*x3d - x1d*(x2d + x3d) + square(y1d) + y2d*y3d - 
 								 y1d*(y2d + y3d) + (z1d - z2d)*(z1d - z3d))*
-								(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-							   (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									 (z1u - z2u)*(z1u - z3u),2) + 
-								(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
+								(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+							   (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									 (z1u - z2u)*(z1u - z3u)) + 
+								(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
 							  ((x1d - x3d)*(1 + ((-1 + nu)*
-												 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												 (Math.pow(x1d - x3d,2) + Math.pow(y1d - y3d,2) + Math.pow(z1d - z3d,2)))/
-											(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-												  (z1u - z2u)*(z1u - z3u),2) + 
-											 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
-											nu*(-((((x1d - x2d)*(x1d - x3d) + Math.pow(y1d,2) + y2d*y3d - y1d*(y2d + y3d) + 
+												 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												 (square(x1d - x3d) + square(y1d - y3d) + square(z1d - z3d)))/
+											(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+												  (z1u - z2u)*(z1u - z3u)) + 
+											 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
+											nu*(-((((x1d - x2d)*(x1d - x3d) + square(y1d) + y2d*y3d - y1d*(y2d + y3d) + 
 													(z1d - z2d)*(z1d - z3d))*
 												   ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 													(z1u - z2u)*(z1u - z3u)))/
-												  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-														(z1u - z2u)*(z1u - z3u),2) + 
-												   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
-												((Math.pow(x1d - x2d,2) + Math.pow(y1d - y2d,2) + Math.pow(z1d - z2d,2))*
-												 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-												(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													  (z1u - z2u)*(z1u - z3u),2) + 
-												 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) - 
-											((-1 + nu)*(Math.pow(x1d,2) + x2d*x3d - x1d*(x2d + x3d) + Math.pow(y1d,2) + 
+												  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+														(z1u - z2u)*(z1u - z3u)) + 
+												   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
+												((square(x1d - x2d) + square(y1d - y2d) + square(z1d - z2d))*
+												 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+												(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													  (z1u - z2u)*(z1u - z3u)) + 
+												 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) - 
+											((-1 + nu)*(square(x1d) + x2d*x3d - x1d*(x2d + x3d) + square(y1d) + 
 														y2d*y3d - y1d*(y2d + y3d) + (z1d - z2d)*(z1d - z3d))*
 											 ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 											  (z1u - z2u)*(z1u - z3u)))/
-											(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-												  (z1u - z2u)*(z1u - z3u),2) + 
-											 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
+											(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+												  (z1u - z2u)*(z1u - z3u)) + 
+											 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
 							   ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + (z1u - z2u)*(z1u - z3u)))/
-							  ((-1 + 2*nu)*(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-												 (z1u - z2u)*(z1u - z3u),2) + 
-											(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
-							  (2*(-x1d + x3d)*(((Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												(Math.pow(x1d,2) + x2d*x3d - x1d*(x2d + x3d) + Math.pow(y1d,2) + y2d*y3d - 
+							  ((-1 + 2*nu)*(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+												 (z1u - z2u)*(z1u - z3u)) + 
+											(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
+							  (2*(-x1d + x3d)*(((square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												(square(x1d) + x2d*x3d - x1d*(x2d + x3d) + square(y1d) + y2d*y3d - 
 												 y1d*(y2d + y3d) + (z1d - z2d)*(z1d - z3d)))/
-											   (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													 (z1u - z2u)*(z1u - z3u),2) + 
-												(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
-											   ((Math.pow(x1d - x2d,2) + Math.pow(y1d - y2d,2) + Math.pow(z1d - z2d,2))*
+											   (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													 (z1u - z2u)*(z1u - z3u)) + 
+												(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
+											   ((square(x1d - x2d) + square(y1d - y2d) + square(z1d - z2d))*
 												((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 												 (z1u - z2u)*(z1u - z3u)))/
-											   (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													 (z1u - z2u)*(z1u - z3u),2) + 
-												(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
-							   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-							  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									(z1u - z2u)*(z1u - z3u),2) + 
-							   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-							   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
-						   Math.sqrt(Math.pow(Math.abs(x2u*y1u - x3u*y1u - x1u*y2u + x3u*y2u + x1u*y3u - x2u*y3u),2) + 
-								Math.pow(Math.abs(x2u*z1u - x3u*z1u - x1u*z2u + x3u*z2u + x1u*z3u - x2u*z3u),2) + 
-								Math.pow(Math.abs(y2u*z1u - y3u*z1u - y1u*z2u + y3u*z2u + y1u*z3u - y2u*z3u),2)))/
+											   (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													 (z1u - z2u)*(z1u - z3u)) + 
+												(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
+							   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+							  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									(z1u - z2u)*(z1u - z3u)) + 
+							   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+							   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
+						   Math.sqrt(square(Math.abs(x2u*y1u - x3u*y1u - x1u*y2u + x3u*y2u + x1u*y3u - x2u*y3u)) + 
+								square(Math.abs(x2u*z1u - x3u*z1u - x1u*z2u + x3u*z2u + x1u*z3u - x2u*z3u)) + 
+								square(Math.abs(y2u*z1u - y3u*z1u - y1u*z2u + y3u*z2u + y1u*z3u - y2u*z3u))))/
 			(16.*(1 + nu));
 			
 			// Particle 2, Force y
@@ -1038,384 +1038,384 @@ public class TriangleForce extends Force<TriangleForce> {
 			
 			double Fy2 = -(Y*(((nu*(-(((y1d - y3d)*((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 													(z1u - z2u)*(z1u - z3u)))/
-									  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-											(z1u - z2u)*(z1u - z3u),2) + 
-									   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-									   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
-									(2*(y1d - y2d)*(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + 
-													Math.pow(z1u - z3u,2)))/
-									(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-										  (z1u - z2u)*(z1u - z3u),2) + 
-									 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-									 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
+									  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+											(z1u - z2u)*(z1u - z3u)) + 
+									   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+									   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
+									(2*(y1d - y2d)*(square(x1u - x3u) + square(y1u - y3u) + 
+													square(z1u - z3u)))/
+									(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+										  (z1u - z2u)*(z1u - z3u)) + 
+									 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+									 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
 								((-1 + nu)*(y1d - y3d)*((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 														(z1u - z2u)*(z1u - z3u)))/
-								(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									  (z1u - z2u)*(z1u - z3u),2) + 
-								 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
-							   (-1 + ((Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-									  (Math.pow(x1d - x3d,2) + Math.pow(y1d - y3d,2) + Math.pow(z1d - z3d,2)))/
-								(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									  (z1u - z2u)*(z1u - z3u),2) + 
-								 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
-								((Math.pow(x1d,2) + x2d*x3d - x1d*(x2d + x3d) + Math.pow(y1d,2) + y2d*y3d - 
+								(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									  (z1u - z2u)*(z1u - z3u)) + 
+								 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
+							   (-1 + ((square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+									  (square(x1d - x3d) + square(y1d - y3d) + square(z1d - z3d)))/
+								(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									  (z1u - z2u)*(z1u - z3u)) + 
+								 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
+								((square(x1d) + x2d*x3d - x1d*(x2d + x3d) + square(y1d) + y2d*y3d - 
 								  y1d*(y2d + y3d) + (z1d - z2d)*(z1d - z3d))*
 								 ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 								  (z1u - z2u)*(z1u - z3u)))/
-								(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									  (z1u - z2u)*(z1u - z3u),2) + 
-								 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))))/
+								(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									  (z1u - z2u)*(z1u - z3u)) + 
+								 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))))/
 							  (-1 + 2*nu) - (((y1d - y3d)*
 											  (-(((-1 + nu)*((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 															 (z1u - z2u)*(z1u - z3u)))/
-												 (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													   (z1u - z2u)*(z1u - z3u),2) + 
-												  (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												  (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
+												 (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													   (z1u - z2u)*(z1u - z3u)) + 
+												  (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												  (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
 											   (nu*((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 													(z1u - z2u)*(z1u - z3u)))/
-											   (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													 (z1u - z2u)*(z1u - z3u),2) + 
-												(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
+											   (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													 (z1u - z2u)*(z1u - z3u)) + 
+												(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
 											  (2*(-1 + nu)*(y1d - y2d)*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-											  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													(z1u - z2u)*(z1u - z3u),2) + 
-											   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
-											 (-1 - (((x1d - x2d)*(x1d - x3d) + Math.pow(y1d,2) + y2d*y3d - y1d*(y2d + y3d) + 
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+											  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													(z1u - z2u)*(z1u - z3u)) + 
+											   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
+											 (-1 - (((x1d - x2d)*(x1d - x3d) + square(y1d) + y2d*y3d - y1d*(y2d + y3d) + 
 													 (z1d - z2d)*(z1d - z3d))*
 													((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 													 (z1u - z2u)*(z1u - z3u)))/
-											  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													(z1u - z2u)*(z1u - z3u),2) + 
-											   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) + 
-											  ((Math.pow(x1d - x2d,2) + Math.pow(y1d - y2d,2) + Math.pow(z1d - z2d,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-											  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													(z1u - z2u)*(z1u - z3u),2) + 
-											   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))))/
+											  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													(z1u - z2u)*(z1u - z3u)) + 
+											   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) + 
+											  ((square(x1d - x2d) + square(y1d - y2d) + square(z1d - z2d))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+											  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													(z1u - z2u)*(z1u - z3u)) + 
+											   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))))/
 							  (-1 + 2*nu) - ((-(((y1d - y3d)*
 												 ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 												  (z1u - z2u)*(z1u - z3u)))/
-												(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													  (z1u - z2u)*(z1u - z3u),2) + 
-												 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
-											  (2*(y1d - y2d)*(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-											  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													(z1u - z2u)*(z1u - z3u),2) + 
-											   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
-											 (1 - nu*(((Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-													   (Math.pow(x1d - x3d,2) + Math.pow(y1d - y3d,2) + Math.pow(z1d - z3d,2)))/
-													  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-															(z1u - z2u)*(z1u - z3u),2) + 
-													   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-													   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
-													  (((x1d - x2d)*(x1d - x3d) + Math.pow(y1d,2) + y2d*y3d - y1d*(y2d + y3d) + 
+												(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													  (z1u - z2u)*(z1u - z3u)) + 
+												 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
+											  (2*(y1d - y2d)*(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+											  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													(z1u - z2u)*(z1u - z3u)) + 
+											   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
+											 (1 - nu*(((square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+													   (square(x1d - x3d) + square(y1d - y3d) + square(z1d - z3d)))/
+													  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+															(z1u - z2u)*(z1u - z3u)) + 
+													   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+													   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
+													  (((x1d - x2d)*(x1d - x3d) + square(y1d) + y2d*y3d - y1d*(y2d + y3d) + 
 														(z1d - z2d)*(z1d - z3d))*
 													   ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 														(z1u - z2u)*(z1u - z3u)))/
-													  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-															(z1u - z2u)*(z1u - z3u),2) + 
-													   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-													   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) - 
-											  ((-1 + nu)*((x1d - x2d)*(x1d - x3d) + Math.pow(y1d,2) + y2d*y3d - 
+													  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+															(z1u - z2u)*(z1u - z3u)) + 
+													   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+													   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) - 
+											  ((-1 + nu)*((x1d - x2d)*(x1d - x3d) + square(y1d) + y2d*y3d - 
 														  y1d*(y2d + y3d) + (z1d - z2d)*(z1d - z3d))*
 											   ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 												(z1u - z2u)*(z1u - z3u)))/
-											  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													(z1u - z2u)*(z1u - z3u),2) + 
-											   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) + 
-											  ((-1 + nu)*(Math.pow(x1d - x2d,2) + Math.pow(y1d - y2d,2) + Math.pow(z1d - z2d,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-											  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													(z1u - z2u)*(z1u - z3u),2) + 
-											   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))))/
+											  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													(z1u - z2u)*(z1u - z3u)) + 
+											   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) + 
+											  ((-1 + nu)*(square(x1d - x2d) + square(y1d - y2d) + square(z1d - z2d))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+											  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													(z1u - z2u)*(z1u - z3u)) + 
+											   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))))/
 							  (-1 + 2*nu) + 2*(((-y1d + y3d)*
-												(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2)))/
-											   (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													 (z1u - z2u)*(z1u - z3u),2) + 
-												(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
+												(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u)))/
+											   (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													 (z1u - z2u)*(z1u - z3u)) + 
+												(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
 											   (2*(-y1d + y2d)*((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 																(z1u - z2u)*(z1u - z3u)))/
-											   (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													 (z1u - z2u)*(z1u - z3u),2) + 
-												(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
-							  (-(((Math.pow(x1d - x3d,2) + Math.pow(y1d - y3d,2) + Math.pow(z1d - z3d,2))*
+											   (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													 (z1u - z2u)*(z1u - z3u)) + 
+												(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
+							  (-(((square(x1d - x3d) + square(y1d - y3d) + square(z1d - z3d))*
 								  ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 								   (z1u - z2u)*(z1u - z3u)))/
-								 (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									   (z1u - z2u)*(z1u - z3u),2) + 
-								  (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								  (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
-							   ((Math.pow(x1d,2) + x2d*x3d - x1d*(x2d + x3d) + Math.pow(y1d,2) + y2d*y3d - 
+								 (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									   (z1u - z2u)*(z1u - z3u)) + 
+								  (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								  (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
+							   ((square(x1d) + x2d*x3d - x1d*(x2d + x3d) + square(y1d) + y2d*y3d - 
 								 y1d*(y2d + y3d) + (z1d - z2d)*(z1d - z3d))*
-								(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-							   (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									 (z1u - z2u)*(z1u - z3u),2) + 
-								(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
+								(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+							   (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									 (z1u - z2u)*(z1u - z3u)) + 
+								(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
 							  ((y1d - y3d)*(1 + ((-1 + nu)*
-												 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												 (Math.pow(x1d - x3d,2) + Math.pow(y1d - y3d,2) + Math.pow(z1d - z3d,2)))/
-											(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-												  (z1u - z2u)*(z1u - z3u),2) + 
-											 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
-											nu*(-((((x1d - x2d)*(x1d - x3d) + Math.pow(y1d,2) + y2d*y3d - y1d*(y2d + y3d) + 
+												 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												 (square(x1d - x3d) + square(y1d - y3d) + square(z1d - z3d)))/
+											(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+												  (z1u - z2u)*(z1u - z3u)) + 
+											 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
+											nu*(-((((x1d - x2d)*(x1d - x3d) + square(y1d) + y2d*y3d - y1d*(y2d + y3d) + 
 													(z1d - z2d)*(z1d - z3d))*
 												   ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 													(z1u - z2u)*(z1u - z3u)))/
-												  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-														(z1u - z2u)*(z1u - z3u),2) + 
-												   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
-												((Math.pow(x1d - x2d,2) + Math.pow(y1d - y2d,2) + Math.pow(z1d - z2d,2))*
-												 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-												(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													  (z1u - z2u)*(z1u - z3u),2) + 
-												 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) - 
-											((-1 + nu)*(Math.pow(x1d,2) + x2d*x3d - x1d*(x2d + x3d) + Math.pow(y1d,2) + 
+												  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+														(z1u - z2u)*(z1u - z3u)) + 
+												   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
+												((square(x1d - x2d) + square(y1d - y2d) + square(z1d - z2d))*
+												 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+												(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													  (z1u - z2u)*(z1u - z3u)) + 
+												 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) - 
+											((-1 + nu)*(square(x1d) + x2d*x3d - x1d*(x2d + x3d) + square(y1d) + 
 														y2d*y3d - y1d*(y2d + y3d) + (z1d - z2d)*(z1d - z3d))*
 											 ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 											  (z1u - z2u)*(z1u - z3u)))/
-											(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-												  (z1u - z2u)*(z1u - z3u),2) + 
-											 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
+											(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+												  (z1u - z2u)*(z1u - z3u)) + 
+											 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
 							   ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + (z1u - z2u)*(z1u - z3u)))/
-							  ((-1 + 2*nu)*(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-												 (z1u - z2u)*(z1u - z3u),2) + 
-											(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
-							  (2*(-y1d + y3d)*(((Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												(Math.pow(x1d,2) + x2d*x3d - x1d*(x2d + x3d) + Math.pow(y1d,2) + y2d*y3d - 
+							  ((-1 + 2*nu)*(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+												 (z1u - z2u)*(z1u - z3u)) + 
+											(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
+							  (2*(-y1d + y3d)*(((square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												(square(x1d) + x2d*x3d - x1d*(x2d + x3d) + square(y1d) + y2d*y3d - 
 												 y1d*(y2d + y3d) + (z1d - z2d)*(z1d - z3d)))/
-											   (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													 (z1u - z2u)*(z1u - z3u),2) + 
-												(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
-											   ((Math.pow(x1d - x2d,2) + Math.pow(y1d - y2d,2) + Math.pow(z1d - z2d,2))*
+											   (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													 (z1u - z2u)*(z1u - z3u)) + 
+												(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
+											   ((square(x1d - x2d) + square(y1d - y2d) + square(z1d - z2d))*
 												((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 												 (z1u - z2u)*(z1u - z3u)))/
-											   (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													 (z1u - z2u)*(z1u - z3u),2) + 
-												(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
-							   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-							  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									(z1u - z2u)*(z1u - z3u),2) + 
-							   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-							   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
-						   Math.sqrt(Math.pow(Math.abs(x2u*y1u - x3u*y1u - x1u*y2u + x3u*y2u + x1u*y3u - x2u*y3u),2) + 
-								Math.pow(Math.abs(x2u*z1u - x3u*z1u - x1u*z2u + x3u*z2u + x1u*z3u - x2u*z3u),2) + 
-								Math.pow(Math.abs(y2u*z1u - y3u*z1u - y1u*z2u + y3u*z2u + y1u*z3u - y2u*z3u),2)))/
+											   (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													 (z1u - z2u)*(z1u - z3u)) + 
+												(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
+							   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+							  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									(z1u - z2u)*(z1u - z3u)) + 
+							   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+							   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
+						   Math.sqrt(square(Math.abs(x2u*y1u - x3u*y1u - x1u*y2u + x3u*y2u + x1u*y3u - x2u*y3u)) + 
+								square(Math.abs(x2u*z1u - x3u*z1u - x1u*z2u + x3u*z2u + x1u*z3u - x2u*z3u)) + 
+								square(Math.abs(y2u*z1u - y3u*z1u - y1u*z2u + y3u*z2u + y1u*z3u - y2u*z3u))))/
 			(16.*(1 + nu));
 			
 			
 			// Particle 2, Force z
 			//--------------------
 			
-			double Fz2 = -(Y*(((-1 + ((Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-									  (Math.pow(x1d - x3d,2) + Math.pow(y1d - y3d,2) + Math.pow(z1d - z3d,2)))/
-								(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									  (z1u - z2u)*(z1u - z3u),2) + 
-								 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
-								((Math.pow(x1d,2) + x2d*x3d - x1d*(x2d + x3d) + Math.pow(y1d,2) + y2d*y3d - 
+			double Fz2 = -(Y*(((-1 + ((square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+									  (square(x1d - x3d) + square(y1d - y3d) + square(z1d - z3d)))/
+								(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									  (z1u - z2u)*(z1u - z3u)) + 
+								 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
+								((square(x1d) + x2d*x3d - x1d*(x2d + x3d) + square(y1d) + y2d*y3d - 
 								  y1d*(y2d + y3d) + (z1d - z2d)*(z1d - z3d))*
 								 ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 								  (z1u - z2u)*(z1u - z3u)))/
-								(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									  (z1u - z2u)*(z1u - z3u),2) + 
-								 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
+								(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									  (z1u - z2u)*(z1u - z3u)) + 
+								 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
 							   (nu*(-(((z1d - z3d)*((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 													(z1u - z2u)*(z1u - z3u)))/
-									  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-											(z1u - z2u)*(z1u - z3u),2) + 
-									   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-									   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
-									(2*(z1d - z2d)*(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + 
-													Math.pow(z1u - z3u,2)))/
-									(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-										  (z1u - z2u)*(z1u - z3u),2) + 
-									 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-									 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
+									  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+											(z1u - z2u)*(z1u - z3u)) + 
+									   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+									   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
+									(2*(z1d - z2d)*(square(x1u - x3u) + square(y1u - y3u) + 
+													square(z1u - z3u)))/
+									(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+										  (z1u - z2u)*(z1u - z3u)) + 
+									 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+									 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
 								((-1 + nu)*(z1d - z3d)*((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 														(z1u - z2u)*(z1u - z3u)))/
-								(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									  (z1u - z2u)*(z1u - z3u),2) + 
-								 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))))/
-							  (-1 + 2*nu) - ((1 - nu*(((Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + 
-														Math.pow(z1u - z2u,2))*
-													   (Math.pow(x1d - x3d,2) + Math.pow(y1d - y3d,2) + Math.pow(z1d - z3d,2)))/
-													  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-															(z1u - z2u)*(z1u - z3u),2) + 
-													   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-													   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
-													  (((x1d - x2d)*(x1d - x3d) + Math.pow(y1d,2) + y2d*y3d - y1d*(y2d + y3d) + 
+								(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									  (z1u - z2u)*(z1u - z3u)) + 
+								 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))))/
+							  (-1 + 2*nu) - ((1 - nu*(((square(x1u - x2u) + square(y1u - y2u) + 
+														square(z1u - z2u))*
+													   (square(x1d - x3d) + square(y1d - y3d) + square(z1d - z3d)))/
+													  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+															(z1u - z2u)*(z1u - z3u)) + 
+													   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+													   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
+													  (((x1d - x2d)*(x1d - x3d) + square(y1d) + y2d*y3d - y1d*(y2d + y3d) + 
 														(z1d - z2d)*(z1d - z3d))*
 													   ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 														(z1u - z2u)*(z1u - z3u)))/
-													  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-															(z1u - z2u)*(z1u - z3u),2) + 
-													   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-													   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) - 
-											  ((-1 + nu)*((x1d - x2d)*(x1d - x3d) + Math.pow(y1d,2) + y2d*y3d - 
+													  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+															(z1u - z2u)*(z1u - z3u)) + 
+													   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+													   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) - 
+											  ((-1 + nu)*((x1d - x2d)*(x1d - x3d) + square(y1d) + y2d*y3d - 
 														  y1d*(y2d + y3d) + (z1d - z2d)*(z1d - z3d))*
 											   ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 												(z1u - z2u)*(z1u - z3u)))/
-											  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													(z1u - z2u)*(z1u - z3u),2) + 
-											   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) + 
-											  ((-1 + nu)*(Math.pow(x1d - x2d,2) + Math.pow(y1d - y2d,2) + Math.pow(z1d - z2d,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-											  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													(z1u - z2u)*(z1u - z3u),2) + 
-											   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
+											  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													(z1u - z2u)*(z1u - z3u)) + 
+											   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) + 
+											  ((-1 + nu)*(square(x1d - x2d) + square(y1d - y2d) + square(z1d - z2d))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+											  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													(z1u - z2u)*(z1u - z3u)) + 
+											   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
 											 (-(((z1d - z3d)*((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 															  (z1u - z2u)*(z1u - z3u)))/
-												(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													  (z1u - z2u)*(z1u - z3u),2) + 
-												 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
-											  (2*(z1d - z2d)*(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-											  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													(z1u - z2u)*(z1u - z3u),2) + 
-											   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))))/
-							  (-1 + 2*nu) - ((-1 - (((x1d - x2d)*(x1d - x3d) + Math.pow(y1d,2) + y2d*y3d - 
+												(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													  (z1u - z2u)*(z1u - z3u)) + 
+												 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
+											  (2*(z1d - z2d)*(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+											  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													(z1u - z2u)*(z1u - z3u)) + 
+											   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))))/
+							  (-1 + 2*nu) - ((-1 - (((x1d - x2d)*(x1d - x3d) + square(y1d) + y2d*y3d - 
 													 y1d*(y2d + y3d) + (z1d - z2d)*(z1d - z3d))*
 													((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 													 (z1u - z2u)*(z1u - z3u)))/
-											  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													(z1u - z2u)*(z1u - z3u),2) + 
-											   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) + 
-											  ((Math.pow(x1d - x2d,2) + Math.pow(y1d - y2d,2) + Math.pow(z1d - z2d,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-											  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													(z1u - z2u)*(z1u - z3u),2) + 
-											   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
+											  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													(z1u - z2u)*(z1u - z3u)) + 
+											   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) + 
+											  ((square(x1d - x2d) + square(y1d - y2d) + square(z1d - z2d))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+											  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													(z1u - z2u)*(z1u - z3u)) + 
+											   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
 											 ((z1d - z3d)*(-(((-1 + nu)*
 															  ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 															   (z1u - z2u)*(z1u - z3u)))/
-															 (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-																   (z1u - z2u)*(z1u - z3u),2) + 
-															  (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-															  (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
+															 (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+																   (z1u - z2u)*(z1u - z3u)) + 
+															  (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+															  (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
 														   (nu*((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 																(z1u - z2u)*(z1u - z3u)))/
-														   (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-																 (z1u - z2u)*(z1u - z3u),2) + 
-															(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-															(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
+														   (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+																 (z1u - z2u)*(z1u - z3u)) + 
+															(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+															(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
 											  (2*(-1 + nu)*(z1d - z2d)*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-											  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													(z1u - z2u)*(z1u - z3u),2) + 
-											   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))))/
-							  (-1 + 2*nu) + 2*(((Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+											  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													(z1u - z2u)*(z1u - z3u)) + 
+											   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))))/
+							  (-1 + 2*nu) + 2*(((square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
 												(-z1d + z3d))/
-											   (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													 (z1u - z2u)*(z1u - z3u),2) + 
-												(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
+											   (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													 (z1u - z2u)*(z1u - z3u)) + 
+												(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
 											   (2*(-z1d + z2d)*((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 																(z1u - z2u)*(z1u - z3u)))/
-											   (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													 (z1u - z2u)*(z1u - z3u),2) + 
-												(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
-							  (-(((Math.pow(x1d - x3d,2) + Math.pow(y1d - y3d,2) + Math.pow(z1d - z3d,2))*
+											   (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													 (z1u - z2u)*(z1u - z3u)) + 
+												(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
+							  (-(((square(x1d - x3d) + square(y1d - y3d) + square(z1d - z3d))*
 								  ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 								   (z1u - z2u)*(z1u - z3u)))/
-								 (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									   (z1u - z2u)*(z1u - z3u),2) + 
-								  (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								  (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
-							   ((Math.pow(x1d,2) + x2d*x3d - x1d*(x2d + x3d) + Math.pow(y1d,2) + y2d*y3d - 
+								 (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									   (z1u - z2u)*(z1u - z3u)) + 
+								  (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								  (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
+							   ((square(x1d) + x2d*x3d - x1d*(x2d + x3d) + square(y1d) + y2d*y3d - 
 								 y1d*(y2d + y3d) + (z1d - z2d)*(z1d - z3d))*
-								(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-							   (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									 (z1u - z2u)*(z1u - z3u),2) + 
-								(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
+								(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+							   (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									 (z1u - z2u)*(z1u - z3u)) + 
+								(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
 							  ((z1d - z3d)*(1 + ((-1 + nu)*
-												 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												 (Math.pow(x1d - x3d,2) + Math.pow(y1d - y3d,2) + Math.pow(z1d - z3d,2)))/
-											(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-												  (z1u - z2u)*(z1u - z3u),2) + 
-											 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
-											nu*(-((((x1d - x2d)*(x1d - x3d) + Math.pow(y1d,2) + y2d*y3d - y1d*(y2d + y3d) + 
+												 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												 (square(x1d - x3d) + square(y1d - y3d) + square(z1d - z3d)))/
+											(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+												  (z1u - z2u)*(z1u - z3u)) + 
+											 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
+											nu*(-((((x1d - x2d)*(x1d - x3d) + square(y1d) + y2d*y3d - y1d*(y2d + y3d) + 
 													(z1d - z2d)*(z1d - z3d))*
 												   ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 													(z1u - z2u)*(z1u - z3u)))/
-												  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-														(z1u - z2u)*(z1u - z3u),2) + 
-												   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
-												((Math.pow(x1d - x2d,2) + Math.pow(y1d - y2d,2) + Math.pow(z1d - z2d,2))*
-												 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-												(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													  (z1u - z2u)*(z1u - z3u),2) + 
-												 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) - 
-											((-1 + nu)*(Math.pow(x1d,2) + x2d*x3d - x1d*(x2d + x3d) + Math.pow(y1d,2) + 
+												  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+														(z1u - z2u)*(z1u - z3u)) + 
+												   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
+												((square(x1d - x2d) + square(y1d - y2d) + square(z1d - z2d))*
+												 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+												(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													  (z1u - z2u)*(z1u - z3u)) + 
+												 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) - 
+											((-1 + nu)*(square(x1d) + x2d*x3d - x1d*(x2d + x3d) + square(y1d) + 
 														y2d*y3d - y1d*(y2d + y3d) + (z1d - z2d)*(z1d - z3d))*
 											 ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 											  (z1u - z2u)*(z1u - z3u)))/
-											(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-												  (z1u - z2u)*(z1u - z3u),2) + 
-											 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
+											(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+												  (z1u - z2u)*(z1u - z3u)) + 
+											 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
 							   ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + (z1u - z2u)*(z1u - z3u)))/
-							  ((-1 + 2*nu)*(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-												 (z1u - z2u)*(z1u - z3u),2) + 
-											(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
-							  (2*(-z1d + z3d)*(((Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												(Math.pow(x1d,2) + x2d*x3d - x1d*(x2d + x3d) + Math.pow(y1d,2) + y2d*y3d - 
+							  ((-1 + 2*nu)*(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+												 (z1u - z2u)*(z1u - z3u)) + 
+											(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
+							  (2*(-z1d + z3d)*(((square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												(square(x1d) + x2d*x3d - x1d*(x2d + x3d) + square(y1d) + y2d*y3d - 
 												 y1d*(y2d + y3d) + (z1d - z2d)*(z1d - z3d)))/
-											   (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													 (z1u - z2u)*(z1u - z3u),2) + 
-												(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
-											   ((Math.pow(x1d - x2d,2) + Math.pow(y1d - y2d,2) + Math.pow(z1d - z2d,2))*
+											   (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													 (z1u - z2u)*(z1u - z3u)) + 
+												(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
+											   ((square(x1d - x2d) + square(y1d - y2d) + square(z1d - z2d))*
 												((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 												 (z1u - z2u)*(z1u - z3u)))/
-											   (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													 (z1u - z2u)*(z1u - z3u),2) + 
-												(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
-							   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-							  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									(z1u - z2u)*(z1u - z3u),2) + 
-							   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-							   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
-						   Math.sqrt(Math.pow(Math.abs(x2u*y1u - x3u*y1u - x1u*y2u + x3u*y2u + x1u*y3u - x2u*y3u),2) + 
-								Math.pow(Math.abs(x2u*z1u - x3u*z1u - x1u*z2u + x3u*z2u + x1u*z3u - x2u*z3u),2) + 
-								Math.pow(Math.abs(y2u*z1u - y3u*z1u - y1u*z2u + y3u*z2u + y1u*z3u - y2u*z3u),2)))/
+											   (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													 (z1u - z2u)*(z1u - z3u)) + 
+												(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
+							   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+							  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									(z1u - z2u)*(z1u - z3u)) + 
+							   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+							   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
+						   Math.sqrt(square(Math.abs(x2u*y1u - x3u*y1u - x1u*y2u + x3u*y2u + x1u*y3u - x2u*y3u)) + 
+								square(Math.abs(x2u*z1u - x3u*z1u - x1u*z2u + x3u*z2u + x1u*z3u - x2u*z3u)) + 
+								square(Math.abs(y2u*z1u - y3u*z1u - y1u*z2u + y3u*z2u + y1u*z3u - y2u*z3u))))/
 			(16.*(1 + nu));
 			
 			
@@ -1423,575 +1423,575 @@ public class TriangleForce extends Force<TriangleForce> {
 			// Particle 3, Force x
 			//--------------------
 			
-			double Fx3 = -(Y*(-((((2*(-1 + nu)*(x1d - x3d)*(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + 
-															Math.pow(z1u - z2u,2)))/
-								  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-										(z1u - z2u)*(z1u - z3u),2) + 
-								   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
+			double Fx3 = -(Y*(-((((2*(-1 + nu)*(x1d - x3d)*(square(x1u - x2u) + square(y1u - y2u) + 
+															square(z1u - z2u)))/
+								  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+										(z1u - z2u)*(z1u - z3u)) + 
+								   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
 								  ((-1 + nu)*(x1d - x2d)*
 								   ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 									(z1u - z2u)*(z1u - z3u)))/
-								  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-										(z1u - z2u)*(z1u - z3u),2) + 
-								   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
+								  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+										(z1u - z2u)*(z1u - z3u)) + 
+								   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
 								  (nu*(-x1d + x2d)*((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 													(z1u - z2u)*(z1u - z3u)))/
-								  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-										(z1u - z2u)*(z1u - z3u),2) + 
-								   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
-								 (-1 + ((Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-										(Math.pow(x1d - x3d,2) + Math.pow(y1d - y3d,2) + Math.pow(z1d - z3d,2)))/
-								  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-										(z1u - z2u)*(z1u - z3u),2) + 
-								   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
-								  ((Math.pow(x1d,2) + x2d*x3d - x1d*(x2d + x3d) + Math.pow(y1d,2) + y2d*y3d - 
+								  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+										(z1u - z2u)*(z1u - z3u)) + 
+								   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
+								 (-1 + ((square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+										(square(x1d - x3d) + square(y1d - y3d) + square(z1d - z3d)))/
+								  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+										(z1u - z2u)*(z1u - z3u)) + 
+								   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
+								  ((square(x1d) + x2d*x3d - x1d*(x2d + x3d) + square(y1d) + y2d*y3d - 
 									y1d*(y2d + y3d) + (z1d - z2d)*(z1d - z3d))*
 								   ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 									(z1u - z2u)*(z1u - z3u)))/
-								  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-										(z1u - z2u)*(z1u - z3u),2) + 
-								   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))))/
+								  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+										(z1u - z2u)*(z1u - z3u)) + 
+								   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))))/
 								(-1 + 2*nu)) - (((2*(x1d - x3d)*
-												  (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2)))/
-												 (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													   (z1u - z2u)*(z1u - z3u),2) + 
-												  (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												  (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
+												  (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u)))/
+												 (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													   (z1u - z2u)*(z1u - z3u)) + 
+												  (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												  (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
 												 ((x1d - x2d)*((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 															   (z1u - z2u)*(z1u - z3u)))/
-												 (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													   (z1u - z2u)*(z1u - z3u),2) + 
-												  (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												  (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
-												(1 + ((-1 + nu)*(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-													  (Math.pow(x1d - x3d,2) + Math.pow(y1d - y3d,2) + Math.pow(z1d - z3d,2)))/
-												 (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													   (z1u - z2u)*(z1u - z3u),2) + 
-												  (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												  (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
-												 nu*(-((((x1d - x2d)*(x1d - x3d) + Math.pow(y1d,2) + y2d*y3d - y1d*(y2d + y3d) + 
+												 (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													   (z1u - z2u)*(z1u - z3u)) + 
+												  (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												  (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
+												(1 + ((-1 + nu)*(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+													  (square(x1d - x3d) + square(y1d - y3d) + square(z1d - z3d)))/
+												 (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													   (z1u - z2u)*(z1u - z3u)) + 
+												  (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												  (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
+												 nu*(-((((x1d - x2d)*(x1d - x3d) + square(y1d) + y2d*y3d - y1d*(y2d + y3d) + 
 														 (z1d - z2d)*(z1d - z3d))*
 														((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 														 (z1u - z2u)*(z1u - z3u)))/
-													   (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-															 (z1u - z2u)*(z1u - z3u),2) + 
-														(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-														(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
-													 ((Math.pow(x1d - x2d,2) + Math.pow(y1d - y2d,2) + Math.pow(z1d - z2d,2))*
-													  (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-													 (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-														   (z1u - z2u)*(z1u - z3u),2) + 
-													  (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-													  (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) - 
-												 ((-1 + nu)*(Math.pow(x1d,2) + x2d*x3d - x1d*(x2d + x3d) + Math.pow(y1d,2) + 
+													   (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+															 (z1u - z2u)*(z1u - z3u)) + 
+														(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+														(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
+													 ((square(x1d - x2d) + square(y1d - y2d) + square(z1d - z2d))*
+													  (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+													 (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+														   (z1u - z2u)*(z1u - z3u)) + 
+													  (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+													  (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) - 
+												 ((-1 + nu)*(square(x1d) + x2d*x3d - x1d*(x2d + x3d) + square(y1d) + 
 															 y2d*y3d - y1d*(y2d + y3d) + (z1d - z2d)*(z1d - z3d))*
 												  ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 												   (z1u - z2u)*(z1u - z3u)))/
-												 (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													   (z1u - z2u)*(z1u - z3u),2) + 
-												  (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												  (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))))/
-							  (-1 + 2*nu) + 2*(((Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												(Math.pow(x1d,2) + x2d*x3d - x1d*(x2d + x3d) + Math.pow(y1d,2) + y2d*y3d - 
+												 (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													   (z1u - z2u)*(z1u - z3u)) + 
+												  (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												  (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))))/
+							  (-1 + 2*nu) + 2*(((square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												(square(x1d) + x2d*x3d - x1d*(x2d + x3d) + square(y1d) + y2d*y3d - 
 												 y1d*(y2d + y3d) + (z1d - z2d)*(z1d - z3d)))/
-											   (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													 (z1u - z2u)*(z1u - z3u),2) + 
-												(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
-											   ((Math.pow(x1d - x2d,2) + Math.pow(y1d - y2d,2) + Math.pow(z1d - z2d,2))*
+											   (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													 (z1u - z2u)*(z1u - z3u)) + 
+												(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
+											   ((square(x1d - x2d) + square(y1d - y2d) + square(z1d - z2d))*
 												((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + (z1u - z2u)*(z1u - z3u)))
-											   /(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													  (z1u - z2u)*(z1u - z3u),2) + 
-												 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
+											   /(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													  (z1u - z2u)*(z1u - z3u)) + 
+												 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
 							  ((-2*(-x1d + x3d)*((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 												 (z1u - z2u)*(z1u - z3u)))/
-							   (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									 (z1u - z2u)*(z1u - z3u),2) + 
-								(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) + 
-							   ((-x1d + x2d)*(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-							   (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									 (z1u - z2u)*(z1u - z3u),2) + 
-								(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
-							  ((nu*((2*(x1d - x3d)*(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + 
-													Math.pow(z1u - z2u,2)))/
-									(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-										  (z1u - z2u)*(z1u - z3u),2) + 
-									 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-									 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
+							   (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									 (z1u - z2u)*(z1u - z3u)) + 
+								(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) + 
+							   ((-x1d + x2d)*(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+							   (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									 (z1u - z2u)*(z1u - z3u)) + 
+								(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
+							  ((nu*((2*(x1d - x3d)*(square(x1u - x2u) + square(y1u - y2u) + 
+													square(z1u - z2u)))/
+									(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+										  (z1u - z2u)*(z1u - z3u)) + 
+									 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+									 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
 									((x1d - x2d)*((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 												  (z1u - z2u)*(z1u - z3u)))/
-									(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-										  (z1u - z2u)*(z1u - z3u),2) + 
-									 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-									 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
+									(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+										  (z1u - z2u)*(z1u - z3u)) + 
+									 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+									 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
 								((-1 + nu)*(x1d - x2d)*((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 														(z1u - z2u)*(z1u - z3u)))/
-								(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									  (z1u - z2u)*(z1u - z3u),2) + 
-								 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
-							   (-1 - (((x1d - x2d)*(x1d - x3d) + Math.pow(y1d,2) + y2d*y3d - y1d*(y2d + y3d) + 
+								(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									  (z1u - z2u)*(z1u - z3u)) + 
+								 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
+							   (-1 - (((x1d - x2d)*(x1d - x3d) + square(y1d) + y2d*y3d - y1d*(y2d + y3d) + 
 									   (z1d - z2d)*(z1d - z3d))*
 									  ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 									   (z1u - z2u)*(z1u - z3u)))/
-								(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									  (z1u - z2u)*(z1u - z3u),2) + 
-								 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) + 
-								((Math.pow(x1d - x2d,2) + Math.pow(y1d - y2d,2) + Math.pow(z1d - z2d,2))*
-								 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-								(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									  (z1u - z2u)*(z1u - z3u),2) + 
-								 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))))/
+								(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									  (z1u - z2u)*(z1u - z3u)) + 
+								 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) + 
+								((square(x1d - x2d) + square(y1d - y2d) + square(z1d - z2d))*
+								 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+								(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									  (z1u - z2u)*(z1u - z3u)) + 
+								 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))))/
 							  (-1 + 2*nu) + (2*(-x1d + x2d)*
-											 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											 (-(((Math.pow(x1d - x3d,2) + Math.pow(y1d - y3d,2) + Math.pow(z1d - z3d,2))*
+											 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											 (-(((square(x1d - x3d) + square(y1d - y3d) + square(z1d - z3d))*
 												 ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 												  (z1u - z2u)*(z1u - z3u)))/
-												(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													  (z1u - z2u)*(z1u - z3u),2) + 
-												 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
-											  ((Math.pow(x1d,2) + x2d*x3d - x1d*(x2d + x3d) + Math.pow(y1d,2) + y2d*y3d - 
+												(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													  (z1u - z2u)*(z1u - z3u)) + 
+												 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
+											  ((square(x1d) + x2d*x3d - x1d*(x2d + x3d) + square(y1d) + y2d*y3d - 
 												y1d*(y2d + y3d) + (z1d - z2d)*(z1d - z3d))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-											  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													(z1u - z2u)*(z1u - z3u),2) + 
-											   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))))/
-							  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									(z1u - z2u)*(z1u - z3u),2) + 
-							   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-							   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) + 
-							  ((x1d - x2d)*(1 - nu*(((Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + 
-													  Math.pow(z1u - z2u,2))*
-													 (Math.pow(x1d - x3d,2) + Math.pow(y1d - y3d,2) + Math.pow(z1d - z3d,2)))/
-													(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-														  (z1u - z2u)*(z1u - z3u),2) + 
-													 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-													 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
-													(((x1d - x2d)*(x1d - x3d) + Math.pow(y1d,2) + y2d*y3d - y1d*(y2d + y3d) + 
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+											  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													(z1u - z2u)*(z1u - z3u)) + 
+											   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))))/
+							  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									(z1u - z2u)*(z1u - z3u)) + 
+							   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+							   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) + 
+							  ((x1d - x2d)*(1 - nu*(((square(x1u - x2u) + square(y1u - y2u) + 
+													  square(z1u - z2u))*
+													 (square(x1d - x3d) + square(y1d - y3d) + square(z1d - z3d)))/
+													(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+														  (z1u - z2u)*(z1u - z3u)) + 
+													 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+													 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
+													(((x1d - x2d)*(x1d - x3d) + square(y1d) + y2d*y3d - y1d*(y2d + y3d) + 
 													  (z1d - z2d)*(z1d - z3d))*
 													 ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 													  (z1u - z2u)*(z1u - z3u)))/
-													(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-														  (z1u - z2u)*(z1u - z3u),2) + 
-													 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-													 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) - 
-											((-1 + nu)*((x1d - x2d)*(x1d - x3d) + Math.pow(y1d,2) + y2d*y3d - 
+													(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+														  (z1u - z2u)*(z1u - z3u)) + 
+													 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+													 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) - 
+											((-1 + nu)*((x1d - x2d)*(x1d - x3d) + square(y1d) + y2d*y3d - 
 														y1d*(y2d + y3d) + (z1d - z2d)*(z1d - z3d))*
 											 ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 											  (z1u - z2u)*(z1u - z3u)))/
-											(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-												  (z1u - z2u)*(z1u - z3u),2) + 
-											 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) + 
-											((-1 + nu)*(Math.pow(x1d - x2d,2) + Math.pow(y1d - y2d,2) + Math.pow(z1d - z2d,2))*
-											 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-											(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-												  (z1u - z2u)*(z1u - z3u),2) + 
-											 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
+											(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+												  (z1u - z2u)*(z1u - z3u)) + 
+											 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) + 
+											((-1 + nu)*(square(x1d - x2d) + square(y1d - y2d) + square(z1d - z2d))*
+											 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+											(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+												  (z1u - z2u)*(z1u - z3u)) + 
+											 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
 							   ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + (z1u - z2u)*(z1u - z3u)))/
-							  ((-1 + 2*nu)*(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-												 (z1u - z2u)*(z1u - z3u),2) + 
-											(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))))*
-						   Math.sqrt(Math.pow(Math.abs(x2u*y1u - x3u*y1u - x1u*y2u + x3u*y2u + x1u*y3u - x2u*y3u),2) + 
-								Math.pow(Math.abs(x2u*z1u - x3u*z1u - x1u*z2u + x3u*z2u + x1u*z3u - x2u*z3u),2) + 
-								Math.pow(Math.abs(y2u*z1u - y3u*z1u - y1u*z2u + y3u*z2u + y1u*z3u - y2u*z3u),2)))/
+							  ((-1 + 2*nu)*(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+												 (z1u - z2u)*(z1u - z3u)) + 
+											(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))))*
+						   Math.sqrt(square(Math.abs(x2u*y1u - x3u*y1u - x1u*y2u + x3u*y2u + x1u*y3u - x2u*y3u)) + 
+								square(Math.abs(x2u*z1u - x3u*z1u - x1u*z2u + x3u*z2u + x1u*z3u - x2u*z3u)) + 
+								square(Math.abs(y2u*z1u - y3u*z1u - y1u*z2u + y3u*z2u + y1u*z3u - y2u*z3u))))/
 			(16.*(1 + nu));
 			
 			
 			// Particle 3, Force y
 			//--------------------
 			
-			double Fy3 = -(Y*(-((((2*(-1 + nu)*(y1d - y3d)*(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + 
-															Math.pow(z1u - z2u,2)))/
-								  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-										(z1u - z2u)*(z1u - z3u),2) + 
-								   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
+			double Fy3 = -(Y*(-((((2*(-1 + nu)*(y1d - y3d)*(square(x1u - x2u) + square(y1u - y2u) + 
+															square(z1u - z2u)))/
+								  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+										(z1u - z2u)*(z1u - z3u)) + 
+								   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
 								  ((-1 + nu)*(y1d - y2d)*
 								   ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 									(z1u - z2u)*(z1u - z3u)))/
-								  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-										(z1u - z2u)*(z1u - z3u),2) + 
-								   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
+								  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+										(z1u - z2u)*(z1u - z3u)) + 
+								   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
 								  (nu*(-y1d + y2d)*((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 													(z1u - z2u)*(z1u - z3u)))/
-								  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-										(z1u - z2u)*(z1u - z3u),2) + 
-								   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
-								 (-1 + ((Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-										(Math.pow(x1d - x3d,2) + Math.pow(y1d - y3d,2) + Math.pow(z1d - z3d,2)))/
-								  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-										(z1u - z2u)*(z1u - z3u),2) + 
-								   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
-								  ((Math.pow(x1d,2) + x2d*x3d - x1d*(x2d + x3d) + Math.pow(y1d,2) + y2d*y3d - 
+								  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+										(z1u - z2u)*(z1u - z3u)) + 
+								   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
+								 (-1 + ((square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+										(square(x1d - x3d) + square(y1d - y3d) + square(z1d - z3d)))/
+								  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+										(z1u - z2u)*(z1u - z3u)) + 
+								   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
+								  ((square(x1d) + x2d*x3d - x1d*(x2d + x3d) + square(y1d) + y2d*y3d - 
 									y1d*(y2d + y3d) + (z1d - z2d)*(z1d - z3d))*
 								   ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 									(z1u - z2u)*(z1u - z3u)))/
-								  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-										(z1u - z2u)*(z1u - z3u),2) + 
-								   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))))/
+								  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+										(z1u - z2u)*(z1u - z3u)) + 
+								   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))))/
 								(-1 + 2*nu)) - (((2*(y1d - y3d)*
-												  (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2)))/
-												 (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													   (z1u - z2u)*(z1u - z3u),2) + 
-												  (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												  (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
+												  (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u)))/
+												 (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													   (z1u - z2u)*(z1u - z3u)) + 
+												  (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												  (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
 												 ((y1d - y2d)*((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 															   (z1u - z2u)*(z1u - z3u)))/
-												 (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													   (z1u - z2u)*(z1u - z3u),2) + 
-												  (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												  (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
-												(1 + ((-1 + nu)*(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-													  (Math.pow(x1d - x3d,2) + Math.pow(y1d - y3d,2) + Math.pow(z1d - z3d,2)))/
-												 (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													   (z1u - z2u)*(z1u - z3u),2) + 
-												  (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												  (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
-												 nu*(-((((x1d - x2d)*(x1d - x3d) + Math.pow(y1d,2) + y2d*y3d - y1d*(y2d + y3d) + 
+												 (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													   (z1u - z2u)*(z1u - z3u)) + 
+												  (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												  (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
+												(1 + ((-1 + nu)*(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+													  (square(x1d - x3d) + square(y1d - y3d) + square(z1d - z3d)))/
+												 (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													   (z1u - z2u)*(z1u - z3u)) + 
+												  (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												  (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
+												 nu*(-((((x1d - x2d)*(x1d - x3d) + square(y1d) + y2d*y3d - y1d*(y2d + y3d) + 
 														 (z1d - z2d)*(z1d - z3d))*
 														((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 														 (z1u - z2u)*(z1u - z3u)))/
-													   (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-															 (z1u - z2u)*(z1u - z3u),2) + 
-														(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-														(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
-													 ((Math.pow(x1d - x2d,2) + Math.pow(y1d - y2d,2) + Math.pow(z1d - z2d,2))*
-													  (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-													 (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-														   (z1u - z2u)*(z1u - z3u),2) + 
-													  (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-													  (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) - 
-												 ((-1 + nu)*(Math.pow(x1d,2) + x2d*x3d - x1d*(x2d + x3d) + Math.pow(y1d,2) + 
+													   (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+															 (z1u - z2u)*(z1u - z3u)) + 
+														(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+														(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
+													 ((square(x1d - x2d) + square(y1d - y2d) + square(z1d - z2d))*
+													  (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+													 (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+														   (z1u - z2u)*(z1u - z3u)) + 
+													  (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+													  (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) - 
+												 ((-1 + nu)*(square(x1d) + x2d*x3d - x1d*(x2d + x3d) + square(y1d) + 
 															 y2d*y3d - y1d*(y2d + y3d) + (z1d - z2d)*(z1d - z3d))*
 												  ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 												   (z1u - z2u)*(z1u - z3u)))/
-												 (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													   (z1u - z2u)*(z1u - z3u),2) + 
-												  (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												  (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))))/
-							  (-1 + 2*nu) + 2*(((Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												(Math.pow(x1d,2) + x2d*x3d - x1d*(x2d + x3d) + Math.pow(y1d,2) + y2d*y3d - 
+												 (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													   (z1u - z2u)*(z1u - z3u)) + 
+												  (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												  (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))))/
+							  (-1 + 2*nu) + 2*(((square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												(square(x1d) + x2d*x3d - x1d*(x2d + x3d) + square(y1d) + y2d*y3d - 
 												 y1d*(y2d + y3d) + (z1d - z2d)*(z1d - z3d)))/
-											   (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													 (z1u - z2u)*(z1u - z3u),2) + 
-												(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
-											   ((Math.pow(x1d - x2d,2) + Math.pow(y1d - y2d,2) + Math.pow(z1d - z2d,2))*
+											   (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													 (z1u - z2u)*(z1u - z3u)) + 
+												(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
+											   ((square(x1d - x2d) + square(y1d - y2d) + square(z1d - z2d))*
 												((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + (z1u - z2u)*(z1u - z3u)))
-											   /(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													  (z1u - z2u)*(z1u - z3u),2) + 
-												 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
+											   /(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													  (z1u - z2u)*(z1u - z3u)) + 
+												 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
 							  ((-2*(-y1d + y3d)*((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 												 (z1u - z2u)*(z1u - z3u)))/
-							   (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									 (z1u - z2u)*(z1u - z3u),2) + 
-								(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) + 
-							   ((-y1d + y2d)*(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-							   (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									 (z1u - z2u)*(z1u - z3u),2) + 
-								(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
-							  ((nu*((2*(y1d - y3d)*(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + 
-													Math.pow(z1u - z2u,2)))/
-									(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-										  (z1u - z2u)*(z1u - z3u),2) + 
-									 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-									 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
+							   (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									 (z1u - z2u)*(z1u - z3u)) + 
+								(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) + 
+							   ((-y1d + y2d)*(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+							   (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									 (z1u - z2u)*(z1u - z3u)) + 
+								(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
+							  ((nu*((2*(y1d - y3d)*(square(x1u - x2u) + square(y1u - y2u) + 
+													square(z1u - z2u)))/
+									(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+										  (z1u - z2u)*(z1u - z3u)) + 
+									 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+									 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
 									((y1d - y2d)*((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 												  (z1u - z2u)*(z1u - z3u)))/
-									(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-										  (z1u - z2u)*(z1u - z3u),2) + 
-									 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-									 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
+									(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+										  (z1u - z2u)*(z1u - z3u)) + 
+									 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+									 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
 								((-1 + nu)*(y1d - y2d)*((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 														(z1u - z2u)*(z1u - z3u)))/
-								(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									  (z1u - z2u)*(z1u - z3u),2) + 
-								 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
-							   (-1 - (((x1d - x2d)*(x1d - x3d) + Math.pow(y1d,2) + y2d*y3d - y1d*(y2d + y3d) + 
+								(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									  (z1u - z2u)*(z1u - z3u)) + 
+								 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
+							   (-1 - (((x1d - x2d)*(x1d - x3d) + square(y1d) + y2d*y3d - y1d*(y2d + y3d) + 
 									   (z1d - z2d)*(z1d - z3d))*
 									  ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 									   (z1u - z2u)*(z1u - z3u)))/
-								(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									  (z1u - z2u)*(z1u - z3u),2) + 
-								 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) + 
-								((Math.pow(x1d - x2d,2) + Math.pow(y1d - y2d,2) + Math.pow(z1d - z2d,2))*
-								 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-								(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									  (z1u - z2u)*(z1u - z3u),2) + 
-								 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))))/
+								(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									  (z1u - z2u)*(z1u - z3u)) + 
+								 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) + 
+								((square(x1d - x2d) + square(y1d - y2d) + square(z1d - z2d))*
+								 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+								(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									  (z1u - z2u)*(z1u - z3u)) + 
+								 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))))/
 							  (-1 + 2*nu) + (2*(-y1d + y2d)*
-											 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											 (-(((Math.pow(x1d - x3d,2) + Math.pow(y1d - y3d,2) + Math.pow(z1d - z3d,2))*
+											 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											 (-(((square(x1d - x3d) + square(y1d - y3d) + square(z1d - z3d))*
 												 ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 												  (z1u - z2u)*(z1u - z3u)))/
-												(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													  (z1u - z2u)*(z1u - z3u),2) + 
-												 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
-											  ((Math.pow(x1d,2) + x2d*x3d - x1d*(x2d + x3d) + Math.pow(y1d,2) + y2d*y3d - 
+												(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													  (z1u - z2u)*(z1u - z3u)) + 
+												 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
+											  ((square(x1d) + x2d*x3d - x1d*(x2d + x3d) + square(y1d) + y2d*y3d - 
 												y1d*(y2d + y3d) + (z1d - z2d)*(z1d - z3d))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-											  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													(z1u - z2u)*(z1u - z3u),2) + 
-											   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))))/
-							  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									(z1u - z2u)*(z1u - z3u),2) + 
-							   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-							   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) + 
-							  ((y1d - y2d)*(1 - nu*(((Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + 
-													  Math.pow(z1u - z2u,2))*
-													 (Math.pow(x1d - x3d,2) + Math.pow(y1d - y3d,2) + Math.pow(z1d - z3d,2)))/
-													(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-														  (z1u - z2u)*(z1u - z3u),2) + 
-													 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-													 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
-													(((x1d - x2d)*(x1d - x3d) + Math.pow(y1d,2) + y2d*y3d - y1d*(y2d + y3d) + 
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+											  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													(z1u - z2u)*(z1u - z3u)) + 
+											   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))))/
+							  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									(z1u - z2u)*(z1u - z3u)) + 
+							   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+							   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) + 
+							  ((y1d - y2d)*(1 - nu*(((square(x1u - x2u) + square(y1u - y2u) + 
+													  square(z1u - z2u))*
+													 (square(x1d - x3d) + square(y1d - y3d) + square(z1d - z3d)))/
+													(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+														  (z1u - z2u)*(z1u - z3u)) + 
+													 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+													 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
+													(((x1d - x2d)*(x1d - x3d) + square(y1d) + y2d*y3d - y1d*(y2d + y3d) + 
 													  (z1d - z2d)*(z1d - z3d))*
 													 ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 													  (z1u - z2u)*(z1u - z3u)))/
-													(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-														  (z1u - z2u)*(z1u - z3u),2) + 
-													 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-													 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) - 
-											((-1 + nu)*((x1d - x2d)*(x1d - x3d) + Math.pow(y1d,2) + y2d*y3d - 
+													(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+														  (z1u - z2u)*(z1u - z3u)) + 
+													 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+													 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) - 
+											((-1 + nu)*((x1d - x2d)*(x1d - x3d) + square(y1d) + y2d*y3d - 
 														y1d*(y2d + y3d) + (z1d - z2d)*(z1d - z3d))*
 											 ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 											  (z1u - z2u)*(z1u - z3u)))/
-											(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-												  (z1u - z2u)*(z1u - z3u),2) + 
-											 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) + 
-											((-1 + nu)*(Math.pow(x1d - x2d,2) + Math.pow(y1d - y2d,2) + Math.pow(z1d - z2d,2))*
-											 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-											(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-												  (z1u - z2u)*(z1u - z3u),2) + 
-											 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
+											(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+												  (z1u - z2u)*(z1u - z3u)) + 
+											 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) + 
+											((-1 + nu)*(square(x1d - x2d) + square(y1d - y2d) + square(z1d - z2d))*
+											 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+											(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+												  (z1u - z2u)*(z1u - z3u)) + 
+											 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
 							   ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + (z1u - z2u)*(z1u - z3u)))/
-							  ((-1 + 2*nu)*(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-												 (z1u - z2u)*(z1u - z3u),2) + 
-											(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))))*
-						   Math.sqrt(Math.pow(Math.abs(x2u*y1u - x3u*y1u - x1u*y2u + x3u*y2u + x1u*y3u - x2u*y3u),2) + 
-								Math.pow(Math.abs(x2u*z1u - x3u*z1u - x1u*z2u + x3u*z2u + x1u*z3u - x2u*z3u),2) + 
-								Math.pow(Math.abs(y2u*z1u - y3u*z1u - y1u*z2u + y3u*z2u + y1u*z3u - y2u*z3u),2)))/
+							  ((-1 + 2*nu)*(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+												 (z1u - z2u)*(z1u - z3u)) + 
+											(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))))*
+						   Math.sqrt(square(Math.abs(x2u*y1u - x3u*y1u - x1u*y2u + x3u*y2u + x1u*y3u - x2u*y3u)) + 
+								square(Math.abs(x2u*z1u - x3u*z1u - x1u*z2u + x3u*z2u + x1u*z3u - x2u*z3u)) + 
+								square(Math.abs(y2u*z1u - y3u*z1u - y1u*z2u + y3u*z2u + y1u*z3u - y2u*z3u))))/
 			(16.*(1 + nu));
 			
 			
 			// Particle 3, Force z
 			//--------------------
 			
-			double Fz3 = -(Y*(-((((2*(-1 + nu)*(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
+			double Fz3 = -(Y*(-((((2*(-1 + nu)*(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
 								   (z1d - z3d))/
-								  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-										(z1u - z2u)*(z1u - z3u),2) + 
-								   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
+								  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+										(z1u - z2u)*(z1u - z3u)) + 
+								   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
 								  ((-1 + nu)*(z1d - z2d)*
 								   ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 									(z1u - z2u)*(z1u - z3u)))/
-								  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-										(z1u - z2u)*(z1u - z3u),2) + 
-								   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
+								  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+										(z1u - z2u)*(z1u - z3u)) + 
+								   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
 								  (nu*(-z1d + z2d)*((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 													(z1u - z2u)*(z1u - z3u)))/
-								  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-										(z1u - z2u)*(z1u - z3u),2) + 
-								   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
-								 (-1 + ((Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-										(Math.pow(x1d - x3d,2) + Math.pow(y1d - y3d,2) + Math.pow(z1d - z3d,2)))/
-								  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-										(z1u - z2u)*(z1u - z3u),2) + 
-								   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
-								  ((Math.pow(x1d,2) + x2d*x3d - x1d*(x2d + x3d) + Math.pow(y1d,2) + y2d*y3d - 
+								  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+										(z1u - z2u)*(z1u - z3u)) + 
+								   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
+								 (-1 + ((square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+										(square(x1d - x3d) + square(y1d - y3d) + square(z1d - z3d)))/
+								  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+										(z1u - z2u)*(z1u - z3u)) + 
+								   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
+								  ((square(x1d) + x2d*x3d - x1d*(x2d + x3d) + square(y1d) + y2d*y3d - 
 									y1d*(y2d + y3d) + (z1d - z2d)*(z1d - z3d))*
 								   ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 									(z1u - z2u)*(z1u - z3u)))/
-								  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-										(z1u - z2u)*(z1u - z3u),2) + 
-								   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))))/
-								(-1 + 2*nu)) - (((2*(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + 
-													 Math.pow(z1u - z2u,2))*(z1d - z3d))/
-												 (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													   (z1u - z2u)*(z1u - z3u),2) + 
-												  (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												  (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
+								  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+										(z1u - z2u)*(z1u - z3u)) + 
+								   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))))/
+								(-1 + 2*nu)) - (((2*(square(x1u - x2u) + square(y1u - y2u) + 
+													 square(z1u - z2u))*(z1d - z3d))/
+												 (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													   (z1u - z2u)*(z1u - z3u)) + 
+												  (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												  (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
 												 ((z1d - z2d)*((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 															   (z1u - z2u)*(z1u - z3u)))/
-												 (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													   (z1u - z2u)*(z1u - z3u),2) + 
-												  (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												  (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
-												(1 + ((-1 + nu)*(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-													  (Math.pow(x1d - x3d,2) + Math.pow(y1d - y3d,2) + Math.pow(z1d - z3d,2)))/
-												 (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													   (z1u - z2u)*(z1u - z3u),2) + 
-												  (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												  (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
-												 nu*(-((((x1d - x2d)*(x1d - x3d) + Math.pow(y1d,2) + y2d*y3d - y1d*(y2d + y3d) + 
+												 (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													   (z1u - z2u)*(z1u - z3u)) + 
+												  (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												  (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
+												(1 + ((-1 + nu)*(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+													  (square(x1d - x3d) + square(y1d - y3d) + square(z1d - z3d)))/
+												 (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													   (z1u - z2u)*(z1u - z3u)) + 
+												  (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												  (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
+												 nu*(-((((x1d - x2d)*(x1d - x3d) + square(y1d) + y2d*y3d - y1d*(y2d + y3d) + 
 														 (z1d - z2d)*(z1d - z3d))*
 														((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 														 (z1u - z2u)*(z1u - z3u)))/
-													   (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-															 (z1u - z2u)*(z1u - z3u),2) + 
-														(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-														(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
-													 ((Math.pow(x1d - x2d,2) + Math.pow(y1d - y2d,2) + Math.pow(z1d - z2d,2))*
-													  (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-													 (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-														   (z1u - z2u)*(z1u - z3u),2) + 
-													  (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-													  (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) - 
-												 ((-1 + nu)*(Math.pow(x1d,2) + x2d*x3d - x1d*(x2d + x3d) + Math.pow(y1d,2) + 
+													   (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+															 (z1u - z2u)*(z1u - z3u)) + 
+														(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+														(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
+													 ((square(x1d - x2d) + square(y1d - y2d) + square(z1d - z2d))*
+													  (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+													 (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+														   (z1u - z2u)*(z1u - z3u)) + 
+													  (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+													  (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) - 
+												 ((-1 + nu)*(square(x1d) + x2d*x3d - x1d*(x2d + x3d) + square(y1d) + 
 															 y2d*y3d - y1d*(y2d + y3d) + (z1d - z2d)*(z1d - z3d))*
 												  ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 												   (z1u - z2u)*(z1u - z3u)))/
-												 (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													   (z1u - z2u)*(z1u - z3u),2) + 
-												  (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												  (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))))/
-							  (-1 + 2*nu) + ((nu*((2*(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + 
-													  Math.pow(z1u - z2u,2))*(z1d - z3d))/
-												  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-														(z1u - z2u)*(z1u - z3u),2) + 
-												   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
+												 (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													   (z1u - z2u)*(z1u - z3u)) + 
+												  (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												  (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))))/
+							  (-1 + 2*nu) + ((nu*((2*(square(x1u - x2u) + square(y1u - y2u) + 
+													  square(z1u - z2u))*(z1d - z3d))/
+												  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+														(z1u - z2u)*(z1u - z3u)) + 
+												   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
 												  ((z1d - z2d)*((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 																(z1u - z2u)*(z1u - z3u)))/
-												  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-														(z1u - z2u)*(z1u - z3u),2) + 
-												   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
+												  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+														(z1u - z2u)*(z1u - z3u)) + 
+												   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
 											  ((-1 + nu)*(z1d - z2d)*((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 																	  (z1u - z2u)*(z1u - z3u)))/
-											  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													(z1u - z2u)*(z1u - z3u),2) + 
-											   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
-											 (-1 - (((x1d - x2d)*(x1d - x3d) + Math.pow(y1d,2) + y2d*y3d - y1d*(y2d + y3d) + 
+											  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													(z1u - z2u)*(z1u - z3u)) + 
+											   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
+											 (-1 - (((x1d - x2d)*(x1d - x3d) + square(y1d) + y2d*y3d - y1d*(y2d + y3d) + 
 													 (z1d - z2d)*(z1d - z3d))*
 													((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 													 (z1u - z2u)*(z1u - z3u)))/
-											  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													(z1u - z2u)*(z1u - z3u),2) + 
-											   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) + 
-											  ((Math.pow(x1d - x2d,2) + Math.pow(y1d - y2d,2) + Math.pow(z1d - z2d,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-											  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													(z1u - z2u)*(z1u - z3u),2) + 
-											   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))))/
-							  (-1 + 2*nu) + 2*(((Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												(Math.pow(x1d,2) + x2d*x3d - x1d*(x2d + x3d) + Math.pow(y1d,2) + y2d*y3d - 
+											  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													(z1u - z2u)*(z1u - z3u)) + 
+											   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) + 
+											  ((square(x1d - x2d) + square(y1d - y2d) + square(z1d - z2d))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+											  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													(z1u - z2u)*(z1u - z3u)) + 
+											   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))))/
+							  (-1 + 2*nu) + 2*(((square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												(square(x1d) + x2d*x3d - x1d*(x2d + x3d) + square(y1d) + y2d*y3d - 
 												 y1d*(y2d + y3d) + (z1d - z2d)*(z1d - z3d)))/
-											   (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													 (z1u - z2u)*(z1u - z3u),2) + 
-												(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
-											   ((Math.pow(x1d - x2d,2) + Math.pow(y1d - y2d,2) + Math.pow(z1d - z2d,2))*
+											   (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													 (z1u - z2u)*(z1u - z3u)) + 
+												(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
+											   ((square(x1d - x2d) + square(y1d - y2d) + square(z1d - z2d))*
 												((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + (z1u - z2u)*(z1u - z3u)))
-											   /(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-													  (z1u - z2u)*(z1u - z3u),2) + 
-												 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-												 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
+											   /(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+													  (z1u - z2u)*(z1u - z3u)) + 
+												 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+												 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
 							  ((-2*(-z1d + z3d)*((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 												 (z1u - z2u)*(z1u - z3u)))/
-							   (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									 (z1u - z2u)*(z1u - z3u),2) + 
-								(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) + 
-							   ((-z1d + z2d)*(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-							   (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									 (z1u - z2u)*(z1u - z3u),2) + 
-								(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
-							  (2*(-z1d + z2d)*(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-							   (-(((Math.pow(x1d - x3d,2) + Math.pow(y1d - y3d,2) + Math.pow(z1d - z3d,2))*
+							   (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									 (z1u - z2u)*(z1u - z3u)) + 
+								(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) + 
+							   ((-z1d + z2d)*(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+							   (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									 (z1u - z2u)*(z1u - z3u)) + 
+								(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
+							  (2*(-z1d + z2d)*(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+							   (-(((square(x1d - x3d) + square(y1d - y3d) + square(z1d - z3d))*
 								   ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 									(z1u - z2u)*(z1u - z3u)))/
-								  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-										(z1u - z2u)*(z1u - z3u),2) + 
-								   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) + 
-								((Math.pow(x1d,2) + x2d*x3d - x1d*(x2d + x3d) + Math.pow(y1d,2) + y2d*y3d - 
+								  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+										(z1u - z2u)*(z1u - z3u)) + 
+								   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) + 
+								((square(x1d) + x2d*x3d - x1d*(x2d + x3d) + square(y1d) + y2d*y3d - 
 								  y1d*(y2d + y3d) + (z1d - z2d)*(z1d - z3d))*
-								 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-								(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									  (z1u - z2u)*(z1u - z3u),2) + 
-								 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-								 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))))/
-							  (-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-									(z1u - z2u)*(z1u - z3u),2) + 
-							   (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-							   (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) + 
-							  ((z1d - z2d)*(1 - nu*(((Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + 
-													  Math.pow(z1u - z2u,2))*
-													 (Math.pow(x1d - x3d,2) + Math.pow(y1d - y3d,2) + Math.pow(z1d - z3d,2)))/
-													(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-														  (z1u - z2u)*(z1u - z3u),2) + 
-													 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-													 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) - 
-													(((x1d - x2d)*(x1d - x3d) + Math.pow(y1d,2) + y2d*y3d - y1d*(y2d + y3d) + 
+								 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+								(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									  (z1u - z2u)*(z1u - z3u)) + 
+								 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+								 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))))/
+							  (-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+									(z1u - z2u)*(z1u - z3u)) + 
+							   (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+							   (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) + 
+							  ((z1d - z2d)*(1 - nu*(((square(x1u - x2u) + square(y1u - y2u) + 
+													  square(z1u - z2u))*
+													 (square(x1d - x3d) + square(y1d - y3d) + square(z1d - z3d)))/
+													(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+														  (z1u - z2u)*(z1u - z3u)) + 
+													 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+													 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) - 
+													(((x1d - x2d)*(x1d - x3d) + square(y1d) + y2d*y3d - y1d*(y2d + y3d) + 
 													  (z1d - z2d)*(z1d - z3d))*
 													 ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 													  (z1u - z2u)*(z1u - z3u)))/
-													(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-														  (z1u - z2u)*(z1u - z3u),2) + 
-													 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-													 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))) - 
-											((-1 + nu)*((x1d - x2d)*(x1d - x3d) + Math.pow(y1d,2) + y2d*y3d - 
+													(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+														  (z1u - z2u)*(z1u - z3u)) + 
+													 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+													 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))) - 
+											((-1 + nu)*((x1d - x2d)*(x1d - x3d) + square(y1d) + y2d*y3d - 
 														y1d*(y2d + y3d) + (z1d - z2d)*(z1d - z3d))*
 											 ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
 											  (z1u - z2u)*(z1u - z3u)))/
-											(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-												  (z1u - z2u)*(z1u - z3u),2) + 
-											 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))) + 
-											((-1 + nu)*(Math.pow(x1d - x2d,2) + Math.pow(y1d - y2d,2) + Math.pow(z1d - z2d,2))*
-											 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))/
-											(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-												  (z1u - z2u)*(z1u - z3u),2) + 
-											 (Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											 (Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2))))*
+											(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+												  (z1u - z2u)*(z1u - z3u)) + 
+											 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))) + 
+											((-1 + nu)*(square(x1d - x2d) + square(y1d - y2d) + square(z1d - z2d))*
+											 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))/
+											(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+												  (z1u - z2u)*(z1u - z3u)) + 
+											 (square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											 (square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u))))*
 							   ((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + (z1u - z2u)*(z1u - z3u)))/
-							  ((-1 + 2*nu)*(-Math.pow((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
-												 (z1u - z2u)*(z1u - z3u),2) + 
-											(Math.pow(x1u - x2u,2) + Math.pow(y1u - y2u,2) + Math.pow(z1u - z2u,2))*
-											(Math.pow(x1u - x3u,2) + Math.pow(y1u - y3u,2) + Math.pow(z1u - z3u,2)))))*
-						   Math.sqrt(Math.pow(Math.abs(x2u*y1u - x3u*y1u - x1u*y2u + x3u*y2u + x1u*y3u - x2u*y3u),2) + 
-								Math.pow(Math.abs(x2u*z1u - x3u*z1u - x1u*z2u + x3u*z2u + x1u*z3u - x2u*z3u),2) + 
-								Math.pow(Math.abs(y2u*z1u - y3u*z1u - y1u*z2u + y3u*z2u + y1u*z3u - y2u*z3u),2)))/
+							  ((-1 + 2*nu)*(-square((x1u - x2u)*(x1u - x3u) + (y1u - y2u)*(y1u - y3u) + 
+												 (z1u - z2u)*(z1u - z3u)) + 
+											(square(x1u - x2u) + square(y1u - y2u) + square(z1u - z2u))*
+											(square(x1u - x3u) + square(y1u - y3u) + square(z1u - z3u)))))*
+						   Math.sqrt(square(Math.abs(x2u*y1u - x3u*y1u - x1u*y2u + x3u*y2u + x1u*y3u - x2u*y3u)) + 
+								square(Math.abs(x2u*z1u - x3u*z1u - x1u*z2u + x3u*z2u + x1u*z3u - x2u*z3u)) + 
+								square(Math.abs(y2u*z1u - y3u*z1u - y1u*z2u + y3u*z2u + y1u*z3u - y2u*z3u))))/
 			(16.*(1 + nu));
 			
 			// Sanity check -- sum of internal forces should be zero
@@ -2014,5 +2014,9 @@ public class TriangleForce extends Force<TriangleForce> {
 		}
 		
 		return localForce;
+	}
+	
+	private double square(double x) {
+		return x*x;
 	}
 }
