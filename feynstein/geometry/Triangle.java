@@ -28,4 +28,11 @@ public class Triangle {
 			return idx[index];
 		return -1;
 	}
+
+        public boolean contains(int index) {
+	    for (int i = 0; i < 3; i++)
+		if(idx[i]==index)
+		    return true;
+	    return false;
+        }
 }
