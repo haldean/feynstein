@@ -3,21 +3,21 @@ package feynstein.properties;
 import feynstein.*;
 
 public abstract class Property<E extends Property> extends Built<E> {
-	final Scene scene;
+    final Scene scene;
 	
-	public Property(Scene scene) {
-		this.scene = scene;
-		objectType = "Property";
-	}
+    public Property(Scene scene) {
+	this.scene = scene;
+	objectType = "Property";
+    }
 	
-	public Scene getScene() {
-		return scene;
-	}
+    public Scene getScene() {
+	return scene;
+    }
 	
-	public abstract void update();
+    public abstract void update();
 	
-	@SuppressWarnings("unchecked")
-    public E compile() {
-		return (E) this;
-	}
+    @SuppressWarnings("unchecked")
+	public E compile() {
+	return (E) this;
+    }
 }
