@@ -26,7 +26,7 @@ import javax.media.opengl.awt.GLCanvas;
 import javax.media.opengl.fixedfunc.GLLightingFunc;
 import javax.media.opengl.fixedfunc.GLMatrixFunc;
 import javax.media.opengl.glu.GLU;
-import com.sun.opengl.util.GLUT; 
+import com.jogamp.opengl.util.gl2.GLUT; 
  
 import com.jogamp.opengl.util.Animator;
 
