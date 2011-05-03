@@ -25,6 +25,12 @@ public class FluidPlane extends Shape<FluidPlane> {
 	return this;
     }
 
+    public FluidPlane set_length(double l) {
+	length_x = l;
+	length_y = l;
+	return this;
+    }
+
     public FluidPlane set_subdivisions(int s) {
 	subdivisions = s;
 	return this;
