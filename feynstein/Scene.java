@@ -26,11 +26,10 @@ public abstract class Scene {
     protected ArrayList<Property> properties;
     protected Mesh mesh;
 	
-	double[] globalForces;
-	double[] globalPositions;
-	double[] globalVelocities;
-	double[] globalMasses;
-	
+    double[] globalForces;
+    double[] globalPositions;
+    double[] globalVelocities;
+    double[] globalMasses;
 
     public Scene() {
 	mesh = new Mesh();
@@ -55,10 +54,10 @@ public abstract class Scene {
     }
 
     public void addShape(Shape s) {
-		print("Adding a " + s.toString());
-		shapes.put(s.getName(), s);
-		mesh.append(s.getLocalMesh());
-	}
+	print("Adding a " + s.toString());
+	shapes.put(s.getName(), s);
+	mesh.append(s.getLocalMesh());
+    }
 
     public Shape getShape(String name) {
 	return shapes.get(name);
@@ -66,7 +65,7 @@ public abstract class Scene {
 
     public void addForce(Force f) {
 	print("Adding a " + f.toString());
-		forces.add(f);
+	forces.add(f);
     }
 	
     public void addProperty(Property p) {
@@ -134,6 +133,8 @@ public abstract class Scene {
     public void update() {
 	for (Property property : properties) 
 	    property.update();
+
+	
 	onFrame();
     }
 

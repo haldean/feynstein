@@ -16,8 +16,7 @@ public abstract class Property<E extends Property> extends Built<E> {
 	
     public abstract void update();
 	
-    @SuppressWarnings("unchecked")
-	public E compile() {
+    @SuppressWarnings("unchecked") public E compile() {
 	return (E) this;
     }
 }
