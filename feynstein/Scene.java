@@ -1,5 +1,6 @@
 package feynstein;
 
+import feynstein.collision.*;
 import feynstein.forces.*;
 import feynstein.geometry.*;
 import feynstein.properties.*;
@@ -21,8 +22,7 @@ public abstract class Scene {
     public static Animator animator = new Animator(canvas);
 
     protected Map<String, Shape> shapes;
-    //protected Map<String, Force> forces;
-	protected ArrayList<Force> forces;
+    protected ArrayList<Force> forces;
     protected ArrayList<Property> properties;
     protected Mesh mesh;
 	
@@ -36,7 +36,6 @@ public abstract class Scene {
 	mesh = new Mesh();
 
 	shapes = new HashMap<String, Shape>();
-	//forces = new HashMap<String, Force>();
 	forces = new ArrayList<Force>();
 	properties = new ArrayList<Property>();
 
@@ -70,10 +69,10 @@ public abstract class Scene {
 		forces.add(f);
     }
 	
-	public void addProperty(Property p) {
-		print("Adding a " + p.toString());
-		properties.add(p);
-	}
+    public void addProperty(Property p) {
+	print("Adding a " + p.toString());
+	properties.add(p);
+    }
 
     /**
      * This method steps through the list of local force 
@@ -82,50 +81,50 @@ public abstract class Scene {
      */	
     public double[] globalForceMagnitude() {
 		
-		// build global force, position, velocity, and mass vectors
-		// this will be convient when we get to implicit time stepping
-		for(int i = 0; i < mesh.size(); i++) {
-			// clear global fores
-			globalForces[3*i] = 0;
-			globalForces[3*i+1] = 0;
-			globalForces[3*i+2] = 0;
-			// get global positions
-			globalPositions[3*i] = mesh.getParticles().get(i).getPos().x();
-			globalPositions[3*i+1] = mesh.getParticles().get(i).getPos().y();
-			globalPositions[3*i+2] = mesh.getParticles().get(i).getPos().z();
-			// get global velocitiyes
-			globalVelocities[3*i] = mesh.getParticles().get(i).getVel().x();
-			globalVelocities[3*i+1] = mesh.getParticles().get(i).getVel().y();
-			globalVelocities[3*i+2] = mesh.getParticles().get(i).getVel().z();
-			// get global masses
-			globalMasses[3*i] = mesh.getParticles().get(i).getMass();
-			globalMasses[3*i+1] = mesh.getParticles().get(i).getMass();
-			globalMasses[3*i+2] = mesh.getParticles().get(i).getMass();
-		}
+	// build global force, position, velocity, and mass vectors
+	// this will be convient when we get to implicit time stepping
+	for(int i = 0; i < mesh.size(); i++) {
+	    // clear global fores
+	    globalForces[3*i] = 0;
+	    globalForces[3*i+1] = 0;
+	    globalForces[3*i+2] = 0;
+	    // get global positions
+	    globalPositions[3*i] = mesh.getParticles().get(i).getPos().x();
+	    globalPositions[3*i+1] = mesh.getParticles().get(i).getPos().y();
+	    globalPositions[3*i+2] = mesh.getParticles().get(i).getPos().z();
+	    // get global velocitiyes
+	    globalVelocities[3*i] = mesh.getParticles().get(i).getVel().x();
+	    globalVelocities[3*i+1] = mesh.getParticles().get(i).getVel().y();
+	    globalVelocities[3*i+2] = mesh.getParticles().get(i).getVel().z();
+	    // get global masses
+	    globalMasses[3*i] = mesh.getParticles().get(i).getMass();
+	    globalMasses[3*i+1] = mesh.getParticles().get(i).getMass();
+	    globalMasses[3*i+2] = mesh.getParticles().get(i).getMass();
+	}
 		
-		//for each force potential
-		for(Force force : forces){
-			//get the local force vector
-			double [] localForce = force.getLocalForce(globalPositions,
-								     globalVelocities, globalMasses);
-			//add to the global force vector at cooresponding particle
-			//indicies
-			if(force.isGlobal()) {
-				for(int i = 0; i < localForce.length; i++){
-					globalForces[i] += localForce[i];
-				}
-			} else {
-				for(int i = 0; i < localForce.length/3; i++){
-					globalForces[3*force.getStencilIdx(i)] += localForce[3*i];
-					globalForces[3*force.getStencilIdx(i)+1] += localForce[3*i+1];
-					globalForces[3*force.getStencilIdx(i)+2] += localForce[3*i+2];
-				}
-			}
+	//for each force potential
+	for(Force force : forces){
+	    //get the local force vector
+	    double [] localForce = force.getLocalForce(globalPositions,
+						       globalVelocities, globalMasses);
+	    //add to the global force vector at cooresponding particle
+	    //indicies
+	    if(force.isGlobal()) {
+		for(int i = 0; i < localForce.length; i++){
+		    globalForces[i] += localForce[i];
 		}
-		//System.out.println("Global");
-		//for(int i = 0; i < globalForces.length; i++)
-		//	System.out.println(i+": "+globalForces[i]);
-		return globalForces;
+	    } else {
+		for(int i = 0; i < localForce.length/3; i++){
+		    globalForces[3*force.getStencilIdx(i)] += localForce[3*i];
+		    globalForces[3*force.getStencilIdx(i)+1] += localForce[3*i+1];
+		    globalForces[3*force.getStencilIdx(i)+2] += localForce[3*i+2];
+		}
+	    }
+	}
+	//System.out.println("Global");
+	//for(int i = 0; i < globalForces.length; i++)
+	//	System.out.println(i+": "+globalForces[i]);
+	return globalForces;
     }
 	
     public Mesh getMesh() {
@@ -133,9 +132,9 @@ public abstract class Scene {
     }
 
     public void update() {
-		for (Property property : properties) 
-			property.update();
-		onFrame();
+	for (Property property : properties) 
+	    property.update();
+	onFrame();
     }
 
     public abstract void setProperties();
