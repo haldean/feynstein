@@ -2,6 +2,7 @@ package feynstein.shapes;
 
 import feynstein.Built;
 import feynstein.geometry.Mesh;
+import feynstein.geometry.Particle;
 import feynstein.utilities.Vector3d;
 
 public abstract class Shape<E extends Shape> extends Built<E> {
@@ -9,7 +10,7 @@ public abstract class Shape<E extends Shape> extends Built<E> {
 
     protected Vector3d location = new Vector3d();
     protected double mass;
-	protected float particleRadius;
+    protected float particleRadius;
     protected String name = null;
 
     public Shape() {
@@ -60,6 +61,12 @@ public abstract class Shape<E extends Shape> extends Built<E> {
 	}
 
 	compileShape();
+
+	double particleMass = mass / (double) localMesh.size();
+	for (Particle p : localMesh.getParticles()) {
+	    p.setMass(particleMass);
+	}
+
 	return (E) this;
     }
 	
