@@ -22,7 +22,17 @@ public class AxisAlignedBoundingBox extends BoundingVolume {
     }
 
     @Override public void fitTriangle(Triangle t, Mesh mesh) {
-	for (int vert=0; vert<3; vert++) {
+	fitTriangle(t, mesh, true);
+    }
+
+    public void fitTriangle(Triangle t, Mesh mesh, boolean forceUpdate) {
+	if (forceUpdate) {
+	    x_lower = x_upper = getVertex(t, 0, mesh, 0);
+	    y_lower = y_upper = getVertex(t, 0, mesh, 1);
+	    z_lower = z_upper = getVertex(t, 0, mesh, 2);
+	}
+
+	for (int vert = forceUpdate ? 1 : 0; vert<3; vert++) {
 	    x_lower = Math.min(x_lower, getVertex(t, vert, mesh, 0));
 	    y_lower = Math.min(y_lower, getVertex(t, vert, mesh, 1));
 	    z_lower = Math.min(z_lower, getVertex(t, vert, mesh, 2));
@@ -34,8 +44,12 @@ public class AxisAlignedBoundingBox extends BoundingVolume {
     }
 
     @Override public void fitTriangles(Triangle[] ts, Mesh mesh) {
+	x_lower = x_upper = getVertex(ts[0], 0, mesh, 0);
+	y_lower = y_upper = getVertex(ts[0], 0, mesh, 1);
+	z_lower = z_upper = getVertex(ts[0], 0, mesh, 2);
+
 	for (int i=0; i<ts.length; i++) {
-	    fitTriangle(ts[i], mesh);
+	    fitTriangle(ts[i], mesh, false);
 	}
     }
 
@@ -75,11 +89,16 @@ public class AxisAlignedBoundingBox extends BoundingVolume {
 	z_upper = Math.max(aabb1.z_upper, aabb2.z_upper);
     }
 
+    private boolean spanOverlap(double x1_l, double x1_u, 
+				double x2_l, double x2_u) {
+	return (x1_l <= x2_u && x2_l <= x1_u) || (x2_l <= x1_u && x1_l <= x2_u);
+    }
+
     @Override @SuppressWarnings("unchecked")	
     public boolean overlaps(BoundingVolume vol) {
 	AxisAlignedBoundingBox other = (AxisAlignedBoundingBox) vol;
-	return !(x_upper < other.x_lower || other.x_upper < x_lower ||
-		 y_upper < other.y_lower || other.y_upper < y_lower ||
-		 z_upper < other.z_lower || other.z_upper < z_lower);
+	return spanOverlap(x_lower, x_upper, other.x_lower, other.x_upper) &&
+	    spanOverlap(y_lower, y_upper, other.y_lower, other.y_upper) &&
+	    spanOverlap(z_lower, z_upper, other.z_lower, other.z_upper);
     }	    
 }

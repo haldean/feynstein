@@ -11,6 +11,7 @@ import feynstein.utilities.*;
 import java.awt.Frame;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.media.opengl.awt.*;
@@ -22,8 +23,9 @@ public abstract class Scene {
     public static Animator animator = new Animator(canvas);
 
     protected Map<String, Shape> shapes;
-    protected ArrayList<Force> forces;
-    protected ArrayList<Property> properties;
+    protected List<Force> forces;
+    protected Map<Class, Property> propertyMap;
+    protected List<Property> properties;
     protected Mesh mesh;
 	
     double[] globalForces;
@@ -37,16 +39,16 @@ public abstract class Scene {
 	shapes = new HashMap<String, Shape>();
 	forces = new ArrayList<Force>();
 	properties = new ArrayList<Property>();
+	propertyMap = new HashMap<Class, Property>();
 
-	setProperties();
 	createShapes();
+	setProperties();
 	createForces();
 		
 	globalForces = new double[3*mesh.size()];
 	globalPositions = new double[3*mesh.size()];
 	globalVelocities = new double[3*mesh.size()];
 	globalMasses = new double[3*mesh.size()];
-		
     }
 
     protected static void print(String str) {
@@ -54,7 +56,7 @@ public abstract class Scene {
     }
 
     public void addShape(Shape s) {
-	print("Adding a " + s.toString());
+	print("Adding " + s.toString());
 	shapes.put(s.getName(), s);
 	mesh.append(s.getLocalMesh());
     }
@@ -64,13 +66,19 @@ public abstract class Scene {
     }
 
     public void addForce(Force f) {
-	print("Adding a " + f.toString());
+	print("Adding " + f.toString());
 	forces.add(f);
     }
 	
     public void addProperty(Property p) {
-	print("Adding a " + p.toString());
+	print("Adding " + p.toString());
 	properties.add(p);
+	propertyMap.put(p.getClass(), p);
+    }
+
+    @SuppressWarnings("unchecked")
+    public <E extends Property> E getProperty(Class c) {
+	return (E) propertyMap.get(c);
     }
 
     /**

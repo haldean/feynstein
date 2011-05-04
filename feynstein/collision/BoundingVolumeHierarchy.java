@@ -6,20 +6,26 @@ import feynstein.properties.Property;
 import feynstein.utilities.Vector3d;
 
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 public class BoundingVolumeHierarchy extends Property<BoundingVolumeHierarchy> {
-
     private Node root;
     private VolumeType volumeType = null;
     private Mesh mesh;
     private Triangle[] triangles;
     private double margin = 0;
+    private LinkedList<Collision> collisions;
 
     public BoundingVolumeHierarchy(Scene scene) {
 	super(scene);
 
+	objectType = "BoundingVolumeHierarchy";
 	mesh = scene.getMesh();
 	triangles = mesh.getTriangles().toArray(new Triangle[0]);
+	collisions = new LinkedList<Collision>();
+
+	System.out.println(triangles.length);
     }
 
     public BoundingVolumeHierarchy set_margin(double margin) {
@@ -38,18 +44,28 @@ public class BoundingVolumeHierarchy extends Property<BoundingVolumeHierarchy> {
 	}
 
 	this.root = new Node();
-	buildTree(root, triangles, 0);
+	System.out.println(buildTree(root, triangles, 0));
 	return this;
     }
 
+    public Node getRoot() {
+	return root;
+    }
+
     public void update() {
-	updateBounds(root);
+	refitBounds(root);
+	checkOverlap();
+	System.out.println(root.volume);
+    }
+
+    public List<Collision> getCollisions() {
+	return collisions;
     }
 
     private int buildTree(Node root, Triangle[] triangles, int index) {
 	root.index = index++;
 	
-	updateBounds(root);
+	updateBounds(root, triangles);
 
 	if (triangles.length == 1) {
 	    root.triangle = triangles[0];
@@ -75,7 +91,7 @@ public class BoundingVolumeHierarchy extends Property<BoundingVolumeHierarchy> {
 	return buildTree(root.rightChild, rightHalf, index);
     }
 
-    private void updateBounds(Node root) {
+    private void updateBounds(Node root, Triangle[] triangles) {
 	if (volumeType == VolumeType.AABB) {
 	    root.volume = new AxisAlignedBoundingBox();
 	    root.volume.fitTriangles(triangles, mesh);
@@ -141,11 +157,61 @@ public class BoundingVolumeHierarchy extends Property<BoundingVolumeHierarchy> {
 	    sortTriangles(indeces, axis, i, right);
     }
 
-    private class Node {
-	BoundingVolume volume;
+    public void checkOverlap() {
+	collisions.clear();
+	checkOverlap(root, root, collisions);
+
+	if (collisions.size() > 0) {
+	    System.out.println(collisions.size() + " broad-phase collisions detected");
+	}
+    }
+
+    private void checkOverlap(Node n1, Node n2, LinkedList<Collision> collisions) {
+	/* If the two nodes refer to the same triangle, return. */
+	if (n1.isLeaf() && n2.isLeaf() && n1.triangle == n2.triangle) return;
+	/* If the nodes do not overlap, return. */
+	if (! n1.volume.overlaps(n2.volume)) return;
+
+	/* If we get here, the nodes overlap. If they are both leaf
+	 * nodes, then add this pair to the collisions list. */
+	if (n1.isLeaf() && n2.isLeaf() && n1.index < n2.index) {
+	    if (! n1.triangle.overlaps(n2.triangle)) {
+		collisions.offer(new Collision(n1.triangle, n2.triangle));
+	    }
+
+	} else if (n1.isLeaf()) {
+	    if (n2.leftChild != null)
+		checkOverlap(n1, n2.leftChild, collisions);
+	    if (n2.rightChild != null)
+		checkOverlap(n1, n2.rightChild, collisions);
+
+	} else if (n2.isLeaf()) {
+	    if (n1.leftChild != null)
+		checkOverlap(n1.leftChild, n2, collisions);
+	    if (n1.rightChild != null)
+		checkOverlap(n1.rightChild, n2, collisions);
+
+	} else {
+	    if (n1.leftChild != null && n2.leftChild != null)
+		checkOverlap(n1.leftChild, n2.leftChild, collisions);
+	    if (n1.leftChild != null && n2.rightChild != null)
+		checkOverlap(n1.leftChild, n2.rightChild, collisions);
+	    if (n1.rightChild != null && n2.leftChild != null)
+		checkOverlap(n1.rightChild, n2.leftChild, collisions);
+	    if (n1.rightChild != null && n2.rightChild != null)
+		checkOverlap(n1.rightChild, n2.rightChild, collisions);
+	}
+    }
+
+    public class Node {
+	public Node leftChild, rightChild;
+	public BoundingVolume volume;
 	int index;
 	Triangle triangle;
-	Node leftChild, rightChild;
+
+	public boolean isLeaf() {
+	    return leftChild == null && rightChild == null;
+	}
     }
 
     public enum VolumeType { AABB, };

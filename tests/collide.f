@@ -1,7 +1,8 @@
 CollideScene {
     shapes {
-	shape FluidPlane(name="plane", length=30, subdivisions=40,
-			 location=(0, 0, 30), mass=10kg);
+	shape FluidPlane(name="plane", length=60, subdivisions=10,
+			 location=(-10, -10, 60), mass=10kg);
+	shape Sphere(name="sphere", radius=20, accuracy=10, fixed=true);
     }
 
     forces {
@@ -10,6 +11,6 @@ CollideScene {
 
     properties {
 	property SemiImplicitEuler(stepSize=0.01);
-	property BoundingVolumeHierarchy(type=BoundingVolumeHierarchy.AABB);
+	property BoundingVolumeHierarchy(type=BoundingVolumeHierarchy.AABB, margin=0.1);
     }
 }

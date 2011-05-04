@@ -47,4 +47,8 @@ public class Triangle {
 	}
 	return false;
     }
+
+    public String toString() {
+	return "Triangle (" + idx[0] + ", " + idx[1] + ", " + idx[2] + ")";
+    }
 }

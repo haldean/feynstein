@@ -12,6 +12,7 @@ public abstract class Shape<E extends Shape> extends Built<E> {
     protected double mass;
     protected float particleRadius;
     protected String name = null;
+    protected boolean fixed = false;
 
     public Shape() {
 		objectType = "Shape";
@@ -46,10 +47,16 @@ public abstract class Shape<E extends Shape> extends Built<E> {
 	return (E) this;
     }
 	
-	@SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked")
     public E set_particleRadius(float rad) {
-		particleRadius = rad;
-		return (E) this;
+	particleRadius = rad;
+	return (E) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    public E set_fixed(boolean fixed) {
+	this.fixed = fixed;
+	return (E) this;
     }
 
     @SuppressWarnings("unchecked")
@@ -65,6 +72,7 @@ public abstract class Shape<E extends Shape> extends Built<E> {
 	double particleMass = mass / (double) localMesh.size();
 	for (Particle p : localMesh.getParticles()) {
 	    p.setMass(particleMass);
+	    p.setFixed(fixed);
 	}
 
 	return (E) this;
