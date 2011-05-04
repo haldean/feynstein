@@ -3,6 +3,6 @@ CustomScene {
     forces none;
 
     shapes {
-	shape CustomObject(file="scenes/ReefKnot.obj");
+	shape CustomObject(name="knot", file="scenes/ReefKnot.obj");
     }
 }
