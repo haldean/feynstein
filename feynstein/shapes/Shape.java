@@ -9,6 +9,7 @@ public abstract class Shape<E extends Shape> extends Built<E> {
     protected Mesh localMesh;
 
     protected Vector3d location = new Vector3d();
+    protected Vector3d velocity = new Vector3d();
     protected double mass;
     protected float particleRadius;
     protected String name = null;
@@ -38,6 +39,12 @@ public abstract class Shape<E extends Shape> extends Built<E> {
     @SuppressWarnings("unchecked")
     public E set_location(double x, double y, double z) {
 	location = new Vector3d(x, y, z);
+	return (E) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    public E set_velocity(double x, double y, double z) {
+	velocity = new Vector3d(x, y, z);
 	return (E) this;
     }
 
@@ -73,6 +80,7 @@ public abstract class Shape<E extends Shape> extends Built<E> {
 	for (Particle p : localMesh.getParticles()) {
 	    p.setMass(particleMass);
 	    p.setFixed(fixed);
+	    p.setVel(velocity);
 	}
 
 	return (E) this;
