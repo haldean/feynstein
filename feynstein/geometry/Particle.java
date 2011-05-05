@@ -53,6 +53,10 @@ public class Particle {
 	public float getSize() {
 		return size;
 	}
+
+	public void setVel(Vector3d vel) {
+	    this.vel = vel;
+	}
 	
 	public void update(Vector3d pos, Vector3d vel) {
 		this.pos = pos;

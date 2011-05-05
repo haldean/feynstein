@@ -4,7 +4,8 @@ imports = [
     'feynstein.shapes.*', 'feynstein.forces.*', 'feynstein.*',
     'feynstein.renderer.*', 'feynstein.properties.*', 
     'feynstein.properties.integrators.*', 'java.awt.*', 'java.awt.event.*',
-    'javax.media.opengl.awt.*', 'com.jogamp.opengl.util.*',
+    'javax.media.opengl.awt.*', 'com.jogamp.opengl.util.*', 
+    'feynstein.collision.*',
     ]
 
 def get_imports():

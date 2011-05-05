@@ -2,15 +2,18 @@ package feynstein.shapes;
 
 import feynstein.Built;
 import feynstein.geometry.Mesh;
+import feynstein.geometry.Particle;
 import feynstein.utilities.Vector3d;
 
 public abstract class Shape<E extends Shape> extends Built<E> {
     protected Mesh localMesh;
 
     protected Vector3d location = new Vector3d();
+    protected Vector3d velocity = new Vector3d();
     protected double mass;
-	protected float particleRadius;
+    protected float particleRadius;
     protected String name = null;
+    protected boolean fixed = false;
 
     public Shape() {
 		objectType = "Shape";
@@ -40,15 +43,27 @@ public abstract class Shape<E extends Shape> extends Built<E> {
     }
 
     @SuppressWarnings("unchecked")
+    public E set_velocity(double x, double y, double z) {
+	velocity = new Vector3d(x, y, z);
+	return (E) this;
+    }
+
+    @SuppressWarnings("unchecked")
     public E set_mass(double m) {
 	mass = m;
 	return (E) this;
     }
 	
-	@SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked")
     public E set_particleRadius(float rad) {
-		particleRadius = rad;
-		return (E) this;
+	particleRadius = rad;
+	return (E) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    public E set_fixed(boolean fixed) {
+	this.fixed = fixed;
+	return (E) this;
     }
 
     @SuppressWarnings("unchecked")
@@ -60,6 +75,14 @@ public abstract class Shape<E extends Shape> extends Built<E> {
 	}
 
 	compileShape();
+
+	double particleMass = mass / (double) localMesh.size();
+	for (Particle p : localMesh.getParticles()) {
+	    p.setMass(particleMass);
+	    p.setFixed(fixed);
+	    p.setVel(velocity);
+	}
+
 	return (E) this;
     }
 	
