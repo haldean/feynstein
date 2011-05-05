@@ -1,6 +1,6 @@
 PropertyScene {
   properties {
-    property SemiImplicitEuler(h=10ms);
+    property SemiImplicitEuler(stepSize=10ms);
   }
 
   shapes none;
