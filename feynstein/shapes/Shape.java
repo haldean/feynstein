@@ -74,14 +74,14 @@ public abstract class Shape<E extends Shape> extends Built<E> {
 				       + "for all shapes.");
 	}
 
-	compileShape();
-
 	double particleMass = mass / (double) localMesh.size();
 	for (Particle p : localMesh.getParticles()) {
-	    p.setMass(particleMass);
-	    p.setFixed(fixed);
-	    p.setVel(velocity);
+	p.setMass(particleMass);
+	p.setFixed(fixed);
+	p.setVel(velocity);
 	}
+		
+	compileShape();
 
 	return (E) this;
     }
