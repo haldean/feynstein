@@ -19,7 +19,9 @@ public abstract class Shape<E extends Shape> extends Built<E> {
     protected String name = null;
     protected boolean fixed = false;
     protected boolean compiled = false;
-    protected boolean disableParticleValues = false;
+    protected boolean disableParticleMass = false;
+    protected boolean disableParticleVelocity = false;
+    protected boolean disableParticleFixed = false;
 
     protected Set<Particle> particles;
 
@@ -138,13 +140,11 @@ public abstract class Shape<E extends Shape> extends Built<E> {
 	compileShape();
 
 	particles.addAll(localMesh.getParticles());
-	if (!disableParticleValues) {
-	    double particleMass = mass / (double) localMesh.size();
-	    for (Particle p : particles) {
-		p.setMass(particleMass);
-		p.setFixed(fixed);
-		p.setVel(velocity);
-	    }
+	double particleMass = mass / (double) localMesh.size();
+	for (Particle p : particles) {
+	    if (! disableParticleMass) p.setMass(particleMass);
+	    if (! disableParticleFixed) p.setFixed(fixed);
+	    if (! disableParticleVelocity) p.setVel(velocity);
 	}
 
 	compiled = true;
