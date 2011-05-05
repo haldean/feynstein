@@ -138,6 +138,14 @@ public abstract class Scene {
 	return mesh;
     }
 
+    public double[] getGlobalPositions() {
+	return globalPositions;
+    }
+
+    public double[] getGlobalVelocities() {
+	return globalVelocities;
+    }
+
     public void update() {
 	for (Property property : properties) 
 	    property.update();
