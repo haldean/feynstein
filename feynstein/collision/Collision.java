@@ -36,8 +36,11 @@ public class Collision {
 
     public String toString() {
 	String s = "";
-	if (type == VERTEX_FACE) s += "Collision type: vertex-face; ";
-	if (type == EDGE_EDGE) s += "Collision type: edge-edge; ";
+	if (type == VERTEX_FACE) {
+	    s += "Collision type: vertex-face; ";
+	} else if (type == EDGE_EDGE) {
+	    s += "Collision type: edge-edge; ";
+	}
 	s += "between particles " + particles[0] + ", " + particles[1] + ", " + particles[2] + ", and " + particles[3] + "; ";
 	s += "at barycentric coords (" + baryCoords[0] + ", " + baryCoords[1] + ", " + baryCoords[2] + "); ";
 	s += "with distance = " + dist;
@@ -45,5 +48,5 @@ public class Collision {
     }
 
     public static final int VERTEX_FACE = 0;
-    public static final int EDGE_EDGE = 0;
+    public static final int EDGE_EDGE = 1;
 }
