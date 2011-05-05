@@ -38,6 +38,7 @@ public abstract class NarrowPhaseDetector<E extends NarrowPhaseDetector> extends
 	return mesh.getVert(t.getIdx(vertex)).get(axis);
     }
 
+    //TODO: pass list as reference
     public void update() {
 	actualCollisions.clear();
 
@@ -48,7 +49,15 @@ public abstract class NarrowPhaseDetector<E extends NarrowPhaseDetector> extends
 		if (pairCollisions.size() != 0) actualCollisions.addAll(pairCollisions);
 	    }
 	} else {
-	    //TODO iterate thorugh entire mesh 
+	    Triangle t1, t2;
+	    for (int i = 0; i < mesh.getTriangles().size(); i++) {
+		for (int j = i+1; j < mesh.getTriangles().size(); j++) {
+		    t1 = mesh.getTriangles().get(i);
+		    t2 = mesh.getTriangles().get(j);
+		    LinkedList<Collision> pairCollisions = checkCollision(new TrianglePair(t1, t2));
+		    if (pairCollisions.size() != 0) actualCollisions.addAll(pairCollisions);
+		}
+	    }
 	}
 	
 	//TESTING PURPOSES ONLY:
