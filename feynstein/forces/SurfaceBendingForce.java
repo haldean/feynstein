@@ -118,7 +118,13 @@ public class SurfaceBendingForce extends Force<SurfaceBendingForce> {
 			zl = globalPositions[base3+2];
 			
 			thetaBar = undefAngles[stencilIdx];
-			
+			double phi = ArcTan((-(xj*yi) + xk*yi + xi*yj - xk*yj - xi*yk + xj*yk)*(xj*yi - xl*yi - xi*yj + xl*yj + xi*yl - xj*yl) + 
+								(xj*zi - xk*zi - xi*zj + xk*zj + xi*zk - xj*zk)*(-(xj*zi) + xl*zi + xi*zj - xl*zj - xi*zl + xj*zl) + 
+								(-(yj*zi) + yk*zi + yi*zj - yk*zj - yi*zk + yj*zk)*(yj*zi - yl*zi - yi*zj + yl*zj + yi*zl - yj*zl),
+								(-yi + yl)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(-(xj*zi) + xk*zi + xi*zj - xk*zj - xi*zk + xj*zk) + 
+								(-xi + xl)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(yj*zi - yk*zi - yi*zj + yk*zj + yi*zk - yj*zk) + 
+								(xj*yi - xk*yi - xi*yj + xk*yj + xi*yk - xj*yk)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(-zi + zl));
+
 		double Fxi = (((-((-yi + yl)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(-(xj*zi) + xk*zi + xi*zj - xk*zj - xi*zk + xj*zk)) - 
 						(-xi + xl)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(yj*zi - yk*zi - yi*zj + yk*zj + yi*zk - yj*zk) - 
 						(xj*yi - xk*yi - xi*yj + xk*yj + xi*yk - xj*yk)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(-zi + zl))*
@@ -150,12 +156,7 @@ public class SurfaceBendingForce extends Force<SurfaceBendingForce> {
 					   + square((-(xj*yi) + xk*yi + xi*yj - xk*yj - xi*yk + xj*yk)*(xj*yi - xl*yi - xi*yj + xl*yj + xi*yl - xj*yl) + 
 							 (xj*zi - xk*zi - xi*zj + xk*zj + xi*zk - xj*zk)*(-(xj*zi) + xl*zi + xi*zj - xl*zj - xi*zl + xj*zl) + 
 							 (-(yj*zi) + yk*zi + yi*zj - yk*zj - yi*zk + yj*zk)*(yj*zi - yl*zi - yi*zj + yl*zj + yi*zl - yj*zl))))*
-		(-thetaBar + ArcTan((-(xj*yi) + xk*yi + xi*yj - xk*yj - xi*yk + xj*yk)*(xj*yi - xl*yi - xi*yj + xl*yj + xi*yl - xj*yl) + 
-								   (xj*zi - xk*zi - xi*zj + xk*zj + xi*zk - xj*zk)*(-(xj*zi) + xl*zi + xi*zj - xl*zj - xi*zl + xj*zl) + 
-								   (-(yj*zi) + yk*zi + yi*zj - yk*zj - yi*zk + yj*zk)*(yj*zi - yl*zi - yi*zj + yl*zj + yi*zl - yj*zl),
-								   (-yi + yl)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(-(xj*zi) + xk*zi + xi*zj - xk*zj - xi*zk + xj*zk) + 
-								   (-xi + xl)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(yj*zi - yk*zi - yi*zj + yk*zj + yi*zk - yj*zk) + 
-								   (xj*yi - xk*yi - xi*yj + xk*yj + xi*yk - xj*yk)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(-zi + zl)));
+		(-thetaBar + phi);
 		double Fyi = (((-((-yi + yl)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(-(xj*zi) + xk*zi + xi*zj - xk*zj - xi*zk + xj*zk)) - 
 						(-xi + xl)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(yj*zi - yk*zi - yi*zj + yk*zj + yi*zk - yj*zk) - 
 						(xj*yi - xk*yi - xi*yj + xk*yj + xi*yk - xj*yk)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(-zi + zl))*
@@ -187,12 +188,7 @@ public class SurfaceBendingForce extends Force<SurfaceBendingForce> {
 					   + square((-(xj*yi) + xk*yi + xi*yj - xk*yj - xi*yk + xj*yk)*(xj*yi - xl*yi - xi*yj + xl*yj + xi*yl - xj*yl) + 
 							 (xj*zi - xk*zi - xi*zj + xk*zj + xi*zk - xj*zk)*(-(xj*zi) + xl*zi + xi*zj - xl*zj - xi*zl + xj*zl) + 
 							 (-(yj*zi) + yk*zi + yi*zj - yk*zj - yi*zk + yj*zk)*(yj*zi - yl*zi - yi*zj + yl*zj + yi*zl - yj*zl))))*
-		(-thetaBar + ArcTan((-(xj*yi) + xk*yi + xi*yj - xk*yj - xi*yk + xj*yk)*(xj*yi - xl*yi - xi*yj + xl*yj + xi*yl - xj*yl) + 
-								   (xj*zi - xk*zi - xi*zj + xk*zj + xi*zk - xj*zk)*(-(xj*zi) + xl*zi + xi*zj - xl*zj - xi*zl + xj*zl) + 
-								   (-(yj*zi) + yk*zi + yi*zj - yk*zj - yi*zk + yj*zk)*(yj*zi - yl*zi - yi*zj + yl*zj + yi*zl - yj*zl),
-								   (-yi + yl)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(-(xj*zi) + xk*zi + xi*zj - xk*zj - xi*zk + xj*zk) + 
-								   (-xi + xl)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(yj*zi - yk*zi - yi*zj + yk*zj + yi*zk - yj*zk) + 
-								   (xj*yi - xk*yi - xi*yj + xk*yj + xi*yk - xj*yk)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(-zi + zl)));
+		(-thetaBar + phi);
 		double Fzi = (((-((-yi + yl)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(-(xj*zi) + xk*zi + xi*zj - xk*zj - xi*zk + xj*zk)) - 
 						(-xi + xl)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(yj*zi - yk*zi - yi*zj + yk*zj + yi*zk - yj*zk) - 
 						(xj*yi - xk*yi - xi*yj + xk*yj + xi*yk - xj*yk)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(-zi + zl))*
@@ -224,12 +220,7 @@ public class SurfaceBendingForce extends Force<SurfaceBendingForce> {
 					   + square((-(xj*yi) + xk*yi + xi*yj - xk*yj - xi*yk + xj*yk)*(xj*yi - xl*yi - xi*yj + xl*yj + xi*yl - xj*yl) + 
 							 (xj*zi - xk*zi - xi*zj + xk*zj + xi*zk - xj*zk)*(-(xj*zi) + xl*zi + xi*zj - xl*zj - xi*zl + xj*zl) + 
 							 (-(yj*zi) + yk*zi + yi*zj - yk*zj - yi*zk + yj*zk)*(yj*zi - yl*zi - yi*zj + yl*zj + yi*zl - yj*zl))))*
-		(-thetaBar + ArcTan((-(xj*yi) + xk*yi + xi*yj - xk*yj - xi*yk + xj*yk)*(xj*yi - xl*yi - xi*yj + xl*yj + xi*yl - xj*yl) + 
-								   (xj*zi - xk*zi - xi*zj + xk*zj + xi*zk - xj*zk)*(-(xj*zi) + xl*zi + xi*zj - xl*zj - xi*zl + xj*zl) + 
-								   (-(yj*zi) + yk*zi + yi*zj - yk*zj - yi*zk + yj*zk)*(yj*zi - yl*zi - yi*zj + yl*zj + yi*zl - yj*zl),
-								   (-yi + yl)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(-(xj*zi) + xk*zi + xi*zj - xk*zj - xi*zk + xj*zk) + 
-								   (-xi + xl)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(yj*zi - yk*zi - yi*zj + yk*zj + yi*zk - yj*zk) + 
-								   (xj*yi - xk*yi - xi*yj + xk*yj + xi*yk - xj*yk)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(-zi + zl)));
+		(-thetaBar + phi);
 		
 		double Fxj = (((-((-yi + yl)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(-(xj*zi) + xk*zi + xi*zj - xk*zj - xi*zk + xj*zk)) - 
 						(-xi + xl)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(yj*zi - yk*zi - yi*zj + yk*zj + yi*zk - yj*zk) - 
@@ -261,12 +252,7 @@ public class SurfaceBendingForce extends Force<SurfaceBendingForce> {
 					   + square((-(xj*yi) + xk*yi + xi*yj - xk*yj - xi*yk + xj*yk)*(xj*yi - xl*yi - xi*yj + xl*yj + xi*yl - xj*yl) + 
 							 (xj*zi - xk*zi - xi*zj + xk*zj + xi*zk - xj*zk)*(-(xj*zi) + xl*zi + xi*zj - xl*zj - xi*zl + xj*zl) + 
 							 (-(yj*zi) + yk*zi + yi*zj - yk*zj - yi*zk + yj*zk)*(yj*zi - yl*zi - yi*zj + yl*zj + yi*zl - yj*zl))))*
-		(-thetaBar + ArcTan((-(xj*yi) + xk*yi + xi*yj - xk*yj - xi*yk + xj*yk)*(xj*yi - xl*yi - xi*yj + xl*yj + xi*yl - xj*yl) + 
-								   (xj*zi - xk*zi - xi*zj + xk*zj + xi*zk - xj*zk)*(-(xj*zi) + xl*zi + xi*zj - xl*zj - xi*zl + xj*zl) + 
-								   (-(yj*zi) + yk*zi + yi*zj - yk*zj - yi*zk + yj*zk)*(yj*zi - yl*zi - yi*zj + yl*zj + yi*zl - yj*zl),
-								   (-yi + yl)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(-(xj*zi) + xk*zi + xi*zj - xk*zj - xi*zk + xj*zk) + 
-								   (-xi + xl)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(yj*zi - yk*zi - yi*zj + yk*zj + yi*zk - yj*zk) + 
-								   (xj*yi - xk*yi - xi*yj + xk*yj + xi*yk - xj*yk)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(-zi + zl)));
+		(-thetaBar + phi);
 		double Fyj = (((-((-yi + yl)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(-(xj*zi) + xk*zi + xi*zj - xk*zj - xi*zk + xj*zk)) - 
 						(-xi + xl)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(yj*zi - yk*zi - yi*zj + yk*zj + yi*zk - yj*zk) - 
 						(xj*yi - xk*yi - xi*yj + xk*yj + xi*yk - xj*yk)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(-zi + zl))*
@@ -297,12 +283,7 @@ public class SurfaceBendingForce extends Force<SurfaceBendingForce> {
 					   + square((-(xj*yi) + xk*yi + xi*yj - xk*yj - xi*yk + xj*yk)*(xj*yi - xl*yi - xi*yj + xl*yj + xi*yl - xj*yl) + 
 							 (xj*zi - xk*zi - xi*zj + xk*zj + xi*zk - xj*zk)*(-(xj*zi) + xl*zi + xi*zj - xl*zj - xi*zl + xj*zl) + 
 							 (-(yj*zi) + yk*zi + yi*zj - yk*zj - yi*zk + yj*zk)*(yj*zi - yl*zi - yi*zj + yl*zj + yi*zl - yj*zl))))*
-		(-thetaBar + ArcTan((-(xj*yi) + xk*yi + xi*yj - xk*yj - xi*yk + xj*yk)*(xj*yi - xl*yi - xi*yj + xl*yj + xi*yl - xj*yl) + 
-								   (xj*zi - xk*zi - xi*zj + xk*zj + xi*zk - xj*zk)*(-(xj*zi) + xl*zi + xi*zj - xl*zj - xi*zl + xj*zl) + 
-								   (-(yj*zi) + yk*zi + yi*zj - yk*zj - yi*zk + yj*zk)*(yj*zi - yl*zi - yi*zj + yl*zj + yi*zl - yj*zl),
-								   (-yi + yl)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(-(xj*zi) + xk*zi + xi*zj - xk*zj - xi*zk + xj*zk) + 
-								   (-xi + xl)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(yj*zi - yk*zi - yi*zj + yk*zj + yi*zk - yj*zk) + 
-								   (xj*yi - xk*yi - xi*yj + xk*yj + xi*yk - xj*yk)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(-zi + zl)));
+		(-thetaBar + phi);
 		double Fzj = (((-((-yi + yl)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(-(xj*zi) + xk*zi + xi*zj - xk*zj - xi*zk + xj*zk)) - 
 						(-xi + xl)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(yj*zi - yk*zi - yi*zj + yk*zj + yi*zk - yj*zk) - 
 						(xj*yi - xk*yi - xi*yj + xk*yj + xi*yk - xj*yk)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(-zi + zl))*
@@ -333,12 +314,7 @@ public class SurfaceBendingForce extends Force<SurfaceBendingForce> {
 					   + square((-(xj*yi) + xk*yi + xi*yj - xk*yj - xi*yk + xj*yk)*(xj*yi - xl*yi - xi*yj + xl*yj + xi*yl - xj*yl) + 
 							 (xj*zi - xk*zi - xi*zj + xk*zj + xi*zk - xj*zk)*(-(xj*zi) + xl*zi + xi*zj - xl*zj - xi*zl + xj*zl) + 
 							 (-(yj*zi) + yk*zi + yi*zj - yk*zj - yi*zk + yj*zk)*(yj*zi - yl*zi - yi*zj + yl*zj + yi*zl - yj*zl))))*
-		(-thetaBar + ArcTan((-(xj*yi) + xk*yi + xi*yj - xk*yj - xi*yk + xj*yk)*(xj*yi - xl*yi - xi*yj + xl*yj + xi*yl - xj*yl) + 
-								   (xj*zi - xk*zi - xi*zj + xk*zj + xi*zk - xj*zk)*(-(xj*zi) + xl*zi + xi*zj - xl*zj - xi*zl + xj*zl) + 
-								   (-(yj*zi) + yk*zi + yi*zj - yk*zj - yi*zk + yj*zk)*(yj*zi - yl*zi - yi*zj + yl*zj + yi*zl - yj*zl),
-								   (-yi + yl)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(-(xj*zi) + xk*zi + xi*zj - xk*zj - xi*zk + xj*zk) + 
-								   (-xi + xl)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(yj*zi - yk*zi - yi*zj + yk*zj + yi*zk - yj*zk) + 
-								   (xj*yi - xk*yi - xi*yj + xk*yj + xi*yk - xj*yk)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(-zi + zl)));
+		(-thetaBar + phi);
 		
 		double Fxk = (((-((-yi + yl)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(-(xj*zi) + xk*zi + xi*zj - xk*zj - xi*zk + xj*zk)) - 
 						(-xi + xl)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(yj*zi - yk*zi - yi*zj + yk*zj + yi*zk - yj*zk) - 
@@ -363,12 +339,7 @@ public class SurfaceBendingForce extends Force<SurfaceBendingForce> {
 					   + square((-(xj*yi) + xk*yi + xi*yj - xk*yj - xi*yk + xj*yk)*(xj*yi - xl*yi - xi*yj + xl*yj + xi*yl - xj*yl) + 
 							 (xj*zi - xk*zi - xi*zj + xk*zj + xi*zk - xj*zk)*(-(xj*zi) + xl*zi + xi*zj - xl*zj - xi*zl + xj*zl) + 
 							 (-(yj*zi) + yk*zi + yi*zj - yk*zj - yi*zk + yj*zk)*(yj*zi - yl*zi - yi*zj + yl*zj + yi*zl - yj*zl))))*
-		(-thetaBar + ArcTan((-(xj*yi) + xk*yi + xi*yj - xk*yj - xi*yk + xj*yk)*(xj*yi - xl*yi - xi*yj + xl*yj + xi*yl - xj*yl) + 
-								   (xj*zi - xk*zi - xi*zj + xk*zj + xi*zk - xj*zk)*(-(xj*zi) + xl*zi + xi*zj - xl*zj - xi*zl + xj*zl) + 
-								   (-(yj*zi) + yk*zi + yi*zj - yk*zj - yi*zk + yj*zk)*(yj*zi - yl*zi - yi*zj + yl*zj + yi*zl - yj*zl),
-								   (-yi + yl)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(-(xj*zi) + xk*zi + xi*zj - xk*zj - xi*zk + xj*zk) + 
-								   (-xi + xl)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(yj*zi - yk*zi - yi*zj + yk*zj + yi*zk - yj*zk) + 
-								   (xj*yi - xk*yi - xi*yj + xk*yj + xi*yk - xj*yk)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(-zi + zl)));
+		(-thetaBar + phi);
 		double Fyk = (((-((-yi + yl)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(-(xj*zi) + xk*zi + xi*zj - xk*zj - xi*zk + xj*zk)) - 
 						(-xi + xl)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(yj*zi - yk*zi - yi*zj + yk*zj + yi*zk - yj*zk) - 
 						(xj*yi - xk*yi - xi*yj + xk*yj + xi*yk - xj*yk)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(-zi + zl))*
@@ -392,12 +363,7 @@ public class SurfaceBendingForce extends Force<SurfaceBendingForce> {
 					   + square((-(xj*yi) + xk*yi + xi*yj - xk*yj - xi*yk + xj*yk)*(xj*yi - xl*yi - xi*yj + xl*yj + xi*yl - xj*yl) + 
 							 (xj*zi - xk*zi - xi*zj + xk*zj + xi*zk - xj*zk)*(-(xj*zi) + xl*zi + xi*zj - xl*zj - xi*zl + xj*zl) + 
 							 (-(yj*zi) + yk*zi + yi*zj - yk*zj - yi*zk + yj*zk)*(yj*zi - yl*zi - yi*zj + yl*zj + yi*zl - yj*zl))))*
-		(-thetaBar + ArcTan((-(xj*yi) + xk*yi + xi*yj - xk*yj - xi*yk + xj*yk)*(xj*yi - xl*yi - xi*yj + xl*yj + xi*yl - xj*yl) + 
-								   (xj*zi - xk*zi - xi*zj + xk*zj + xi*zk - xj*zk)*(-(xj*zi) + xl*zi + xi*zj - xl*zj - xi*zl + xj*zl) + 
-								   (-(yj*zi) + yk*zi + yi*zj - yk*zj - yi*zk + yj*zk)*(yj*zi - yl*zi - yi*zj + yl*zj + yi*zl - yj*zl),
-								   (-yi + yl)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(-(xj*zi) + xk*zi + xi*zj - xk*zj - xi*zk + xj*zk) + 
-								   (-xi + xl)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(yj*zi - yk*zi - yi*zj + yk*zj + yi*zk - yj*zk) + 
-								   (xj*yi - xk*yi - xi*yj + xk*yj + xi*yk - xj*yk)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(-zi + zl)));
+		(-thetaBar + phi);
 		double Fzk = (((-((-yi + yl)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(-(xj*zi) + xk*zi + xi*zj - xk*zj - xi*zk + xj*zk)) - 
 						(-xi + xl)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(yj*zi - yk*zi - yi*zj + yk*zj + yi*zk - yj*zk) - 
 						(xj*yi - xk*yi - xi*yj + xk*yj + xi*yk - xj*yk)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(-zi + zl))*
@@ -421,12 +387,7 @@ public class SurfaceBendingForce extends Force<SurfaceBendingForce> {
 					   + square((-(xj*yi) + xk*yi + xi*yj - xk*yj - xi*yk + xj*yk)*(xj*yi - xl*yi - xi*yj + xl*yj + xi*yl - xj*yl) + 
 							 (xj*zi - xk*zi - xi*zj + xk*zj + xi*zk - xj*zk)*(-(xj*zi) + xl*zi + xi*zj - xl*zj - xi*zl + xj*zl) + 
 							 (-(yj*zi) + yk*zi + yi*zj - yk*zj - yi*zk + yj*zk)*(yj*zi - yl*zi - yi*zj + yl*zj + yi*zl - yj*zl))))*
-		(-thetaBar + ArcTan((-(xj*yi) + xk*yi + xi*yj - xk*yj - xi*yk + xj*yk)*(xj*yi - xl*yi - xi*yj + xl*yj + xi*yl - xj*yl) + 
-								   (xj*zi - xk*zi - xi*zj + xk*zj + xi*zk - xj*zk)*(-(xj*zi) + xl*zi + xi*zj - xl*zj - xi*zl + xj*zl) + 
-								   (-(yj*zi) + yk*zi + yi*zj - yk*zj - yi*zk + yj*zk)*(yj*zi - yl*zi - yi*zj + yl*zj + yi*zl - yj*zl),
-								   (-yi + yl)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(-(xj*zi) + xk*zi + xi*zj - xk*zj - xi*zk + xj*zk) + 
-								   (-xi + xl)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(yj*zi - yk*zi - yi*zj + yk*zj + yi*zk - yj*zk) + 
-								   (xj*yi - xk*yi - xi*yj + xk*yj + xi*yk - xj*yk)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(-zi + zl)));
+		(-thetaBar + phi);
 		
 		double Fxl = ((((-yi + yj)*(-(xj*yi) + xk*yi + xi*yj - xk*yj - xi*yk + xj*yk) + (zi - zj)*(xj*zi - xk*zi - xi*zj + xk*zj + xi*zk - xj*zk))*
 					   (-((-yi + yl)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*
@@ -451,12 +412,7 @@ public class SurfaceBendingForce extends Force<SurfaceBendingForce> {
 					   + square((-(xj*yi) + xk*yi + xi*yj - xk*yj - xi*yk + xj*yk)*(xj*yi - xl*yi - xi*yj + xl*yj + xi*yl - xj*yl) + 
 							 (xj*zi - xk*zi - xi*zj + xk*zj + xi*zk - xj*zk)*(-(xj*zi) + xl*zi + xi*zj - xl*zj - xi*zl + xj*zl) + 
 							 (-(yj*zi) + yk*zi + yi*zj - yk*zj - yi*zk + yj*zk)*(yj*zi - yl*zi - yi*zj + yl*zj + yi*zl - yj*zl))))*
-		(-thetaBar + ArcTan((-(xj*yi) + xk*yi + xi*yj - xk*yj - xi*yk + xj*yk)*(xj*yi - xl*yi - xi*yj + xl*yj + xi*yl - xj*yl) + 
-								   (xj*zi - xk*zi - xi*zj + xk*zj + xi*zk - xj*zk)*(-(xj*zi) + xl*zi + xi*zj - xl*zj - xi*zl + xj*zl) + 
-								   (-(yj*zi) + yk*zi + yi*zj - yk*zj - yi*zk + yj*zk)*(yj*zi - yl*zi - yi*zj + yl*zj + yi*zl - yj*zl),
-								   (-yi + yl)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(-(xj*zi) + xk*zi + xi*zj - xk*zj - xi*zk + xj*zk) + 
-								   (-xi + xl)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(yj*zi - yk*zi - yi*zj + yk*zj + yi*zk - yj*zk) + 
-								   (xj*yi - xk*yi - xi*yj + xk*yj + xi*yk - xj*yk)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(-zi + zl)));
+		(-thetaBar + phi);
 		double Fyl = ((((xi - xj)*(-(xj*yi) + xk*yi + xi*yj - xk*yj - xi*yk + xj*yk) + (-zi + zj)*(-(yj*zi) + yk*zi + yi*zj - yk*zj - yi*zk + yj*zk))*
 					   (-((-yi + yl)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*
 						  (-(xj*zi) + xk*zi + xi*zj - xk*zj - xi*zk + xj*zk)) - 
@@ -480,12 +436,7 @@ public class SurfaceBendingForce extends Force<SurfaceBendingForce> {
 					   + square((-(xj*yi) + xk*yi + xi*yj - xk*yj - xi*yk + xj*yk)*(xj*yi - xl*yi - xi*yj + xl*yj + xi*yl - xj*yl) + 
 							 (xj*zi - xk*zi - xi*zj + xk*zj + xi*zk - xj*zk)*(-(xj*zi) + xl*zi + xi*zj - xl*zj - xi*zl + xj*zl) + 
 							 (-(yj*zi) + yk*zi + yi*zj - yk*zj - yi*zk + yj*zk)*(yj*zi - yl*zi - yi*zj + yl*zj + yi*zl - yj*zl))))*
-		(-thetaBar + ArcTan((-(xj*yi) + xk*yi + xi*yj - xk*yj - xi*yk + xj*yk)*(xj*yi - xl*yi - xi*yj + xl*yj + xi*yl - xj*yl) + 
-								   (xj*zi - xk*zi - xi*zj + xk*zj + xi*zk - xj*zk)*(-(xj*zi) + xl*zi + xi*zj - xl*zj - xi*zl + xj*zl) + 
-								   (-(yj*zi) + yk*zi + yi*zj - yk*zj - yi*zk + yj*zk)*(yj*zi - yl*zi - yi*zj + yl*zj + yi*zl - yj*zl),
-								   (-yi + yl)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(-(xj*zi) + xk*zi + xi*zj - xk*zj - xi*zk + xj*zk) + 
-								   (-xi + xl)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(yj*zi - yk*zi - yi*zj + yk*zj + yi*zk - yj*zk) + 
-								   (xj*yi - xk*yi - xi*yj + xk*yj + xi*yk - xj*yk)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(-zi + zl)));
+		(-thetaBar + phi);
 		double Fzl = ((((-xi + xj)*(xj*zi - xk*zi - xi*zj + xk*zj + xi*zk - xj*zk) + (yi - yj)*(-(yj*zi) + yk*zi + yi*zj - yk*zj - yi*zk + yj*zk))*
 					   (-((-yi + yl)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*
 						  (-(xj*zi) + xk*zi + xi*zj - xk*zj - xi*zk + xj*zk)) - 
@@ -509,12 +460,7 @@ public class SurfaceBendingForce extends Force<SurfaceBendingForce> {
 					   + square((-(xj*yi) + xk*yi + xi*yj - xk*yj - xi*yk + xj*yk)*(xj*yi - xl*yi - xi*yj + xl*yj + xi*yl - xj*yl) + 
 							 (xj*zi - xk*zi - xi*zj + xk*zj + xi*zk - xj*zk)*(-(xj*zi) + xl*zi + xi*zj - xl*zj - xi*zl + xj*zl) + 
 							 (-(yj*zi) + yk*zi + yi*zj - yk*zj - yi*zk + yj*zk)*(yj*zi - yl*zi - yi*zj + yl*zj + yi*zl - yj*zl))))*
-		(-thetaBar + ArcTan((-(xj*yi) + xk*yi + xi*yj - xk*yj - xi*yk + xj*yk)*(xj*yi - xl*yi - xi*yj + xl*yj + xi*yl - xj*yl) + 
-								   (xj*zi - xk*zi - xi*zj + xk*zj + xi*zk - xj*zk)*(-(xj*zi) + xl*zi + xi*zj - xl*zj - xi*zl + xj*zl) + 
-								   (-(yj*zi) + yk*zi + yi*zj - yk*zj - yi*zk + yj*zk)*(yj*zi - yl*zi - yi*zj + yl*zj + yi*zl - yj*zl),
-								   (-yi + yl)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(-(xj*zi) + xk*zi + xi*zj - xk*zj - xi*zk + xj*zk) + 
-								   (-xi + xl)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(yj*zi - yk*zi - yi*zj + yk*zj + yi*zk - yj*zk) + 
-								   (xj*yi - xk*yi - xi*yj + xk*yj + xi*yk - xj*yk)*Math.sqrt(square(-xi + xj) + square(-yi + yj) + square(-zi + zj))*(-zi + zl)));
+		(-thetaBar + phi);
 		
 				
 		Fxi *= -forceScale[stencilIdx];
