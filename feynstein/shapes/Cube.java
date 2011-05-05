@@ -40,7 +40,7 @@ public class Cube extends Shape<Cube> {
 	Vector3d y_length = new Vector3d(0, side_y, 0);
 	Vector3d z_length = new Vector3d(0, 0, side_z);
 
-	Particle reference = new Particle(location);
+	Particle reference = new Particle(location.copy());
 
 	Particle reference_x = new Particle(location.plus(x_length));
 	Particle reference_y = new Particle(location.plus(y_length));
