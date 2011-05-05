@@ -48,5 +48,5 @@ public class Collision {
     }
 
     public static final int VERTEX_FACE = 0;
-    public static final int EDGE_EDGE = 0;
+    public static final int EDGE_EDGE = 1;
 }
