@@ -38,7 +38,7 @@ public class Collision {
 	String s = "";
 	if (type == VERTEX_FACE) {
 	    s += "Collision type: vertex-face; ";
-	} elseif (type == EDGE_EDGE) {
+	} else if (type == EDGE_EDGE) {
 	    s += "Collision type: edge-edge; ";
 	}
 	s += "between particles " + particles[0] + ", " + particles[1] + ", " + particles[2] + ", and " + particles[3] + "; ";
