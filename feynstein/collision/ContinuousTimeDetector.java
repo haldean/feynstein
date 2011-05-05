@@ -6,6 +6,13 @@ import feynstein.*;
 import feynstein.properties.*;
 import java.util.*;
 
+import com.numericalmethod.suanshu.analysis.function.polynomial.root.*;
+import com.numericalmethod.suanshu.analysis.function.polynomial.*;
+import com.numericalmethod.suanshu.datastructure.list.*;
+import com.numericalmethod.suanshu.license.*;
+import org.joda.time.*;
+import java.lang.Number;
+
 public class ContinuousTimeDetector extends NarrowPhaseDetector<ContinuousTimeDetector> {
 
     private double h = 0;   
