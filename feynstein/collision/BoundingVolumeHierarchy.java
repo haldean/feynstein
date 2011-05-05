@@ -15,7 +15,7 @@ public class BoundingVolumeHierarchy extends Property<BoundingVolumeHierarchy> {
     private Mesh mesh;
     private Triangle[] triangles;
     private double margin = 0;
-    private LinkedList<Collision> collisions;
+    private LinkedList<TrianglePair> collisions;
 
     public BoundingVolumeHierarchy(Scene scene) {
 	super(scene);
@@ -23,7 +23,7 @@ public class BoundingVolumeHierarchy extends Property<BoundingVolumeHierarchy> {
 	objectType = "BoundingVolumeHierarchy";
 	mesh = scene.getMesh();
 	triangles = mesh.getTriangles().toArray(new Triangle[0]);
-	collisions = new LinkedList<Collision>();
+	collisions = new LinkedList<TrianglePair>();
 
 	System.out.println(triangles.length);
     }
@@ -58,7 +58,7 @@ public class BoundingVolumeHierarchy extends Property<BoundingVolumeHierarchy> {
 	System.out.println(root.volume);
     }
 
-    public List<Collision> getCollisions() {
+    public List<TrianglePair> getCollisions() {
 	return collisions;
     }
 
@@ -166,7 +166,7 @@ public class BoundingVolumeHierarchy extends Property<BoundingVolumeHierarchy> {
 	}
     }
 
-    private void checkOverlap(Node n1, Node n2, LinkedList<Collision> collisions) {
+    private void checkOverlap(Node n1, Node n2, LinkedList<TrianglePair> collisions) {
 	/* If the two nodes refer to the same triangle, return. */
 	if (n1.isLeaf() && n2.isLeaf() && n1.triangle == n2.triangle) return;
 	/* If the nodes do not overlap, return. */
@@ -176,7 +176,7 @@ public class BoundingVolumeHierarchy extends Property<BoundingVolumeHierarchy> {
 	 * nodes, then add this pair to the collisions list. */
 	if (n1.isLeaf() && n2.isLeaf() && n1.index < n2.index) {
 	    if (! n1.triangle.overlaps(n2.triangle)) {
-		collisions.offer(new Collision(n1.triangle, n2.triangle));
+		collisions.offer(new TrianglePair(n1.triangle, n2.triangle));
 	    }
 
 	} else if (n1.isLeaf()) {
