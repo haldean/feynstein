@@ -1,6 +1,6 @@
 springforce1 {
     shapes {
-	m = 1;
+	int m = 1;
 	shape SpringChain(name="spring1", vert=(0,0,0), vert=(0,1,0), mass=m);
 	shape SpringChain(name="spring2", vert=(1,0,0), vert=(1,2,0), mass=m);
 	shape SpringChain(name="spring3", vert=(2,0,0), vert=(2,3,0), mass=m);
@@ -44,23 +44,23 @@ springforce1 {
 	force SpringForce(actsOn=#spring4, strength=10, length=4);
 	force SpringForce(actsOn=#spring5, strength=10, length=5);
 
-	force SpringForce(actsOn#spring6, strength=1, length=0.8);
-	force SpringForce(actsOn#spring6, strength=2, length=0.8);
-	force SpringForce(actsOn#spring6, strength=3, length=0.8);
-	force SpringForce(actsOn#spring6, strength=4, length=0.8);
-	force SpringForce(actsOn#spring6, strength=5, length=0.8);
+	force SpringForce(actsOn=#spring6, strength=1, length=0.8);
+	force SpringForce(actsOn=#spring6, strength=2, length=0.8);
+	force SpringForce(actsOn=#spring6, strength=3, length=0.8);
+	force SpringForce(actsOn=#spring6, strength=4, length=0.8);
+	force SpringForce(actsOn=#spring6, strength=5, length=0.8);
 
-	force SpringForce(actsOn#spring6, strength=1, length=0.8);
-	force SpringForce(actsOn#spring7, strength=2, length=0.8);
-	force SpringForce(actsOn#spring8, strength=4, length=0.8);
-	force SpringForce(actsOn#spring9, strength=8, length=0.8);
-	force SpringForce(actsOn#spring10, strength=16, length=0.8);
+	force SpringForce(actsOn=#spring6, strength=1, length=0.8);
+	force SpringForce(actsOn=#spring7, strength=2, length=0.8);
+	force SpringForce(actsOn=#spring8, strength=4, length=0.8);
+	force SpringForce(actsOn=#spring9, strength=8, length=0.8);
+	force SpringForce(actsOn=#spring10, strength=16, length=0.8);
 
-	force SpringForce(actsOn#spring11, strength=1, length=0.9);
-	force SpringForce(actsOn#spring12, strength=1, length=0.8);
-	force SpringForce(actsOn#spring13, strength=1, length=0.7);
-	force SpringForce(actsOn#spring14, strength=1, length=0.6);
-	force SpringForce(actsOn#spring15, strength=1, length=0.5);
+	force SpringForce(actsOn=#spring11, strength=1, length=0.9);
+	force SpringForce(actsOn=#spring12, strength=1, length=0.8);
+	force SpringForce(actsOn=#spring13, strength=1, length=0.7);
+	force SpringForce(actsOn=#spring14, strength=1, length=0.6);
+	force SpringForce(actsOn=#spring15, strength=1, length=0.5);
 
     }
 

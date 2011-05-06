@@ -35,11 +35,11 @@ springforce0 {
 	force SpringForce(actsOn=#spring4, strength=8, length=1);
 	force SpringForce(actsOn=#spring5, strength=16, length=1);
 
-	force SpringForce(actsOn#spring6, strength=1, length=1);
-	force SpringForce(actsOn#spring7, strength=1, length=1);
-	force SpringForce(actsOn#spring8, strength=1, length=1);
-	force SpringForce(actsOn#spring9, strength=1, length=1);
-	force SpringForce(actsOn#spring10, strength=1, length=1);
+	force SpringForce(actsOn=#spring6, strength=1, length=1);
+	force SpringForce(actsOn=#spring7, strength=1, length=1);
+	force SpringForce(actsOn=#spring8, strength=1, length=1);
+	force SpringForce(actsOn=#spring9, strength=1, length=1);
+	force SpringForce(actsOn=#spring10, strength=1, length=1);
     }
 
     properties { 
