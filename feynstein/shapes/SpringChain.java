@@ -9,7 +9,7 @@ public class SpringChain extends ParticleSet<SpringChain> {
 	
 	public SpringChain() {
 		objectType = "SpringChain";
-		particleRadius = 0.6f;
+		particleRadius = 0.2f;
 	}
 
     public SpringChain compileShape() {
