@@ -977,7 +977,7 @@ property ::= 'property' 'renderTo' '(' renderParams ')'
   | 'property' 'CameraView' '(' cameraParams ')' 
   | 'property' 'ProximityDetector' '(' 'proximityParams' ')' 
   | 'property' 'BoundingVolumeHierarchy' '(' 'bvhParams' ')'
-
+  | 'property' 'SpringPenaltyResponder' '(' springPenaltyParams ')'
 renderParams ::= 'VideoOutput' | 'FileOutput' '(' S ')' | epsilon
 
 endParams ::= 'endAt=' TIME | epsilon 
@@ -992,9 +992,11 @@ cameraParams ::= 'location' '=' '(' NUMBER ',' NUMBER ',' NUMBER ')'
   ',' 'fieldOfView' '=' NUMBER
 
 proximityParams ::= 'proximity' '=' 'NUMBER'
-bvhParams ::= 'type' '=' 'BoundingVolumeHierarchy.' 'volumeType'
+bvhParams ::= 'margin' '=' NUMBER | 'margin' '=' NUMBER ',' 'type' '=' 'BoundingVolumeHierarchy.' 'volumeType'
 volumeType ::= 'AABB' | 'SPHERE' | 'KDOP_' 'num'
 num = '6' | '14' | '18' | '26'
+
+springPenaltyParams ::= 'proximity' '=' NUMBER | 'proximity' '=' NUMBER ',' 'stiffness' '=' NUMBER 
 
 onFrame ::=  'onFrame ' '{' onFrameAxns '}' | epsilon
 onFrameAxns ::= statements statement | epsilon
