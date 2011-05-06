@@ -13,9 +13,10 @@ public abstract class CollisionResponder<E extends CollisionResponder> extends P
 	scene = aScene;
     }
 
-    public CollisionResponder set_detector(String name) {
-	detector = scene.getDetectorByName(name);
-	return this;
+    @SuppressWarnings("unchecked")
+    public E set_detector(int index) {
+	detector = scene.getDetectorByIndex(index);
+	return (E) this;
     }
 
     public abstract void update();

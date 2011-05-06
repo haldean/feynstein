@@ -25,7 +25,8 @@ public abstract class Scene {
     protected Map<String, Shape> shapes;
     protected List<Force> forces;
     protected Map<Class, Property> propertyMap;
-    protected Map<String, NarrowPhaseDetector> detectorMap;
+    //protected Map<String, NarrowPhaseDetector> detectorMap;
+    protected ArrayList<NarrowPhaseDetector> detectorList;
     protected List<Property> properties; //without collision responders, integrators
     protected List<Property> responders;
     protected List<Property> integrators;
@@ -45,7 +46,8 @@ public abstract class Scene {
 	responders = new ArrayList<Property>();
 	integrators = new ArrayList<Property>();
 	propertyMap = new HashMap<Class, Property>();
-	detectorMap = new HashMap<String, NarrowPhaseDetector>();
+	//detectorMap = new HashMap<String, NarrowPhaseDetector>();
+	detectorList = new ArrayList<NarrowPhaseDetector>();
 
 	createShapes();
 	setProperties();
@@ -90,7 +92,9 @@ public abstract class Scene {
 	propertyMap.put(p.getClass(), p);
 
 	if (p instanceof NarrowPhaseDetector)
-	    detectorMap.put(((NarrowPhaseDetector) p).getName(), (NarrowPhaseDetector) p);
+	    detectorList.add((NarrowPhaseDetector) p);
+	    //REMOVED PENDING TRANSLATOR UPDATE
+	    //detectorMap.put(((NarrowPhaseDetector) p).getName(), (NarrowPhaseDetector) p);
     }
 
     @SuppressWarnings("unchecked")
@@ -98,12 +102,17 @@ public abstract class Scene {
 	return (E) propertyMap.get(c);
     }
     
+    /* REMOVED PENDING TRANSLATOR UPDATE
     public NarrowPhaseDetector getDetectorByName(String name) {
 	return detectorMap.get(name);
+	} */
+
+    public NarrowPhaseDetector getDetectorByIndex(int index) {
+	return detectorList.get(index);
     }
 	
     public Mesh getMesh() {
-		return mesh;
+	return mesh;
     }
 
 	/**
