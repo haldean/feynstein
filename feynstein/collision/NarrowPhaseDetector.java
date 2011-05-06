@@ -15,11 +15,11 @@ public abstract class NarrowPhaseDetector<E extends NarrowPhaseDetector> extends
     protected final BoundingVolumeHierarchy bvh;
     protected final boolean enableBvh;
 
-    protected LinkedList<Collision> actualCollisions;
+    protected HashSet<Collision> actualCollisions;
 
     public NarrowPhaseDetector(Scene aScene) {
 	super(aScene);
-	actualCollisions = new LinkedList<Collision>();
+	actualCollisions = new HashSet<Collision>();
 
 	scene = aScene;
 	mesh = scene.getMesh();
@@ -28,9 +28,9 @@ public abstract class NarrowPhaseDetector<E extends NarrowPhaseDetector> extends
 	enableBvh = bvh != null;
     }
 
-    public abstract LinkedList<Collision> checkCollision(TrianglePair c);
+    public abstract HashSet<Collision> checkCollision(TrianglePair p, HashSet<Collision> cSet);
 
-    public LinkedList<Collision> getCollisions() {
+    public HashSet<Collision> getCollisions() {
 	return actualCollisions;
     }
 
@@ -45,8 +45,8 @@ public abstract class NarrowPhaseDetector<E extends NarrowPhaseDetector> extends
 	if (enableBvh) {
 	    List<TrianglePair> collisions = bvh.getCollisions();
 	    for (TrianglePair pair : collisions) {
-		LinkedList<Collision> pairCollisions = checkCollision(pair);
-		if (pairCollisions.size() != 0) actualCollisions.addAll(pairCollisions);
+		checkCollision(pair, actualCollisions);
+		//(checkCollision adds the collision to the given set as a side effect
 	    }
 	} else {
 	    Triangle t1, t2;
@@ -54,15 +54,14 @@ public abstract class NarrowPhaseDetector<E extends NarrowPhaseDetector> extends
 		for (int j = i+1; j < mesh.getTriangles().size(); j++) {
 		    t1 = mesh.getTriangles().get(i);
 		    t2 = mesh.getTriangles().get(j);
-		    LinkedList<Collision> pairCollisions = checkCollision(new TrianglePair(t1, t2));
-		    if (pairCollisions.size() != 0) actualCollisions.addAll(pairCollisions);
+		    checkCollision(new TrianglePair(t1, t2), actualCollisions);
 		}
 	    }
 	}
 	
 	//TESTING PURPOSES ONLY:
-	for (int i = 0; i < actualCollisions.size(); i++) {
-	    System.out.println(actualCollisions.get(i).toString());
+	for (Collision c : actualCollisions) {
+	    System.out.println(c.toString());
 	}
     }
 

@@ -4,10 +4,10 @@ import feynstein.geometry.*;
 
 public class Collision {
 
-    private int type;
-    private double[] baryCoords;
-    private double[] particles;
-    private double dist;
+    int type;
+    double[] baryCoords;
+    int[] particles;
+    double dist;
 
     /**
        Creates a Collision object with the given data:
@@ -27,12 +27,66 @@ public class Collision {
 	baryCoords[2] = bc3;
 
 	//store particle indicies
-	particles = new double[4];
+	particles = new int[4];
 	particles[0] = a;
 	particles[1] = b;
 	particles[2] = c;
 	particles[3] = d;
 	dist = distance;
+    }
+
+    /**
+       Lazy compareTo method implemented so we can make a HashSet of collisions. 
+       Returns 0 if the two collisions are equal, -1 otherwise.
+    */
+    public int compareTo(Collision c)
+    {
+	if (this.type != c.type) return -1;
+
+	//compare vertex-face
+	else if (this.type == VERTEX_FACE) {
+	    if (this.particles[0] == c.particles[0] && this.particles[1] == c.particles[1]
+		&& this.particles[2] == c.particles[2] && this.particles[3] == c.particles[3]) return 0;
+	    return -1;
+	}
+
+	//compare edge-edge
+	else if (this.type == EDGE_EDGE) {
+	    //check all 8 permutations of a combination of 4 edge points
+	    //01 23 = 01 23
+	    if (this.particles[0]==c.particles[0]&&this.particles[1]==c.particles[1]
+		&&this.particles[2]==c.particles[2]&&this.particles[3]==c.particles[3])
+		return 0;
+	    //01 23 = 23 01
+	    if (this.particles[0]==c.particles[2]&&this.particles[1]==c.particles[3]
+		&&this.particles[2]==c.particles[0]&&this.particles[3]==c.particles[1])
+		return 0;
+	    //01 23 = 10 23 
+	    if (this.particles[0]==c.particles[1]&&this.particles[1]==c.particles[0]
+		&&this.particles[2]==c.particles[2]&&this.particles[3]==c.particles[3])
+		return 0;
+	    //01 23 = 23 10
+	    if (this.particles[0]==c.particles[2]&&this.particles[1]==c.particles[3]
+		&&this.particles[2]==c.particles[1]&&this.particles[3]==c.particles[0])
+		return 0;
+	    //01 23 = 01 32
+	    if (this.particles[0]==c.particles[0]&&this.particles[1]==c.particles[1]
+		&&this.particles[2]==c.particles[3]&&this.particles[3]==c.particles[2])
+		return 0;
+	    //01 23 = 32 01
+	    if (this.particles[0]==c.particles[3]&&this.particles[1]==c.particles[2]
+		&&this.particles[2]==c.particles[0]&&this.particles[3]==c.particles[1])
+		return 0;
+	    //01 23 = 10 32
+	    if (this.particles[0]==c.particles[1]&&this.particles[1]==c.particles[0]
+		&&this.particles[2]==c.particles[3]&&this.particles[3]==c.particles[2])
+		return 0;
+	    //01 23 = 32 10
+	    if (this.particles[0]==c.particles[3]&&this.particles[1]==c.particles[2]
+		&&this.particles[2]==c.particles[1]&&this.particles[3]==c.particles[0])
+		return 0;
+	}
+	return -1;
     }
 
     public String toString() {
