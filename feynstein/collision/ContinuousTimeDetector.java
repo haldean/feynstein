@@ -26,12 +26,11 @@ public class ContinuousTimeDetector extends NarrowPhaseDetector<ContinuousTimeDe
 	return this;
     }
     
-    public LinkedList<Collision> checkCollision(TrianglePair c) {
-	return checkCollision(c.t1, c.t2);
+    public HashSet<Collision> checkCollision(TrianglePair p, HashSet<Collision> cSet) {
+	return checkCollision(p.t1, p.t2, cSet);
     }
 
-    public LinkedList<Collision> checkCollision(Triangle t1, Triangle t2) {
-	LinkedList<Collision> cSet = new LinkedList<Collision>();
+    public HashSet<Collision> checkCollision(Triangle t1, Triangle t2, HashSet<Collision> cSet) {
 	double[] X = scene.getGlobalPositions();
 	double[] V = scene.getGlobalVelocities();
 
@@ -304,7 +303,7 @@ public class ContinuousTimeDetector extends NarrowPhaseDetector<ContinuousTimeDe
 		    c[1] = y2+hit_t*vy2;
 		    c[2] = z2+hit_t*vz2;
 		    //check for false-positive
-		    double[] distAndCoords = vertexFaceDistance(p, a, b, c, u, v, w);
+		    double[] distAndCoords = DistanceFinder.vertexFaceDistance(p, a, b, c, u, v, w);
 		    if(distAndCoords[0] < .000001){
 			u = distAndCoords[1];
 			v = distAndCoords[2];
@@ -331,7 +330,7 @@ public class ContinuousTimeDetector extends NarrowPhaseDetector<ContinuousTimeDe
 			q2[2] = z3+hit_t*vz3;
 
 			//check for false-positive
-			double[] distAndCoords = edgeEdgeDistance(p, a, b, c, s, t);
+			double[] distAndCoords = DistanceFinder.edgeEdgeDistance(p, a, b, c, s, t);
 			if (distAndCoords[0] < .000001) {
 			    s = distAndCoords[0];
 			    t = distAndCoords[1];

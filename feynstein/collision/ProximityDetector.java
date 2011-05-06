@@ -19,14 +19,12 @@ public class ProximityDetector extends NarrowPhaseDetector<ProximityDetector> {
 	return this;
     }
     
-    public LinkedList<Collision> checkCollision(TrianglePair c) {
-	return checkCollision(c.t1, c.t2);
+    public HashSet<Collision> checkCollision(TrianglePair p, HashSet<Collision> cSet) {
+	return checkCollision(p.t1, p.t2, cSet);
     }
 
-    public LinkedList<Collision> checkCollision(Triangle t1, Triangle t2) {
+    public HashSet<Collision> checkCollision(Triangle t1, Triangle t2, HashSet<Collision> cSet) {
 	double[] globalPos = scene.getGlobalPositions();
-
-	LinkedList<Collision> cSet = new LinkedList<Collision>();
 
 	// make sure triangles are not connected:
 	if (t1.getIdx(0) == t2.getIdx(0) || t1.getIdx(0) == t2.getIdx(1) 
@@ -77,7 +75,7 @@ public class ProximityDetector extends NarrowPhaseDetector<ProximityDetector> {
 	    double u = -1, v = -1, w = -1;
 
 	    //vertex-face distance
-	    double[] distAndCoords = vertexFaceDistance(p, a, b, c, u, v, w);
+	    double[] distAndCoords = DistanceFinder.vertexFaceDistance(p, a, b, c, u, v, w);
 	    double distance = Math.sqrt(distAndCoords[0]);
 	    u = distAndCoords[1];
 	    v = distAndCoords[2];
@@ -147,7 +145,7 @@ public class ProximityDetector extends NarrowPhaseDetector<ProximityDetector> {
 	    double s = -1, t = -1; 
 
 	    //collision
-	    double[] distAndCoords = edgeEdgeDistance(p1, q1, p2, q2, s, t);
+	    double[] distAndCoords = DistanceFinder.edgeEdgeDistance(p1, q1, p2, q2, s, t);
 	    double distance = Math.sqrt(distAndCoords[0]);
 	    s = distAndCoords[1];
 	    t = distAndCoords[2];
