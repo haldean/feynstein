@@ -1,4 +1,4 @@
-MyScene {
+rodbending0 {
 
     shapes {
 	m = 1;
@@ -28,7 +28,8 @@ MyScene {
 		vert=(-2,-8,0), mass=m);
 	shape SpringChain(name="spring11", vert=(-1,-7,0), vert=(0,-7,0),
 		vert=(-0,-8,0), mass=m);
-	shape SpringChain(name="spring12", vert=(1,-7,0), vert=(2,-7,0), 		vert=(2,-8,0), mass=m);
+	shape SpringChain(name="spring12", vert=(1,-7,0), vert=(2,-7,0),
+		vert=(2,-8,0), mass=m);
 
 	
     }
