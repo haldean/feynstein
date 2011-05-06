@@ -1,16 +1,20 @@
+package feynstein.collision;
 
-public class CollisionResponder<E extends CollisionResponder> extends Property<E> {
+import feynstein.*;
+import feynstein.properties.*;
+
+public abstract class CollisionResponder<E extends CollisionResponder> extends Property<E> {
     
     NarrowPhaseDetector detector;
     Scene scene;
 
     public CollisionResponder(Scene aScene, NarrowPhaseDetector npd) {
+	super(aScene);
 	scene = aScene;
 	detector = npd;
     }
 
 
-    public void update() {
+    public abstract void update();
 
-    }
 }

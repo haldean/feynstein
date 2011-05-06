@@ -1,3 +1,5 @@
+package feynstein.collision;
+
 /**
    Utility class for collision detection to compute
    distances between triangles.
@@ -265,7 +267,5 @@ public final class DistanceFinder {
     }
     
     public static final double EPSILON = .00000001;
-
-
 
 }

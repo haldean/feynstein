@@ -25,7 +25,9 @@ public abstract class Scene {
     protected Map<String, Shape> shapes;
     protected List<Force> forces;
     protected Map<Class, Property> propertyMap;
-    protected List<Property> properties;
+    protected List<Property> properties; //without collision responders, integrators
+    protected List<Property> responders;
+    protected List<Property> integrators;
     protected Mesh mesh;
 	
     double[] globalForces;
@@ -39,6 +41,8 @@ public abstract class Scene {
 	shapes = new HashMap<String, Shape>();
 	forces = new ArrayList<Force>();
 	properties = new ArrayList<Property>();
+	responders = new ArrayList<Property>();
+	integrators = new ArrayList<Property>();
 	propertyMap = new HashMap<Class, Property>();
 
 	createShapes();
@@ -72,7 +76,15 @@ public abstract class Scene {
 	
     public void addProperty(Property p) {
 	print("Adding " + p.toString());
-	properties.add(p);
+
+	if (p instanceOf CollisionResponder) {
+	    responders.add(p);
+	} else if (p instanceOf Integrator) {
+	    integrators.add(p);
+	} else {
+	    properties.add(p);
+	}
+
 	propertyMap.put(p.getClass(), p);
     }
 
@@ -135,10 +147,13 @@ public abstract class Scene {
 		return forcePotential;
 	}
 	
-	public double[] globalForceMagnitude() {
-		return globalForces;
+    public double[] globalForceMagnitude() {
+	return globalForces;
     }
-	
+    
+    public void setGlobalForces(double[] newGlobalForces) {
+	globalForces = newGlobalForces;
+    }
 
     public double[] getGlobalPositions() {
 	return globalPositions;
@@ -149,11 +164,15 @@ public abstract class Scene {
     }
 
     public void update() {
-		updateGlobalForce();
-		for (Property property : properties) 
-			property.update();
+	updateGlobalForce();
 
-	
+	for (Property property : properties) 
+	    property.update();
+	for (Property property : responders)
+	    property.update();
+	for (Property property : integrators)
+	    property.update();
+
 	onFrame();
     }
 
