@@ -36,7 +36,7 @@ public abstract class NarrowPhaseDetector<E extends NarrowPhaseDetector> extends
     }
 
     @SuppressWarnings("unchecked")
-    public <E extends NarrowPhaseDetector> E set_name(String aName) {
+    public E set_name(String aName) {
 	name = aName;
 	return (E) this;
     }
