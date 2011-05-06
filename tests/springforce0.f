@@ -1,7 +1,7 @@
 springforce0 {
 
     shapes {
-	m = 1;
+	int m = 1;
 	//Fix one end, increase k.  Weaker springs should stretch more.
 	shape SpringChain(name="spring1", vert=(0,0,0), vert=(0,1,0),
 		mass=m, fixed=1);

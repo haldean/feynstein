@@ -1,4 +1,4 @@
-MyScene {
+springforce4 {
     shapes {
 	m = 1;
 	shape SpringChain(name="spring1", vert=(0,1,0), vert=(0,0,0), mass=m);
