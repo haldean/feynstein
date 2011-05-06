@@ -15,6 +15,7 @@ public class ParticleSet<E extends ParticleSet> extends Shape<E> {
 	particleRadius = 0.5f;
 	disableParticleMass = true;
 	disableParticleFixed = true;
+	disableParticleVelocity = true;
     }
     
     public ParticleSet set_vert(double x, double y, double z) {
