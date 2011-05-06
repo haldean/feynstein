@@ -13,11 +13,11 @@ public class SpringChain extends ParticleSet<SpringChain> {
 	}
 
     public SpringChain compileShape() {
-		super.compileShape();
+		//super.compileShape();
 		for (int i = 0; i < localMesh.size(); i++) {
 			if(i < localMesh.size() - 1 )
 				localMesh.getEdges().add(new Edge(i, i+1));
 		}
-		return this;
+		return super.compileShape();
     }
 }

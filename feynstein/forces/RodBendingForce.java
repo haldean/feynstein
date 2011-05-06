@@ -54,9 +54,9 @@ public class RodBendingForce extends Force<RodBendingForce> {
 					}
 			}
 		}
-		//System.out.println("STENCIL "+stencil.size());
-		//for(Integer i : stencil)
-		//	System.out.println(i);
+		System.out.println("STENCIL "+stencil.size());
+		for(Integer i : stencil)
+			System.out.println(i);
 		actsOn = s;
 		return this;
     }
@@ -81,7 +81,7 @@ public class RodBendingForce extends Force<RodBendingForce> {
 			undefLengths = new double[2*stencil.size()/stencilSize];
 			int ulIdx = 0;
 			for (int i = 0; i < undefLengths.length; i+=2) {
-				double [] undefLen = computeUndeformedLengths(globalPositions, stencilSize*i);
+				double [] undefLen = computeUndeformedLengths(globalPositions, stencilSize/2*i);
 				undefLengths[ulIdx++] = undefLen[0];
 				undefLengths[ulIdx++] = undefLen[1];
 			}
