@@ -20,6 +20,7 @@ public class Collision {
     */
        
     public Collision(int typeConstant, double bc1, double bc2, double bc3, int a, int b, int c, int d, double distance) {
+	type = typeConstant;
 	baryCoords = new double[3];
 	baryCoords[0] = bc1;
 	baryCoords[1] = bc2;
