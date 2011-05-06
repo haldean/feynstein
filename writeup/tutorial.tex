@@ -1,0 +1,439 @@
+\documentclass[letterpaper]{article}
+
+\usepackage{graphicx,listings,color}
+
+\title{How to Use Feynstein for Physical Simulation}
+
+\author{Sam Ainsley, Eva Asplund, Will Brown, Colleen McKenzie, Rob
+  Post}
+\definecolor{gray}{gray}{0.95}
+\renewcommand{\familydefault}{\sfdefault}
+\lstset{
+  language=C,
+  basicstyle=\footnotesize\ttfamily, % Standardschrift
+  % numbers=left,               % Ort der Zeilennummern
+  numberstyle=\tiny,          % Stil der Zeilennummern
+  % stepnumber=2,               % Abstand zwischen den Zeilennummern
+  numbersep=5pt,              % Abstand der Nummern zum Text
+  tabsize=2,                  % Groesse von Tabs
+  extendedchars=true,         %
+  breaklines=true,            % Zeilen werden Umgebrochen
+  stringstyle=\ttfamily, % Farbe der String
+  showspaces=false,           % Leerzeichen anzeigen ?
+  showtabs=false,             % Tabs anzeigen ?
+  xleftmargin=17pt,
+  framexleftmargin=17pt,
+  framexrightmargin=5pt,
+  framexbottommargin=4pt,
+  backgroundcolor=\color{gray},
+  showstringspaces=false      % Leerzeichen in Strings anzeigen ?        
+ }
+\newcommand\subsubsubsection[1]{\paragraph{#1}}
+
+\begin{document} 
+\maketitle
+
+\tableofcontents
+
+\newpage
+\section{Overview}
+
+Feynstein is a language designed for making physical simulation
+accessible to those who want to experiment with physics but who do not
+have significant experience in computer science. Feynstein will make
+the process of going from an experiment's conception to its simulation
+simple and fast, and will provide the end user with accurate video
+renderings, either in a file or on screen.
+
+Historically, if users wanted to have the power of a full physical
+simulation engine, they had to either purchase and learn very complex
+and expensive 3D simulation software, or write it themselves (usually
+in C++). Because these options are costly and time-consuming, often
+students of physics will learn simulation using a software package
+like Matlab or Mathematica. These tools have the benefit of
+abstracting much of the complexity of the task, but with the loss of
+complexity comes a loss of control and expressive power. Feynstein
+attempts to be a midpoint between these two extremes; it is a language
+that allows for the full expressivity of a complex simulation package,
+but with the ease-of-use that comes with a tool like Matlab.
+
+Feynstein's native simulator and its simple and convenient syntax make
+it an ideal tool for researchers with limited programming experience
+for configuration simulations to test experimental
+hypothesis. Moreover, the language offers an excellent framework for
+teaching the fundamentals of physics-based computer simulation to
+students with limited understanding of mechanics or programming in
+C++.
+
+Feynstein is fully object oriented, allowing for easy
+extensibility. Users can customize integration and rendering methods,
+giving them full control of how their animation is calculated and
+displayed. Finally, users can use the built-in forces and 3D solids
+and define their own. Feynstein is appropriate for all levels of user
+expertise, whether they want to simulate a sphere on a spring or a
+complex compression force on a custom shape.
+
+This tutorial will use code examples to walk you through the various
+aspects of Feynstein syntax and semantics; it will start with basic
+scenes, and end with defining your own forces, integrators, and
+objects. Let's begin!
+
+\newpage
+\section{Simple Program}
+
+Let's start with a basic Feynstein program.
+
+\begin{lstlisting}{caption=ShapeScene.f}
+ShapeScene {
+   shapes {
+     shape Sphere(name="sphere1", radius=20cm, 
+       location=(0,0,0));
+   }
+ }
+\end{lstlisting}
+
+This is as basic a program you can have in Feynstein; a single object
+with no forces acting on it. This will render a scene to a window on
+your screen; this window will allow you to pan and tilt using your
+mouse and keyboard, just like most popular 3D editing software. There
+are a few things to note, just from this short code example:
+
+\begin{enumerate}
+\item The source file has a `.f` extension. This is necessary
+  for the compiler and interpreter to compile and run your Feynstein
+  source file.
+\item The scene has a name: `ShapeScene`. This name needs
+  to match the name of the source file, and it is the name you will
+  pass in to the interpreter to render your scene.
+\item There is block called `shapes`. Within this block, the user can
+  define the shapes she would like to place in the scene. Anything
+  goes in this block, though; anything not preceded by the `shape`
+  keyword will be treated as standard Java code.
+\item There is a `shape` keyword. The `shape` keyword defines a type
+  in Feynstein -- any kind of shape you add to the scene inherits from
+  `shape`. In the `shapes` block, any `shape` defined on a line by
+  itself is automatically added to the scene.
+\end{enumerate}
+
+There is also a syntactical oddity here, as well. Most Java users will
+be right at home using Feynstein, as almost all of the syntax is
+borrowed from Java. However, one large irritant of defining a 3D scene
+in Java is just how many parameters you need to specify for every
+object. Each object needs an identity, size and location at the
+minimum, and to make matters worse, both the size and location of
+every object have dimensions. Feynstein adds a new way to create
+objects, called “Builder Syntax”, which lets you use key-value pairs
+to initialize an object. You can see this in `ShapeScene.f`; we create
+a new sphere by calling `shape Sphere(name=”sphere1”, radius=20cm,
+location=(0,0));`. Builder syntax allows you to set only the
+properties you want, allowing the rest to remain at their default
+value. In addition, Feynstein recognizes most standard units for
+length, mass, force, velocity and acceleration; commonly used
+S.I. (meter, centimeter, gram, Newton, etc) and Imperial units (foot,
+inch, mile, pound) are all supported. For a full list of supported
+units, consult the Feynstein User Manual.
+
+There are many shapes a user can add that come built into Feynstein,
+and it's also really easy to import a 3D model from somewhere
+else. The included shapes are shown in the table below. Note that
+every shape has the parameters `location` and `mass`.
+
+\begin{table}\centering
+  \begin{tabular}{r|l}
+    \textbf{Shape} & \textbf{Parameters} \\ \hline
+    RectangularPrism & height, width, location, mass, name \\
+    Cylinder & height, radius1, radius2 (optional), location, mass, name \\
+    Sphere & radius, location, mass, name \\
+    Tetrahedron & edges, location, mass, name \\
+    Plane & normal, location, mass, name \\
+    CustomObj & file, location, mass, name \\
+  \end{tabular} 
+\caption{Built-in shapes and their supported parameters}
+\label{tab:shapes}
+\end{table}
+
+You can also import objects created in other 3D programs into
+Feynstein if they're in a .OBJ format. Adding OBJ files is easy; you
+just add a `CustomObj` shape in the same way you'd add any shape, and
+you pass the file name of model as the `file` parameter. Feynstein
+imports it for you, and you can set the `location` and `mass`
+properties of the shape just like you would for any object.
+
+\newpage
+\section{Forces}
+No simulation package would be complete without a full array of forces
+at its users disposal, and Feynstein is no exception to this
+rule. With eight built-in forces, the user can specify almost any
+real-world scenario by just specifying parameters. An example program
+that includes forces is shown below.
+
+\begin{lstlisting}{caption=ForceScene.f}
+ForceScene {
+   shapes {
+     shape Sphere(name="sphere1", radius=20cm, 
+       location=(0,0,0));
+   }
+
+    forces {
+      force GravityForce(gx=0, gy=0, gz=-9.81);
+      force SpringForce(restLength=1m, k=1, 
+        actsOn=”sphere1”, fixedAt=(0, 0, 2m));
+    }
+ }
+\end{lstlisting}
+
+This scene defines two forces using the same builder syntax that we
+used to define shapes earlier. We place the same sphere that we had
+earlier in our scene, but then we attach it to a spring. This
+simulation would result in a video of a sphere bouncing up and down
+before it eventually comes to rest about one meter above where it
+began. Each type of force has a different set of parameters; in this
+scene we've used GravityForce (which allows you to configure the
+direction and strength with which the gravitational force acts) and
+SpringForce (which allows you to configure the rest length, spring
+force, the location of its fixed end, if any, and the objects upon
+which it acts).
+
+These two forces are the most intuitive, but there are many forces you
+might be interested in using. In addition to GravityForce and
+SpringForce, Feynstein has the following forces at your disposal. Note
+that for all forces, the parameter `actsOn` specifies an object (or
+objects) which that force acts upon.
+
+\begin{description}
+\item[DampingForce] A DampingForce is a frictional force which resists
+  motion, and is a function of mass. You can attach a DampingForce to
+  any object, and that object's motion will be resisted. The magnitude
+  of its resistance is given by a single parameter, `lambda`.
+
+\item[RodBendingForce] A RodBendingForce acts upon three particles, which
+  together act like a hinge, to resist the bending of these
+  particles. It has three parameters: the rest length between the
+  first pair of particles `restLength1`, the rest length between the
+  second pair of particles `restLength2`, and the rest angle `theta`.
+
+\item[ConstantStrainTriangleForce] This is a force that acts against the
+  deformation of a triangle. Given the side lengths of the triangle,
+  the stiffness of the resistance `stiffness`, and the
+  compression-to-expansion ratio `poisson`, it will act against any
+  force that attempts to skew the triangle in any way.
+
+\item[SurfaceBendingForce] A SurfaceBendingForce is a constraint force that
+  resists the bending of a four-particle surface along its diagonal.
+  These four particles are arranged in two triangles which share an
+  edge. The strength of the force is a function of the angle between
+  these two triangles, and is parameterized by the resistance to
+  bending, `stiffness`, rest angle of the two triangles, `theta`, and
+  the shape of both triangles.
+
+\item[TetrahedralConstraintForce] A force based on a tetrahedron
+  configuration involving four particles. It is essentially the
+  ConstantStrainTriangleForce, except acting to resist deformation in
+  three dimensions instead of two. Like the
+  ConstantStrainTriangleForce, this force is configured by a tensile
+  modulus `stiffness`, a Poisson ratio `poisson`, and the undeformed
+  lengths of the four (rather than three) edge vectors.
+
+\item[ContactForce] A ContactForce is derived from a SpringForce and acts
+  upon two triangles to resist a collision between them. An equal and
+  opposite force is applied to both triangles which pushes them apart,
+  which is analogous to a collision. A contact force is configured by
+  a spring force stiffness `stiffness` and a minimum distance
+  (`minDist`) that must be maintained between the colliding pairs.
+\end{description}
+
+If none of these forces satisfy your simulation needs, it's easy to
+define your own, as well! We'll discuss how to define your own forces
+in the Advanced Topics section.
+
+\newpage
+\section{Outputs}
+
+Up until now, we've implicitly defined our output to be the
+screen, so that you can interact with the scene and see the results of
+your rendering as they happen. However, what if you want to save your
+rendered movie and send it to someone else to show off?  Feynstein's
+got you covered.
+
+\begin{lstlisting}{caption=OutputScene.f}
+OutputScene {
+    properties {
+      renderTo FileOutput(file=”myScene.avi”);
+      property CameraView(location=(5m, 0, 0), 
+        lookingAt=(0, 0, 0), fieldOfView=50);
+    }
+
+    shapes {
+      shape Sphere(name="sphere1", radius=20cm, 
+        location=(0, 0, 0));
+    }
+
+    forces {
+      force GravityForce(gx=0, gy=0, gz=-9.81);
+      force SpringForce(restLength=1m, k=1, 
+        actsOn=”sphere1”, fixedAt=(0, 0, 2m));
+    }
+ }
+\end{lstlisting}
+
+In `OutputScene`, we've introduced another block: the `properties`
+block. This block contains scene-wide properties that you want to set
+before the scene starts rendering. In this case, we're setting a new
+output for our scene, and we're setting the default location of the
+camera as well. Feynstein comes with two outputs built-in, with easy
+ways to define new ones.
+
+If no output is specified, Feynstein defaults to using `VideoOutput`,
+which is the output you've implicitly been using since we
+started. This is the output in the window that lets you explore the
+scene interactively. However, if you want to write the video output to
+a file, instead, you can use the `FileOutput` rendering target, as
+shown in `OutputScene`. `FileOutput` takes one argument, `file`, which
+is the file to write the scene to.
+
+If you want to write your own rendering target, it's incredibly
+simple; writing plugins for Feynstein is a breeze thanks to it's
+object-oriented architecture. Simply write a standard Java class that
+extends the built-in class `RenderTarget`. This is an abstract class
+that contains the abstract method `onFrame` which takes a single
+parameter (the OpenGL representation of the current scene) as a
+parameter. Your render target can do whatever it wants to with the
+scene -- for example, it could generate an image and then send it to a
+different computer over the network.
+
+\newpage
+\section{Frame Updates}
+
+While you're rendering your scene, you get qualitative output in the
+preview window. If you're modelling a scientific experiment, though,
+you'll often need much more precision than that; what if you want to
+know exactly where an object is in a given frame? That's where frame
+update methods come in.
+
+The frame update method of a scene is a block that is executed every
+time the scene is stepped forward in time, but before it is
+rendered. This gives the programmer an opportunity to observe or
+change some of the properties of the objects in the scene before the
+next frame is generated. Let's take the ball-on-a-spring example again
+to see how this might be useful.
+
+\begin{lstlisting}{caption=ForceScene.f}
+import java.io.*;
+
+ForceScene {
+    FileWriter writer;
+
+    create {
+      try {
+        writer = new FileWriter(“output.csv”);
+      } catch (IOException) {
+        // handle error
+      }
+    }
+
+    shapes {
+      shape Sphere(name="sphere1", radius=20cm, location=(0,0,0));
+    }
+
+    forces {
+      force GravityForce(gx=0, gy=0, gz=-9.81);
+      force SpringForce(restLength=1m, k=1, actsOn=”sphere1”, fixedAt=(0, 0, 2m));
+    }
+
+    onFrame {
+      writer.write(String.format(“\%d,\%d\n”, time, #sphere1.getZ()));
+    }
+ }
+\end{lstlisting}
+
+This code generates the same visualization we had before -- a sphere
+bobbing on a spring -- but this time it does something extra; for
+every frame that is rendered, it also writes a record to a CSV file
+with the time that has elapsed and the height of the sphere. If we
+then wanted to go away and do further processing on that data in
+Matlab or Mathematica, it's in easy, machine-readable format.
+
+There's lots of new syntax and features in this snippet, so we'll
+start at the top. The first thing you'll notice is the `import`
+statement -- imports work exactly the same in Feynstein as they do in
+Java, and you have the full Java standard library at your
+disposal. You can also see we've defined a scene-wide variable,
+outside the scope of any of our blocks. Anything that isn't in a
+predefined block is treated as if it were in a standard Java class. In
+this case, that means our `FileWriter` is an instance variable of our
+scene.
+
+There's also two new blocks: `create` and `onFrame`. `create` is
+called after the system has been initialized and properties have been
+set set, but before any shapes or forces are created. This is a good
+time to read input from the user, if any, or to initialize instance
+variables you want to use in other blocks. That's exactly what we do
+here, initializing our `FileWriter` so we can write to it during
+`onFrame`.
+
+`onFrame` is the frame update method we discussed in the introduction
+to this section -- it is the method that gets run after all of the
+forces are applied to the shapes in the scene, but before the scene is
+rendered. Here, you can set or read any of the properties of a shape;
+in our case, we're accessing the height of our sphere in the
+scene. Within the onFrame block, you have access to a special
+variable, `time`, which represents the number of milliseconds that
+have passed in scene time.
+
+To get the properties of an object, you have to have a reference to
+the object itself, but since we created the object in the shapes
+block, we didn't store a reference to it in a variable. Instead, we
+access it using its name with the \#-operator. We then can treat it
+like a regular object and call instance methods on it, like `getZ()`.
+
+\newpage
+\section{Integration Methods and Error Bounds}
+
+Unfortunately for the users of any simulation system, physical
+simulation isn't perfect. While, given the right parameters, it can
+approximate the real world extraordinarily well, sometimes it fails to
+do so quite dramatically. The most common source of failure in
+physical simulation is the systematic error (or “instability”)
+inherent in time stepping.
+
+Time stepping is the process by which the simulator figures out the
+location and momentum of objects in the next frame, based on the
+forces acting on them and their location and momentum in the current
+frame. The simulator uses various numerical methods for solving large
+systems of equations to project the objects into the next frame, and
+each of these comes with its own drawbacks. As a user of Feynstein,
+you get to choose which time stepping methods (also called an
+“Integration Method”) you would like to use to render your scene. You
+can also place limits on the error in the scene, so if the error ever
+passes a certain threshold, rendering is halted and the user is shown
+an error message.
+
+Feynstein comes with two different time-stepping methods, each with
+advantages and disadvantages. These are all properties; for example,
+if I wanted to use Implicit Euler with a step size of 2 milliseconds,
+I would add `property ImplicitEuler(stepSize=2ms);` to my `properties`
+block. It is important to note that the stability of any method is
+dependent upon the step size used; a larger step size means lower
+stability, and vice-versa.
+
+\begin{description}
+\item[SemiImplicitEuler] The semi-implicit Euler method of time integration
+  is, as the name suggests, a midpoint between explicit and
+  implicit. Unlike implicit Euler, it uses the location in the
+  previous frame to calculate the velocity in the next frame, giving
+  it a source of error (especially when you have fast-moving things in
+  your scene). However, it then uses its estimate for the velocity in
+  the next frame to calculate its next position, unlike explicit
+  Euler, which only uses its knowledge of the current frame. This is a
+  good trade-off between speed and stability, and is a good choice for
+  everyday rendering tasks.
+
+\item[ImplicitEuler] By far the slowest of the three, the implicit Euler
+  method is also by far the most accurate. It expresses the future
+  velocity and location in terms of each other, then does a numerical
+  root solve to find a solution to the resulting system of
+  equations. This is very expensive, but it makes for a very stable
+  simulation. This is the best choice for scientific purposes, where
+  highly accurate results are worth waiting for.
+\end{description}
+\end{document}
