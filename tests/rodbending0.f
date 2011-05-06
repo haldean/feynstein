@@ -1,35 +1,36 @@
 rodbending0 {
 
     shapes {
-	m = 1;
 
 	shape SpringChain(name="spring1", vert=(0,0,0), vert=(0,1,0),
-		vert=(0,2,0), mass=m)
+		vert=(0,2,0), mass=1);
+
 	shape SpringChain(name="spring2", vert=(2,0,0), vert=(2,1,0),
-		vert=(2.707106781186548,1.707106781186548,0), mass=m);
+		vert=(2.707106781186548,1.707106781186548,0), mass=1);
+
 	shape SpringChain(name="spring3", vert=(-2,0,0), vert=(-2,1,0),
-		vert=(-3,1,0), mass=m);
+		vert=(-3,1,0), mass=1);
 
 	shape SpringChain(name="spring4", vert=(-2,-3,0), vert=(-2,-2,0),
-		vert=(-3,-2,0), mass=m);
+		vert=(-3,-2,0), mass=1);
 	shape SpringChain(name="spring5", vert=(0,-3,0), vert=(0,-2,0),
 		vert=(-1,-2,0), mass=2);
 	shape SpringChain(name="spring6", vert=(2,-3,0), vert=(2,-2,0),
 		vert=(1,-2,0), mass=4);
 
 	shape SpringChain(name="spring7", vert=(-2,-5,0), vert=(-2,-4,0),
-		vert=(-3,-4,0), mass=m);
+		vert=(-3,-4,0), mass=1);
 	shape SpringChain(name="spring8", vert=(0,-5,0), vert=(0,-4,0),
-		vert=(-1,-4,0), mass=m);
+		vert=(-1,-4,0), mass=1);
 	shape SpringChain(name="spring9", vert=(2,-5,0), vert=(2,-4,0),
-		vert=(1,-4,0), mass=m);
+		vert=(1,-4,0), mass=1);
 
-	shape SpringChain(name="spring10", vert=(-3,-7,0), vert=(-2,7,0),
-		vert=(-2,-8,0), mass=m);
+	shape SpringChain(name="spring10", vert=(-3,-7,0), vert=(-2,-7,0),
+		vert=(-2,-8,0), mass=1);
 	shape SpringChain(name="spring11", vert=(-1,-7,0), vert=(0,-7,0),
-		vert=(-0,-8,0), mass=m);
+		vert=(-0,-8,0), mass=1);
 	shape SpringChain(name="spring12", vert=(1,-7,0), vert=(2,-7,0),
-		vert=(2,-8,0), mass=m);
+		vert=(2,-8,0), mass=1);
 
 	
     }
