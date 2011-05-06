@@ -11,7 +11,7 @@ import java.util.List;
 
 public class BoundingVolumeHierarchy extends Property<BoundingVolumeHierarchy> {
     private Node root;
-    private VolumeType volumeType = null;
+    private VolumeType volumeType = AABB;
     private Mesh mesh;
     private Triangle[] triangles;
     private double margin = 0;
@@ -55,7 +55,7 @@ public class BoundingVolumeHierarchy extends Property<BoundingVolumeHierarchy> {
     public void update() {
 	refitBounds(root);
 	checkOverlap();
-	System.out.println(root.volume);
+	//System.out.println(root.volume);
     }
 
     public List<TrianglePair> getCollisions() {

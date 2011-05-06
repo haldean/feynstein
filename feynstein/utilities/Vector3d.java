@@ -50,9 +50,12 @@ public class Vector3d {
 	return new Vector3d(0,0,0);
     }
 	
-    public double norm()
-    {
+    public double norm() {
 	return Math.sqrt(dot(this));
+    }
+
+    public boolean zero() {
+	return x == 0 && y == 0 && z == 0;
     }
 	
     public Vector3d plus(Vector3d other) {

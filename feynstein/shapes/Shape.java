@@ -21,6 +21,7 @@ public abstract class Shape<E extends Shape> extends Built<E> {
     protected boolean compiled = false;
     protected boolean disableParticleMass = false;
     protected boolean disableParticleVelocity = false;
+    protected boolean disableNonzeroParticleVelocity = false;
     protected boolean disableParticleFixed = false;
 
     protected Set<Particle> particles;
@@ -144,7 +145,11 @@ public abstract class Shape<E extends Shape> extends Built<E> {
 	for (Particle p : particles) {
 	    if (! disableParticleMass) p.setMass(particleMass);
 	    if (! disableParticleFixed) p.setFixed(fixed);
-	    if (! disableParticleVelocity) p.setVel(velocity);
+	    if (! disableParticleVelocity) {
+		p.setVel(velocity);
+	    } else if (! disableNonzeroParticleVelocity) {
+		if (p.getVel().zero()) p.setVel(velocity);
+	    }
 	}
 
 	compiled = true;
