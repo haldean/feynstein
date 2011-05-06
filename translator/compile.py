@@ -22,4 +22,7 @@ def run_feynstein(infile):
 
 if __name__ == '__main__':
     infile = sys.argv[1]
-    run_feynstein(compile_feynstein(infile))
+    if len(sys.argv) > 2 and sys.argv[2] == 'compile':
+        compile_feynstein(infile)
+    else:
+        run_feynstein(compile_feynstein(infile))
