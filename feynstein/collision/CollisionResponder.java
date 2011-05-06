@@ -8,12 +8,15 @@ public abstract class CollisionResponder<E extends CollisionResponder> extends P
     NarrowPhaseDetector detector;
     Scene scene;
 
-    public CollisionResponder(Scene aScene, NarrowPhaseDetector npd) {
+    public CollisionResponder(Scene aScene) {
 	super(aScene);
 	scene = aScene;
-	detector = npd;
     }
 
+    public CollisionResponder set_detector(String name) {
+	detector = scene.getDetectorByName(name);
+	return this;
+    }
 
     public abstract void update();
 

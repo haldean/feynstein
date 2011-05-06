@@ -934,17 +934,18 @@ point ::= 'point=' NUMBER ',' NUMBER ',' NUMBER
 
 forceBlock ::= 'forces' '{' forces '}'
 forces ::= forces force ';' | epsilon
-force ::= 'force' 'GravityForce' '(' gravityParams ')' 
-  | 'force' 'DampingForce '(' dampParams ')' 
-  | 'force' 'SpringForce' '(' springParams ')' 
-  | 'force' 'RodBendingForce '(' rodParams ')' 
-  | 'force' 'ConstantStrainTriangleForce '(' triangleParams ')' 
-  | 'force' 'SurfaceBendingForce' '(' surfaceParams ')' 
-  | 'force' 'TetrahedralConstraintForce' '(' tetParams ')' 
-  | 'force' 'ContactForce' '(' contactParams ')' 
+force ::= 'force' 'GravityForce' '(' forceParams gravityParams ')' 
+  | 'force' 'DampingForce '(' forceParams dampParams ')' 
+  | 'force' 'SpringForce' '(' forceParams springParams ')' 
+  | 'force' 'RodBendingForce '(' forceParams rodParams ')' 
+  | 'force' 'ConstantStrainTriangleForce '(' forceParams triangleParams ')' 
+  | 'force' 'SurfaceBendingForce' '(' forceParams surfaceParams ')' 
+  | 'force' 'TetrahedralConstraintForce' '(' forceParams tetParams ')' 
+  | 'force' 'ContactForce' '(' forceParams contactParams ')' 
 
-gravityParams ::= 'actsOn' '=' '\"' STRING ',' 
-  'length' '=' NUMBER CENTIMETERS ',' 'strength' '=' NUMBER
+forceParams ::= 'actsOn' '=' '#' STRING
+
+gravityParams ::= 'length' '=' NUMBER CENTIMETERS ',' 'strength' '=' NUMBER
 
 dampParams ::= 'coefficient' '=' NUMBER
 
@@ -996,7 +997,7 @@ bvhParams ::= 'margin' '=' NUMBER | 'margin' '=' NUMBER ',' 'type' '=' 'Bounding
 volumeType ::= 'AABB' | 'SPHERE' | 'KDOP_' 'num'
 num = '6' | '14' | '18' | '26'
 
-springPenaltyParams ::= 'proximity' '=' NUMBER | 'proximity' '=' NUMBER ',' 'stiffness' '=' NUMBER 
+springPenaltyParams ::= 'proximity' '=' NUMBER ',' 'detector' '=' '#' STRING | 'proximity' '=' NUMBER ',' 'detector' '=' '#' STRING ',' 'stiffness' '=' NUMBER 
 
 onFrame ::=  'onFrame ' '{' onFrameAxns '}' | epsilon
 onFrameAxns ::= statements statement | epsilon

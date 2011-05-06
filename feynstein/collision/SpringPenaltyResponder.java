@@ -2,51 +2,61 @@ package feynstein.collision;
 
 import feynstein.*;
 import feynstein.properties.*;
+import feynstein.utilities.*;
+import java.util.*;
 
 public class SpringPenaltyResponder extends CollisionResponder<SpringPenaltyResponder> {
     
     double k; //stiffness
-    double thickness;
+    double proximity;
 
-    public SpringPenaltyResponder(Scene aScene, NarrowPhaseDetector npd) {
-	super(aScene, npd);
+    public SpringPenaltyResponder(Scene aScene) {
+	super(aScene);
+	k = 500;
     }
 
     public SpringPenaltyResponder set_stiffness(double stiffness) {
 	k = stiffness;
+	return this;
     }
 
-    public SpringPenaltyResponder set_proximity(double proximity) {
-	thickness = proximity;
+    public SpringPenaltyResponder set_proximity(double p) {
+	proximity = p;
+	return this;
     }
 
     public void update() {
 	// (responders always updated after detectors--see Scene.java)
 	HashSet<Collision> cSet = detector.getCollisions();
 	if (cSet.size() > 0) {
-	    double[] updatedForces = calculatePenaltyForces(scene.getGlobalPositions(), scene.getGlobalVelocities(), cSet);
-	    scene.setGlobalForces(updatedForces);
+	    double[] penalties = calculatePenaltyForces(scene.getGlobalPositions(), 
+							scene.getGlobalVelocities(), cSet);
+	    double[] globalForces = scene.globalForceMagnitude();
+
+	    for (int i = 0; i < globalForces.length; i++) {
+		globalForces[i] += penalties[i];
+	    }
+	    scene.setGlobalForces(globalForces);
 	}
     }
 
-    //TODO WTF THICKNESS
     public double[] calculatePenaltyForces(double[] X, double[] V, HashSet<Collision> cSet) {
 	double[] penalty = new double[X.length];
 
 	//for each collision, apply the penalties
-	for (Collision c : cSet) {
+	for (Collision col : cSet) {
 	    //Collision col = col_rec[i];
 	    //vertex-face collision
-	    if(c.getType == Collision.VERTEX_FACE){
+	    if(col.getType() == Collision.VERTEX_FACE){
 		//get indicies
-		int[] parts = c.getParticles();
+		int[] parts = col.getParticles();
 		int p = parts[0];
 		int a = parts[1]; 
 		int b = parts[2]; 
 		int c = parts[3];
 
 		//get barycentric coords
-		double[] bc = c.getBaryCoords();
+		double[] bc = col.getBaryCoords();
 
 		//get collision point and collision velocities
 		Vector3d xa = new Vector3d(); //was Vector3d xa, xb, va, vb;
@@ -55,7 +65,7 @@ public class SpringPenaltyResponder extends CollisionResponder<SpringPenaltyResp
 		Vector3d vb = new Vector3d();
 
 		xa.set(X[3*p], X[3*p + 1], X[3*p + 2]);
-		xb.set(bc[0] * X[3*a] + v*X[3*b] + w*X[3*c],
+		xb.set(bc[0] * X[3*a] + bc[1]*X[3*b] + bc[2]*X[3*c],
 		       bc[0] * X[3*a + 1] + bc[1] * X[3*b + 1] + bc[2] * X[3*c + 1],
 		       bc[0] * X[3*a + 2] + bc[1] * X[3*b + 2] + bc[2] * X[3*c + 2]);
 		va.set(V[3*p], V[3*p + 1], V[3*p + 2]);
@@ -67,7 +77,7 @@ public class SpringPenaltyResponder extends CollisionResponder<SpringPenaltyResp
 		  a seperating velocity, apply the 
 		  local spring penalty */
 		if(xa.minus(xb).dot(va.minus(vb)) < 0) {
-		    double local_penalty = springPenalty(xa, xb, c.getDistance());
+		    double[] local_penalty = springPenalty(xa, xb, col.getDistance());
 		    //apply to vertex
 		    penalty[3*p] += local_penalty[0];
 		    penalty[3*p + 1] += local_penalty[1];
@@ -87,16 +97,16 @@ public class SpringPenaltyResponder extends CollisionResponder<SpringPenaltyResp
 	    }
 		
 	    //edge-edge collision
-	    if(c.getType == Collision.EDGE_EDGE){
+	    if(col.getType() == Collision.EDGE_EDGE){
 		//get indicies
-		int[] parts = c.getParticles();
+		int[] parts = col.getParticles();
 		int p1 = parts[0];
 		int q1 = parts[1];
 		int p2 = parts[2];
 		int q2 = parts[3];
 
 		//get barycentric coords
-		double[] coords = c.getBaryCoords();
+		double[] coords = col.getBaryCoords();
 		double s = coords[0];
 		double t = coords[1];
 
@@ -125,7 +135,7 @@ public class SpringPenaltyResponder extends CollisionResponder<SpringPenaltyResp
 		  a seperating velocity, apply the 
 		  local spring penalty */
 		if(xa.minus(xb).dot(va.minus(vb)) < 0) {
-		    Vector local_penalty = springPenalty(xa, xb, c.getDistance());
+		    double[] local_penalty = springPenalty(xa, xb, col.getDistance());
 		    //apply penalty to first edge
 		    penalty[3*p1] += s*local_penalty[0];
 		    penalty[3*p1+1] += s*local_penalty[1];
@@ -144,20 +154,19 @@ public class SpringPenaltyResponder extends CollisionResponder<SpringPenaltyResp
 	    }
 		
 	}
-	cSet.clear(); //TODO do we want this...?
 
 	return penalty;
     }
 
-    private void springPenalty(Vector3d xi, Vector3d xj, double dist) {
+    private double[] springPenalty(Vector3d xi, Vector3d xj, double dist) {
 	double[] F = new double[6];
 	//collision normal
 	Vector3d n = xi.minus(xj);
-	//TODO n = n / n.normalize();
+	n = n.dot(1 / n.norm());
 	
-	F[0] = -(stiff * (n.x()) * (-2*thickness + dist));
-	F[1] = -(stiff*(n.y())*(-2*thickness + dist));
-	F[2] = -(stiff*(n.z())*(-2*thickness + dist));
+	F[0] = -(k * (n.x()) * (-2 * proximity + dist));
+	F[1] = -(k * (n.y()) * (-2 * proximity + dist));
+	F[2] = -(k * (n.z()) * (-2 * proximity + dist));
 	F[3] = -F[0];
 	F[4] = -F[1];
 	F[5] = -F[2];

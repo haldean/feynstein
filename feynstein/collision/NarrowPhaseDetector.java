@@ -11,7 +11,8 @@ public abstract class NarrowPhaseDetector<E extends NarrowPhaseDetector> extends
     
     protected Mesh mesh;
     protected Scene scene;
-    
+    protected String name;
+
     protected final BoundingVolumeHierarchy bvh;
     protected final boolean enableBvh;
 
@@ -32,6 +33,16 @@ public abstract class NarrowPhaseDetector<E extends NarrowPhaseDetector> extends
 
     public HashSet<Collision> getCollisions() {
 	return actualCollisions;
+    }
+
+    @SuppressWarnings("unchecked")
+    public <E extends NarrowPhaseDetector> E set_name(String aName) {
+	name = aName;
+	return (E) this;
+    }
+
+    public String getName() {
+	return name;
     }
 
     protected double getVertex(Triangle t, int vertex, int axis) {

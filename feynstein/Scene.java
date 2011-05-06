@@ -25,6 +25,7 @@ public abstract class Scene {
     protected Map<String, Shape> shapes;
     protected List<Force> forces;
     protected Map<Class, Property> propertyMap;
+    //protected Map<String, NarrowPhaseDetector> detectorMap;
     protected List<Property> properties; //without collision responders, integrators
     protected List<Property> responders;
     protected List<Property> integrators;
@@ -44,6 +45,7 @@ public abstract class Scene {
 	responders = new ArrayList<Property>();
 	integrators = new ArrayList<Property>();
 	propertyMap = new HashMap<Class, Property>();
+	//detectorMap = new HashMap<String, NarrowPhaseDetector>();
 
 	createShapes();
 	setProperties();
@@ -77,23 +79,34 @@ public abstract class Scene {
     public void addProperty(Property p) {
 	print("Adding " + p.toString());
 
-	if (p instanceOf CollisionResponder) {
+	if (p instanceof CollisionResponder) {
 	    responders.add(p);
-	} else if (p instanceOf Integrator) {
+	} else if (p instanceof Integrator) {
 	    integrators.add(p);
 	} else {
 	    properties.add(p);
 	}
 
 	propertyMap.put(p.getClass(), p);
+	/*
+	  I LIKED THIS BETTER WHEN I WAS WORKING ON STUPID PROJECTS
+	  AND COULD JUST HARD CODE EVERYTHING WITHOUT WORRYING ABOUT
+	  YOU DAMN GOOGLE INTERNS LOOKOFDISAPPROVALING ME
+
+	if (p instanceof NarrowPhaseDetector)
+	detectorMap.put((p.getClass().cast(p)).getName(), p.getClass().cast(p));*/
     }
 
     @SuppressWarnings("unchecked")
     public <E extends Property> E getProperty(Class c) {
 	return (E) propertyMap.get(c);
     }
+    
+    public NarrowPhaseDetector getDetectorByName(String name) {
+	return detectorMap.get(name);
+    }
 	
-	public Mesh getMesh() {
+    public Mesh getMesh() {
 		return mesh;
     }
 

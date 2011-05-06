@@ -40,11 +40,11 @@ public class Collision {
     }
 
     public double[] getBaryCoords() {
-	return baryCoords();
+	return baryCoords;
     }
 
     public int[] getParticles() {
-	return particles();
+	return particles;
     }
 
     public double getDistance() {
