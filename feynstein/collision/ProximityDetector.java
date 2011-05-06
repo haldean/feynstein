@@ -19,14 +19,12 @@ public class ProximityDetector extends NarrowPhaseDetector<ProximityDetector> {
 	return this;
     }
     
-    public LinkedList<Collision> checkCollision(TrianglePair c) {
-	return checkCollision(c.t1, c.t2);
+    public HashSet<Collision> checkCollision(TrianglePair p, HashSet<Collision> cSet) {
+	return checkCollision(p.t1, p.t2, cSet);
     }
 
-    public LinkedList<Collision> checkCollision(Triangle t1, Triangle t2) {
+    public HashSet<Collision> checkCollision(Triangle t1, Triangle t2, HashSet<Collision> cSet) {
 	double[] globalPos = scene.getGlobalPositions();
-
-	LinkedList<Collision> cSet = new LinkedList<Collision>();
 
 	// make sure triangles are not connected:
 	if (t1.getIdx(0) == t2.getIdx(0) || t1.getIdx(0) == t2.getIdx(1) 
