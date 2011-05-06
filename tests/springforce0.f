@@ -1,4 +1,4 @@
-springforce0.f {
+springforce0 {
 
     shapes {
 	m = 1;
@@ -36,10 +36,10 @@ springforce0.f {
 	force SpringForce(actsOn=#spring5, strength=16, length=1);
 
 	force SpringForce(actsOn#spring6, strength=1, length=1);
-	force SpringForce(actsOn#spring6, strength=1, length=1);
-	force SpringForce(actsOn#spring6, strength=1, length=1);
-	force SpringForce(actsOn#spring6, strength=1, length=1);
-	force SpringForce(actsOn#spring6, strength=1, length=1);
+	force SpringForce(actsOn#spring7, strength=1, length=1);
+	force SpringForce(actsOn#spring8, strength=1, length=1);
+	force SpringForce(actsOn#spring9, strength=1, length=1);
+	force SpringForce(actsOn#spring10, strength=1, length=1);
     }
 
     properties { 
