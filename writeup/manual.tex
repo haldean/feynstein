@@ -740,7 +740,7 @@ properties {
   /*other property declarations...*/
   property BoundingVolumeHierarchy(
     type=BoundingVolumeHierarchy.AABB, margin=1e-3);
-  property ProximityDetector(proximity=1e-3);
+  property ContinuousTimeDetector(stepSize=.01);
 }
 \end{verbatim}
 \end{description}
@@ -786,6 +786,14 @@ includes two methods for responding to collisions. The first method, \texttt{Spr
   iterative step is performed until all collisions disappear or some
   maximum number or interactions is reached.
 \end{description}
+\begin{verbatim}
+ properties { 
+	/* other property declarations... */
+        property ProximityDetector(proximity=0.1);
+        property ImpulseResponder(iterations=100, detector=0);
+   }
+\end{verbatim}
+
 
 \paragraph{Camera Location and Orientation}
 
@@ -883,71 +891,77 @@ exponent ::= ('e'| 'E') ['+'|'‐'] int+
 
 \subsubsection{File Structure and Expressions}
 
+The following production describes the canonical organization for Feynstein files:
 \begin{verbatim}
 FeynsteinFile ::= ID { optCode shapeBlock optCode forceBlock 
   optCode propertyBlock optCode onframeBlock }
-  | 
 optCode ::= optcode statement | epsilon
+\end{verbatim}
+Feynstein-specific blocks, however, can appear in any order.
 
+\begin{verbatim}
 shapeBlock ::= 'shapes' '{' shapes '}'
 shapes ::= shapes shape ';' | epsilon
 shape ::= 'shape' 'Sphere' '(' sphereParams ')' 
-  | 'shape' 'Cylinder' '(' cylParams ')' 
-  | 'shape' 'Plane' '(' planeParams ')' 
-  | 'shape' 'RectangularPrism' '(' rectParams ')' 
-  | 'shape' 'Tetrahedron' '(' tetParams ') 
-  | 'shape' 'Cube' '(' cubeParams ')'
-  | 'shape' 'FluidPlane' '(' fPlaneParams ')'
-  | 'shape' 'ParticleSet' '(' pSetParams ')'
-  | 'shape' 'ClothPiece' '(' pSetParams ')'
-  | 'shape' 'RegularPolygon' '(' regPolyParams ')'
-  | 'shape' 'SinglePointMass' '(' pointMassParams ')'
-  | 'shape' 'SpringChain' '(' pSetParams ')'
-  | 'shape' 'TriangleShape' '(' triangleParams ')'
-  | 'shape' ID '(' userParams ')' 
+  | 'shape' 'Cylinder' '(' shapeParams cylParams ')' 
+  | 'shape' 'Plane' '(' shapeParams planeParams ')' 
+  | 'shape' 'RectangularPrism' '(' shapeParams rectParams ')' 
+  | 'shape' 'Tetrahedron' '(' shapeParams tetParams ') 
+  | 'shape' 'Cube' '(' shapeParams cubeParams ')'
+  | 'shape' 'FluidPlane' '(' shapeParams fPlaneParams ')'
+  | 'shape' 'ParticleSet' '(' shapeParams pSetParams ')'
+  | 'shape' 'ClothPiece' '(' shapeParams pSetParams ')'
+  | 'shape' 'RegularPolygon' '(' shapeParams regPolyParams ')'
+  | 'shape' 'SinglePointMass' '(' shapeParams pointMassParams ')'
+  | 'shape' 'SpringChain' '(' shapeParams pSetParams ')'
+  | 'shape' 'TriangleShape' '(' shapeParams triangleParams ')'
+  | 'shape' ID '(' shapeParams userParams ')' 
 
-sphereParams ::= sphereParams 'name=' STRING 
-  | sphereParams 'radius=' NUMBER spatialLiteral 
-  | sphereParams 'accuracy=' NUMBER
-  | sphereParams 'location=(' NUMBER ',' NUMBER ')' | epsilon
+shapeParams ::= 'name' '=' STRING
+  | 'location' '=' point
+  | 'velocity' '=' '(' NUMBER velocityLiteral ',' NUMBER velocityLiteral ',' NUMBER velocityLiteral ')'
+  | 'mass' '=' NUMBER massLiteral
+  | 'particleRadius' '=' NUMBER spatialLiteral
+  | 'fixed' '=' NUMBER
+  | epsilon
 
-cylParams ::= cylParams 'name=' STRING 
-  | cylParams 'radius=' NUMBER spatialLiteral 
-  | cylParams 'radius1=' NUMBER spatialLiteral ','  cylParams 'radius2=' NUMBER spatialLiteral 
-  | cylParams 'height=' NUMBER spatialLiteral 
-  | cylParams 'accuracy=' NUMBER
-  | cylParams 'location=(' NUMBER ',' NUMBER ')' | epsilon
+point ::= '(' NUMBER ',' NUMBER ',' NUMBER ')'
 
-planeParams ::= planeParams 'name=' STRING 
-  | planeParams 'normal '=' point | epsilon
+sphereParams ::= 'radius=' NUMBER spatialLiteral sphereOpt
+sphereOpt ::= ',' 'accuracy' '=' NUMBER | epsilon
+
+cylParams ::= height cylOpt ',' radius cylOpt 
+  | radius cylOpt ',' height cylOpt
+radius ::= 'radius' '=' NUMBER spatialLiteral
+  | 'radius1=' NUMBER spatialLiteral ',' 'radius2=' NUMBER spatialLiteral 
+height ::= 'height' '=' NUMBER spatialLiteral ',' cylParams
+cylOpt ::= ',' 'accuracy=' NUMBER | epsilon
+
+planeParams ::= planeParams 'normal '=' point
 
 tetParams ::= 'point1' '=' point ',' 'point2' '=' point ',' 'point3' '=' point ',' 'point4' '=' point ','
 
-cubeParams ::= cubeParams 'sides' '=' '(' NUMBER spatialLiteral ',' NUMBER spatialLiteral ',' NUMBER spatialLiteral ')'
-  | cubeParams 'allSides' '=' NUMBER spatialLiteral
-  | epsilon 
+cubeParams ::= 'sides' '=' '(' NUMBER spatialLiteral ',' NUMBER spatialLiteral ',' NUMBER spatialLiteral ')'
+  | 'allSides' '=' NUMBER spatialLiteral
 
-fPlaneParams ::= fPlaneParams 'lengthX' '=' NUMBER spatialLiteral
-  | fPlaneParams 'lengthY' '=' NUMBER spatialLiteral
-  | fPlaneParams 'length' '=' NUMBER spatialLiteral
-  | fPlaneParams 'subdivisions' '=' NUMBER | epsilon
+fPlaneParams ::= 'lengthX' '=' NUMBER spatialLiteral fPlaneOpt ',' 'lengthY' '=' NUMBER spatialLiteral fPlaneOpt
+  | fPlaneParams 'length' '=' NUMBER spatialLiteral fPlaneOpt
+fPlaneOpt ::= ',' 'subdivisions' '=' NUMBER | epsilon
 
-pSetParams ::= pSetParams 'vert' '=' point 
-  | pSetParams 'fixed' '=' NUMBER 
-  | pSetParams 'velocity' '=' '(' NUMBER velocityLiteral ',' NUMBER velocityLiteral ',' NUMBER velocityLiteral ',' NUMBER velocityLiteral ')'
-  | epsilon
+pSetParams ::= vert pSetOpt
+vert ::= vert 'vert' '=' point | epsilon
+pSetOpt ::= ',' 'fixed' '=' NUMBER | epsilon
 
-regPolyParams ::= regPolyParams 'vertices' '=' NUMBER
-  | regPolyParams 'radius' '=' NUMBER spatialLiteral | epsilon
+regPolyParams ::= 'vertices' '=' NUMBER ',' regPolyParams 'radius' '=' NUMBER spatialLiteral
+  |  regPolyParams 'radius' '=' NUMBER spatialLiteral ',' 'vertices' '=' NUMBER
 
-pointMassParams ::= 'pos' '=' NUMBER | epsilon
+pointMassParams ::= 'pos' '=' NUMBER
 
 userParams ::= userParams STRING '=' STRING 
   | userParams STRING '=' NUMBER 
   | userParams STRING '=' NUMBER literal
   | epsilon
 
-point ::= '(' NUMBER ',' NUMBER ',' NUMBER ')'
 
 forceBlock ::= 'forces' '{' forces '}'
 forces ::= forces force ';' | epsilon
@@ -966,15 +980,19 @@ gravityParams ::= gravityParams 'gx' '=' NUMBER
   | gravityParams 'gz' '=' NUMBER
   | epsilon
 
-dampParams ::= 'coefficient' '=' NUMBER
+dampParams ::= 'coefficient' '=' NUMBER | epsilon
 
-springParams ::= 'length' '=' NUMBER spatialLiteral ',' 'strength' '=' NUMBER
+springParams ::= springParams 'length' '=' NUMBER spatialLiteral
+  | 'strength' '=' NUMBER
+  | epsilon
 
-triangleParams ::= 'youngs' '=' NUMBER ',' 'poisson' '=' NUMBER ','
+triangleParams ::= 'youngs' '=' NUMBER ',' 'poisson' '=' NUMBER
 
-rodBendingParams ::= 'strength' '='  NUMBER ',' 'angle' '=' NUMBER
+rodBendingParams ::= rodBendingParams 'strength' '='  NUMBER
+  | rodBendingParams 'angle' '=' NUMBER
+  | epsilon
 
-surfaceBendingParams ::= 'strength' '=' NUMBER
+surfaceBendingParams ::= 'strength' '=' NUMBER | epsilon
 
 propertyBlock ::= 'properties' '{' properties '}'
 properties ::= properties property ';' |  epsilon
@@ -991,12 +1009,12 @@ property ::= 'property' 'renderTo' '(' renderParams ')'
 
 renderParams ::= 'VideoOutput' | 'FileOutput' '(' STRING ')' | epsilon
 
-endParams ::= 'endAt=' TIME | epsilon 
+endParams ::= 'endAt' '=' timeLiteral | epsilon 
 
 assertParams ::= epsilon | 'margin=' NUMBER 
 
 eulerMethod ::= 'VelocityVerlet' | 'SemiImplicitEuler'
-eulerParams ::= 'stepSize=' timeLiteral
+eulerParams ::= 'stepSize' '=' timeLiteral
 
 cameraParams ::= 'location' '=' '(' NUMBER ',' NUMBER ',' NUMBER ')'
   ',' 'lookingAt' '=' '(' NUMBER ',' NUMBER ',' NUMBER ')' 
@@ -1006,12 +1024,14 @@ proximityParams ::= 'proximity' '=' 'NUMBER'
 
 bvhParams ::= 'margin' '=' NUMBER | 'margin' '=' NUMBER ',' 'type' '=' 'BoundingVolumeHierarchy.' 'volumeType'
 volumeType ::= 'AABB'
-num = '6' | '14' | '18' | '26'
 
-springPenaltyParams ::= 'proximity' '=' NUMBER ',' 'detector' '=' NUMBER
-  | 'proximity' '=' NUMBER ',' 'detector' '=' NUMBER ',' 'stiffness' '=' NUMBER 
+springPenaltyParams ::= 'proximity' '=' NUMBER springOpt ',' 'detector' '=' NUMBER springOpt
+  |  'detector' '=' NUMBER springOpt ',' 'proximity' '=' NUMBER springOpt
+springOpt ::= ',' stiffness' '=' NUMBER 
 
-impulseParams ::= 'iterations' '=' NUMBER ',' 'detector' '=' NUMBER
+impulseParams ::= 'iterations' '=' NUMBER ',' 'detector' '=' NUMBER 
+  | 'detector' '=' NUMBER ',' 'iterations' '=' NUMBER
+  | 'detector' '=' NUMBER
 
 onFrame ::=  'onFrame ' '{' onFrameAxns '}' | epsilon
 onFrameAxns ::= statements statement | epsilon
