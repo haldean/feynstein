@@ -11,18 +11,24 @@ def get_jvm_vars():
 
 def error_gen(err,javamap):
     err = str(err)
-    err = err.split('\n')
+    err = err.split('\\n')
     errorlist = []
     errormessage = ''
     for e in err:
+        print(e)
         if re.search('java:',e):
-            m = re.search('[0-9]+',e)
-            errorlist.append(int(m.group()))
-    
+            m = re.search(':[0-9]+',e)
+            n = re.search('[0-9]+',m.group())
+            errorlist.append(int(n.group()))
+    #print(str(len(errorlist)))
+
+    for el in errorlist:
+        print(str(el))
     if len(errorlist) > 0:
         errormessage = 'Feynstein errors:\n'
         for er in errorlist:
             for j in javamap:
+                #print(str(j[0])+' '+str(j[1])+'\n')
                 if j[1] == er:
                     errormessage=errormessage+'Check error in line ' + str(j[0]) + '.\n'
 
@@ -32,7 +38,7 @@ def compile_feynstein(infile):
     java_source,javamap = translator.main(infile)
     p = subprocess.Popen(['javac', '-classpath', get_classpath(), 
                      '-Xlint:unchecked', java_source],stderr = subprocess.PIPE)
-    out,err = p.communicate()    
+    out,err = p.communicate()
     print(error_gen(err,javamap))
 
     return java_source
