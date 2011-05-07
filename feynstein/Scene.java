@@ -180,6 +180,10 @@ public abstract class Scene {
     public double[] getGlobalVelocities() {
 	return globalVelocities;
     }
+	
+	public double[] getGlobalMasses() {
+		return globalMasses;
+    }
 
     public void update() {
 	updateGlobalForce();
