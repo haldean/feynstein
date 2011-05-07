@@ -128,13 +128,13 @@ section has a default configuration if left empty. The default time
 integration method is semi-implicit Euler and the default rendering
 method is on-screen display. User defined properties that change the
 appearance of the simulation -- such as textures and lighting -- find a
-place in this section. An example of a simulation using implicit Euler
+place in this section. An example of a simulation using verlet
 time integration and video output (i.e. offline rendering) is shown
 below.
 
 \begin{verbatim}
 properties {
-  property ImplicitEuler(stepSize = 10ms);
+  property VelocityVerlet(stepSize = 10ms);
   property FileOutput(name = "myScene.mov");
 }
 \end{verbatim}
@@ -168,7 +168,7 @@ MyScene {
    }
    
    properties {
-     property ImplicitEuler(stepSize=10tms);
+     property SemiImplicitEuler(stepSize=10tms);
      property VideoOutput();
      property FileOutput("myScene.avi");
      property AssertStability(margin=4);
@@ -271,7 +271,7 @@ primitives, which specify more technical aspects of the scene, such as
 integration method and collision detectors.  These are declared in the
 same way as the other two special primitives: with the key word
 followed by the specific form the primitive is taking (i.e. Cylinder,
-ImplicitEuler), and the parameters required to instantiate it.
+SemiImplicitEuler), and the parameters required to instantiate it.
 
 The possible properties are EndTime, AssertStability, CameraView,
 StabilityAssertTolerance, BoundingVolumeHierarchy, ProximityDetector,
@@ -652,13 +652,13 @@ frameworks, textures, lighting, and camera controls.
 
 \subsubsection{Predefined time integrators}
 
-Feynstein provides two methods of integration, implicit Euler and
+Feynstein provides two methods of integration, velocity Verlet and
 semi-implicit Euler, for calculating changes to the scene over each
-time step. Both the implicit and semi-implicit Euler methods yield
+time step. Both the Verlet and semi-implicit Euler methods yield
 more stable approximations of an object's trajectory than the explicit
 Euler method, the other conventional method of calculation, which we
 have omitted in the interest of accuracy. The integrators are defined
-as \texttt{ImplicitEuler} and \texttt{SemiImplicitEuler} objects, and both require
+as \texttt{VelocityVerlet} and \texttt{SemiImplicitEuler} objects, and both require
 only one parameter, the size of the time step to use in the time
 integration calculations. This parameter should consist of a numerical
 value and a time literal specifying the value's units.
@@ -666,7 +666,7 @@ value and a time literal specifying the value's units.
 \begin{verbatim}
 properties {
   /* (other property declarations) */
-  property ImplicitEuler(stepSize = 5ms);
+  property SemiImplicitEuler(stepSize = 5ms);
 }
 \end{verbatim}
 
@@ -747,7 +747,7 @@ property will cause a compiler error;
 properties {
   /*other property declarations...*/
   property BoundingVolumeHierarchy(
-    type=BoundingVolumeHierarchy.KDOP_18);
+    type=BoundingVolumeHierarchy.AABB, margin=1e-3);
   property ProximityDetector(proximity=1e-3);
 }
 \end{verbatim}
@@ -755,32 +755,29 @@ properties {
 \subsubsubsection{Responders}
 
 Collision response is handled by an additional property. Feynstein
-includes a method for responding to collisions by adding a contact
-force to the global force list. The \texttt{ContactForce} extends the
-\texttt{SpringForce} to resist impact. The key difference between the
-\texttt{ContactForce} and the basic \texttt{SpringForce} is that the
-\texttt{ContactForce}'s stencil is partitioned into subsets of four. Each
-subset defines one of two canonical collision types: \texttt{VERTEX\_FACE}
+includes two methods for responding to collisions. The first method, \texttt{SpringPenaltyResponder},  is a penalty-based method that uses a \texttt{SpringForce} between objects to resist their impact. The second method, \texttt{ImpulseResponder}, applies iterative impulses to object's velocities until collisions converge. All collision responders take a detector instance as a parameter. This detector will feed the responder it's collision set.
+
+\begin{verbatim}
+ properties { 
+	/* other property declarations... */
+        property BoundingVolumeHierarchy(margin=0.1);
+        property ProximityDetector(proximity=0.1);
+        property SpringPenaltyResponder(detector=0, stiffness=1000, proximity=0.1);
+   }
+\end{verbatim}
+
+\subsubsubsubsection{SpringPenaltyResponder}
+The \texttt{SpringPenaltyResponder}  takes two parameters in addition to it's detector index: Thie spring stiffness used to resist collisions and the minumum proximity allowed between two triangles (i.e. the rest length of the spring). \texttt{SpringPenaltyResponder} takes a set of collisions from it's detector, which are flagged one of two canonical collision types: \texttt{VERTEX\_FACE}
 (one vertex and a three-vertex face) and \texttt{EDGE\_EDGE} (two two-vertex
 edges).
 
 The two points of the standard \texttt{SpringForce} stencil are then computed
 using the barycentric coordinates of the contact points within a face
-or along an edge. In a sense, the \texttt{ContactForce} holds a
+or along an edge. In a sense, the \texttt{SpringPenaltyResponder} holds a
 sub-\texttt{SpringForce} for each exhibited collision vertex set.
 
-To add a \texttt{ContactForce} to the simulation, declare it within the list of
-global forces. A \texttt{ContactForce} typically begins with an empty stencil
-that is modified throughout the simulation. \texttt{ContactForce}s can be
-instantiated with an initial stencil if objects are known to be in
-contact at the beginning of the simulation.
-
-\begin{verbatim}
-forces {
-  /* other force declarations... */
-  force ContactForce(stencil={}, promixity=1e-3);
-}
-\end{verbatim}
+\subsubsubsubsection{ImpulseResponder}
+An \texttt{ImpulseResponder} takes one parameter in addition to it's detector index: The maximum number of iterations to perform when modifying object velocities until collisions converge. At each iteration, the \texttt{ImpulseResponder} projects the simulation state forward in time by updating object velocities and asking its detector to check for collisions. If any are found, impulses (either elastic or inelastic) are applied to object velocities, and the future simulation state is recomputed with the new velocities. This iterative step is performed until all collisions disappear or some maximum number or interactions is reached.
 
 \subsubsection{Camera Location and Orientation}
 
@@ -988,7 +985,7 @@ endParams ::= 'endAt=' TIME | epsilon
 
 assertParams ::= epsilon | 'margin=' NUMBER 
 
-eulerMethod ::= 'ImplicitEuler' | 'SemiImplicitEuler'
+eulerMethod ::= 'VelocityVerlet' | 'SemiImplicitEuler'
 eulerParams ::= 'stepSize=' timeLiteral
 
 cameraParams ::= 'location' '=' '(' NUMBER ',' NUMBER ',' NUMBER ')'
