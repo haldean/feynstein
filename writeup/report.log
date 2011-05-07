@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=latex 2011.4.29)  7 MAY 2011 13:13
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=latex 2011.4.29)  7 MAY 2011 14:42
 entering extended mode
  %&-line parsing enabled.
 **\input report.tex
@@ -297,29 +297,27 @@ Class scrartcl Info: You've told me to use the font selection of the element
 (scrartcl)            on input line 12.
 Class scrartcl Info: You've told me to use the font selection of the element
 (scrartcl)           `sectioning' that is an alias of element `disposition'
-(scrartcl)            on input line 17.
-)
-\tf@toc=\write4
-\openout4 = `report.toc'.
-
+(scrartcl)            on input line 13.
  [1
 
 
 ]
+Class scrartcl Info: You've told me to use the font selection of the element
+(scrartcl)           `sectioning' that is an alias of element `disposition'
+(scrartcl)            on input line 18.
+)
+\tf@toc=\write4
+\openout4 = `report.toc'.
+
 Missing character: There is no â in font cmss10!
 Missing character: There is no € in font cmss10!
 Missing character: There is no ™ in font cmss10!
 
+
+LaTeX Font Warning: Font shape `OT1/cmss/m/it' in size <10.95> not available
+(Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 68.
+
 (./colleen.tex
-Missing character: There is no â in font cmss10!
-Missing character: There is no € in font cmss10!
-Missing character: There is no ™ in font cmss10!
-Missing character: There is no â in font cmss10!
-Missing character: There is no € in font cmss10!
-Missing character: There is no ™ in font cmss10!
-Missing character: There is no â in font cmss10!
-Missing character: There is no € in font cmss10!
-Missing character: There is no ™ in font cmss10!
 Missing character: There is no â in font cmss10!
 Missing character: There is no € in font cmss10!
 Missing character: There is no ™ in font cmss10!
@@ -339,15 +337,52 @@ Missing character: There is no ™ in font cmss10!
 Missing character: There is no â in font cmss10!
 Missing character: There is no € in font cmss10!
 Missing character: There is no ™ in font cmss10!
- [3]) (./sam.tex [4]
+Missing character: There is no â in font cmss10!
+Missing character: There is no € in font cmss10!
+Missing character: There is no ™ in font cmss10!
+Missing character: There is no â in font cmss10!
+Missing character: There is no € in font cmss10!
+Missing character: There is no ™ in font cmss10!
+Missing character: There is no â in font cmss10!
+Missing character: There is no € in font cmss10!
+Missing character: There is no ™ in font cmss10!
+ [3] [4])
+Underfull \hbox (badness 10000) in paragraph at lines 73--74
+
+ []
+
+(./sam.tex
 File: figures/depend.eps Graphic file (type eps)
- <figures/depend.eps> [5] [6])
+ <figures/depend.eps>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[5] [6])
+Underfull \hbox (badness 10000) in paragraph at lines 78--79
+
+ []
+
 (./will.tex [7]
 File: figures/translator.eps Graphic file (type eps)
  <figures/translator.eps>
+
+LaTeX Warning: Reference `sec:whowhat' on page 8 undefined on input line 71.
+
+
+LaTeX Warning: Reference `sec:listing' on page 8 undefined on input line 72.
+
+[8]
 File: figures/eeblock.eps Graphic file (type eps)
- <figures/eeblock.eps>) (./lessons.tex
-[8] [9]
+ <figures/eeblock.eps>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+)
+Underfull \hbox (badness 10000) in paragraph at lines 83--84
+
+ []
+
+(./eva.tex) (./lessons.tex
 Missing character: There is no â in font cmss10!
 Missing character: There is no € in font cmss10!
 Missing character: There is no ™ in font cmss10!
@@ -372,10 +407,14 @@ Missing character: There is no ™ in font cmss10!
 Missing character: There is no â in font cmss10!
 Missing character: There is no € in font cmss10!
 Missing character: There is no ™ in font cmss10!
+ [9] [10] [11]
 Missing character: There is no â in font cmss10!
 Missing character: There is no € in font cmss10!
 Missing character: There is no ™ in font cmss10!
-) [10] (./log.appendix.tex
+Missing character: There is no â in font cmss10!
+Missing character: There is no € in font cmss10!
+Missing character: There is no ™ in font cmss10!
+ [12]) (./log.appendix.tex
 Missing character: There is no â in font cmss10!
 Missing character: There is no € in font cmss10!
 Missing character: There is no ™ in font cmss10!
@@ -388,18 +427,21 @@ LaTeX Font Warning: Font shape `OMS/cmss/m/n' undefined
 (Font)              using `OMS/cmsy/m/n' instead
 (Font)              for symbol `textbullet' on input line 20.
 
-[11] [12] [13] [14] [15] [16]) [17] (./report.aux)
+[13] [14] [15] [16] [17] [18] [19]) [20] [21] (./report.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
+
+LaTeX Warning: There were undefined references.
+
  ) 
 Here is how much of TeX's memory you used:
- 4616 strings out of 495062
- 63065 string characters out of 1182644
- 171858 words of memory out of 3000000
- 7720 multiletter control sequences out of 15000+50000
- 12843 words of font info for 50 fonts, out of 3000000 for 9000
+ 4627 strings out of 495062
+ 63198 string characters out of 1182644
+ 170858 words of memory out of 3000000
+ 7727 multiletter control sequences out of 15000+50000
+ 13199 words of font info for 51 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 37i,7n,40p,825b,274s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 37i,8n,40p,825b,272s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on report.dvi (17 pages, 53880 bytes).
+Output written on report.dvi (21 pages, 70808 bytes).

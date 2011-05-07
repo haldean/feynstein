@@ -34,20 +34,187 @@ to add--and remove--language components easily.
   the importance of setting realistic deadlines, but I’ve realized
   that it’s equally important to accept that sometimes a schedule you
   thought was realistic at first needs to be changed.
+
+\item[Sam: Language Guru] Working on this language was fascinating to
+  me, especially in a group dynamic. I proposed this language idea to
+  my teammates as physical simulation is my primary area of
+  research. The idea was very much inspired by my own experience
+  learning simulation. I took a course in physical simulation that was
+  taught entirely in C++, a language I was unfamiliar with at the
+  time. I found (and I was far from alone) that most of my energy was
+  put towards learning to use a new language in a very complex way:
+  building an interact object-oriented system and optimizing for
+  performance. Although this was a great learning experience, within
+  this particular course, I wished I could have focused more on
+  understanding the physics behind the engine I was writing rather
+  than just getting it to work--so much time was spent on the initial
+  implementation that little was left for
+  experimentation. Resultantly, I was inspired to create a language
+  that facilitated easy understanding of the physical simulation
+  concepts, but also allowed for more complex extension and
+  experimentation.
+
+  Needless to say, there was great pedagogical merit in this
+  process. I am interesting in learning how different people
+  understand the task of programming physical systems, and this gave
+  me great insight. The language design is very much a reflection of
+  this pedagogical experience. The act of teaching new concepts
+  involves abstracting the lower level details into comprehensible
+  objects and relationships. That said, my initial lessons for
+  teaching simulation to the team ended up defining our language
+  model. Furthermore, by working in Java, I learned a great deal about
+  adapting my own perspective of developing simulation code, which is
+  characterized by C++, to new languages--especially in terms of
+  achieving optimal performance.
+
+  Simulation aside, another important lesson I learned is about the
+  dynamics of team work. In past experience, I have always tried to
+  divide up labor as efficiently as possible so the maximal number of
+  components could be developed in parallel. This division of labor
+  was always straightforward when each person considered themselves a
+  unique specialist. But what if not everyone is a specialist? I our
+  group, there were some members who came in knowing exactly what they
+  wanted to do, and others who were more flexible. There is, of
+  course, an appeal to the person who is willing to work on anything,
+  but from what I have learned, if someone considers themselves an
+  expert, they will perform accordingly. I think that passion makes a
+  team, and team members need to really to be confident in their
+  necessity within the larger group from the beginning. I've learned
+  that when selling an individual vision to a group of teammates, you
+  should be certain each person is excited about their role.
+	
+  On that same token, one of the hardest parts of the language guru's
+  job is letting go of control. When you envision a perfect system,
+  you cant imagine accepting outside input. In some cases, my
+  teammates showed me their clever and new perspectives on methods
+  with which I've become rather familiar with developing
+  simulators. It was admittedly hard to assign major coding components
+  with which I was so familiar to my teammates. Some team members were
+  very responsive, and I enjoyed collecting relevant reading materials
+  to help them understand larger concepts, helping them through the
+  coding process, and seeing their genuine excitement when things were
+  working. Unfortunately, in other cases I believe some tasks may have
+  been too daunting for team members. In these cases, I learned that
+  you have to be aggressive when offering help--people won't always
+  ask for it. On the other side, I also learned that sometimes you
+  need to be resolute and put the language first, even if that means
+  redistributing the work load towards those who consistently complete
+  their work on time.
+
+\item[Will: System Architect] I learned the value of defining APIs
+  early on, because just the definition of an API is enough to get
+  everyone thinking about how exactly things work. We had some issues
+  later in the semester in which things couldn't work as we had
+  planned, and we would have realized that that was the case if we had
+  defined just what methods and fields each class in our execution
+  environment had.
+
+  I also learned (from experience) why everyone uses parser generators
+  like YACC; at first, I tried to implement our language in pure
+  Python, starting from scratch. I found that this approach made it
+  much easier to write the actions in the SDTS for our language, but
+  it made it extremely difficult to adapt to changes in our language's
+  grammar.
+
+  Finally, I learned a lot about my own division of labor when it
+  comes to working in a team. Specifically, I found that the most
+  challenging part of the project was responding to emails and
+  maintaining the administrative part of the project; the coding came
+  comparatively easily, despite the fact that I did a lot of
+  coding. In fact, the largest headaches came from my job managing the
+  documentation -- compiling everyone's contributions, ensuring that
+  things got done on time and responding to people's requests for
+  edits in a timely fashion were probably the most difficult tasks
+  that I had.
+
+\item[Rob: Systems] During this project, I learned two things. The
+  first and probably most important thing I learned is that
+  communication is quintessential in successful group work. I learned
+  that I do not do this well and that it is something I need to
+  improve upon if I want to be a more successful and productive group
+  member in the future. The second thing I learned is that starting to
+  code early is also really important in getting the best results as
+  possible. It allows time to revise the code and make sure it works
+  properly. That is also something which I will need to work on.
+
+\item[Eva: Testing] You never know how much you're going to miss a
+  debugger until it isn't there anymore.  It's pretty amazing the
+  amount of knowledge contained in the heads of 5 Computer Science
+  majors, but it's only helpful if you're asking questions.  Teammates
+  and classmates can be a great resource, but only when you take the
+  initiative to communicate and ask questions.
 \end{description}
 
 \subsection{Advice for Future Teams}
-I found the existence of our team wiki to be very helpful, and I would
+We found the existence of our team wiki to be very helpful, and would
 encourage other groups to implement their own and use it even more
-extensively than our group did. I would suggest that other groups make
-sure that the basic framework for working together on a coding project
-is in place early in the project. This framework would include
+extensively than our group did. We would suggest that other groups
+make sure that the basic framework for working together on a coding
+project is in place early in the project. This framework would include
 expectations about meetings and communication in addition to tools to
 store, update, and communicate about the compiler’s code at all stages
-of the project.
+of the project. There are few replacements for effective
+communication; in some cases, team members missed deadlines just
+because their teammates didn't respond to emails in a timely
+manner. Starting early and communicating effectively are both key to
+meeting deadlines with high-quality results.
+
+We also would advise future teams to set as many bail out points as
+possible. Define versions 1.0, 1.1, and 1.2 of your language. Aspire
+for version 1.2, but be willing to accept 1.0. This was definitely the
+saving grace of our design process: we had many small
+milestones. Also, it is important to never hesitate to ask team
+members for help. This was definitely a struggling point for our
+team. Remember that asking for help isn’t a reflection of a lack of
+intelligence, and more communication between teammates is always a
+good thing. Getting stuck and not telling anyone is never an excuse
+for failing to meet a deadline. On that same note: meet and meet
+often. Lastly, be certain from the very beginning that every team
+member knows the answer to these three questions: what is their role,
+why were they chosen for it in particular, and are they excited about
+it?
 
 \subsection{Instructor Feedback}
-I found the sections on run-time environments (chapter 7) code
-generation (chapter 8) to be particularly interesting--both gave me a
-far greater understand of facets of computer programming that I had
-previously taken for granted.
+\begin{description}
+\item[Sam] I found the material for this course to be as interesting
+  as it was difficult to grasp. My first suggestion would be more
+  consistent written homework--however small--to reinforce ideas as
+  they are learned. I would also suggest more consistency between
+  homework and exams. I found that whereas the homework were more
+  procedural, deriving from examples in the book, the exams were more
+  conceptual.
+
+  As far as the project is concerned, I would suggest a clearer
+  definition of the five roles from the beginning. I remember our team
+  did not gain a clear understanding of the distinction between the
+  systems architect and integrator until the final report descriptions
+  were posted. On that note, I often found that project-related
+  assignments, such as the white paper and the language manual, did
+  not come with explicit description. Perhaps more lessons focusing on
+  the language design process would be beneficial.
+
+\item[Colleen] I found the sections on run-time environments (chapter
+  7) code generation (chapter 8) to be particularly interesting--both
+  gave me a far greater understand of facets of computer programming
+  that I had previously taken for granted.
+
+\item[Will] I really enjoyed all of the material associated with this
+  course, and I think the project really gave me an appreciation for
+  compilers and compiling tools. If I were to change one thing about
+  this course, it would be to make homeworks more frequent. I would
+  have liked to have more opportunities to apply some of the knowledge
+  that I learned in lecture. Also, I'm not sure if this is unique to
+  our language or all teams' languages, but we never got into any code
+  optimization in Feynstein. I would have found a homework that
+  required me to implement some basic code optimization really
+  challenging and enjoyable.
+
+\item[Eva] I think we covered grammars and regular languages a little
+  more extensively than we needed to given that they were review. It
+  would have been nice to get to YACC and lex right away.
+
+\item[Rob] For future classes, I'd like to see a bit more examples of
+  other programming languages and syntax styles, for no other reason
+  other than I think things like that and I think it would be
+  interesting and entertaining.
+\end{description}
