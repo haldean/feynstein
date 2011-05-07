@@ -15,15 +15,15 @@ def error_gen(err,javamap):
     errorlist = []
     errormessage = ''
     for e in err:
-        print(e)
+        #print(e)
         if re.search('java:',e):
             m = re.search(':[0-9]+',e)
             n = re.search('[0-9]+',m.group())
             errorlist.append(int(n.group()))
     #print(str(len(errorlist)))
 
-    for el in errorlist:
-        print(str(el))
+    #for el in errorlist:
+        #print(str(el))
     if len(errorlist) > 0:
         errormessage = 'Feynstein errors:\n'
         for er in errorlist:
