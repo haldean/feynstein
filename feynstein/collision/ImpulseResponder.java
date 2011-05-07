@@ -122,51 +122,54 @@ public class ImpulseResponder extends CollisionResponder<ImpulseResponder> {
 		double[] coords = col.getBaryCoords();
 		double s = coords[0];
 		double t = coords[1];
-		
+
 		//collision points
-		Vector3d xa, xb, va, vb;
-			xa[0] = s*X[3*p1]+(1-s)*X[3*q1];
-			xa[1] = s*X[3*p1+1]+(1-s)*X[3*q1+1];
-			xa[2] = s*X[3*p1+2]+(1-s)*X[3*q1+2];
-			xb[0] = t*X[3*p2]+(1-t)*X[3*q2];
-			xb[1] = t*X[3*p2+1]+(1-t)*X[3*q2+1];
-			xb[2] = t*X[3*p2+2]+(1-t)*X[3*q2+2];
-			//collision velocities
-			va[0] = s*V[3*p1]+(1-s)*V[3*q1];
-			va[1] = s*V[3*p1+1]+(1-s)*V[3*q1+1];
-			va[2] = s*V[3*p1+2]+(1-s)*V[3*q1+2];
-			vb[0] = t*V[3*p2]+(1-t)*V[3*q2];
-			vb[1] = t*V[3*p2+1]+(1-t)*V[3*q2+1];
-			vb[2] = t*V[3*p2+2]+(1-t)*V[3*q2+2];
-			//weighted mass
-			double m = s*s/M[3*p1]+(1-s)*(1-s)/M[3*q1]+t*t/M[3*p2]+(1-t)*(1-t)/M[3*q2];
-			//collision norm
-			Vector3d norm = xa-xb;
-			if(norm.norm()!=0)
-				norm = norm/norm.norm();
-			//impulse
-			double I= (va-vb-1.0e-6)*norm/m;
-			//apply to first edge
-			V[3*p1] -= s*I/M[3*p1]*norm[0];
-			V[3*p1+1] -= s*I/M[3*p1]*norm[1];
-			V[3*p1+2] -= s*I/M[3*p1]*norm[2];
-			V[3*q1] -= (1-s)*I/M[3*q1]*norm[0];
-			V[3*q1+1] -= (1-s)*I/M[3*q1]*norm[1];
-			V[3*q1+2] -= (1-s)*I/M[3*q1]*norm[2];
-			//apply to next edge
-			V[3*p2] += t*I/M[3*p2]*norm[0];
-			V[3*p2+1] += t*I/M[3*p2]*norm[1];
-			V[3*p2+2] += t*I/M[3*p2]*norm[2];
-			V[3*q2] += (1-t)*I/M[3*q2]*norm[0];
-			V[3*q2+1] += (1-t)*I/M[3*q2]*norm[1];
-			V[3*q2+2] += (1-t)*I/M[3*q2]*norm[2];
-		}
+		Vector3d xa = new Vector3d(s*X[3*p1]+(1-s)*X[3*q1],
+					   s*X[3*p1+1]+(1-s)*X[3*q1+1],
+					   s*X[3*p1+2]+(1-s)*X[3*q1+2]);
+		Vector3d xb = new Vector3d(t*X[3*p2]+(1-t)*X[3*q2],
+					   t*X[3*p2+1]+(1-t)*X[3*q2+1],
+					   t*X[3*p2+2]+(1-t)*X[3*q2+2]);
 
+		//collision velocities
+		Vector3d va = new Vector3d(s*V[3*p1]+(1-s)*V[3*q1],
+					   s*V[3*p1+1]+(1-s)*V[3*q1+1],
+					   s*V[3*p1+2]+(1-s)*V[3*q1+2]);
+		Vector3d vb = new Vector3d(t*V[3*p2]+(1-t)*V[3*q2],
+					   t*V[3*p2+1]+(1-t)*V[3*q2+1],
+					   t*V[3*p2+2]+(1-t)*V[3*q2+2]);
 
-
-
-
-
+		
+		//weighted mass
+		//TODO haven't touched this...
+		double m = s*s/M[3*p1]+(1-s)*(1-s)/M[3*q1]+t*t/M[3*p2]+(1-t)*(1-t)/M[3*q2];
+		
+		//collision norm
+		Vector3d norm = xa.minus(xb);
+		if(norm.norm() != 0)
+		    norm = norm / norm.norm();
+		
+		//impulse
+		//TODO vector 3d != scalar
+		double I= (va-vb - .000001) * norm/m;
+		
+		//TODO haven't touched this either...
+		//apply to first edge
+		V[3*p1] -= s*I/M[3*p1]*norm[0];
+		V[3*p1+1] -= s*I/M[3*p1]*norm[1];
+		V[3*p1+2] -= s*I/M[3*p1]*norm[2];
+		V[3*q1] -= (1-s)*I/M[3*q1]*norm[0];
+		V[3*q1+1] -= (1-s)*I/M[3*q1]*norm[1];
+		V[3*q1+2] -= (1-s)*I/M[3*q1]*norm[2];
+		//apply to next edge
+		V[3*p2] += t*I/M[3*p2]*norm[0];
+		V[3*p2+1] += t*I/M[3*p2]*norm[1];
+		V[3*p2+2] += t*I/M[3*p2]*norm[2];
+		V[3*q2] += (1-t)*I/M[3*q2]*norm[0];
+		V[3*q2+1] += (1-t)*I/M[3*q2]*norm[1];
+		V[3*q2+2] += (1-t)*I/M[3*q2]*norm[2];
+	    }
+	}
 
 	return V;
     }
