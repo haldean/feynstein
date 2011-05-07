@@ -1,0 +1,102 @@
+The Feynstein language evolved rather smoothly throughout the course
+of this project. From the very beginning we agreed upon a syntax and
+feature set for our language. We defined a set of clear milestones
+that we then organized into a language pipeline. Naturally, our first
+goal was to have our parser and syntax interpreter up and running, so
+our execution code could be written with few changes to the translator
+and interpreter. After this, our second milestone was to implement our
+renderer, without which no testing could be performed as Feynstein
+requires visual display. Both of these hurdles were overcome in the
+first half of the semester. With this foundation established, we were
+able to divide our language into independent features and assign
+development accordingly.
+
+The dependency graph shown in Figure \figref{depend} shows the work
+flow for our language development. An arrow indicates a dependency,
+i.e. if A->B, then A must be completed before B. Features shown in
+italics were deemed second priority because no other language modules
+depend upon them and they are not necessary for testing, or there
+exists an equivalent feature. Based on this flow graph, we decided to
+assign integration and shapes to different team members as they could
+clearly be completed in parallel. The team member responsible for
+integration would first complete one integrator before developing an
+additional integrator, so the person responsible for forces could
+begin their work. The person responsible for forces would first
+complete spring forces, as collision response will depend on this
+logic (and it is the simplest force potential). Forces where An
+additional person would then be responsible for handling collisions,
+which we agreed upon as a second completion state. As collision
+detection extends all other primary modules, it could be left for
+future development with the language in a completed state under
+undesirable circumstances.
+
+\imgfig{depend}{.5}{Dependencies in Feynstein}{depend}
+
+Our syntax, which is intentionally close to Java for easy integration
+of Java code into Feynstein programs, improves upon Java with a
+feature we called Builder Syntax. Builder Syntax allows users to
+specify Feynstein object instantiation parameters in an arbitrary
+order with key-value pairs. For example, a user creates a gravity
+force as \code{force GravityForce(gy=-9.8)}. The GravityForce takes
+additional optional parameters gx, and gz, which specify the
+acceleration due to gravity in the x and z directions,
+respectively. This important feature makes Feynstein accessible to
+users without requiring an in-depth understanding of its API.
+
+The systems architect took primary responsibility for developing the
+translator logic of Builder Syntax translator was completed in the
+first half of the project timeline. Meanwhile, the language guru wrote
+the OpenGL pipeline render as a stand-alone Java application to be
+incorporated into the make Feynstein program. The architect's Builder
+Syntax implementation allowed for each development of new-key value
+pairs without modifying the basic grammar. Instantiation parameters
+are configured as a chain of function calls, each of which returns the
+updated object instance. The syntax was also developed to support list
+configuration when setting multidimensional parameters; for example,
+\code{shape Sphere(position=(0.0,0.2,0.2))}. Builder Syntax keys
+translate to methods of name \code{set\_<key\_name>} that return an
+instance of the class type--this facilitated rich feature development
+for the rest of the team.
+
+With the goal of allowing the team to easily develop properties,
+shapes, and forces independently, our architect wrote the APIs for
+each base class. With our code checked into a central repository, the
+other team members could fill in the method logic
+accordingly. Geometric primitives were developed for the renderer and
+used to build a triangle mesh class for shape topology. As planned, we
+developed our initial custom shapes in parallel with the Semi-implict
+Euler integrator. We implemented the .obj file parser first, as this
+would allow for quick render testing without defining complex
+geometric configurations dynamically. We then developed forces while
+extending our custom shape library. Forces were developed in order of
+increasing complexity measured in the number of particles they act
+upon. The most complex force we aspired to support, a tetrahedral
+constraint force, was omitted from the language as it only applied to
+a single shape configuration. We developed particle-Interpolation
+shapes, which are small shapes defined by a list of vertices, in light
+of forces for easy unit testing of force stencils.
+
+We had hoped to develop a second time integration class in parallel to
+force and shape development, but did not reach this goal. The
+ImplicitEuler method we hoped to support required a complex
+multi-dimensional numerical solver for which we could not find an
+appropriate external library. We did however, add a less complex
+Velocity-Verlet based integrator to offer users more flexibility. We
+completed all force and shape definitions soon enough that we could
+focus our last efforts towards building our collision detection system
+while simultaneously developing a syntactical feature that allowed
+users to manipulate shapes with predefined operators. We first
+completed proximity-based collision detection, then continuous-time
+collision detection, which is significantly more complicated and
+precise. We then developed a penalty-spring-based collision handler
+followed by an impulse-based handler.
+
+With the exception of our two minor changes, our language evolved
+beyond our first completion stage. We achieve our milestones on time,
+though sacrifices in division of labor often had to be made to reach
+this goal. With better deadline achievement, I believe we could have
+achieved more interesting rendering capabilities into the
+languages--such as lighting and textures. Nevertheless, our final
+feature set provides a rich framework for configuring physics-based
+simulation as well as many easily-extendable building blocks for
+future research and development.

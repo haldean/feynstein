@@ -1,20 +1,4 @@
-\documentclass[letterpaper]{article}
-
-\usepackage{graphicx}
-
-\title{Feynstein: A Language for Physical Simulation}
-
-\author{Sam Ainsley, Eva Asplund, Will Brown, Colleen McKenzie, Rob
-  Post}
-
-\newcommand\subsubsubsection[1]{\paragraph{#1}}
-
-\begin{document} 
-\maketitle
-
-\tableofcontents
-
-\section{Introduction}
+\subsection{Introduction}
 This reference manual describes the syntax and semantics of the
 Feynstein programming language. The document is divided into
 sections that aim to define the language conventions and
@@ -22,7 +6,7 @@ applications. For an introductory guide to working with Feynstein,
 including sample programs, please refer to the Feynstein Language
 Tutorial.
 
-\subsection{Motivation}
+\subsubsection{Motivation}
 
 Physics-based computer simulation is becoming increasingly popular as
 a standard paradigm for scientific experimentation. For example,
@@ -57,7 +41,7 @@ midpoint between these two extremes. It is a language that allows for
 the visual fidelity of a complex simulation package, but with the
 ease-of-use that comes with a tool like Matlab.
 
-\subsection{Extensibility}
+\subsubsection{Extensibility}
 Feynstein is fully object oriented and extensible, allowing for
 straightforward customization of native forces and geometric
 primitives. Users can additionally customize integration and rendering
@@ -74,14 +58,14 @@ configured with as few tokens as would be required to simply describe
 the scene in words.
 
 
-\section{Top-Level Elements}
+\subsection{Top-Level Elements}
 
-\subsection{Feynstein File Sections}
+\subsubsection{Feynstein File Sections}
  
 A Feynstein source program is comprised of three mandatory sections --
 shapes, forces and properties -- and one optional section -- onFrame.
  
-\subsubsection{Shapes}
+\paragraph{Shapes}
 \label{sec:shapes}
 The shapes section is where the geometry of the scene is
 declared. This is essentially the modeling portion of the
@@ -99,7 +83,7 @@ shapes {
 }
 \end{verbatim}
  
-\subsubsection{Forces}
+\paragraph{Forces}
 
 The forces section is where physical forces are assigned to the shapes
 in the scene by name. The force section is where the animation is
@@ -119,7 +103,7 @@ forces {
 }
 \end{verbatim}
  
-\subsubsection{Properties}
+\paragraph{Properties}
 
 The properties section is the place to define all other aspects of the
 simulation. Most notably, time integration and rendering methods are
@@ -139,7 +123,7 @@ properties {
 }
 \end{verbatim}
  
-\subsection{Frame Update Methods}
+\subsubsection{Frame Update Methods}
 The frame update method (defined in the \texttt{onframe} block) of the
 program allows the user to define any additional actions to be taken
 every time a new frame is rendered in the simulation. This section is
@@ -149,7 +133,7 @@ it is rendered. This gives the programmer an opportunity to observe or
 change some of the properties of the objects in the scene before the
 next frame is generated.
 
-\subsection{Code Sample}
+\subsubsection{Code Sample}
 
 \begin{verbatim}
 MyScene {
@@ -180,12 +164,12 @@ MyScene {
  }
 \end{verbatim}
 
-\section{Lexical Conventions}
+\subsection{Lexical Conventions}
  
-\subsection{Statements}
+\subsubsection{Statements}
 As in Java, logical statements are separated with semicolons.
  
-\subsection{Whitespace}
+\subsubsection{Whitespace}
 Lexical definition:
 
 \begin{verbatim}
@@ -195,7 +179,7 @@ whitespace ::= " " | "\t" | "\n";
 Whitespace, as defined as spaces, tabs, and new lines, is solely used
 to separate tokens.
  
-\subsection{Comments}
+\subsubsection{Comments}
 Lexical definition:
 
 \begin{verbatim}
@@ -208,7 +192,7 @@ forward slashes "//". Feynstein supports multi-line comments
 delineated at the beginning by a forward slash follwed by a star, "/*"
 and at the end by a start followed by a forward slash, "*/".
  
-\subsection{Identifiers and Keywords}
+\subsubsection{Identifiers and Keywords}
 
 Identifiers are described by the following lexical definitions:
 
@@ -228,7 +212,7 @@ character.  Identifiers with the same spelling as a Java or Feynstein
 keyword, boolean or null literal will not be recognized by the
 compiler.
 
-\subsubsection{Primitive Types}
+\paragraph{Primitive Types}
 All of Feynstein's primitive types function like Java primitives in
 that they are pre-defined, can be used as return values for functions,
 and in that the value of a primitive-typed variable can only be
@@ -247,7 +231,7 @@ using literals as described in Section \ref{sec:numliterals}.
 
 int decimal string boolean void shape force property
 
-\subsubsection{Section Declaration}
+\paragraph{Section Declaration}
 
 At some point within the code block constituting the scene to be
 simulated and rendered, a \texttt{shapes}, \texttt{forces}, and \texttt{properties} block
@@ -263,7 +247,7 @@ codeSection ::= sectionName { codeBlock }
 sectionName ::= shapes | forces | properties | onframe
 \end{verbatim}
 
-\subsubsubsection{Properties}
+\subparagraph{Properties}
 
 As mentioned above, there is more than one aspect of the scene that
 must be declared in the properties code block.  There are property
@@ -277,7 +261,7 @@ The possible properties are EndTime, AssertStability, CameraView,
 StabilityAssertTolerance, BoundingVolumeHierarchy, ProximityDetector,
 VideoOutput and FileOutput.
 
-\subsubsection{Other Keywords}
+\paragraph{Other Keywords}
 
 The keywords \texttt{new} and \texttt{return} are used with Feynstein
 classes and functions in the same way they are used in Java.  That is,
@@ -286,7 +270,7 @@ instantiated object of the specified type, and \texttt{return} is used
 within a function to escape the function block and specify the value
 of the function call.
 
-\subsection{Builder Syntax}
+\subsubsection{Builder Syntax}
 Feynstein adds a new way to construct objects, called "Builder
 Syntax", which lets you use key-value pairs to call a series of
 mutator methods. For example, to create a sphere with the name
@@ -310,9 +294,9 @@ lists of arbitrary length, you will have to take an array as an
 argument, and the end user of your API will not be able to use the
 syntax described above.
 
-\subsection{Literals}
+\subsubsection{Literals}
  
-\subsubsection{Number literals}
+\paragraph{Number literals}
 \label{sec:numliterals}
 All number literals are parsed as double precision floating point
 literals, referenced as the decimal primitive type. Floating point
@@ -333,7 +317,7 @@ are left to the individual machines Java implementation. Note that for
 simplicity of use, Feynstein supports only integer and decimal
 (i.e. Java doubles).
  
-\subsubsection{Boolean literals}
+\paragraph{Boolean literals}
 Booleans are primitive types that evaluate to either one or zero. A
 boolean in Feynstein is represented by a single bit in Java with the
 following grammar:
@@ -342,7 +326,7 @@ following grammar:
 boolean ::= true | false
 \end{verbatim}
 
-\subsubsection{String literals}
+\paragraph{String literals}
 
 Strings are sequences of characters. There is no character type in
 Feynstein as we anticipate Strings only to be used for labels in
@@ -359,7 +343,7 @@ stringchar ::= <any source character except "\"> | escapeseq
 escapeseq ::= "\" character
 \end{verbatim}
 
-\subsubsection{Time literals}
+\paragraph{Time literals}
  
 Time literals describe a unit of time. Time objects are implemented as
 numbers in milliseconds and are described by the following lexical
@@ -374,7 +358,7 @@ second ::= decimal "ts" millisecond | millisecond
 millisecond ::= decimal "tms" | epsilon
 \end{verbatim}
 
-\subsubsection{Spatial literals}
+\paragraph{Spatial literals}
  
 Spatial literals describe a unit of measurement. Spatial literals
 represent a one-dimensional measure of length. Spatial literals can be
@@ -395,7 +379,7 @@ feet ::= decimal "ft" inch | inch
 inch ::= decimal "in" | epsilon
 \end{verbatim}
 
-\subsubsection{Mass literals}
+\paragraph{Mass literals}
 
 Mass literals describe units of measure of the mass of objects. Mass
 literals are implemented in kilograms and are described by the
@@ -408,7 +392,7 @@ gram ::= decimal "g" milligram | milligram
 milligram ::= decimal "mg" | epsilon
 \end{verbatim}
 
-\subsubsection{Force literals}
+\paragraph{Force literals}
 
 All forces are measured in Newtons (N).
 
@@ -416,7 +400,7 @@ All forces are measured in Newtons (N).
 force ::= decimal "N" | epsilon
 \end{verbatim}
 
-\subsection{Delimiters}
+\subsubsection{Delimiters}
 The following tokens are designated as grammar delimiters:
 
 \begin{verbatim}
@@ -427,9 +411,9 @@ The following tokens are designated as grammar delimiters:
 '     \
 \end{verbatim}
 
-\section{Expressions}
+\subsection{Expressions}
 
-\subsection{Arithmetic Operations}
+\subsubsection{Arithmetic Operations}
 The following tokens are designated as arithmetic operators:
 \begin{verbatim}
 + - / * \% \textasciicircum
@@ -439,7 +423,7 @@ These operators retain their conventional operations; all are binary
 operators, and the minus sign also functions as a unary negation
 operator.
 
-\subsection{Comparison Operations}
+\subsubsection{Comparison Operations}
 
 The following tokens are designated as arithmetic operators:
 \begin{verbatim}
@@ -451,7 +435,7 @@ These operators retain their conventional operations and all return a
 boolean value. Comparison operators take a lower precedence than
 arithmetic operations.
 
-\subsection{Boolean Operations}
+\subsubsection{Boolean Operations}
 
 The following tokens are designated as boolean operators:
 \begin{verbatim}
@@ -466,16 +450,16 @@ performed on the principle of lazy evaluation: for the expression
 and for the expression \texttt{a or b}, \texttt{b} is not evaluated if
 \texttt{a} is true.
 
-\section{Language model}
+\subsection{Language model}
 
-\subsection{Section types}
+\subsubsection{Subsection types}
 Like Java, Feynstein supports extension of object-oriented language
 types. In the Feynstein language model, the notion of an object
 ``class'' is broken down into three types corresponding to the source
-code sections: shape, force, and property. Each type has properties
+code subsections: shape, force, and property. Each type has properties
 that must be defined by any new type definitions.
 
-\subsection{Shapes}
+\subsubsection{Shapes}
 The shape type represents a piece of geometry in the simulation
 scene. Every shape has an underlying triangle mesh that defines its
 geometry. An anonymous object of type shape can be instantiated
@@ -484,7 +468,7 @@ is instantiated, its underlying mesh is added to the global list of
 triangles and a global list of vertices in the scene. These lists can
 be indexed into by forces in the scene.
 
-\subsubsection{Shape accessors}
+\paragraph{Shape accessors}
 When defined in the shapes block, shapes are not assigned to a
 variable. Rather, they are created anonymously, using the
 \texttt{shape} keyword, and the compiler adds the shape to the
@@ -500,7 +484,7 @@ shapes {
 }
 \end{verbatim}
 
-\subsubsection{Transformation operators}
+\paragraph{Transformation operators}
 Shapes can be scaled, translated, and rotated given a designated
 operator and either a scalar or vector argument. Scalar arguments will
 apply the transformations equally along all three axes. Vector inputs
@@ -518,7 +502,7 @@ operators and their corresponding definitions.
   \label{tab:transform}
 \end{table}
 
-\subsubsection{Predefined shapes}
+\paragraph{Predefined shapes}
 The Feynstein language package includes pre-defined, re-sizable
 shapes. The automatic discretzation of geometric primitives makes
 Feynstein an excellent tool for building scenes without a separate
@@ -541,14 +525,14 @@ the corresponding parameters are shown in Table \ref{tab:shapes}.
 \label{tab:shapes}
 \end{table}
 
-\subsubsection{Custom shapes}
+\paragraph{Custom shapes}
 Custom shapes must be created in external 3D editing software and
 exported as a Wavefront OBJ file. This can then be imported into
 Feynstein using the \texttt{CustomObj} shape, which takes a \texttt{file} as a
 parameter. Note that all textures defined in the OBJ file will be
 ignored.
 
-\subsection{Forces}
+\subsubsection{Forces}
 Force objects act on shapes in the scene to influence their
 motion. All forces have an underlying force stencil. The force stencil
 is a list of indexes into the global vertex list. Each force has an
@@ -559,14 +543,14 @@ list of vertex indices equal in length to the stencil size. If the
 stencil size is undefined, then the force is global and acts on all
 vertexes in the scene.
 
-\subsubsection{Predefined forces}
-\subsubsubsection{GravityForce}
+\paragraph{Predefined forces}
+\subparagraph{GravityForce}
 
 A global gravitational force acting on each particle in the
 simulation. Has three configurable components $(gx, gy, gz)$ which
 express the vector acceleration due to gravity.
 
-\subsubsubsection{DampingForce}
+\subparagraph{DampingForce}
 
 A global mass-based damping force acting to oppose the velocity of
 each particle. The DampingForce has one parameter, $\gamma$, the
@@ -574,7 +558,7 @@ coefficient of the damping force acting on each particle. For a
 particle with mass m and velocity $v = (vx, vy, vz)$, the damping force
 is given by $f = -\gamma mv$.
 
-\subsubsubsection{SpringForce}
+\subparagraph{SpringForce}
 
 A constraint force between two particles. The energy associated to the
 spring force is $(\frac{k}{2L}) (||\vec{x}||−L)^2$, where $\vec{x} =
@@ -584,12 +568,12 @@ arrangement of this force can be seen in Figure \ref{fig:springf}.
 
 \begin{figure}
   \centering
-  \includegraphics{img/SpringForce}
+  \includegraphics{figures/SpringForce}
   \caption{The spatial arrangement of particles for a \texttt{SpringForce}}
   \label{fig:springf}
 \end{figure}
 
-\subsubsubsection{RodBendingForce}
+\subparagraph{RodBendingForce}
 
 A RodBendingForce is a constraint force acting open three particles
 that come to form a single hinge. The energy associated to the
@@ -601,12 +585,12 @@ in Figure \ref{fig:rodf}.
 
 \begin{figure}
   \centering
-  \includegraphics{img/RodBending}
+  \includegraphics{figures/RodBending}
   \caption{The spatial arrangement of particles for a \texttt{RodBendingForce}}
   \label{fig:rodf}
 \end{figure}
 
-\subsubsubsection{ConstantStrainTriangleForce}
+\subparagraph{ConstantStrainTriangleForce}
 
 The ConstantStrainTriangleForce is based on a triangle stencil
 involving three particles. This force resists both stretching and
@@ -618,12 +602,12 @@ force can be seen in Figure \ref{fig:trianglef}.
 
 \begin{figure}
   \centering
-  \includegraphics{img/Triangle}
+  \includegraphics{figures/Triangle}
   \caption{The spatial arrangement of particles for a \texttt{ConstantStrainTriangleForce}}
   \label{fig:trianglef}
 \end{figure}
 
-\subsubsubsection{SurfaceBendingForce}
+\subparagraph{SurfaceBendingForce}
 
 A SurfaceBendingForce is a constraint force that resists the bending
 of a four-particle surface along its diagonal. The force energy is
@@ -636,12 +620,12 @@ in Figure \ref{fig:surfacef}.
 
 \begin{figure}
   \centering
-  \includegraphics{img/SurfaceBending}
+  \includegraphics{figures/SurfaceBending}
   \caption{The spatial arrangement of particles for a \texttt{SurfaceBendingForce}}
   \label{fig:surfacef}
 \end{figure}
 
-\subsection{Properties}
+\subsubsection{Properties}
 Properties objects foremost include the non-optional properties of
 simulation: time integration and rendering. Every simulation requires
 a time-stepping method that defines force integration with each
@@ -650,7 +634,7 @@ rendered scene. The property type can additionally be used to define
 simulation features such as collision detection and response
 frameworks, textures, lighting, and camera controls.
 
-\subsubsection{Predefined time integrators}
+\paragraph{Predefined time integrators}
 
 Feynstein provides two methods of integration, velocity Verlet and
 semi-implicit Euler, for calculating changes to the scene over each
@@ -670,7 +654,7 @@ properties {
 }
 \end{verbatim}
 
-\subsubsection{Predefined renderers}
+\paragraph{Predefined renderers}
 
 Feynstein supports both online and offline methods of video output.
 Online rendering means that when a Feynstein program runs, it displays
@@ -696,19 +680,19 @@ the \texttt{FileOutput} property. The parameter of \texttt{File\-Output} is a
 string specifying the file. Using offline rendering requires that the
 camera position is specified using the \texttt{CameraView} property.
 
-\subsubsection{Predefined collision handlers}
+\paragraph{Predefined collision handlers}
 Efficient collision detection and effective collision response are
 essential to achieving accurate simulation for most scenarios. The
 Feynstein language has built in property types for easy collision
 detection and response.
 
-\subsubsubsection{Detectors}
+\subparagraph{Detectors}
 
 Feynstein supports a traditional, two-phase collision detection
 framework. The narrow phase of detection supports both a basic proximity-based
 method for classifying collisions, and more costly continuous-time detection for greater accuracy in
 collision handling. To add a collision detection to your simulation, declare a
-new \texttt{ProximityDetector} or \texttt{ContinuousTimeDetector} to the properties section. 
+new \texttt{ProximityDetector} or \texttt{ContinuousTimeDetector} to the properties subsection. 
 
 \begin{verbatim}                                                                                                                                             
 properties {                                                                                                                                                 
@@ -717,31 +701,39 @@ properties {
 }                                                                                                                                                            
 \end{verbatim}
 
-\subsubsubsubsection{ProximityDetector}
-A \texttt{ProximityDetector} requires one parameter: the minimum proximity that can be exhibited
-between two triangles before they are detected as colliding. At each simulation update, the \texttt{ProximityDetector}
-determines if any two triangles are going to violate this minimum proximity, and if so, marks them as colliding.
+\begin{description}
+\item[ProximityDetector] A \texttt{ProximityDetector} requires one
+  parameter: the minimum proximity that can be exhibited between two
+  triangles before they are detected as colliding. At each simulation
+  update, the \texttt{ProximityDetector} determines if any two
+  triangles are going to violate this minimum proximity, and if so,
+  marks them as colliding.
 
-\subsubsubsubsection{ContinuousTimeDetector}
-A \texttt{ContinuousTimeDetector} requires no parameters and detects collisions at each simulation update by using each triangles current positions and velocities to determine at what time they would collide. If this collision time falls in between the current time and next update time, the two are marked as colliding. 
+\item[ContinuousTimeDetector] A \texttt{ContinuousTimeDetector}
+  requires no parameters and detects collisions at each simulation
+  update by using each triangles current positions and velocities to
+  determine at what time they would collide. If this collision time
+  falls in between the current time and next update time, the two are
+  marked as colliding.
 
-The optional broad phase of detection uses a spatial hierarchy, with
-support for a variety of bounding volumes, to determine pairs of
-triangles that are close enough to exhibit a collision. These
-potentially colliding triangles are then passed to the narrow phase
-detection, which would otherwise operate on the entire global
-mesh. This data structure is provided as an optimization to
-proximity-based collision detection and will automatically wrap all
-triangles in the global simulation mesh.
+  The optional broad phase of detection uses a spatial hierarchy, with
+  support for a variety of bounding volumes, to determine pairs of
+  triangles that are close enough to exhibit a collision. These
+  potentially colliding triangles are then passed to the narrow phase
+  detection, which would otherwise operate on the entire global
+  mesh. This data structure is provided as an optimization to
+  proximity-based collision detection and will automatically wrap all
+  triangles in the global simulation mesh.
 
-To add broad phase detection to your simulation, declare a new
-\texttt{Bounding\-Volume\-Hierarchy} in the properties section of the Feynstein
-program. A \texttt{Bounding\-Volume\-Hierarchy} requires a bounding volume type
-specification: \texttt{AABB} for Axis-Aligned Bounding Boxes (default),
-\texttt{SPHERE} for Spheres, and \texttt{KDOP\_n} for n-degree K-Discrete Oriented
-Polytopes with $n \in {6, 14, 18, 26}$. Note that declaration of an
-broad phase detection property without a narrow phase detection
-property will cause a compiler error;
+  To add broad phase detection to your simulation, declare a new
+  \texttt{Bounding\-Volume\-Hierarchy} in the properties subsection of
+  the Feynstein program. A \texttt{Bounding\-Volume\-Hierarchy}
+  requires a bounding volume type specification: \texttt{AABB} for
+  Axis-Aligned Bounding Boxes (default), \texttt{SPHERE} for Spheres,
+  and \texttt{KDOP\_n} for n-degree K-Discrete Oriented Polytopes with
+  $n \in {6, 14, 18, 26}$. Note that declaration of an broad phase
+  detection property without a narrow phase detection property will
+  cause a compiler error;
 
 \begin{verbatim}
 properties {
@@ -751,8 +743,9 @@ properties {
   property ProximityDetector(proximity=1e-3);
 }
 \end{verbatim}
+\end{description}
 
-\subsubsubsection{Responders}
+\subparagraph{Responders}
 
 Collision response is handled by an additional property. Feynstein
 includes two methods for responding to collisions. The first method, \texttt{SpringPenaltyResponder},  is a penalty-based method that uses a \texttt{SpringForce} between objects to resist their impact. The second method, \texttt{ImpulseResponder}, applies iterative impulses to object's velocities until collisions converge. All collision responders take a detector instance as a parameter. This detector will feed the responder it's collision set.
@@ -765,21 +758,36 @@ includes two methods for responding to collisions. The first method, \texttt{Spr
         property SpringPenaltyResponder(detector=0, stiffness=1000, proximity=0.1);
    }
 \end{verbatim}
+\begin{description}
+\item[SpringPenaltyResponder] The \texttt{SpringPenaltyResponder}
+  takes two parameters in addition to it's detector index: Thie spring
+  stiffness used to resist collisions and the minumum proximity
+  allowed between two triangles (i.e. the rest length of the
+  spring). \texttt{SpringPenaltyResponder} takes a set of collisions
+  from it's detector, which are flagged one of two canonical collision
+  types: \texttt{VERTEX\_FACE} (one vertex and a three-vertex face)
+  and \texttt{EDGE\_EDGE} (two two-vertex edges).
 
-\subsubsubsubsection{SpringPenaltyResponder}
-The \texttt{SpringPenaltyResponder}  takes two parameters in addition to it's detector index: Thie spring stiffness used to resist collisions and the minumum proximity allowed between two triangles (i.e. the rest length of the spring). \texttt{SpringPenaltyResponder} takes a set of collisions from it's detector, which are flagged one of two canonical collision types: \texttt{VERTEX\_FACE}
-(one vertex and a three-vertex face) and \texttt{EDGE\_EDGE} (two two-vertex
-edges).
+  The two points of the standard \texttt{SpringForce} stencil are then
+  computed using the barycentric coordinates of the contact points
+  within a face or along an edge. In a sense, the
+  \texttt{SpringPenaltyResponder} holds a sub-\texttt{SpringForce} for
+  each exhibited collision vertex set.
 
-The two points of the standard \texttt{SpringForce} stencil are then computed
-using the barycentric coordinates of the contact points within a face
-or along an edge. In a sense, the \texttt{SpringPenaltyResponder} holds a
-sub-\texttt{SpringForce} for each exhibited collision vertex set.
+\item[ImpulseResponder] An \texttt{ImpulseResponder} takes one
+  parameter in addition to it's detector index: The maximum number of
+  iterations to perform when modifying object velocities until
+  collisions converge. At each iteration, the
+  \texttt{ImpulseResponder} projects the simulation state forward in
+  time by updating object velocities and asking its detector to check
+  for collisions. If any are found, impulses (either elastic or
+  inelastic) are applied to object velocities, and the future
+  simulation state is recomputed with the new velocities. This
+  iterative step is performed until all collisions disappear or some
+  maximum number or interactions is reached.
+\end{description}
 
-\subsubsubsubsection{ImpulseResponder}
-An \texttt{ImpulseResponder} takes one parameter in addition to it's detector index: The maximum number of iterations to perform when modifying object velocities until collisions converge. At each iteration, the \texttt{ImpulseResponder} projects the simulation state forward in time by updating object velocities and asking its detector to check for collisions. If any are found, impulses (either elastic or inelastic) are applied to object velocities, and the future simulation state is recomputed with the new velocities. This iterative step is performed until all collisions disappear or some maximum number or interactions is reached.
-
-\subsubsection{Camera Location and Orientation}
+\paragraph{Camera Location and Orientation}
 
 The CameraView property defines how the scene will appear to the
 viewer. The location of the camera is given by a location (x, y, z) in
@@ -797,18 +805,18 @@ properties {
 }
 \end{verbatim}
 
-\section{Execution Model}
+\subsection{Execution Model}
 
-\subsection{Code Blocks}
+\subsubsection{Code Blocks}
 Code blocks consist of multiple statements executed as a group, and
 the blocks can be nested. Code blocks are used to determine the
 grouping of statements such as those that are part of a main Feynstein
-code section or those that are part of a loop. The beginning of a code
+code subsection or those that are part of a loop. The beginning of a code
 block is delineated with a \texttt{\{}. The end of a code block is delineated
 with a \texttt{\}}. Variables declared inside of a code block exist only
 within that block of code.
 
-\subsection{Stability Analyzers}
+\subsubsection{Stability Analyzers}
 
 Stability analyzers are activated at run-time and throw exceptions
 when the difference between the average kinetic energy at the
@@ -824,12 +832,12 @@ properties {
 }
 \end{verbatim}
 
-\section{Grammar}
+\subsection{Grammar}
 
 Note that, in the grammar below, the string \texttt{epsilon} is taken
 to mean $\epsilon$, or the empty string.
 
-\subsection{Tokens}
+\subsubsection{Tokens}
 
 \begin{verbatim}
 ID ::= (letter|'_')(letter | digit | '_')*
@@ -873,7 +881,7 @@ fraction ::= '.' int+
 exponent ::= ('e'| 'E') ['+'|'‐'] int+
 \end{verbatim}
 
-\subsection{File Structure and Expressions}
+\subsubsection{File Structure and Expressions}
 
 \begin{verbatim}
 FeynsteinFile ::= ID { optCode shapeBlock optCode forceBlock 
@@ -1034,5 +1042,3 @@ forExpr ::= expression forExpr | expression | epsilon
 forUpdate ::= expression forUpdate | epsilon
 
 \end{verbatim}
-
-\end{document}

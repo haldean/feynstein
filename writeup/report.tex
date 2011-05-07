@@ -1,0 +1,85 @@
+\input{/home/haldean/Documents/latex_template.tex}
+\title{Project Report: Feynstein}
+\subtitle{A Language for Physical Simulation}
+
+\author{Samantha Ainsley \and Eva Asplund \and William Brown \and
+  Colleen McKenzie \and Robert Post}
+
+\newtoggle{tutorial}
+\newtoggle{manual}
+
+\togglefalse{tutorial}
+\togglefalse{manual}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+  Feynstein is a language designed for making physical simulation
+  accessible to those who want to experiment with physics but who do not
+  have significant experience in computer science. Feynstein will make
+  the process of going from an experiment’s conception to its simulation
+  simple and fast, and will provide the end user with accurate video
+  renderings, either in a file or on screen.
+\end{abstract}
+
+\tableofcontents
+
+\section{Introduction}
+
+Historically, if users wanted to have the power of a full physical
+simulation engine, they had to either purchase and learn very complex
+and expensive 3D simulation software, or write it themselves (usually
+in C++). Because these options are costly and time-consuming, often
+students of physics will learn simulation using a software package
+like Matlab or Mathematica. These tools have the benefit of
+abstracting much of the complexity of the task, but with the loss of
+complexity comes a loss of control. Feynstein attempts to be a
+midpoint between these two extremes; it is a language that allows for
+the full expressivity of a complex simulation package, but with the
+ease-of-use that comes with a tool like Matlab.
+
+Feynstein’s native simulator and its simple and convenient syntax make
+it an ideal tool for researchers with limited programming experience
+for configuration simulations to test experimental
+hypothesis. Moreover, the language offers an excellent framework for
+teaching the fundamentals of physics-based computer simulation to
+students with limited understanding of mechanics or programming.
+
+Feynstein is fully object oriented, allowing for easy
+extensibility. Users can customize integration and rendering methods,
+giving them full control of how their animation is calculated and
+displayed. Finally, users can use the built-in forces and 3D solids
+and define their own. Feynstein is appropriate for all levels of user
+expertise, whether they want to simulate a sphere on a spring or a
+complex compression force on a custom shape.
+
+\iftoggle{tutorial}{
+\section{Language Tutorial}
+\input{tutorial.tex}
+}{}
+
+\iftoggle{manual}{
+\section{Language Reference Manual}
+\input{manual.tex}
+}{}
+
+\section{Project Plan}
+\input{colleen.tex}
+
+\section{Language Evolution}
+\input{sam.tex}
+
+\section{Language Architecture}
+\input{will.tex}
+
+\section{Lessons Learned}
+\input{lessons.tex}
+
+\appendix
+
+\section{Project Log}
+\label{sec:projectlog}
+\input{log.appendix.tex}
+
+\end{document}

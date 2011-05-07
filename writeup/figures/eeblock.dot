@@ -1,0 +1,65 @@
+digraph eeblock {
+	rankdir="LR";
+	
+	feynstein collision forces geometry properties renderer shapes [style=bold];
+	node [shape="rect"];
+	EdgeNode [label="Edge"];
+
+	feynstein -> Scene;
+	feynstein -> Built;
+	feynstein -> ClassGetter;
+	
+	feynstein -> collision;
+	collision -> AxisAlignedBoundingBox;
+	collision -> BoundingVolume;
+	collision -> BoundingVolumeHierarchy;
+	collision -> Collision;
+	collision -> CollisionResponder;
+	collision -> ContinuousTimeDetector;
+	collision -> DistanceFinder;
+	collision -> ImpulseResponder;
+	collision -> NarrowPhaseDetector;
+	collision -> ProximityDetector;
+	collision -> SpringPenaltyResponder;
+	collision -> TrianglePair;
+
+	feynstein -> forces;
+	forces -> Force;
+	Force -> DampingForce;
+	Force -> GravityForce;
+	Force -> RodBendingForce;
+	Force -> SpringForce;
+	Force -> SurfaceBendingForce;
+	Force -> TriangleForce;
+
+	feynstein -> geometry;
+	geometry -> EdgeNode;
+	geometry -> Mesh;
+	geometry -> Particle;
+	geometry -> Transform;
+	geometry -> Triangle;
+
+	feynstein -> properties;
+	properties -> Property;
+	Property -> Integrator;
+	Integrator -> SemiImplicitEuler;
+
+	feynstein -> renderer;
+	renderer -> Renderer;
+
+	feynstein -> shapes;
+	shapes -> Shape;
+	Shape -> ParticleSet;
+	ParticleSet -> ClothPiece;
+	Shape -> Cube;
+	Shape -> CustomObject;
+	Shape -> Cylinder;
+	Shape -> FluidPlane;
+	Shape -> RegularPolygon;
+	Shape -> SinglePointMass;
+	Shape -> Sphere;
+	ParticleSet -> SpringChain;
+	Shape -> Tetrahedron;
+	Shape -> TriangleShape;
+}
+	
