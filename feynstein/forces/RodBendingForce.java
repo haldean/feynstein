@@ -164,7 +164,7 @@ public class RodBendingForce extends Force<RodBendingForce> {
 		
 		double [] undefLen = new double[2];
 		undefLen[0] = (pos1.minus(pos2)).norm();
-		undefLen[1] = (pos1.minus(pos2)).norm();
+		undefLen[1] = (pos2.minus(pos3)).norm();
 		
 		return undefLen;
 	}
