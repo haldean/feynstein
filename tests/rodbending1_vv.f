@@ -19,7 +19,7 @@ rodbending1 {
     }
 
     properties { 
-	property SemiImplicitEuler(stepSize=0.001);
+	property VelocityVerlet(stepSize=0.001);
    }
 }
 
