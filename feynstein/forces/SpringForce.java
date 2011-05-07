@@ -2,16 +2,18 @@ package feynstein.forces;
 
 import feynstein.geometry.*;
 import feynstein.shapes.*;
+import feynstein.utilities.*;
 
 import java.util.ArrayList;
 
 public class SpringForce extends Force<SpringForce> {
     private Shape actsOn;
-    private double length, strength;
-
+    private double restLength, strength;
+	private double undefLengths[];
+	
     public SpringForce() {
 		super(2);
-		length = 1.0;
+		restLength = 0.0;
 		strength = 10.0;
 		objectType = "SpringForce";
     }
@@ -26,7 +28,7 @@ public class SpringForce extends Force<SpringForce> {
     }
 
     public SpringForce set_length(double length) {
-		this.length = length;
+		this.restLength = length;
 		return this;
     }
 
@@ -42,8 +44,22 @@ public class SpringForce extends Force<SpringForce> {
 		if(localForce == null)
 			localForce = new double[3*n];
 		
-		double xi, xj, yi, yj, zi, zj;
+		if(undefLengths == null) {
+			undefLengths = new double[stencil.size()/stencilSize];
+			int ulIdx = 0;
+			for (int i = 0; i < stencil.size(); i+=stencilSize) {
+				double undefLen = computeUndeformedLengths(globalPositions, i);
+				undefLengths[ulIdx++] = undefLen;
+			}
+		}
+		
+		int ulIdx = 0;
+		double length, xi, xj, yi, yj, zi, zj;
 		for(int i = 0; i < stencil.size(); i += stencilSize) {
+			if(restLength > 0)
+				length = restLength;
+			else 
+				length = undefLengths[ulIdx++];
 			//edge vectors xi and xj
 			xi = globalPositions[3*stencil.get(i)];
 			yi = globalPositions[3*stencil.get(i)+1];
@@ -61,5 +77,18 @@ public class SpringForce extends Force<SpringForce> {
 		}
 		
 		return localForce;
+	}
+	
+	double computeUndeformedLengths(double [] vrt_psns, int i)
+	{
+		int base0 = 3*stencil.get(i);
+		int base1 = 3*stencil.get(i+1);
+		
+		Vector3d pos1, pos2;
+		pos1 = new Vector3d(vrt_psns[base0], vrt_psns[base0+1], vrt_psns[base0+2]);
+		pos2 = new Vector3d(vrt_psns[base1], vrt_psns[base1+1], vrt_psns[base1+2]);
+		
+		return (pos1.minus(pos2)).norm();
+		
 	}
 }
