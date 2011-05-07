@@ -1,0 +1,700 @@
+\subsection*{../translator/blocks.py}
+\begin{lstlisting}
+#!/usr/bin/env python3
+
+class Block:
+    '''
+    Represents a block of code with an identifier. 
+
+    This identifier usually corresponds to either a method or class
+    declaration. Tags are used to keep track of the Feynstein context
+    which this block exists within (i.e., is it in the shape block,
+    the onFrame block, etc.).
+    '''
+
+    def __init__(self, block_id, children, tag=None):
+        self.block_id = block_id
+        self.children = children
+        self.tag = tag
+        self.name = None
+
+    def block_to_string(self, tab_level=0):
+        '''
+        Convert a block to Java syntax.
+        '''
+
+        rest = '  ' * tab_level + '%s { \n' % (self.block_id)
+        for child in self.children:
+            if isinstance(child, Block):
+                rest += child.block_to_string(tab_level+1)
+            else:
+                rest += '  ' * (tab_level + 1) + '%s;\n' % child
+        rest += '  ' * tab_level + '}\n'
+        return rest
+
+    def get_by_tag(self, tag):
+        '''
+        Returns the first child with the given tag. If it has no
+        children with the correct tag, returns None.
+        '''
+
+        for child in self.children:
+            if isinstance(child, Block) and child.tag == tag: 
+                return child
+        return None
+
+    def __str__(self):
+        return self.block_to_string()
+\end{lstlisting}
+
+\subsection*{../translator/imports.py}
+\begin{lstlisting}
+#!/usr/bin/env python3
+
+imports = [
+    'feynstein.shapes.*', 'feynstein.forces.*', 'feynstein.*',
+    'feynstein.renderer.*', 'feynstein.properties.*', 
+    'feynstein.properties.integrators.*', 'java.awt.*', 'java.awt.event.*',
+    'javax.media.opengl.awt.*', 'com.jogamp.opengl.util.*', 
+    'feynstein.properties.collision.*',
+    ]
+
+def get_imports():
+    return imports
+\end{lstlisting}
+
+\subsection*{../translator/parse.py}
+\begin{lstlisting}
+#!/usr/bin/env python3
+
+import re
+
+from translator import SyntaxException
+
+import blocks, imports, matchers
+
+def split(source):
+    '''
+    Converts a source file to a series of statements, removing
+    comments. blocks.Block identifiers have not yet been removed from the
+    expressions at the end of this pass.
+    '''
+
+    # Replace all single line comments before we mangle whitespace
+    source = re.sub(matchers.line_comments, '', source)
+
+    # Replace all whitespace by a single space
+    source = re.sub(matchers.whitespace, r' ', source)
+
+    # Replace all multiline comments (this must be done after newlines
+    # are removed).
+    source = re.sub(matchers.multiline_comments, '', source)
+
+    # Place a semicolor after all braces, so that open and close block
+    # statements will be split in the following split-on-semicolon.
+    source = re.sub(matchers.braces, r'\1;', source)
+
+    # Remove trailing whitespace.
+    exprs = [x.strip() for x in source.split(';')]
+    return exprs
+        
+def is_open_block(expr):
+    '''
+    Returns true if an expression opens a block -- i.e., if an
+    expression ends with an open-brace.
+    '''
+    return expr.endswith('{')
+
+def is_close_block(expr):
+    '''
+    Returns true if an expression closes a block -- i.e., if an
+    expression is composed solely of a close-brace.
+    '''
+    return expr == '}'
+
+def block_id(expr):
+    '''
+    Given an open block expression, returns the corresponding
+    identifier of the block that is opened.
+    '''
+
+    if not is_open_block(expr):
+        raise SyntaxException('Not a block open statement: %s' % expr)
+    return expr.strip('{ ')
+
+def parse(exprs):
+    '''
+    Convert a series of expressions to a syntax tree. This also
+    creates a "root" block which encompasses all parent expressions,
+    to ensure that the syntax tree is rooted at a single node.
+    '''
+
+    root = blocks.Block(None, make_blocks(exprs), 'root')
+    for imp in imports.get_imports():
+        root.children.insert(0, 'import %s;' % imp)
+    return root
+
+def make_blocks(exprs):
+    '''
+    Convert a list of expressions into a syntax tree. Called
+    recursively to generate a full tree.
+    '''
+
+    block_list = []
+    i = 0
+
+    while i < len(exprs):
+        expr = exprs[i]
+        if is_open_block(expr):
+            try:
+                inner_blocks = 1
+                j = i
+
+                # Find the corresponding close-block
+                while inner_blocks > 0:
+                    j += 1
+                    if is_close_block(exprs[j]):
+                        inner_blocks -= 1
+                    elif is_open_block(exprs[j]):
+                        inner_blocks += 1
+
+                # Create a new block, recursively call make_blocks
+                # on the statements between the open and close block,
+                # and set the new block's children to the result.
+                block_list.append(blocks.Block(block_id(expr), make_blocks(exprs[i+1:j])))
+
+                # Move the stack pointer forward to represent all of
+                # the statements that were just added to the new
+                # block's children.
+                i = j
+            except IndexError:
+                print('Exception encountered while parsing %s' % expr)
+                raise SyntaxException('Not enough close block statements. ' +
+                                      'You\'re probably missing a close-brace ' +
+                                      'or a semicolon.')
+
+        # If it's not an open block statement, just add it to the
+        # sequence of expressions we've found thus far.
+        elif expr: block_list.append(expr)
+        i += 1
+
+    return block_list
+\end{lstlisting}
+
+\subsection*{../translator/main.txt}
+\begin{lstlisting}
+public static void main(String[] args) {
+    SceneClass scene = new SceneClass();
+    canvas.addGLEventListener(new Renderer(scene));
+
+    frame.add(canvas);
+    frame.setSize(640, 480);
+    frame.setUndecorated(true);
+    frame.setExtendedState(Frame.MAXIMIZED_BOTH);
+    frame.addWindowListener(new WindowAdapter() {
+	    public void windowClosing(WindowEvent e) {
+		System.exit(0);
+	    }
+	});
+    frame.setVisible(true);
+    animator.start();
+    canvas.requestFocus();
+}\end{lstlisting}
+
+\subsection*{../translator/matchers.py}
+\begin{lstlisting}
+#!/usr/bin/env python3
+
+import re
+
+def method_for(method):
+    '''
+    Return a private instance method for a given method signature.
+    '''
+
+    return '@Override public void %s' % method
+
+def for_unit(unit_name):
+    '''
+    Returns a pattern that matches a unit value, with the value in
+    group 0.
+    '''
+
+    pattern = r'(\d+\.?\d*(?:[eE]\d+)?)\s*%s(?=[^a-zA-Z])' % unit_name
+    return re.compile(pattern)
+
+# Matches strings of whitespace
+whitespace = re.compile(r'[\n\t ]+')
+
+# Matches open or close braces and puts the matched brace in group 0
+braces = re.compile(r'([{}])')
+
+# Matches single-line comments of the // variety
+line_comments = re.compile(r'//.*')
+
+# Matches multiline comments, but only after all newlines have been
+# removed.
+multiline_comments = re.compile(r'/\*.*?\*/')
+
+# Matches lowercase keywords.
+keyword = re.compile(r'[a-z]+')
+
+# Matches identifiers.
+identifier = re.compile(r'[a-zA-Z][a-zA-Z0-9_]*')
+
+# While this is not definitive proof of the usage of builder syntax,
+# it is a good guess. A negative match means that an expression is
+# conclusively not in builder syntax. A positive match means that an
+# expression probably uses builder syntax.
+builder_hint = re.compile(r'[a-zA-Z][a-zA-Z0-9_]*\(' +
+                          r'[a-zA-Z][a-zA-Z0-9_]*=[^=]')
+
+# Matches an identifier followed by a paren-wrapped string. First
+# group is the identifier, second group is the argument list.
+outer_parens = re.compile(r'([a-zA-Z][a-zA-Z0-9_]*)\((.*)\)')
+
+# Matches a shape accessor.
+accessor = re.compile(r'\#([a-zA-Z][a-zA-Z0-9_]*)')
+
+# Definitions for block method translation.
+block_translations = {
+    'shapes': method_for('createShapes()'),
+    'forces': method_for('createForces()'),
+    'properties': method_for('setProperties()'),
+    'onFrame': method_for('onFrame()'),
+    }
+\end{lstlisting}
+
+\subsection*{../translator/compile.py}
+\begin{lstlisting}
+#!/usr/bin/env python3
+
+import glob, os, subprocess, sys, translator
+
+def get_classpath():
+    libs = ':'.join(glob.glob('./libs/*.jar'))
+    return '.:%s:%s' % (os.getcwd(), libs)
+
+def get_jvm_vars():
+    return '-Djava.library.path=/lib/:libs/'
+
+def compile_feynstein(infile):
+    java_source = translator.main(infile)
+    subprocess.call(['javac', '-classpath', get_classpath(), 
+                     '-Xlint:unchecked', java_source])
+    return java_source
+
+def run_feynstein(infile):
+    package = '.'.join(infile.replace('.', '/').split('/')[:-1])
+    subprocess.call(['java', '-classpath', get_classpath(), 
+                     get_jvm_vars(), package])
+
+if __name__ == '__main__':
+    infile = sys.argv[1]
+    if len(sys.argv) > 2 and sys.argv[2] == 'compile':
+        compile_feynstein(infile)
+    else:
+        run_feynstein(compile_feynstein(infile))
+\end{lstlisting}
+
+\subsection*{../translator/syntax.py}
+\begin{lstlisting}
+#!/usr/bin/env python3
+
+from translator import SyntaxException
+import matchers
+
+def check_syntax(root):
+    '''
+    Ensure that no syntactic rules are broken.
+    '''
+
+    scene = root.get_by_tag('scene')
+    check_blocks(scene)
+
+def check_blocks(scene):
+    '''
+    Ensure that all of the correct blocks are present.
+    '''
+
+    if not scene.get_by_tag('shapes'):
+        raise SyntaxException('No shapes block found.')
+    if not scene.get_by_tag('forces'):
+        raise SyntaxException('No forces block found.')
+    if not scene.get_by_tag('properties'):
+        raise SyntaxException('No properties block found.')
+    if not scene.get_by_tag('onFrame'):
+        print('Warning: no onFrame block found. ' +
+              'An empty frame update method will be used.')
+        scene.children.append('%s() {}' % matchers.method_for('onFrame'))
+\end{lstlisting}
+
+\subsection*{../translator/units.py}
+\begin{lstlisting}
+#!/usr/bin/env python3
+
+import blocks, matchers, re
+
+conversions = {
+    # Length
+    'km': 1000,
+    'm': 1,
+    'cm': 0.01,
+    'mm': 0.001,
+
+    'mi': 1609.34,
+    'yd': 0.9144,
+    'ft': 0.3048,
+
+    # Time
+    'year': 3.154e7,
+    'month': 2.628e6,
+    'week': 604800,
+    'day': 86400,
+    'hour': 3600,
+    'min': 60,
+    'sec': 1,
+    'ms': 0.001,
+    'microsec': 1e-6,
+
+    # Mass
+    'tonne': 1000,
+    'kg': 1,
+    'g': 0.001,
+
+    'ton': 1016.0469,
+    'lb': 0.4536,
+    'oz': 0.028349,
+
+    # Force
+    'forcelb': 4.448,
+    'newton': 1,
+    'dyne': 1e-5,
+    }
+
+unit_matchers = {}
+for unit in conversions.keys():
+    unit_matchers[unit] = matchers.for_unit(unit)
+
+def translate_units_for_expr(expr):
+    if expr and re.search('\d', expr):
+        for unit, m in unit_matchers.items():
+            expr = re.sub(m, r'(\1*%f)' % conversions[unit], expr)
+    return expr
+
+def translate_units(block):
+    for i, expr in enumerate(block.children):
+        if isinstance(expr, blocks.Block):
+            expr.block_id = translate_units_for_expr(expr.block_id)
+            translate_units(expr)
+        else:
+            block.children[i] = translate_units_for_expr(expr)
+\end{lstlisting}
+
+\subsection*{../translator/translator.py}
+\begin{lstlisting}
+#!/usr/bin/env python3
+
+'''
+The Feynstein compiler. (Mostly) written early one morning, with the
+help of lots of beer. I'm going to bed now, I think.
+'''
+
+class SyntaxException(Exception): 
+    '''
+    An exception raised when a syntax error is detected when parsing a
+    Feynstein source file.
+    '''
+    pass
+
+import blocks, matchers, os, parse, re, sys, syntax, translate
+
+def create_java(root):
+    '''
+    Create a Java source string from a translated root block.
+    '''
+
+    return '\n'.join([str(x) for x in root.children])
+
+def src2blocks(source):
+    exprs = parse.split(source)
+    root = parse.parse(exprs)
+    translate.translate(root)
+    syntax.check_syntax(root)
+    return root
+
+def feync(source, path):
+    '''
+    Compile a source file, returning a tuple with the Java source code
+    and the name of the scene.
+    '''
+
+    root = src2blocks(source)
+
+    package = os.path.dirname(path).replace('/', '.')
+    root.children.insert(0, 'package %s;' % package)
+
+    scene_name = root.get_by_tag('scene').name
+
+    main_file = "%s/main.txt" % os.path.dirname(__file__)
+    with open(main_file) as f:
+        main_method = f.read().replace('SceneClass', scene_name);
+        if main_method:
+            root.get_by_tag('scene').children.append(main_method)
+
+    return create_java(root), scene_name
+
+def main(infile):
+    '''
+    Compile infile and return the filename of the generated Java
+    source code.
+    '''
+
+    with open(infile) as f:
+        source = f.read()
+
+    source, scene_name = feync(source, infile)
+    output_file = '%s/%s.java' % (os.path.dirname(infile), scene_name)
+
+    with open(output_file, 'w') as f:
+        f.write(source)
+    print('Compiled to %s' % output_file)
+    
+    return output_file
+
+if __name__ == '__main__':
+    infile = sys.argv[1]
+    main(infile)
+\end{lstlisting}
+
+\subsection*{../translator/translate.py}
+\begin{lstlisting}
+#!/usr/bin/env python3
+
+from translator import SyntaxException
+
+import blocks, matchers, re, units
+
+def translate_block_id(block):
+    '''
+    Replaces block identifiers with their corresponding replacement,
+    as defined in matchers.block_translations. Any block identifier
+    not in matchers.block_translations remains untouched.
+    '''
+
+    if block.block_id in matchers.block_translations:
+        # If we're translating this block_id, set its tag to the
+        # block_id specified in the Feynstein source.
+        block.tag = block.block_id
+        block.block_id = matchers.block_translations[block.block_id]
+
+def translate_root_id(block):
+    '''
+    Replaces the block identifier for a scene block with the
+    corresponding class definition.
+    '''
+
+    block.name = block.block_id
+    block.block_id = 'public class %s extends Scene' % block.block_id
+    block.tag = 'scene'
+
+def translate_ids(block, is_root=True):
+    '''
+    Translate all block identifiers recursively.
+    '''
+
+    # Keep track of whether we've seen a block; the root must contain
+    # exactly one block (the scene).
+    block_seen = False
+
+    for expr in block.children:
+        if isinstance(expr, blocks.Block):
+            if is_root and block_seen:
+                raise SyntaxException('Source may only contain one top-level block. ' +
+                                      'You cannot specify more than one scene in one file.')
+            block_seen = True
+            if is_root:
+                translate_root_id(expr)
+            else:
+                translate_block_id(expr)
+
+            # Recursively call on this block.
+            translate_ids(expr, is_root=False)
+
+    if is_root and not block_seen:
+        raise SyntaxException('Source must contain a scene.')
+
+def disperse_tags(root):
+    '''
+    Trickle down tags so that all blocks within other blocks in a
+    scene are tagged with their parents' tags. This is necessary for
+    later translation steps; for example, the "shape" directive has a
+    different meaning if it is in the "shapes" block.
+    '''
+
+    def set_child_tags(block, tag):
+        '''
+        Set the tag for block and all of its children.
+        '''
+
+        block.tag = tag
+        for expr in block.children:
+            if isinstance(expr, blocks.Block):
+                set_child_tags(expr, tag)
+
+    # If this isn't a scene block, assume that it's the root and find
+    # the scene block in its children.
+    if root.tag != 'scene':
+        root = root.get_by_tag('scene')
+        if not root:
+            raise SyntaxException('Source must contain a scene.')
+    
+    for child in root.children:
+        if isinstance(child, blocks.Block):
+            set_child_tags(child, child.tag)
+
+def is_builder(expr):
+    '''
+    Return a best-guess for whether or not expr represents an
+    expression that contains builder syntax. Note that the result of
+    this method is not guaranteed to be correct.
+    '''
+    match = re.search(matchers.builder_hint, expr)
+    if match and expr.count('"', 0, match.start()) % 2 == 0:
+        return True
+    return False
+
+def translate_builder(expr, parent_ref=False):
+    '''
+    Given an expresion in builder syntax, output the corresponding
+    Java translation.
+    '''
+
+    # Get the class name and parameter list
+    match = re.search(matchers.outer_parens, expr)
+    class_name, param_list = match.groups()
+    
+    params = []
+    nest_level = last_boundary = 0
+    in_quote = False
+
+    # Process input one character at a time; this is essentially a PDA
+    # to determine the boundaries between arguments at the parent
+    # level, and ignore commas that correspond to other method calls.
+    for i in range(len(param_list)):
+        char = param_list[i]
+
+        if in_quote and char == '"':
+            in_quote = False
+        elif char == '"':
+            in_quote = True
+        elif char == '(':
+            nest_level += 1
+        elif char == ')':
+            nest_level -= 1
+        elif (char == ',' or char == ')') and nest_level == 0 and in_quote == False:
+            params.append(param_list[last_boundary:i])
+            last_boundary = i
+
+    # Add the remainder, removing any trailing commas.
+    params.append(param_list[last_boundary:].strip(','))
+
+    # Process each key-value pair
+    for i, p in enumerate(params):
+        attr, eql, value = p.strip(' ,').partition('=')
+
+        # If the value starts with a parenthesis, we remove a set of
+        # parentheses from the outside of this statement. This is for
+        # tuple invocation of multiparametered methods.
+        if value.startswith('('):
+            value = value[1:-1]
+
+        params[i] = 'set_%s(%s)' % (attr, value)
+
+    # If a parent reference is required, add one. This is usually only
+    # necessary for properties.
+    if parent_ref:
+        constructor_args = 'this';
+    else:
+        constructor_args = '';
+
+    # Return a formatted string, leaving the prefix to the builder
+    # syntax intact.
+    return '%s(new %s(%s)).%s.compile()' % (
+        expr[:match.start()], class_name, constructor_args, '.'.join(params))
+
+def translate_builders(block):
+    '''
+    Recursively translate builder syntax.
+    '''
+
+    for i, expr in enumerate(block.children):
+        if isinstance(expr, blocks.Block):
+            translate_builders(expr)
+        else:
+            if is_builder(expr):
+                block.children[i] = translate_builder(expr, block.tag == 'properties')
+
+def translate_block_directives(block):
+    '''
+    Recursively translate block directives, like "shape" or "force"
+    in the "shapes" or "forces" block, respectively.
+    '''
+
+    for i, expr in enumerate(block.children):
+        if not isinstance(expr, blocks.Block):
+            # If an expression starts with "shape" in the shapes
+            # block, it is an add shape directive, and likewise for
+            # "force" in the forces block.
+            if block.tag == 'shapes' and expr.startswith('shape '):
+                block.children[i] = 'addShape(%s)' % expr[len('shape '):]
+            elif block.tag == 'forces' and expr.startswith('force '):
+                block.children[i] = 'addForce(%s)' % expr[len('force '):]
+            elif block.tag == 'properties' and expr.startswith('property '):
+                block.children[i] = 'addProperty(%s)' % expr[len('property '):]
+        else: translate_block_directives(expr)
+
+def translate_shape_accessors(block):
+    '''
+    Recursively translate shape accessors.
+    '''
+
+    for i, expr in enumerate(block.children):
+        if not isinstance(expr, blocks.Block):
+            # Split the string by double quotes, then only replace
+            # accessors in the even bits. The odd bits correspond to
+            # string literals in this expression, and should not be
+            # touched.
+            bits = expr.split('"')
+            for j, b in enumerate(bits):
+                if j % 2 == 0:
+                    bits[j] = re.sub(matchers.accessor, r'getShape("\1")', b)
+            block.children[i] = '"'.join(bits)
+        else: translate_shape_accessors(expr)
+
+def translate_empty_blocks(block):
+    '''
+    Recursively translate the "block none;" construct.
+    '''
+
+    for i, expr in enumerate(block.children):
+        if not isinstance(expr, blocks.Block):
+            if expr.endswith(' none'):
+                block.children[i] = blocks.Block(expr[:-5], [])
+        else:
+            translate_empty_blocks(expr)
+
+def translate(root):
+    '''
+    Perform all translation tasks on a syntax tree.
+    '''
+
+    translate_empty_blocks(root)
+    translate_ids(root)
+    disperse_tags(root)
+    translate_shape_accessors(root)
+    translate_builders(root)
+    translate_block_directives(root)
+    units.translate_units(root)
+\end{lstlisting}
+
