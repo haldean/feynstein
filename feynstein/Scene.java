@@ -93,7 +93,7 @@ public abstract class Scene {
 
 	if (p instanceof NarrowPhaseDetector)
 	    detectorList.add((NarrowPhaseDetector) p);
-	    //REMOVED PENDING TRANSLATOR UPDATE
+
 	    //detectorMap.put(((NarrowPhaseDetector) p).getName(), (NarrowPhaseDetector) p);
     }
 
@@ -102,7 +102,7 @@ public abstract class Scene {
 	return (E) propertyMap.get(c);
     }
     
-    /* REMOVED PENDING TRANSLATOR UPDATE
+    /*
     public NarrowPhaseDetector getDetectorByName(String name) {
 	return detectorMap.get(name);
 	} */
