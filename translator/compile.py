@@ -13,30 +13,27 @@ def error_gen(err,javamap):
     err = str(err)
     err = err.split('\n')
     errorlist = []
-    errormessage = 'Feynstein Errors:\n'
+    errormessage = ''
     for e in err:
         if re.search('java:',e):
             m = re.search('[0-9]+',e)
             errorlist.append(int(m.group()))
     
     if len(errorlist) > 0:
+        errormessage = 'Feynstein errors:\n'
         for er in errorlist:
             for j in javamap:
-                
                 if j[1] == er:
-                    errormessage=errormessage+'Syntax error in line ' + str(j[0]) + '.\n'
+                    errormessage=errormessage+'Check error in line ' + str(j[0]) + '.\n'
 
     return errormessage
 
 def compile_feynstein(infile):
     java_source,javamap = translator.main(infile)
     p = subprocess.Popen(['javac', '-classpath', get_classpath(), 
-                     '-Xlint:unchecked', java_source],stdout = subprocess.PIPE)
-    out,err = p.communicate()
-    
-    
-    
-    print(error_gen(out,javamap))
+                     '-Xlint:unchecked', java_source],stderr = subprocess.PIPE)
+    out,err = p.communicate()    
+    print(error_gen(err,javamap))
 
     return java_source
 
