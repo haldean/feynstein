@@ -859,25 +859,31 @@ to mean $\epsilon$, or the empty string.
 ID ::= (letter|'_')(letter | digit | '_')*
 NUMBER ::= decimal
 STRING ::= '(letter)*'
-TIME ::= day
+
+literal ::= timeLiteral | spatialLiteral 
+            | massLiteral | forceLiteral
+timeLiteral ::= day
 day ::= decimal 'td' hour | hour
 hour ::= decimal 'th' minute | minute
 minute ::= decimal 'tm' second | second
 second ::= decimal 'ts' millisecond | millisecond 
 millisecond ::= decimal 'tms' | epsilon
 
-LENGTH ::= meter | feet
+spatialLiteral ::= meter | feet
 	meter ::= decimal 'm' centimeter | centimeter
 centimeter ::= decimal 'cm' millimeter | millimeter
 millimeter ::= decimal 'mm' | epsilon
 feet ::= decimal 'ft' inch | inch
 inch ::= decimal 'in' | epsilon
 
-MASS::= kilogram
+velocityLiteral ::= spatialLiteral '/' timeLiteral | episolon
+
+massLiteral ::= kilogram
 kilogram ::= decimal 'kg' gram | gram
 gram ::= decimal 'g' milligram | milligram
 milligram ::= decimal 'mg' | epsilon
-FORCE ::= decimal 'N' | epsilon
+
+forceLiteral ::= decimal 'N' | epsilon
 
 letter ::= lowercase | uppercase
 lowercase ::= 'a'...'z'
@@ -904,70 +910,85 @@ shape ::= 'shape' 'Sphere' '(' sphereParams ')'
   | 'shape' 'Cylinder' '(' cylParams ')' 
   | 'shape' 'Plane' '(' planeParams ')' 
   | 'shape' 'RectangularPrism' '(' rectParams ')' 
-  | 'shape' 'Tetrahedron' '(' tetParams ')' 
-  | 'shape' className '(' userParams ')' 
+  | 'shape' 'Tetrahedron' '(' tetParams ') 
+  | 'shape' 'Cube' '(' cubeParams ')'
+  | 'shape' 'FluidPlane' '(' fPlaneParams ')'
+  | 'shape' 'ParticleSet' '(' pSetParams ')'
+  | 'shape' 'ClothPiece' '(' pSetParams ')'
+  | 'shape' 'RegularPolygon' '(' regPolyParams ')'
+  | 'shape' 'SinglePointMass' '(' pointMassParams ')'
+  | 'shape' 'SpringChain' '(' pSetParams ')'
+  | 'shape' 'TriangleShape' '(' triangleParams ')'
+  | 'shape' ID '(' userParams ')' 
 
 sphereParams ::= sphereParams 'name=' STRING 
   | sphereParams 'radius=' NUMBER spatialLiteral 
+  | sphereParams 'accuracy=' NUMBER
   | sphereParams 'location=(' NUMBER ',' NUMBER ')' | epsilon
 
 cylParams ::= cylParams 'name=' STRING 
   | cylParams 'radius=' NUMBER spatialLiteral 
+  | cylParams 'radius1=' NUMBER spatialLiteral ','  cylParams 'radius2=' NUMBER spatialLiteral 
   | cylParams 'height=' NUMBER spatialLiteral 
+  | cylParams 'accuracy=' NUMBER
   | cylParams 'location=(' NUMBER ',' NUMBER ')' | epsilon
 
 planeParams ::= planeParams 'name=' STRING 
-  |  planeParams width=' NUMBER spatialLiteral 
-  | planeParams 'height=' NUMBER spatialLiteral 
-  | planeParams 'location=(' NUMBER ',' NUMBER ')' | epsilon
+  | planeParams 'normal '=' point | epsilon
 
-rectParams ::= rectParams 'name=' STRING 
-  | rectParams width=' NUMBER spatialLiteral 
-  | rectParams 'height=' NUMBER spatialLiteral 
-  | rectParams 'length=' NUMBER spatialLiteral 
-  | rectParams 'location=(' NUMBER ',' NUMBER ')' | epsilon
+tetParams ::= 'point1' '=' point ',' 'point2' '=' point ',' 'point3' '=' point ',' 'point4' '=' point ','
 
-tetParams ::= tetParams 'name=' STRING 
-  | tetParams 'location=(' NUMBER ',' NUMBER ')' 
-  | point point point | epsilon 
-point ::= 'point=' NUMBER ',' NUMBER ',' NUMBER 
+cubeParams ::= cubeParams 'sides' '=' '(' NUMBER spatialLiteral ',' NUMBER spatialLiteral ',' NUMBER spatialLiteral ')'
+  | cubeParams 'allSides' '=' NUMBER spatialLiteral
+  | epsilon 
+
+fPlaneParams ::= fPlaneParams 'lengthX' '=' NUMBER spatialLiteral
+  | fPlaneParams 'lengthY' '=' NUMBER spatialLiteral
+  | fPlaneParams 'length' '=' NUMBER spatialLiteral
+  | fPlaneParams 'subdivisions' '=' NUMBER | epsilon
+
+pSetParams ::= pSetParams 'vert' '=' point 
+  | pSetParams 'fixed' '=' NUMBER 
+  | pSetParams 'velocity' '=' '(' NUMBER velocityLiteral ',' NUMBER velocityLiteral ',' NUMBER velocityLiteral ',' NUMBER velocityLiteral ')'
+  | epsilon
+
+regPolyParams ::= regPolyParams 'vertices' '=' NUMBER
+  | regPolyParams 'radius' '=' NUMBER spatialLiteral | epsilon
+
+pointMassParams ::= 'pos' '=' NUMBER | epsilon
+
+userParams ::= userParams STRING '=' STRING 
+  | userParams STRING '=' NUMBER 
+  | userParams STRING '=' NUMBER literal
+  | epsilon
+
+point ::= '(' NUMBER ',' NUMBER ',' NUMBER ')'
 
 forceBlock ::= 'forces' '{' forces '}'
 forces ::= forces force ';' | epsilon
-force ::= 'force' 'GravityForce' '(' forceParams gravityParams ')' 
+force ::= 'force' 'GravityForce' '(' gravityParams ')' 
   | 'force' 'DampingForce '(' forceParams dampParams ')' 
   | 'force' 'SpringForce' '(' forceParams springParams ')' 
   | 'force' 'RodBendingForce '(' forceParams rodParams ')' 
   | 'force' 'ConstantStrainTriangleForce '(' forceParams triangleParams ')' 
   | 'force' 'SurfaceBendingForce' '(' forceParams surfaceParams ')' 
-  | 'force' 'TetrahedralConstraintForce' '(' forceParams tetParams ')' 
-  | 'force' 'ContactForce' '(' forceParams contactParams ')' 
 
 forceParams ::= 'actsOn' '=' '#' STRING
 
-gravityParams ::= 'length' '=' NUMBER CENTIMETERS ',' 'strength' '=' NUMBER
+gravityParams ::= 'gx' '=' NUMBER
+  | 'gy' '=' NUMBER
+  | 'gz' '=' NUMBER
+  | epsilon
 
 dampParams ::= 'coefficient' '=' NUMBER
 
-springParams ::= 'vector' '=' '(' NUMBER ',' ')'',' 
-  'L' '=' NUMBER METERS 'K' '=' NUMBER
+springParams ::= 'length' '=' NUMBER spatialLiteral ',' 'strength' '=' NUMBER
 
-triangleParams ::= 'tensileMod' '=' NUMBER ',' 'K' '=' 
-  NUMBER ',' 'poissonRatio' '=' NUMBER ',' 'edgeVectors' 
-  '=' '(' NUMBER ',' NUMBER ',' NUMBER ')'
+triangleParams ::= 'youngs' '=' NUMBER ',' 'poisson' '=' NUMBER ','
 
-tetParams ::= 'tensileMod' '=' NUMBER ',' 'poissonRatio' 
-  '=' NUMBER ',' 'edgeVectors' '=' '(' NUMBER ',' 
-  NUMBER ',' NUMBER ',' NUMBER ')'
+rodBendingParams ::= 'strength' '='  NUMBER ',' 'angle' '=' NUMBER
 
-contactParams ::= 'K' '=' NUMBER ',' 'minDistance' '=' NUMBER METERS
-
-rodBendingParams ::= 'edgeVectors' '=' '(' NUMBER ',' 
-  NUMBER ')' ',' 'angle' '=' NUMBER ',' 'K' '=' NUMBER
-
-surfaceBendingParams ::= 'dihedralangle' '=' '(' NUMBER ',' 
-  NUMBER ',' NUMBER ')' ',' 'triangle' '=' '(' NUMBER ',' 
-  NUMBER ',' NUMBER ')' ',' 'K' '=' NUMBER
+surfaceBendingParams ::= 'strength' '=' NUMBER
 
 propertyBlock ::= 'properties' '{' properties '}'
 properties ::= properties property ';' |  epsilon
@@ -977,40 +998,47 @@ property ::= 'property' 'renderTo' '(' renderParams ')'
   | 'property' eulerMethod '(' eulerParams ')' 
   | 'property' 'CameraView' '(' cameraParams ')' 
   | 'property' 'ProximityDetector' '(' 'proximityParams' ')' 
+  | 'property' 'ContinuousTimeDetector' '(' cTParams ')'
   | 'property' 'BoundingVolumeHierarchy' '(' 'bvhParams' ')'
   | 'property' 'SpringPenaltyResponder' '(' springPenaltyParams ')'
-renderParams ::= 'VideoOutput' | 'FileOutput' '(' S ')' | epsilon
+  | 'property' 'ImpulseResponder' '(' impulseParams ')'
+
+renderParams ::= 'VideoOutput' | 'FileOutput' '(' STRING ')' | epsilon
 
 endParams ::= 'endAt=' TIME | epsilon 
 
 assertParams ::= epsilon | 'margin=' NUMBER 
 
 eulerMethod ::= 'ImplicitEuler' | 'SemiImplicitEuler'
-eulerParams ::= 'stepSize=' TIME
+eulerParams ::= 'stepSize=' timeLiteral
 
 cameraParams ::= 'location' '=' '(' NUMBER ',' NUMBER ',' NUMBER ')'
   ',' 'lookingAt' '=' '(' NUMBER ',' NUMBER ',' NUMBER ')' 
   ',' 'fieldOfView' '=' NUMBER
 
 proximityParams ::= 'proximity' '=' 'NUMBER'
+
 bvhParams ::= 'margin' '=' NUMBER | 'margin' '=' NUMBER ',' 'type' '=' 'BoundingVolumeHierarchy.' 'volumeType'
-volumeType ::= 'AABB' | 'SPHERE' | 'KDOP_' 'num'
+volumeType ::= 'AABB'
 num = '6' | '14' | '18' | '26'
 
-springPenaltyParams ::= 'proximity' '=' NUMBER ',' 'detector' '=' '#' STRING | 'proximity' '=' NUMBER ',' 'detector' '=' '#' STRING ',' 'stiffness' '=' NUMBER 
+springPenaltyParams ::= 'proximity' '=' NUMBER ',' 'detector' '=' NUMBER
+  | 'proximity' '=' NUMBER ',' 'detector' '=' NUMBER ',' 'stiffness' '=' NUMBER 
+
+impulseParams ::= 'detector' '=' NUMBER
 
 onFrame ::=  'onFrame ' '{' onFrameAxns '}' | epsilon
 onFrameAxns ::= statements statement | epsilon
 
 statements ::= expression statements | statement statements | epsilon
 statement ::= ID '=' expression | ID '=' tok
-tok = ID | NUMBER | SHAPE | FORCE | PROPERTY | TIME
+tok = ID | NUMBER | shape | force | property | timeLiteral
 	expression ::= arithOperation | compOperation | boolOperation
 
 arithOperation ::= NUMBER binOp NUMBER | '-' NUMBER
 binOp ::= '+' | '-' | '/' | '*' | '%' | '^'
 
-compOperation ::= NUMBER compOp NUMBER | OBJECT '==' OBJECT
+compOperation ::= NUMBER compOp NUMBER | ID '==' ID
 compOp ::= '==' | '!=' |'>=' | '<=' | '>' | '<'
 
 boolOperation ::= boolean boolOp boolean
