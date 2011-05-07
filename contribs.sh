@@ -1,5 +1,5 @@
 find feynstein/ translator/ tests/ -name '*.*' | \
-    xargs -d"\n" -if \
+    xargs -if \
     git blame -c -w f | cut -d\( -f2 |
     sed 's/ //g' | cut -f1 |
     sed 's/Sam$/SamanthaAinsley/g' |
