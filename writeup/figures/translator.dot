@@ -1,0 +1,11 @@
+digraph translator {
+	node [shape="rect"];
+
+	Syntax [label="Syntax Analysis\n(Generation of Syntax Tree)"];
+	CodeGen [label="Code Generation\n(Translation to Java)"];
+	Analysis [label="Structure Analysis"];
+	
+	Parsing -> Syntax;
+	Syntax -> CodeGen;
+	Syntax -> Analysis;
+}

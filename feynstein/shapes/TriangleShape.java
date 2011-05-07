@@ -16,7 +16,6 @@ public class TriangleShape extends ParticleSet<TriangleShape> {
 		//this = super.compileShape();
 		for(Integer idx : velocityMap.keySet()) {
 			localMesh.getParticles().get(idx).setVel(velocityMap.get(idx));
-			System.out.println("Set vel "+localMesh.getParticles().get(idx).getVel());
 		}		
 		for (int i = 0; i < localMesh.size(); i+=3) {
 			if(i < localMesh.size() - 2)

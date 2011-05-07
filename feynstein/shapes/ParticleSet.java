@@ -18,20 +18,23 @@ public class ParticleSet<E extends ParticleSet> extends Shape<E> {
 	disableParticleVelocity = true;
     }
     
-    public ParticleSet set_vert(double x, double y, double z) {
+	 @SuppressWarnings("unchecked")
+    public E set_vert(double x, double y, double z) {
 	Particle vert = new Particle(new Vector3d(x, y, z));
 	localMesh.getParticles().add(vert);
-	return this;
+	return (E) this;
     }
 	
-    public ParticleSet set_fixed(int idx) {
+	@SuppressWarnings("unchecked")
+    public E set_fixed(int idx) {
 	fixedIdx.add(idx);
-	return this;
+	return (E) this;
     }
 	
-    public ParticleSet set_velocity(int idx, double x, double y, double z) {
+	@SuppressWarnings("unchecked")
+    public E set_velocity(int idx, double x, double y, double z) {
 	velocityMap.put(idx, new Vector3d(x,y,z));
-	return this;
+	return (E) this;
     }
 
     @SuppressWarnings("unchecked")

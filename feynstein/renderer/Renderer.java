@@ -1,7 +1,7 @@
 package feynstein.renderer;
 
 import feynstein.*;
-import feynstein.collision.*;
+import feynstein.properties.collision.*;
 import feynstein.geometry.*;
 import feynstein.utilities.*;
 

@@ -1,0 +1,137 @@
+\subsection{Development Process}
+Two aspects of our development process that I believe contributed to
+the project’s success were the modularity of our language and compiler
+and our decision to build our language and our code base in
+increments. There were, of course, general aspects of the language
+that had to be decided on early in the project, such as the
+overarching structure of a Feynstein file, and these were discussed
+and voted on at group meetings. Our Language Guru defined a hierarchy
+of discrete features for inclusion, so that we could start out with a
+small but functional code base and build on it to include as many
+possibilities as possible for our languages users. (See section on
+Language Evolution for an in-depth description of this process.)
+Because we divided our language into sections in accordance with
+physical elements--there are shapes (masses), forces, and properties
+such as time integration and collision handling--the modules of our
+translator could be designed, developed, and tested independently of
+each other, which decreased the dependencies in our language and
+allowed the maximum flexibility for group members to work at their own
+paces to finish the sections of the project assigned to them.
+
+\subsection{Roles and responsibilities}
+\begin{description}
+\item[Colleen McKenzie: Project Manager] I was responsible for
+  organizing meetings and taking minutes at group meetings. I also
+  handled updating the group’s project wiki and Google Calendar with
+  minutes, project resources, events and deadlines, group decisions,
+  and other changing information pertaining to our language and its
+  implementation. Monitoring group members’ progress was also my
+  responsibility, and I regularly checked in with group members to
+  keep track of progress in each contributor’s area of language
+  development and implementation. This monitoring also included the
+  setting (and resetting) of deadlines and querying group members
+  about their progress.
+
+\item[Samantha Ainsley: Language Guru] Samantha was responsible for
+  providing the conceptual organization of the language--she was our
+  essentially our Physics Guru, and she used her expertise to lead us
+  to consistent and logical decisions about the design of our
+  language. She provided reference materials to give us an idea of how
+  other languages and libraries implemented functionality similar to
+  Feynstein’s and was the designated point person for questions
+  related to such matters. Further, Sam was largely responsible for
+  executive decisions about which features our language would and
+  wouldn’t support.
+
+\item[Will Brown: Systems Architect] Will was responsible for defining
+  the structure of the Feynstein compiler code package, which is
+  broken up into modules for translation and for processing different
+  simulation aspects. In addition, Will was entirely responsible for
+  the translation portion of the compiler: he worked with our Language
+  Guru’s design to ensure that our language was properly translated
+  into Java code built on the compiler architecture he designed. Will
+  also managed the repository for the group’s code and managed the
+  documentation process: he was responsible for compiling and
+  typesetting all of our group's written material.
+
+\item[Rob Post: Systems Integrator] Rob was responsible for
+  researching information we used to design and add features to our
+  rendering module, and make decisions about what features and options
+  for visual output we would provide users of our language. Rob also
+  collaborated with the Systems Architect to implement robust
+  compile-time error handling in our translator.
+
+\item[Eva Snow: Tester and Validator] Eva was responsible for
+  implementing unit tests designed to make sure our language properly
+  supported all the features defined in our manual and ensuring that
+  the physical features of our language had been implemented
+  correctly.
+\end{description}
+
+\subsection{Implementation Stylesheet}
+Our group did not have an implementation stylesheet. Our development
+process included group members reading through project code before
+contributing more, and because our Language Guru and Systems Architect
+defined a robust API while laying the groundwork for the compiler,
+members contributing new modules were able to sufficiently match the
+project’s existing code.
+
+\subsection{Project Timeline}
+\begin{description}
+\item[1/24] We decided on and assigned roles for each team member,
+  made logistical decisions (e.g. weekly meetings), and decided on
+  physical simulation as the domain for our language.
+
+\item[1/30] Group members gained familiarity with the language domain,
+  including higher-level physical concepts we would need to implement.
+
+\item[2/6] We developed and recorded milestones for our project and
+  started working on a general language specification to guide future
+  language developments and additions.
+
+\item[2/13] With a few tweaks, we made our earlier language
+  specification final. By this point our builder syntax is
+  well-defined.
+
+\item[2/20] Our language whitepaper is finished at this point.
+
+\item[2/27] We defined more specific milestones for implementing the
+  compiler, and we identified and accounted for dependencies in the
+  structure of the language and the compiler.
+
+\item[3/29] By this point, the language reference manual and tutorial
+  were complete. We had a solid specification and a grammar for our
+  language, both of which were very close to the grammar of our
+  finalized language.
+
+\item[4/3] Translation for Feynstein-specific syntax was implemented,
+  and early translator testing was implemented alongside the
+  translator. Our git repository was up and running, and all members
+  were able to commit code. We implemented basic functionality of our
+  renderer so that it could could display a basic shape to the
+  screen. Mouse and keyboard commands were implemented with the
+  rendered so that users could change the view of their scene.
+
+\item[4/10] Automated compilation and running of Feynstein files was
+  implemented by this point. The modules in our compiler were divided
+  up discretely among group members.
+
+\item[4/18] Time-stepping was implemented, but not integrated into
+  Feynstein yet.
+
+\item[4/24] We implemented basic discretization of geometry: at this
+  point we had fully functional objects in our language, and these
+  could be operated on by force constructs. Basic forces (gravity,
+  springs) were also implemented.
+
+\item[5/3] All forces were implemented by this point.
+
+\item[5/5] Basic force testing was completed and collision detection
+  was implemented by this point.
+
+\item[5/6] Collision response was implemented, and the translator was
+  extended to handle errors in more specific and descriptive ways.
+\end{description}
+\subsection{Project Log}
+Please see Appendix \ref{sec:projectlog} for the (rather lengthy)
+project log.
