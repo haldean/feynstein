@@ -1,4 +1,4 @@
-package feynstein.collision;
+ package feynstein.properties.collision;
 
 import feynstein.geometry.*;
 import feynstein.utilities.Vector3d;
@@ -15,10 +15,35 @@ import java.lang.Number;
 
 public class ContinuousTimeDetector extends NarrowPhaseDetector<ContinuousTimeDetector> {
 
-    private double h = 0;   
+    Cubic cubic;
+    double[] op;
+    double[] time;
+    double[] zeroi;
+    double[] a;
+    double[] b;
+    double[] c;
+    double[] p;
+    double[] p1;
+    double[] q1;
+    double[] p2;
+    double[] q2;
+
+    private double h = 0;      
 
     public ContinuousTimeDetector(Scene aScene) {
 	super(aScene);
+	Cubic cubic = new Cubic();
+	op = new double[4];
+        time = new double[3];
+	zeroi = new double[3];
+	a = new double[3];
+	b = new double[3];
+	c = new double[3];
+	p = new double[3];
+	p1 = new double[3];
+	q1 = new double[3];
+	p2 = new double[3];
+	q2 = new double[3];
     }
 
     public ContinuousTimeDetector set_stepSize(double step) {
@@ -41,18 +66,6 @@ public class ContinuousTimeDetector extends NarrowPhaseDetector<ContinuousTimeDe
 	    || t1.getIdx(2) == t2.getIdx(2)) {
 	    return cSet; // because you can't hit yourself
 	}
-	Cubic cubic = new Cubic();
-	double[] op = new double[4];
-	double[] time = new double[3];
-	double[] zeroi = new double[3];
-	double[] a = new double[3];
-	double[] b = new double[3];
-	double[] c = new double[3];
-	double[] p = new double[3];
-	double[] p1 = new double[3];
-	double[] q1 = new double[3];
-	double[] p2 = new double[3];
-	double[] q2 = new double[3];
 	boolean collision = false;
 	double hit_t = -1;
 	double u = -1, v = -1, w = -1, s = -1, t = -1;

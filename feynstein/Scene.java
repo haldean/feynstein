@@ -1,9 +1,10 @@
 package feynstein;
 
-import feynstein.collision.*;
+
 import feynstein.forces.*;
 import feynstein.geometry.*;
 import feynstein.properties.*;
+import feynstein.properties.collision.*;
 import feynstein.properties.integrators.*;
 import feynstein.shapes.*;
 import feynstein.utilities.*;
@@ -179,6 +180,10 @@ public abstract class Scene {
 
     public double[] getGlobalVelocities() {
 	return globalVelocities;
+    }
+	
+	public double[] getGlobalMasses() {
+		return globalMasses;
     }
 
     public void update() {

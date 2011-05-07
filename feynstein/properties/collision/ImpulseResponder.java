@@ -1,4 +1,4 @@
-package feynstein.collision;
+package feynstein.properties.collision;
 
 import feynstein.*;
 import feynstein.properties.*;

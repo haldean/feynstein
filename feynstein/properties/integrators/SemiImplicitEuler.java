@@ -17,20 +17,9 @@ public class SemiImplicitEuler extends Integrator<SemiImplicitEuler> {
 		// This is a list of applied force values (in Newtons), in 
 		// the x, y, and z directions. The size of this list will
 		// be the size of the number of particles in the simulation
-		//TODO make method in scene for getglobalforces
 		double[] F = scene.globalForceMagnitude();
 		// grab global list of particles for the scene
 		ArrayList<Particle> parts = scene.getMesh().getParticles();
-		
-	// TODO (sainsley) : remove this test
-	/*for (Particle p : parts) {
-	    // v[1] = v[0] + a*dt = v[0] + dt*f/m
-	    Vector3d newVel = p.getVel().plus(new Vector3d(0,0,0.5));
-	    // x[1] = x[0] + v*dt
-	    Vector3d newPos =p.getPos().plus(newVel.dot(h));
-	    p.update(newPos, newVel);
-	}*/
-		
 	
 		for (int i = 0; i < parts.size(); i++) {
 			if(!parts.get(i).isFixed()) {

@@ -1,4 +1,4 @@
-package feynstein.collision;
+package feynstein.properties.collision;
 
 /**
    Utility class for collision detection to compute
