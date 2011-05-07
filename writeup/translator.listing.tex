@@ -1,4 +1,4 @@
-\subsection*{../translator/blocks.py}
+\subsection*{translator/blocks.py}
 \begin{lstlisting}
 #!/usr/bin/env python3
 
@@ -47,7 +47,7 @@ class Block:
         return self.block_to_string()
 \end{lstlisting}
 
-\subsection*{../translator/imports.py}
+\subsection*{translator/imports.py}
 \begin{lstlisting}
 #!/usr/bin/env python3
 
@@ -63,7 +63,7 @@ def get_imports():
     return imports
 \end{lstlisting}
 
-\subsection*{../translator/parse.py}
+\subsection*{translator/parse.py}
 \begin{lstlisting}
 #!/usr/bin/env python3
 
@@ -79,6 +79,9 @@ def split(source):
     comments. blocks.Block identifiers have not yet been removed from the
     expressions at the end of this pass.
     '''
+      
+    sourceLines = source
+    sourceLines = re.sub(matchers.braces, r'\1;',sourceLines)
 
     # Replace all single line comments before we mangle whitespace
     source = re.sub(matchers.line_comments, '', source)
@@ -96,8 +99,25 @@ def split(source):
 
     # Remove trailing whitespace.
     exprs = [x.strip() for x in source.split(';')]
-    return exprs
-        
+
+    exprs2 = exprs
+    exprslines = []
+    
+    lines = sourceLines.split('\n')
+    
+
+    #Maps expressions to line numbers and associate it with a java line number.
+    javaline = 12
+    for index, l in enumerate(lines):
+        if re.search(';',l):
+            javaline += 1
+            exprslines.append([index+1,javaline])
+            if re.search('none',l):
+                javaline += 1
+                exprslines.append([index+1,javaline])
+
+    return exprs, exprslines
+
 def is_open_block(expr):
     '''
     Returns true if an expression opens a block -- i.e., if an
@@ -181,7 +201,7 @@ def make_blocks(exprs):
     return block_list
 \end{lstlisting}
 
-\subsection*{../translator/main.txt}
+\subsection*{translator/main.txt}
 \begin{lstlisting}
 public static void main(String[] args) {
     SceneClass scene = new SceneClass();
@@ -201,7 +221,7 @@ public static void main(String[] args) {
     canvas.requestFocus();
 }\end{lstlisting}
 
-\subsection*{../translator/matchers.py}
+\subsection*{translator/matchers.py}
 \begin{lstlisting}
 #!/usr/bin/env python3
 
@@ -265,11 +285,11 @@ block_translations = {
     }
 \end{lstlisting}
 
-\subsection*{../translator/compile.py}
+\subsection*{translator/compile.py}
 \begin{lstlisting}
 #!/usr/bin/env python3
 
-import glob, os, subprocess, sys, translator
+import glob,re, os, subprocess, sys, translator
 
 def get_classpath():
     libs = ':'.join(glob.glob('./libs/*.jar'))
@@ -278,10 +298,35 @@ def get_classpath():
 def get_jvm_vars():
     return '-Djava.library.path=/lib/:libs/'
 
+def error_gen(err,javamap):
+    err = str(err)
+    err = err.split('\n')
+    errorlist = []
+    errormessage = 'Feynstein Errors:\n'
+    for e in err:
+        if re.search('java:',e):
+            m = re.search('[0-9]+',e)
+            errorlist.append(int(m.group()))
+    
+    if len(errorlist) > 0:
+        for er in errorlist:
+            for j in javamap:
+                
+                if j[1] == er:
+                    errormessage=errormessage+'Syntax error in line ' + str(j[0]) + '.\n'
+
+    return errormessage
+
 def compile_feynstein(infile):
-    java_source = translator.main(infile)
-    subprocess.call(['javac', '-classpath', get_classpath(), 
-                     '-Xlint:unchecked', java_source])
+    java_source,javamap = translator.main(infile)
+    p = subprocess.Popen(['javac', '-classpath', get_classpath(), 
+                     '-Xlint:unchecked', java_source],stdout = subprocess.PIPE)
+    out,err = p.communicate()
+    
+    
+    
+    print(error_gen(out,javamap))
+
     return java_source
 
 def run_feynstein(infile):
@@ -297,7 +342,7 @@ if __name__ == '__main__':
         run_feynstein(compile_feynstein(infile))
 \end{lstlisting}
 
-\subsection*{../translator/syntax.py}
+\subsection*{translator/syntax.py}
 \begin{lstlisting}
 #!/usr/bin/env python3
 
@@ -329,7 +374,7 @@ def check_blocks(scene):
         scene.children.append('%s() {}' % matchers.method_for('onFrame'))
 \end{lstlisting}
 
-\subsection*{../translator/units.py}
+\subsection*{translator/units.py}
 \begin{lstlisting}
 #!/usr/bin/env python3
 
@@ -391,7 +436,7 @@ def translate_units(block):
             block.children[i] = translate_units_for_expr(expr)
 \end{lstlisting}
 
-\subsection*{../translator/translator.py}
+\subsection*{translator/translator.py}
 \begin{lstlisting}
 #!/usr/bin/env python3
 
@@ -417,11 +462,11 @@ def create_java(root):
     return '\n'.join([str(x) for x in root.children])
 
 def src2blocks(source):
-    exprs = parse.split(source)
+    exprs,lines = parse.split(source)
     root = parse.parse(exprs)
     translate.translate(root)
     syntax.check_syntax(root)
-    return root
+    return root,lines
 
 def feync(source, path):
     '''
@@ -429,7 +474,7 @@ def feync(source, path):
     and the name of the scene.
     '''
 
-    root = src2blocks(source)
+    root,lines = src2blocks(source)
 
     package = os.path.dirname(path).replace('/', '.')
     root.children.insert(0, 'package %s;' % package)
@@ -442,7 +487,7 @@ def feync(source, path):
         if main_method:
             root.get_by_tag('scene').children.append(main_method)
 
-    return create_java(root), scene_name
+    return create_java(root), scene_name, lines
 
 def main(infile):
     '''
@@ -453,21 +498,21 @@ def main(infile):
     with open(infile) as f:
         source = f.read()
 
-    source, scene_name = feync(source, infile)
+    source, scene_name,lines = feync(source, infile)
     output_file = '%s/%s.java' % (os.path.dirname(infile), scene_name)
 
     with open(output_file, 'w') as f:
         f.write(source)
     print('Compiled to %s' % output_file)
     
-    return output_file
+    return output_file,lines
 
 if __name__ == '__main__':
     infile = sys.argv[1]
     main(infile)
 \end{lstlisting}
 
-\subsection*{../translator/translate.py}
+\subsection*{translator/translate.py}
 \begin{lstlisting}
 #!/usr/bin/env python3
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.4.29)  7 MAY 2011 16:20
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.4.29)  7 MAY 2011 16:40
 entering extended mode
  %&-line parsing enabled.
 **report.tex
@@ -334,10 +334,10 @@ Class scrartcl Info: You've told me to use the font selection of the element
 (scrartcl)            on input line 89.
 Class scrartcl Info: You've told me to use the font selection of the element
 (scrartcl)           `sectioning' that is an alias of element `disposition'
-(scrartcl)            on input line 90.
+(scrartcl)            on input line 92.
 Class scrartcl Info: You've told me to use the font selection of the element
 (scrartcl)           `sectioning' that is an alias of element `disposition'
-(scrartcl)            on input line 91.
+(scrartcl)            on input line 93.
 )
 \tf@toc=\write4
 \openout4 = `report.toc'.
@@ -633,11 +633,11 @@ Missing character: There is no â in font cmss10!
 Missing character: There is no € in font cmss10!
 Missing character: There is no ™ in font cmss10!
  [42]) (./whowhat.appendix.tex
-[43] [44]) (./log.appendix.tex
+(./contribs.tex) [43] [44] [45]) (./log.appendix.tex
 Missing character: There is no â in font cmss10!
 Missing character: There is no € in font cmss10!
 Missing character: There is no ™ in font cmss10!
- [45]
+ [46]
 LaTeX Font Info:    Try loading font information for OMS+cmss on input line 20.
 
 LaTeX Font Info:    No file OMScmss.fd. on input line 20.
@@ -647,25 +647,25 @@ LaTeX Font Warning: Font shape `OMS/cmss/m/n' undefined
 (Font)              using `OMS/cmsy/m/n' instead
 (Font)              for symbol `textbullet' on input line 20.
 
-[46] [47] [48] [49] [50] [51]) (./feynstein.listing.tex [52] [53] [54] [55]
-[56] [57] [58] [59] [60] [61] [62] [63] [64] [65] [66] [67] [68] [69] [70]
-[71] [72] [73] [74] [75] [76] [77] [78] [79] [80] [81] [82] [83] [84] [85]
-[86] [87] [88] [89] [90] [91] [92] [93] [94] [95] [96] [97] [98] [99] [100]
-[101] [102] [103] [104] [105] [106] [107] [108] [109] [110] [111] [112]
-[113] [114] [115] [116] [117] [118] [119] [120] [121] [122] [123] [124]
-[125] [126] [127] [128] [129] [130] [131] [132] [133] [134] [135] [136]
-[137] [138] [139] [140] [141] [142] [143] [144] [145] [146] [147] [148]
-[149] [150] [151] [152] [153] [154] [155] [156] [157] [158] [159] [160]
-[161] [162] [163] [164] [165] [166] [167] [168] [169] [170] [171] [172]
-[173] [174] [175] [176] [177] [178] [179] [180] [181] [182] [183] [184]
-[185] [186] [187] [188] [189] [190] [191] [192] [193] [194] [195] [196]
-[197] [198] [199] [200] [201] [202] [203] [204] [205] [206] [207] [208]
-[209] [210] [211] [212] [213] [214] [215] [216] [217] [218] [219] [220]
-[221] [222] [223] [224] [225] [226] [227] [228] [229] [230] [231] [232]
-[233]) (./tests.listing.tex [234] [235] [236] [237] [238] [239] [240] [241]
-[242] [243] [244] [245] [246] [247]) (./translator.listing.tex [248] [249]
-[250] [251] [252] [253] [254] [255] [256] [257] [258] [259] [260] [261])
-[262] [263 <./figures/eeblock.pdf>] (./report.aux)
+[47] [48] [49] [50] [51] [52]) (./feynstein.listing.tex [53] [54] [55] [56]
+[57] [58] [59] [60] [61] [62] [63] [64] [65] [66] [67] [68] [69] [70] [71]
+[72] [73] [74] [75] [76] [77] [78] [79] [80] [81] [82] [83] [84] [85] [86]
+[87] [88] [89] [90] [91] [92] [93] [94] [95] [96] [97] [98] [99] [100] [101]
+[102] [103] [104] [105] [106] [107] [108] [109] [110] [111] [112] [113]
+[114] [115] [116] [117] [118] [119] [120] [121] [122] [123] [124] [125]
+[126] [127] [128] [129] [130] [131] [132] [133] [134] [135] [136] [137]
+[138] [139] [140] [141] [142] [143] [144] [145] [146] [147] [148] [149]
+[150] [151] [152] [153] [154] [155] [156] [157] [158] [159] [160] [161]
+[162] [163] [164] [165] [166] [167] [168] [169] [170] [171] [172] [173]
+[174] [175] [176] [177] [178] [179] [180] [181] [182] [183] [184] [185]
+[186] [187] [188] [189] [190] [191] [192] [193] [194] [195] [196] [197]
+[198] [199] [200] [201] [202] [203] [204] [205] [206] [207] [208] [209]
+[210] [211] [212] [213] [214] [215] [216] [217] [218] [219] [220] [221]
+[222] [223] [224] [225] [226] [227] [228] [229] [230] [231] [232] [233]
+[234]) (./tests.listing.tex [235] [236] [237] [238] [239] [240] [241] [242]
+[243] [244] [245] [246] [247] [248]) (./translator.listing.tex [249] [250]
+[251] [252] [253] [254] [255] [256] [257] [258] [259] [260] [261] [262]
+[263]) [264] [265 <./figures/eeblock.pdf>] (./report.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
@@ -674,13 +674,13 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 6485 strings out of 495061
- 86476 string characters out of 1182621
- 872483 words of memory out of 3000000
- 9542 multiletter control sequences out of 15000+50000
+ 6507 strings out of 495061
+ 86764 string characters out of 1182621
+ 727483 words of memory out of 3000000
+ 9561 multiletter control sequences out of 15000+50000
  16630 words of font info for 65 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 37i,8n,40p,1572b,1574s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 37i,8n,40p,1569b,1562s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmitt10.pfb></usr/sh
 are/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-t
 exlive/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-texlive/fonts
@@ -694,9 +694,9 @@ type1/public/amsfonts/cm/cmssi10.pfb></usr/share/texmf-texlive/fonts/type1/publ
 ic/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts
 /cm/cmtt10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmtt9.p
 fb>
-Output written on report.pdf (263 pages, 857937 bytes).
+Output written on report.pdf (265 pages, 861427 bytes).
 PDF statistics:
- 933 PDF objects out of 1000 (max. 8388607)
+ 940 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  36 words of extra memory for PDF output out of 10000 (max. 10000000)
 

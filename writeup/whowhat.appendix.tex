@@ -1,90 +1,131 @@
+\subsection{Contribution Summary}
+\begin{table}[h]
+  \centering
+  \begin{tabular}{cl}
+    \input{contribs.tex}
+  \end{tabular}
+  \caption{Code contributions (in lines) by contributor}
+  \label{tab:contrib}
+\end{table}
+
+\subsection{File-Level Breakdown}
 \begin{description}
-\item[] feynstein
+\item feynstein
   \begin{description}
-  \item[] Built.java (Will)
-  \item[] ClassGetter.java (Will)
-  \item[] forces
+  \item Built.java (Will)
+  \item ClassGetter.java (Will)
+  \item forces
     \begin{description}
-    \item[] DampingForce.java (Sam)
-    \item[] Force.java (Sam, Will)
-    \item[] GravityForce.java (Sam)
-    \item[] RodBendingForce.java (Sam)
-    \item[] SpringForce.java (Sam)
-    \item[] SurfaceBendingForce.java (Sam)
-    \item[] TriangleForce.java (Sam)
+    \item DampingForce.java (Sam)
+    \item Force.java (Sam, Will)
+    \item GravityForce.java (Sam)
+    \item RodBendingForce.java (Sam)
+    \item SpringForce.java (Sam)
+    \item SurfaceBendingForce.java (Sam)
+    \item TriangleForce.java (Sam)
     \end{description}
-  \item[] geometry
+  \item geometry
     \begin{description}
-    \item[] Edge.java (Sam)
-    \item[] Mesh.java (Sam) 
-    \item[] Particle.java (Sam)
-    \item[] Transform.java (Will)
-    \item[] Triangle.java (Sam)
+    \item Edge.java (Sam)
+    \item Mesh.java (Sam) 
+    \item Particle.java (Sam)
+    \item Transform.java (Will)
+    \item Triangle.java (Sam)
     \end{description}
-  \item[] properties
+  \item properties
     \begin{description}
-    \item[] collision
+    \item collision
       \begin{description}
-      \item[] AxisAlignedBoundingBox.java (Will) 
-      \item[] BoundingVolumeHierarchy.java (Will)
-      \item[] BoundingVolume.java (Will)
-      \item[] Collision.java (Colleen)
-      \item[] CollisionResponder.java (Colleen)
-      \item[] ContinuousTimeDetector.java (Colleen)
-      \item[] DistanceFinder.java (Colleen)
-      \item[] ImpulseResponder.java (Colleen)
-      \item[] NarrowPhaseDetector.java (Colleen)
-      \item[] ProximityDetector.java (Colleen)
-      \item[] SpringPenaltyResponder.java (Colleen)
-      \item[] TrianglePair.java (Colleen)
+      \item AxisAlignedBoundingBox.java (Will) 
+      \item BoundingVolumeHierarchy.java (Will)
+      \item BoundingVolume.java (Will)
+      \item Collision.java (Colleen)
+      \item CollisionResponder.java (Colleen)
+      \item ContinuousTimeDetector.java (Colleen)
+      \item DistanceFinder.java (Colleen)
+      \item ImpulseResponder.java (Colleen)
+      \item NarrowPhaseDetector.java (Colleen)
+      \item ProximityDetector.java (Colleen)
+      \item SpringPenaltyResponder.java (Colleen)
+      \item TrianglePair.java (Colleen)
       \end{description}
-    \item[] integrators
+    \item integrators
       \begin{description}
-      \item[] Integrator.java (Sam, Will)
-      \item[] SemiImplicitEuler.java (Sam)
-      \item[] VelocityVerlet.java (Sam)
+      \item Integrator.java (Sam, Will)
+      \item SemiImplicitEuler.java (Sam)
+      \item VelocityVerlet.java (Sam)
       \end{description}
-    \item[] Property.java (Sam)
+    \item Property.java (Sam)
     \end{description}
-  \item[] renderer
+  \item renderer
     \begin{description}
-    \item[] Renderer.java (Sam)
+    \item Renderer.java (Sam)
     \end{description}
-  \item[] Scene.java (Colleen, Sam, Will)
-  \item[] shapes
+  \item Scene.java (Colleen, Sam, Will)
+  \item shapes
     \begin{description}
-    \item[] ClothPiece.java (Sam)
-    \item[] Cube.java (Will)
-    \item[] CustomObject.java (Sam)
-    \item[] Cylinder.java (Will)
-    \item[] FluidPlane.java (Will)
-    \item[] ParticleSet.java (Sam)
-    \item[] Plane.java (Will) 
-    \item[] RegularPolygon.java (Will)
-    \item[] Shape.java (Will)
-    \item[] SinglePointMass.java (Sam)
-    \item[] Sphere.java (Will)
-    \item[] SpringChain.java (Sam)
-    \item[] Tetrahedron.java (Will)
-    \item[] TriangleShape.java (Sam)
+    \item ClothPiece.java (Sam)
+    \item Cube.java (Will)
+    \item CustomObject.java (Sam)
+    \item Cylinder.java (Will)
+    \item FluidPlane.java (Will)
+    \item ParticleSet.java (Sam)
+    \item Plane.java (Will) 
+    \item RegularPolygon.java (Will)
+    \item Shape.java (Will)
+    \item SinglePointMass.java (Sam)
+    \item Sphere.java (Will)
+    \item SpringChain.java (Sam)
+    \item Tetrahedron.java (Will)
+    \item TriangleShape.java (Sam)
     \end{description}
-  \item[] utilities
+  \item utilities
     \begin{description}
-    \item[] ObjParser.java (Sam)
-    \item[] Vector3d.java (Sam, Will)
+    \item ObjParser.java (Sam)
+    \item Vector3d.java (Sam, Will)
     \end{description}
   \end{description}
-\item[] translator
+\item translator
   \begin{description}
-  \item[] blocks.py (Will)
-  \item[] compile.py (Will)
-  \item[] imports.py (Will)
-  \item[] main.txt (Sam)
-  \item[] matchers.py (Will)
-  \item[] parse.py (Will)
-  \item[] syntax.py (Will)
-  \item[] translate.py (Will)
-  \item[] translator.py (Will)
-  \item[] units.py (Will)
+  \item blocks.py (Will)
+  \item compile.py (Will, Rob)
+  \item imports.py (Will)
+  \item main.txt (Sam)
+  \item matchers.py (Will)
+  \item parse.py (Will, Rob)
+  \item syntax.py (Will)
+  \item translate.py (Will)
+  \item translator.py (Will, Rob)
+  \item units.py (Will)
+  \end{description}
+\item tests
+  \begin{description}
+  \item cantilever.f (Sam)
+  \item collide.f (Will)
+  \item collision
+    \begin{description}
+    \item ee1.f (Colleen)
+    \item ee2.f (Colleen)
+    \end{description}
+  \item compile.f (Will)
+  \item custom.f (Will) 
+  \item gravity.f (Sam)
+  \item initvel.f (Will)
+  \item ops.f (Will)
+  \item particlevelocity.f (Sam)
+  \item properties.f (Will)
+  \item rodbending0.f (Eva)
+  \item rodbending1.f (Eva)
+  \item rodbending1\_vv.f (Sam)
+  \item rodbendingforce.f (Sam)
+  \item shapetests.f (Will)
+  \item springforce0.f (Eva)
+  \item springforce1.f (Eva)
+  \item springforce.f (Sam)
+  \item surfacebendingforce.f (Sam)
+  \item test.f (Will)
+  \item transtest.f (Eva)
+  \item triangle.f (Sam)
+  \item velocityverlet.f (Sam)
   \end{description}
 \end{description}

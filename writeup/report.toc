@@ -87,5 +87,7 @@
 \contentsline {subsection}{\numberline {9.3}Advice for Future Teams}{42}
 \contentsline {subsection}{\numberline {9.4}Instructor Feedback}{42}
 \contentsline {section}{\numberline {A}Project Contributions}{43}
-\contentsline {section}{\numberline {B}Project Log}{45}
-\contentsline {section}{\numberline {C}Source Code}{52}
+\contentsline {subsection}{\numberline {A.1}Contribution Summary}{43}
+\contentsline {subsection}{\numberline {A.2}File-Level Breakdown}{43}
+\contentsline {section}{\numberline {B}Project Log}{47}
+\contentsline {section}{\numberline {C}Source Code Listing}{53}

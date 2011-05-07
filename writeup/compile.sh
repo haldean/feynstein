@@ -11,6 +11,8 @@ figures() {
 }
 
 figures
-python3 listing.py ../tests > tests.listing.tex
-python3 listing.py ../translator > translator.listing.tex
-python3 listing.py ../feynstein > feynstein.listing.tex
+cd ..
+python3 writeup/listing.py tests > writeup/tests.listing.tex
+python3 writeup/listing.py translator > writeup/translator.listing.tex
+python3 writeup/listing.py feynstein > writeup/feynstein.listing.tex
+./contribs.sh > writeup/contribs.tex
