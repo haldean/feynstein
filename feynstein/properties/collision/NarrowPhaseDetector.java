@@ -35,11 +35,11 @@ public abstract class NarrowPhaseDetector<E extends NarrowPhaseDetector> extends
 	return actualCollisions;
     }
 
-    @SuppressWarnings("unchecked")
+    /*@SuppressWarnings("unchecked")
     public E set_name(String aName) {
 	name = aName;
 	return (E) this;
-    }
+	}*/
 
     public String getName() {
 	return name;
