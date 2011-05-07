@@ -878,6 +878,7 @@ exponent ::= ('e'| 'E') ['+'|'‐'] int+
 \begin{verbatim}
 FeynsteinFile ::= ID { optCode shapeBlock optCode forceBlock 
   optCode propertyBlock optCode onframeBlock }
+  | 
 optCode ::= optcode statement | epsilon
 
 shapeBlock ::= 'shapes' '{' shapes '}'
@@ -950,10 +951,11 @@ force ::= 'force' 'GravityForce' '(' gravityParams ')'
   | 'force' 'SurfaceBendingForce' '(' forceParams surfaceParams ')' 
 
 forceParams ::= 'actsOn' '=' '#' STRING
+  | epsilon
 
-gravityParams ::= 'gx' '=' NUMBER
-  | 'gy' '=' NUMBER
-  | 'gz' '=' NUMBER
+gravityParams ::= gravityParams 'gx' '=' NUMBER
+  | gravityParams 'gy' '=' NUMBER
+  | gravityParams 'gz' '=' NUMBER
   | epsilon
 
 dampParams ::= 'coefficient' '=' NUMBER
@@ -1001,7 +1003,7 @@ num = '6' | '14' | '18' | '26'
 springPenaltyParams ::= 'proximity' '=' NUMBER ',' 'detector' '=' NUMBER
   | 'proximity' '=' NUMBER ',' 'detector' '=' NUMBER ',' 'stiffness' '=' NUMBER 
 
-impulseParams ::= 'detector' '=' NUMBER
+impulseParams ::= 'iterations' '=' NUMBER ',' 'detector' '=' NUMBER
 
 onFrame ::=  'onFrame ' '{' onFrameAxns '}' | epsilon
 onFrameAxns ::= statements statement | epsilon
