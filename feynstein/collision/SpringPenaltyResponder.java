@@ -42,7 +42,7 @@ public class SpringPenaltyResponder extends CollisionResponder<SpringPenaltyResp
 	}
     }
 
-    public double[] calculatePenaltyForces(double[] X, double[] V, HashSet<Collision> cSet) {
+    private double[] calculatePenaltyForces(double[] X, double[] V, HashSet<Collision> cSet) {
 	double[] penalty = new double[X.length];
 
 	//for each collision, apply the penalties
@@ -166,9 +166,10 @@ public class SpringPenaltyResponder extends CollisionResponder<SpringPenaltyResp
 	Vector3d n = xi.minus(xj);
 	n = n.dot(1 / n.norm());
 	
-	F[0] = -(k * (n.x()) * (-2 * proximity + dist));
-	F[1] = -(k * (n.y()) * (-2 * proximity + dist));
-	F[2] = -(k * (n.z()) * (-2 * proximity + dist));
+	//All -1s were -2--taken out for stability
+	F[0] = -(k * (n.x()) * (-1 * proximity + dist));
+	F[1] = -(k * (n.y()) * (-1 * proximity + dist));
+	F[2] = -(k * (n.z()) * (-1 * proximity + dist));
 	F[3] = -F[0];
 	F[4] = -F[1];
 	F[5] = -F[2];

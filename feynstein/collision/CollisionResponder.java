@@ -3,6 +3,10 @@ package feynstein.collision;
 import feynstein.*;
 import feynstein.properties.*;
 
+/* ASK SAM:
+   -physicsSim.cpp l347 on--that's not collision response, right? handled elsewhere?
+*/
+
 public abstract class CollisionResponder<E extends CollisionResponder> extends Property<E> {
     
     NarrowPhaseDetector detector;
