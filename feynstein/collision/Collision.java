@@ -35,6 +35,22 @@ public class Collision {
 	dist = distance;
     }
 
+    public int getType() {
+	return type;
+    }
+
+    public double[] getBaryCoords() {
+	return baryCoords;
+    }
+
+    public int[] getParticles() {
+	return particles;
+    }
+
+    public double getDistance() {
+	return dist;
+    }
+
     /**
        Lazy compareTo method implemented so we can make a HashSet of collisions. 
        Returns 0 if the two collisions are equal, -1 otherwise.

@@ -12,7 +12,7 @@ public class ParticleSet<E extends ParticleSet> extends Shape<E> {
 	
     public ParticleSet() {
 	objectType = "ParticleSet";
-	particleRadius = 0.5f;
+	particleRadius = 0.2f;
 	disableParticleMass = true;
 	disableParticleFixed = true;
 	disableParticleVelocity = true;

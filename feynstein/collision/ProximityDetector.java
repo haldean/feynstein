@@ -75,7 +75,7 @@ public class ProximityDetector extends NarrowPhaseDetector<ProximityDetector> {
 	    double u = -1, v = -1, w = -1;
 
 	    //vertex-face distance
-	    double[] distAndCoords = vertexFaceDistance(p, a, b, c, u, v, w);
+	    double[] distAndCoords = DistanceFinder.vertexFaceDistance(p, a, b, c, u, v, w);
 	    double distance = Math.sqrt(distAndCoords[0]);
 	    u = distAndCoords[1];
 	    v = distAndCoords[2];
@@ -145,7 +145,7 @@ public class ProximityDetector extends NarrowPhaseDetector<ProximityDetector> {
 	    double s = -1, t = -1; 
 
 	    //collision
-	    double[] distAndCoords = edgeEdgeDistance(p1, q1, p2, q2, s, t);
+	    double[] distAndCoords = DistanceFinder.edgeEdgeDistance(p1, q1, p2, q2, s, t);
 	    double distance = Math.sqrt(distAndCoords[0]);
 	    s = distAndCoords[1];
 	    t = distAndCoords[2];

@@ -1,11 +1,10 @@
 rodbending1 {
 
     shapes {
-	m = 1;
 
 	shape SpringChain(name="spring1", vert=(0,0,0), vert=(1,0,0),
 		vert=(2,0,0), vert=(3,0,0), vert=(4,0,0), vert=(5,0,0),
-		vert=(6,0,0), vert=(7,0,0), mass=m, fixed=0, fixed=1);
+		vert=(6,0,0), vert=(7,0,0), fixed=0, fixed=1);
     }
 
 

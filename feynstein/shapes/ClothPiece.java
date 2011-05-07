@@ -14,13 +14,13 @@ public class ClothPiece extends ParticleSet<ClothPiece> {
 	}
    	
     public ClothPiece compileShape() {
-		super.compileShape();
+		//super.compileShape();
 		for (int i = 0; i < localMesh.size(); i+=4) {
 			if(i < localMesh.size() - 2) {
 				localMesh.getTriangles().add(new Triangle(i, i+1, i+2));
 				localMesh.getTriangles().add(new Triangle(i+2, i+3, i));
 			}
 		}
-		return this;
+		return super.compileShape();
     }
 }

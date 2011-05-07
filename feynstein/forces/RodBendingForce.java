@@ -4,11 +4,9 @@ import feynstein.geometry.*;
 import feynstein.shapes.*;
 import feynstein.utilities.*;
 
-import java.util.ArrayList;
-
 public class RodBendingForce extends Force<RodBendingForce> {
     private Shape actsOn;
-	private ArrayList<Double> undefLengths;
+	private double[] undefLengths;
     private double thetaBar, strength;
 
     public RodBendingForce() {
@@ -16,22 +14,15 @@ public class RodBendingForce extends Force<RodBendingForce> {
 		thetaBar = 0.0;
 		strength = 1.0;
 		objectType = "RodBendingForce";
-		undefLengths = new ArrayList<Double>();
     }
 
     public RodBendingForce set_actsOn(Shape s) {
-		//for(int i = 0; i < stencil.getEdges().size(); i++) {
-		//	stencil.add(e.getIdx(0));
-		//	stencil.add(e.getIdx(1));
-		//}
 		Edge e1, e2;
-		Vector3d pos1, pos2, pos3;
 		int idx1 = 0;
 		int idx2 = 0;
 		int idx3 = 0;
 		for(int i = 0; i < s.getLocalMesh().getEdges().size(); i++) {
 			for(int j = i+1; j < s.getLocalMesh().getEdges().size(); j++) {
-				//if (i!=j) {
 					e1 = s.getLocalMesh().getEdges().get(i);
 					e2 = s.getLocalMesh().getEdges().get(j);
 					boolean found = false;
@@ -60,18 +51,12 @@ public class RodBendingForce extends Force<RodBendingForce> {
 						stencil.add(idx1);
 						stencil.add(idx2);
 						stencil.add(idx3);
-						pos1 = s.getLocalMesh().getParticles().get(idx1).getPos();
-						pos2 = s.getLocalMesh().getParticles().get(idx2).getPos();
-						pos3 = s.getLocalMesh().getParticles().get(idx3).getPos();
-						undefLengths.add((pos1.minus(pos2)).norm());
-						undefLengths.add((pos2.minus(pos3)).norm());
 					}
-				//}
 			}
 		}
-		//System.out.println("STENCIL "+stencil.size());
-		//for(Integer i : stencil)
-		//	System.out.println(i);
+		System.out.println("STENCIL "+stencil.size());
+		for(Integer i : stencil)
+			System.out.println(i);
 		actsOn = s;
 		return this;
     }
@@ -92,6 +77,15 @@ public class RodBendingForce extends Force<RodBendingForce> {
 		int n = stencil.size();
 		if(localForce == null)
 			localForce = new double[3*n];
+		if(undefLengths == null) {
+			undefLengths = new double[2*stencil.size()/stencilSize];
+			int ulIdx = 0;
+			for (int i = 0; i < undefLengths.length; i+=2) {
+				double [] undefLen = computeUndeformedLengths(globalPositions, stencilSize/2*i);
+				undefLengths[ulIdx++] = undefLen[0];
+				undefLengths[ulIdx++] = undefLen[1];
+			}
+		}
 		
 		double lenij, lenjk;
 		
@@ -111,8 +105,8 @@ public class RodBendingForce extends Force<RodBendingForce> {
 			yk = globalPositions[3*stencil.get(i+2)+1];
 			zk = globalPositions[3*stencil.get(i+2)+2];
 			
-			lenij = undefLengths.get(lenIdx);
-			lenjk = undefLengths.get(++lenIdx);
+			lenij = undefLengths[lenIdx];
+			lenjk = undefLengths[++lenIdx];
 			
 			e_ij.set(xi-xj, yi-yj, zi-zj);
 			e_jk.set(xj-xk, yj-yk, zj-zk);
@@ -158,4 +152,23 @@ public class RodBendingForce extends Force<RodBendingForce> {
 		
 		
 	}
+	
+	double[] computeUndeformedLengths(double [] vrt_psns, int i)
+	{
+		int base0 = 3*stencil.get(i);
+		int base1 = 3*stencil.get(i+1);
+		int base2 = 3*stencil.get(i+2);
+		
+		Vector3d pos1, pos2, pos3;
+		pos1 = new Vector3d(vrt_psns[base0], vrt_psns[base0+1], vrt_psns[base0+2]);
+		pos2 = new Vector3d(vrt_psns[base1], vrt_psns[base1+1], vrt_psns[base1+2]);
+		pos3 = new Vector3d(vrt_psns[base2], vrt_psns[base2+1], vrt_psns[base2+2]);
+		
+		double [] undefLen = new double[2];
+		undefLen[0] = (pos1.minus(pos2)).norm();
+		undefLen[1] = (pos1.minus(pos2)).norm();
+		
+		return undefLen;
+	}
+	
 }
