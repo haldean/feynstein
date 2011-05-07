@@ -641,32 +641,6 @@ in Figure \ref{fig:surfacef}.
   \label{fig:surfacef}
 \end{figure}
 
-\subsubsubsection{TetrahedralConstraintForce}
-
-A force based on a tetrahedron configuration involving four
-particles. Like the ConstantStrainTriangleForce, this force is
-configured by a tensile modulus and a Poisson ratio, and the
-undeformed lengths of the four (rather than three) edge vectors. The
-spatial arrangement of this force can be seen in Figure
-\ref{fig:tetraf}.
-
-\begin{figure}
-  \centering
-  \includegraphics{img/Tetrahedral}
-  \caption{The spatial arrangement of particles for a
-    \texttt{TetrahedralConstraintForce}}
-  \label{fig:tetraf}
-\end{figure}
-
-\subsubsubsection{ContactForce}
-
-A ContactForce is derived from a SpringForce and acts upon two
-triangles to resist a collision between them. An equal and opposite
-force is applied to both triangles, distributed amongst their three
-vertices based on the point of contact. A contact force is configured
-by a spring force stiffness and a minimum distance that must be
-maintained between the colliding pairs.
-
 \subsection{Properties}
 Properties objects foremost include the non-optional properties of
 simulation: time integration and rendering. Every simulation requires
@@ -731,20 +705,25 @@ detection and response.
 \subsubsubsection{Detectors}
 
 Feynstein supports a traditional, two-phase collision detection
-framework. The narrow phase of detection a basic proximity-based
-method for classifying collisions. Future Feynstein releases will
-additionally support continuous-time detection for greater accuracy in
-detection. To add collision detection to your simulation, declare a
-new \texttt{ProximityDetector} to the properties section. A \texttt{ProximityDetector}
-requires one parameter: the minimum proximity that can be exhibited
-between two triangles before they are detected as colliding.
+framework. The narrow phase of detection supports both a basic proximity-based
+method for classifying collisions, and more costly continuous-time detection for greater accuracy in
+collision handling. To add a collision detection to your simulation, declare a
+new \texttt{ProximityDetector} or \texttt{ContinuousTimeDetector} to the properties section. 
 
-\begin{verbatim}
-properties {
-  /*other property declarations...*/
-  property ProximityDetector(proximity=1e-3);
-}
+\begin{verbatim}                                                                                                                                             
+properties {                                                                                                                                                 
+  /*other property declarations...*/                                                                                                                         
+  property ProximityDetector(proximity=1e-3);                                                                                                                
+}                                                                                                                                                            
 \end{verbatim}
+
+\subsubsubsubsection{ProximityDetector}
+A \texttt{ProximityDetector} requires one parameter: the minimum proximity that can be exhibited
+between two triangles before they are detected as colliding. At each simulation update, the \texttt{ProximityDetector}
+determines if any two triangles are going to violate this minimum proximity, and if so, marks them as colliding.
+
+\subsubsubsubsection{ContinuousTimeDetector}
+A \texttt{ContinuousTimeDetector} requires no parameters and detects collisions at each simulation update by using each triangles current positions and velocities to determine at what time they would collide. If this collision time falls in between the current time and next update time, the two are marked as colliding. 
 
 The optional broad phase of detection uses a spatial hierarchy, with
 support for a variety of bounding volumes, to determine pairs of
