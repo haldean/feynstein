@@ -15,7 +15,7 @@ public class RegularPolygon extends Shape<RegularPolygon> {
 	objectType = "RegularPolygon";
     }
 
-    public RegularPolygon set_verteces(int verts) {
+    public RegularPolygon set_vertices(int verts) {
 	verteces = verts;
 	return this;
     }
