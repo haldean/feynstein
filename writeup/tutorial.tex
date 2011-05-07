@@ -1,85 +1,4 @@
-\documentclass[letterpaper]{article}
-
-\usepackage{graphicx,listings,color}
-
-\title{How to Use Feynstein for Physical Simulation}
-
-\author{Sam Ainsley, Eva Asplund, Will Brown, Colleen McKenzie, Rob
-  Post}
-\definecolor{gray}{gray}{0.95}
-\renewcommand{\familydefault}{\sfdefault}
-\lstset{
-  language=C,
-  basicstyle=\footnotesize\ttfamily, % Standardschrift
-  % numbers=left,               % Ort der Zeilennummern
-  numberstyle=\tiny,          % Stil der Zeilennummern
-  % stepnumber=2,               % Abstand zwischen den Zeilennummern
-  numbersep=5pt,              % Abstand der Nummern zum Text
-  tabsize=2,                  % Groesse von Tabs
-  extendedchars=true,         %
-  breaklines=true,            % Zeilen werden Umgebrochen
-  stringstyle=\ttfamily, % Farbe der String
-  showspaces=false,           % Leerzeichen anzeigen ?
-  showtabs=false,             % Tabs anzeigen ?
-  xleftmargin=17pt,
-  framexleftmargin=17pt,
-  framexrightmargin=5pt,
-  framexbottommargin=4pt,
-  backgroundcolor=\color{gray},
-  showstringspaces=false      % Leerzeichen in Strings anzeigen ?        
- }
-\newcommand\subsubsubsection[1]{\paragraph{#1}}
-
-\begin{document} 
-\maketitle
-
-\tableofcontents
-
-\newpage
-\section{Overview}
-
-Feynstein is a language designed for making physical simulation
-accessible to those who want to experiment with physics but who do not
-have significant experience in computer science. Feynstein will make
-the process of going from an experiment's conception to its simulation
-simple and fast, and will provide the end user with accurate video
-renderings, either in a file or on screen.
-
-Historically, if users wanted to have the power of a full physical
-simulation engine, they had to either purchase and learn very complex
-and expensive 3D simulation software, or write it themselves (usually
-in C++). Because these options are costly and time-consuming, often
-students of physics will learn simulation using a software package
-like Matlab or Mathematica. These tools have the benefit of
-abstracting much of the complexity of the task, but with the loss of
-complexity comes a loss of control and expressive power. Feynstein
-attempts to be a midpoint between these two extremes; it is a language
-that allows for the full expressivity of a complex simulation package,
-but with the ease-of-use that comes with a tool like Matlab.
-
-Feynstein's native simulator and its simple and convenient syntax make
-it an ideal tool for researchers with limited programming experience
-for configuration simulations to test experimental
-hypothesis. Moreover, the language offers an excellent framework for
-teaching the fundamentals of physics-based computer simulation to
-students with limited understanding of mechanics or programming in
-C++.
-
-Feynstein is fully object oriented, allowing for easy
-extensibility. Users can customize integration and rendering methods,
-giving them full control of how their animation is calculated and
-displayed. Finally, users can use the built-in forces and 3D solids
-and define their own. Feynstein is appropriate for all levels of user
-expertise, whether they want to simulate a sphere on a spring or a
-complex compression force on a custom shape.
-
-This tutorial will use code examples to walk you through the various
-aspects of Feynstein syntax and semantics; it will start with basic
-scenes, and end with defining your own forces, integrators, and
-objects. Let's begin!
-
-\newpage
-\section{Simple Program}
+\subsection{Simple Program}
 
 Let's start with a basic Feynstein program.
 
@@ -159,8 +78,7 @@ you pass the file name of model as the `file` parameter. Feynstein
 imports it for you, and you can set the `location` and `mass`
 properties of the shape just like you would for any object.
 
-\newpage
-\section{Forces}
+\subsection{Forces}
 No simulation package would be complete without a full array of forces
 at its users disposal, and Feynstein is no exception to this
 rule. With eight built-in forces, the user can specify almost any
@@ -244,10 +162,9 @@ objects) which that force acts upon.
 
 If none of these forces satisfy your simulation needs, it's easy to
 define your own, as well! We'll discuss how to define your own forces
-in the Advanced Topics section.
+in the Advanced Topics subsection.
 
-\newpage
-\section{Outputs}
+\subsection{Outputs}
 
 Up until now, we've implicitly defined our output to be the
 screen, so that you can interact with the scene and see the results of
@@ -301,8 +218,7 @@ parameter. Your render target can do whatever it wants to with the
 scene -- for example, it could generate an image and then send it to a
 different computer over the network.
 
-\newpage
-\section{Frame Updates}
+\subsection{Frame Updates}
 
 While you're rendering your scene, you get qualitative output in the
 preview window. If you're modelling a scientific experiment, though,
@@ -372,7 +288,7 @@ here, initializing our `FileWriter` so we can write to it during
 `onFrame`.
 
 `onFrame` is the frame update method we discussed in the introduction
-to this section -- it is the method that gets run after all of the
+to this subsection -- it is the method that gets run after all of the
 forces are applied to the shapes in the scene, but before the scene is
 rendered. Here, you can set or read any of the properties of a shape;
 in our case, we're accessing the height of our sphere in the
@@ -386,8 +302,7 @@ block, we didn't store a reference to it in a variable. Instead, we
 access it using its name with the \#-operator. We then can treat it
 like a regular object and call instance methods on it, like `getZ()`.
 
-\newpage
-\section{Integration Methods and Error Bounds}
+\subsection{Integration Methods and Error Bounds}
 
 Unfortunately for the users of any simulation system, physical
 simulation isn't perfect. While, given the right parameters, it can
@@ -436,4 +351,3 @@ stability, and vice-versa.
   simulation. This is the best choice for scientific purposes, where
   highly accurate results are worth waiting for.
 \end{description}
-\end{document}

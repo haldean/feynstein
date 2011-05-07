@@ -1,0 +1,75 @@
+The Feynstein system is broken into two distinct portions; the
+translator and the Feynstein execution environment. The translator
+takes, as input, Feynstein source code and translates it into valid
+Java source code. This Java code is then run in the Feynstein
+execution environment, which pulls in all of the Java code we have
+written to provide the rendering, geometry and simulation constructs
+that are present in Feynstein.
+
+\subsection{Translator}
+
+The translator uses a multi-pass system to translate Feynstein into
+Java. It first does basic lexing, in which it breaks inputs first into
+statements, then into the lexemes within those statements. After
+lexing, it constructs a syntax tree. Once the code exists within this
+tree, the translator walks the tree to generate valid Java code. In
+most cases, this is simple textual substitution; for example, the
+Feynstein code segment \code{\#myShape} translates directly into
+\code{getShape(``myShape'')}. However, some constructs require a more
+in-depth parsing; in particular, builder syntax was quite difficult to
+translate. These statements, of the form
+\code{MyObject(attribute1=value, attribute2=value)}, were not valid
+Java and thus didn't cause a collision in our grammar, but still were
+difficult to distinguish from, say, \code{MyObject(x == y)}, which is
+valid Java (if \code{MyObject} takes a boolean as an argument to its
+constructor).
+
+We do have one unusual step in our translator, which is ``structure
+analysis'' -- since Feynstein has certain parts of the language which
+this user is required to use (for example, the user must specify a
+``shapes'' block), we analyze the syntax tree to ensure that they've
+incorporated the required portions of the source code.
+
+Error handling in Feynstein is difficult; we need to handle errors
+returned by the Java compiler and virtual machine and give users some
+indication as to where in their original Feynstein (instead of the
+generated Java code) the error occured. To do so, during parsing and
+syntax analysis we generate a mapping of Java line numbers to
+Feynstein line numbers. Then, if the Java compiler or VM throws an
+error, we mine the stack trace for the Java line number which causes
+the error and tell the user which line number in Feynstein generated
+that Java code.
+
+Both Rob and Will contributed to the translator. Will wrote the
+initial implementation of the translator and was responsible for
+implementing new features at the translator level. Rob was responsible
+for error handling.
+
+A block diagram of the translator is shown in \figref{translator}
+
+\imgfig{translator}{.8}{Block diagram of the stages in the
+  translator}{translator}
+
+\subsection{Execution Environment}
+
+The execution environment of Feynstein is the more complex half of the
+system; while our language is very similar to Java and therefore
+requires simple translations, the actual behavior of a Feynstein
+program is extremely complex. This complexity is mirrored in the
+complexity of the architecture in the two portions; while the
+translator had four modules and a fairly simple API, the execution
+environment is composed of almost 7000 lines of Java code split across
+50 classes. A block diagram of the execution environment is shown in
+\figref{eeblock}.
+
+Will defined the API for the components in the system to ensure
+consistency and compatibility with translator output. From a
+high-level implementation perspective, Sam was responsible for
+renderer, geometry and forces, Colleen was responsible for collisions
+and integrators, and Will was responsible for shapes. For a more
+in-depth summary of who was responsible for what, see Appendix
+\ref{sec:whowhat}, and for a line-by-line listing of who wrote what
+code, see Appendix \ref{sec:listing}.
+
+\imgfig{eeblock}{.35}{Block diagram of the execution environment
+  architecture}{eeblock}
