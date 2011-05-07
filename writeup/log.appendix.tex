@@ -1,0 +1,295 @@
+\subsection*{1/24}
+
+Meeting minutes ended up just being a to-do list. (Make a wiki, make a
+git repository, everyone read Sam's notes, I’ll create pltphb@gmail
+and start a calendar, we need a fifth group member).  
+
+\subsection*{1/30}
+
+Orders of business:
+\begin{enumerate}
+\item Meetings are Sundays, 8:30, Sam's suite. 
+\item Everybody should read Sam's modeling papers for next week and
+  send her whiny emails if they don't make sense.
+\item Everybody should also read the git tutorial that Will is going
+  to send/post on the wiki.
+\end{enumerate}
+
+Also:
+\begin{itemize}
+\item Will, do you want to just make everyone wiki accounts now so we
+  don't have to deal with it later?  
+\item Rob: Eva had a good point about how I don't really need the
+  calendars anymore (or at least for a while) now that we have a set
+  meeting time, so you don't have to do whatever you were going to try
+  to make Google Calendar behave properly.
+\end{itemize}
+
+\subsection*{2/6}
+
+\begin{enumerate}
+\item Sam's materials and explanation. We spent the most time on:
+  \begin{itemize}
+  \item concept: time-stepping
+  \item time-stepping as a concept
+  \item methods for solving diff eqs
+    \begin{itemize}
+    \item Euler, implicit, explicit, semi-implicit
+    \item stability/error-checking
+    \end{itemize}
+  \item forces we're using
+  \end{itemize}
+
+\item Our language is for physicists who can't program.
+\item Mission: Language Spec now underway. Meet with Aho in a week to
+  get his input
+
+\item Are we doing collisions? Conclusion: probably
+\item Post-Sam: Will's rendering rant
+\end{enumerate}
+
+
+\subsubsection*{Project Milestones}
+\begin{enumerate}
+\item Finish language spec in a week
+  \begin{itemize}
+  \item show it to Aho
+  \item whitepaper 1.5 wks after the meeting
+  \item Will's putting his ideas up on a page, then we'll use the wiki
+    talk feature to add and modify things
+  \end{itemize}
+
+\item Rendering:
+  \begin{itemize}
+  \item OpenGL for Java
+  \item display single triangles
+  \item mesh framework for triangles
+  \end{itemize}
+
+\item Semi-implicit Euler and spring forces (followed by more forces)
+\item Implicit time stepping
+\item discrete geometry
+\item collisions (in parallel with discrete geometry)
+\end{enumerate}
+
+\subsection*{2/20}
+
+Tonight we write the whitepaper!
+
+\subsection*{2/27}
+
+\subsubsection*{Things We Are Going To Code}
+(note: this outline does not imply order)
+\begin{enumerate}
+\item Rendering \textbf{(Rob)}
+  \begin{itemize}
+  \item file output
+  \item video (onscreen)
+  \item displaying triangles
+  \item updating
+  \item aesthetics \textbf{(Sam)}
+  \end{itemize}
+
+\item Time-stepping functions \textbf{(Colleen)}
+  \begin{itemize}
+  \item semi-implicit
+  \item implicit
+  \end{itemize}
+
+\item Forces \textbf{(Sam)}
+
+\item Discretizing geometry \textbf{(Will and Rob)}
+\item Collisions \textbf{(Eva)}
+\item Translator \textbf{(Will)}
+  \begin{itemize}
+  \item define API for target source code (see Will's outline in lang
+    specs for ideas) 
+  \item yaaay regexp
+  \end{itemize}
+
+\item UNIT TEST EVERYWHERE \textbf{(Eva)}
+\end{enumerate}
+
+\subsubsection*{Gameplan}
+Rendering and the translator are independent of other things.
+
+\subsection*{3/21}
+
+\subsubsection*{What to do on the manual}
+\begin{description}
+\item[Missing] sections on builder syntax camera placement, and
+  discrete geometry. The rest is filling in TODOs and 2.6.
+\item[Dividing things up] write about the section you're
+  implementing. Will has to do lots of things because he understands
+  them! Everything else is first-come-first-serve.
+\item[The plan] tasks:
+  \begin{itemize}
+  \item Will finishes tutorial outline by Friday night
+  \item Everyone picks their sections by Saturday at midnight, or I
+    assign them. Shoot for even distribution of work, obviously.
+  \item CHECK YOUR EMAILS PLEASE
+  \item Hard deadline for submitting content to Will is Tues, 3/29, at 10:30am.
+  \item No meeting this Sunday, since it doesn't seem like we need it.
+  \end{itemize}
+\end{description}
+
+\subsection*{4/3}
+
+\subsubsection*{Progress reports}
+\begin{description}
+\item[Will] Translator for most of the Feynstein-specific syntax is
+  implemented. Still working on the Java parts (i.e. telling
+  translator when it should ignore things that are Java). ~500 lines
+  of C, will probably be close to double that.
+
+\item[Rob] Having issues with JOGL implementation--code not might be
+  correct. (Code: rendering triangles to files, video out.)
+\end{description}
+
+\subsubsection*{How to get things done better}
+\begin{itemize}
+\item Deadlines:
+  \begin{itemize}
+  \item Content deadline: 96 hours before due date
+  \item Proofing deadline: 72 hours before due date
+  \item Changes-from-proofing deadline: 48 hours before
+  \item Reproofing deadline: 24 hours before
+  \end{itemize}
+\item MY BRILLIANT PLAN:
+  \begin{itemize}
+  \item If your material is late, a note is made on a new wiki page
+    (will be created soon) and another person takes the material. If
+    you take over someone else's late material, a note is made on the
+    wiki page about how awesome you are.
+  \item Meetings may involve reassigning work
+  \item For each note, we suggest Aho lower the person's personal
+    project grade a letter.
+  \end{itemize}
+\end{itemize}
+
+\subsubsection*{Deadlines for EVERYTHING}
+\begin{enumerate}
+\item Rendering (Rob): done by Thurs, April 7 (night)
+  \begin{itemize}
+  \item file output
+  \item video (onscreen)
+  \item displaying triangles
+  \item updating
+  \item aesthetics (Sam)
+  \end{itemize}
+
+\item Translator (Will): done by Sunday, April 10
+
+\item Obj importer (Sam): done by Sunday, April 10
+\item Gravity (Sam): done by Thursday, April 14
+\item Shape primitives (Will and Rob): Sunday, April 17
+\item Time-stepping functions (Colleen plus Sam and Eva): done by Sunday, April 17
+semi-implicit (first)
+\item Forces (Sam): done by Sunday, April 24th
+\item Time-stepping II (Colleen and Sam): done by Sunday, May 1
+\item Keyboard and mouse navigation (Rob): done by Sunday, May 1
+\item Collisions (Eva): done by Sunday, May 1
+\item UNIT TEST EVERYWHERE (Eva): Testing must be done by Sunday, May 8
+\item Textures, shading, etc (Systems people): as needed
+\item Project report: Friday, April 29
+\end{enumerate}
+
+\subsection*{4/10}
+
+\subsubsection*{How to git}
+One person working on things at a time, otherwise problems.  This
+means check with everyone before you commit!
+
+\subsubsection*{Other things}
+\begin{itemize}
+\item Automated compilation
+  \begin{itemize}
+  \item Command: run
+  \item shell script in top-level directory
+  \item can only compile things inside git directory
+  \end{itemize}
+\item temp file: put temp stuff there (e.g. tests)
+\item Before you commit code, run make clean in the top level
+  directory (to get rid of annoying .class files)
+\end{itemize}
+
+\subsubsection*{Stuff due soon}
+\begin{itemize}
+\item Systems people: object stuff
+\item time stepping (Sam and Colleen meeting Friday)
+\item Will: by end-of-night Sunday, implement main method using
+  renderer and FileShape class.
+\end{itemize}
+
+\subsection*{4/18}
+
+\subsubsection*{Will's updates}
+\begin{itemize}
+\item API changes: eg forces none;
+\item shapes addable; shapes stored in right place; close to storing meshes
+\item still need to test
+\end{itemize}
+
+\subsubsection*{Sam's updates}
+\begin{itemize}
+\item Renderer (w/timestepping) is running in a main method in
+  java--not Feynstein yet. Working on that now.
+\item Set up to "do physics instead of hard coding"
+\item going to work on cleaning up API
+\item Note to everyone: EVERYTHING EXTENDS SCENE. (Scene is abstract.)
+\item some things are already defined in abstract class, e.g. stepping
+  through forces physics, etc
+\end{itemize}
+
+\subsubsection*{Colleen's updates}
+\begin{itemize}
+\item Please be better about responding to my emails.
+\item Demo date: May 11th, 2:30pm
+\item Meeting with Aho: try for this Thursday, 12-2?
+\end{itemize}
+
+\subsubsection*{Revising of deadlines, addition of missing stuff}
+(see master deadlines page)
+
+\subsection*{4/24}
+
+\subsubsection*{Things we did}
+\begin{itemize}
+\item Will: meshes!
+\item Sam: gravity! Spring force!
+\end{itemize}
+
+\subsubsection*{Deadline musical chairs again}
+
+\subsubsection*{Other stuff}
+our final test: www.cs.ubc.ca/~rbridson/movies/spinningcloth.mov
+(this depends on Rob learning about textures)
+
+\subsection*{5/3}
+
+\subsubsection*{There are problems.}
+\begin{itemize}
+\item Setting a deadline about 24 hours after the end of our final was a Bad Idea. Leniency is granted for missed deadlines in light of that fact.
+\item Nobody is finished with anything
+\item Things people have done:
+  \begin{itemize}
+  \item Will: a bunch of collisions stuff
+  \item Sam: all the forces, stressing over implicit time stepping
+  \item Eva: spring force tests
+  \item Rob: mapping java to feynstein code (for error handling)
+  \item Colleen: stressing over implicit time stepping
+  \end{itemize}
+\item Eva and Rob will receive phone calls, not emails, about
+  scheduling from now on
+\end{itemize}
+
+\subsubsection*{When things can be done}
+\begin{itemize}
+\item Rob: error handling due by 6pm tomorrow
+\item Eva: translator tests due by 3pm, force tests by 6pm
+\item Colleen: collisions: proximity tests hopefully done tonight,
+  CTCD due...tomorrow?
+\item Sam: don't forget about file output and mouse navigation (not
+  that we'll let you), but focus on whatever is most important at the
+  moment
+\end{itemize}

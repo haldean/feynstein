@@ -1,52 +1,101 @@
-package feynstein.collision;
+package feynstein.properties.collision;
 
 import feynstein.*;
 import feynstein.properties.*;
 import feynstein.utilities.*;
 import java.util.*;
 
-/*ASK SAM:
-  update method TODO
+/* Questions for Sam, revised to be less angry and more intellible
+   1. Semi-implicit time stepping seems to happen before impulse response,
+   and arrays needed for impulse response (the q/Q/_dot stuff) seem to be
+   defined as a result of time stepping. Do we need to have time stepping 
+   happen before impulse response? If not, how do we define those arrays?
+   
+   2. Lines 88 - 89: please double-check that this is what we want--that
+   the detector checks again for collisions and then we grab the new set.
+   (The only reason I'm confused about this is because of question 3.)
+
+   3. Line 83: original c++ filter() method took a reference to array V. 
+   Does this mean we need to update scene.globalVelocities here? If we 
+   don't update it, I don't see the point of iterating this while loop.
+
+   4. Lines 142 and 202 subtract a scalar from a vector. I assume that just
+   means subtract that value from every coordinate in the vector, but I wanted
+   to double-check before I implement that.
+
+   5. Stupid-proof check: in filter method, double[] M == scene.globalMasses, yes?
+
 */
 
 public class ImpulseResponder extends CollisionResponder<ImpulseResponder> {
 
+    int iter;
+
+    double X[];
+    double M[];
+
     public ImpulseResponder(Scene aScene) {
 	super(aScene);
-	//TODO initialize defaults?
+	iter = 100;
+	X = new double[scene.getGlobalPositions()];
+	M = new double[scene.getGlobalMasses()];
+    }
+
+    public set_iterations(int iterations) {
+	iter = iterations;
     }
     
     public void update() {
 	//TODO physicsSim.cpp l308 has semi-implicit time stepping happening
 	//before impulse stuff gets called. Whaaaaat
 	//...(I'm ignoring it for now and just copying impulse stuff
-	
-	//START WHAT THE FUCK DOES THIS DO
-	//iteration counter
-	int j = 0;
+	/*
+	//semi-implicit Euler time-stepping
+	Vector q (dof);
+	Vector q_dot (dof);
+	Vector Q (dof);
+	Vector Q_dot (dof);
+	//update velocity
+	for(int j = 0; j < dof; j ++){
+	  q_dot[j] = V[j] + (h/M[j])*(F)[j];
+	}
+	//update position
+	q = X + h*q_dot; */
+
+	//Also what the hell does this do:
 	//midstep velocity
 	Q_dot = (q-X)*(1/h);
-	//END WHAT THE FUCK DOES THIS DO
 	
 	HashSet<Collision> cSet = detector.getCollisions();
-	//okay I think this is iterating through everything in a way we don't have to,
-	//so I'm skipping it and implementing the helper method filter()
+	
+	//iteration counter
+	int j = 0;
 	if (cSet.size() > 0) {
 	    //if count < max iterations or no cap
-	    while((collisions && j < max_iterations)||(collisions&&max_iterations==-1)){
-		j ++;
+	    while ( (collisions && j < iter) || (collisions && iter ==-1) ) {
+		j++;
+		
+		X = scene.getGlobalPositions();
+		M = scene.getGlobalMasses();
 
 		//filter velocities
-		filter(Q_dot, X, M, col_rec);
+		//TODO do we need to set scene.globalVelocities = V here?
+		double[] V = filter(Q_dot, X, M, cSet);
 
 		//step forward
 		Q = X + h*Q_dot;
 
+		detector.update();
+		cSet = detector.getCollisions();
+		
+		/*
+		  Following lines implemented above as update() and getCollisions()
 		//clear collision record
 		col_rec.clear();
 
 		//check for collisions
-		collisions = broad_phase_I(X, Q, col_rec);
+		collisions = broad_phase_I(X, Q, col_rec);*/
+
 	    }
 	    q_dot = Q_dot; 
 	    q = Q;
@@ -114,10 +163,10 @@ public class ImpulseResponder extends CollisionResponder<ImpulseResponder> {
 	    //edge-edge
 	    if (col.getType() == Collision.EDGE_EDGE){
 		int[] parts = col.getParticles();
-		int p = parts[0];
-		int a = parts[1];
-		int b = parts[2];
-		int c = parts[3];
+		int p1 = parts[0];
+		int q1 = parts[1];
+		int p2 = parts[2];
+		int q2 = parts[3];
 		//barycentric coords
 		double[] coords = col.getBaryCoords();
 		double s = coords[0];

@@ -1,4 +1,4 @@
-package feynstein.collision;
+package feynstein.properties.collision;
 
 public class AxisAlignedBoundingBoxTest {
     public static void main(String args[]) {
