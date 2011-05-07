@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import glob, os, subprocess, sys, translator
+import glob,re, os, subprocess, sys, translator
 
 def get_classpath():
     libs = ':'.join(glob.glob('./libs/*.jar'))
@@ -9,10 +9,35 @@ def get_classpath():
 def get_jvm_vars():
     return '-Djava.library.path=/lib/:libs/'
 
+def error_gen(err,javamap):
+    err = str(err)
+    err = err.split('\n')
+    errorlist = []
+    errormessage = 'Feynstein Errors:\n'
+    for e in err:
+        if re.search('java:',e):
+            m = re.search('[0-9]+',e)
+            errorlist.append(int(m.group()))
+    
+    if len(errorlist) > 0:
+        for er in errorlist:
+            for j in javamap:
+                
+                if j[1] == er:
+                    errormessage=errormessage+'Syntax error in line ' + str(j[0]) + '.\n'
+
+    return errormessage
+
 def compile_feynstein(infile):
-    java_source = translator.main(infile)
-    subprocess.call(['javac', '-classpath', get_classpath(), 
-                     '-Xlint:unchecked', java_source])
+    java_source,javamap = translator.main(infile)
+    p = subprocess.Popen(['javac', '-classpath', get_classpath(), 
+                     '-Xlint:unchecked', java_source],stdout = subprocess.PIPE)
+    out,err = p.communicate()
+    
+    
+    
+    print(error_gen(out,javamap))
+
     return java_source
 
 def run_feynstein(infile):

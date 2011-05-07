@@ -22,11 +22,11 @@ def create_java(root):
     return '\n'.join([str(x) for x in root.children])
 
 def src2blocks(source):
-    exprs = parse.split(source)
+    exprs,lines = parse.split(source)
     root = parse.parse(exprs)
     translate.translate(root)
     syntax.check_syntax(root)
-    return root
+    return root,lines
 
 def feync(source, path):
     '''
@@ -34,7 +34,7 @@ def feync(source, path):
     and the name of the scene.
     '''
 
-    root = src2blocks(source)
+    root,lines = src2blocks(source)
 
     package = os.path.dirname(path).replace('/', '.')
     root.children.insert(0, 'package %s;' % package)
@@ -47,7 +47,7 @@ def feync(source, path):
         if main_method:
             root.get_by_tag('scene').children.append(main_method)
 
-    return create_java(root), scene_name
+    return create_java(root), scene_name, lines
 
 def main(infile):
     '''
@@ -58,14 +58,14 @@ def main(infile):
     with open(infile) as f:
         source = f.read()
 
-    source, scene_name = feync(source, infile)
+    source, scene_name,lines = feync(source, infile)
     output_file = '%s/%s.java' % (os.path.dirname(infile), scene_name)
 
     with open(output_file, 'w') as f:
         f.write(source)
     print('Compiled to %s' % output_file)
     
-    return output_file
+    return output_file,lines
 
 if __name__ == '__main__':
     infile = sys.argv[1]
