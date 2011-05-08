@@ -27,7 +27,7 @@ public class SpringChain extends ParticleSet<SpringChain> {
     public SpringChain compileShape() {
 		//super.compileShape();
 		for (int i = 0; i < localMesh.size(); i++) {
-			for(int j = 1; j < connectivity; j++) {
+			for(int j = 1; j < connectivity+1; j++) {
 				if(i < localMesh.size() - j)
 					localMesh.getEdges().add(new Edge(i, i+j));
 			}
