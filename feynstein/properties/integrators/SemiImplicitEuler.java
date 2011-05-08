@@ -35,13 +35,14 @@ public class SemiImplicitEuler extends Integrator<SemiImplicitEuler> {
     }
 
     public double[] predictPositions() {
+	Scene scene = super.getScene();
 	// This is a list of applied force values (in Newtons), in 
 	// the x, y, and z directions. The size of this list will
 	// be the size of the number of particles in the simulation
 	double[] F = scene.globalForceMagnitude();
 	// grab global list of particles for the scene
 	ArrayList<Particle> parts = scene.getMesh().getParticles();
-	double newPositions = new double[3 * scene.getMesh.getSize()];
+	double[] newPositions = new double[3 * scene.getMesh().size()];
 	
 	for (int i = 0; i < parts.size(); i++) {
 	    if(!parts.get(i).isFixed()) {
@@ -57,7 +58,8 @@ public class SemiImplicitEuler extends Integrator<SemiImplicitEuler> {
 	return newPositions;
     }
     
-    public double[] predictVelocitioes() {
+    public double[] predictVelocities() {
+	Scene scene = super.getScene();
 	double[] newVelocities = new double[scene.getGlobalVelocities().length];
 
 	double[] F = scene.globalForceMagnitude();

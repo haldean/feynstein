@@ -2,6 +2,7 @@ package feynstein.properties.collision;
 
 import feynstein.*;
 import feynstein.properties.*;
+import feynstein.properties.integrators.*;
 import feynstein.utilities.*;
 import java.util.*;
 
@@ -37,14 +38,16 @@ public class ImpulseResponder extends CollisionResponder<ImpulseResponder> {
 	super(aScene);
 	integrator = scene.getIntegrator();
 	iter = 100;
-	midStepPos = new double[X.length];
-	midStepVel = new double[X.length];
+	midStepPos = new double[scene.getMesh().size() * 3];
+	midStepVel = new double[midStepPos.length];
     }
 
-    public set_iterations(int iterations) {
+    public ImpulseResponder set_iterations(int iterations) {
 	iter = iterations;
+	return this;
     }
     
+    @SuppressWarnings("unchecked")
     public void update() {
 	X = scene.getGlobalPositions();
 	M = scene.getGlobalMasses();
@@ -61,7 +64,7 @@ public class ImpulseResponder extends CollisionResponder<ImpulseResponder> {
 	//update position
 	q = X + h*q_dot; */
 
-	double h = integrator.getStepSize()
+	double h = integrator.getStepSize();
 
 	//midstep velocity
 	for (int i = 0; i < midStepVel.length; i++) {
@@ -74,7 +77,7 @@ public class ImpulseResponder extends CollisionResponder<ImpulseResponder> {
 	int j = 0;
 	if (cSet.size() > 0) {
 	    //if count < max iterations or no cap
-	    while ( (collisions && j < iter) || (collisions && iter == -1) ) {
+	    while ( (cSet.size() > 0 && j < iter) || (cSet.size() > 0 && iter == -1) ) {
 		j++;
 		
 		X = scene.getGlobalPositions();
@@ -93,6 +96,7 @@ public class ImpulseResponder extends CollisionResponder<ImpulseResponder> {
 	}	
     }
 
+    @SuppressWarnings("unchecked")
     private double[] filter(double[] V, double[] X, double[] M, HashSet<Collision> cSet) {
 	for (Collision col : cSet) {
 	    //if vertex-face collision
@@ -128,27 +132,27 @@ public class ImpulseResponder extends CollisionResponder<ImpulseResponder> {
 		//collision normal
 		Vector3d norm = xa.minus(xb);
 		if(norm.norm() != 0)
-		    norm = norm / norm.norm();
+		    //following line was: norm = norm / norm.norm();
+		    norm = norm.dot(1 / norm.norm());
 
 		//impulse
-		double I = (va.subtract(vb).minus(.000001)).dot(norm / m);
+		double I = va.minus(vb).minus(.000001).dot(norm.dot(1 / m));
 		
-		//TODO haven't touched any of this, either...
 		//Apply impulse
 		//apply to vertex
-		V[3*p] -= I/M[3*p]*norm[0];
-		V[3*p+1] -= I/M[3*p]*norm[1];
-		V[3*p+2] -= I/M[3*p]*norm[2];
+		V[3*p] -= I/M[3*p]*norm.x();
+		V[3*p+1] -= I/M[3*p]*norm.y();
+		V[3*p+2] -= I/M[3*p]*norm.z();
 		//apply to triangle vertices
-		V[3*a] += u*I /M[3*a]*norm[0];
-		V[3*a+1] += u*I/M[3*a]*norm[1];
-		V[3*a+2] += u*I/M[3*a]*norm[2];
-		V[3*b] += v*I/M[3*b]*norm[0];
-		V[3*b+1] += v*I/M[3*b]*norm[1];
-		V[3*b+2] += v*I/M[3*b]*norm[2];
-		V[3*c] += w*I/M[3*c]*norm[0];
-		V[3*c+1] += w*I/M[3*c]*norm[1];
-		V[3*c+2] += w*I/M[3*c]*norm[2];
+		V[3*a] += u*I /M[3*a]*norm.x();
+		V[3*a+1] += u*I/M[3*a]*norm.y();
+		V[3*a+2] += u*I/M[3*a]*norm.z();
+		V[3*b] += v*I/M[3*b]*norm.x();
+		V[3*b+1] += v*I/M[3*b]*norm.y();
+		V[3*b+2] += v*I/M[3*b]*norm.z();
+		V[3*c] += w*I/M[3*c]*norm.x();
+		V[3*c+1] += w*I/M[3*c]*norm.y();
+		V[3*c+2] += w*I/M[3*c]*norm.z();
 	    }
 
 	    //edge-edge
@@ -187,26 +191,26 @@ public class ImpulseResponder extends CollisionResponder<ImpulseResponder> {
 		//collision norm
 		Vector3d norm = xa.minus(xb);
 		if(norm.norm() != 0)
-		    norm = norm / norm.norm();
+		    //following line was: norm = norm / norm.norm();
+		    norm = norm.dot(1 / norm.norm());
 		
 		//impulse
-		double I = (va.subtract(vb).minus(.000001)).dot(norm/m);
+		double I = va.minus(vb).minus(.000001).dot(norm.dot(1/m));
 		
-		//TODO haven't touched this either...
 		//apply to first edge
-		V[3*p1] -= s*I/M[3*p1]*norm[0];
-		V[3*p1+1] -= s*I/M[3*p1]*norm[1];
-		V[3*p1+2] -= s*I/M[3*p1]*norm[2];
-		V[3*q1] -= (1-s)*I/M[3*q1]*norm[0];
-		V[3*q1+1] -= (1-s)*I/M[3*q1]*norm[1];
-		V[3*q1+2] -= (1-s)*I/M[3*q1]*norm[2];
+		V[3*p1] -= s*I/M[3*p1]*norm.x();
+		V[3*p1+1] -= s*I/M[3*p1]*norm.y();
+		V[3*p1+2] -= s*I/M[3*p1]*norm.z();
+		V[3*q1] -= (1-s)*I/M[3*q1]*norm.x();
+		V[3*q1+1] -= (1-s)*I/M[3*q1]*norm.y();
+		V[3*q1+2] -= (1-s)*I/M[3*q1]*norm.z();
 		//apply to next edge
-		V[3*p2] += t*I/M[3*p2]*norm[0];
-		V[3*p2+1] += t*I/M[3*p2]*norm[1];
-		V[3*p2+2] += t*I/M[3*p2]*norm[2];
-		V[3*q2] += (1-t)*I/M[3*q2]*norm[0];
-		V[3*q2+1] += (1-t)*I/M[3*q2]*norm[1];
-		V[3*q2+2] += (1-t)*I/M[3*q2]*norm[2];
+		V[3*p2] += t*I/M[3*p2]*norm.x();
+		V[3*p2+1] += t*I/M[3*p2]*norm.y();
+		V[3*p2+2] += t*I/M[3*p2]*norm.z();
+		V[3*q2] += (1-t)*I/M[3*q2]*norm.x();
+		V[3*q2+1] += (1-t)*I/M[3*q2]*norm.y();
+		V[3*q2+2] += (1-t)*I/M[3*q2]*norm.z();
 	    }
 	}
 

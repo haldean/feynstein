@@ -20,7 +20,7 @@ public class VelocityVerlet extends Integrator<VelocityVerlet> {
 	double[] F = scene.globalForceMagnitude();
 	// grab global list of particles for the scene
 	ArrayList<Particle> parts = scene.getMesh().getParticles();
-	newPositions = scene.getGlobalPositions();
+	double[] newPositions = scene.getGlobalPositions();
 	double[] initialVelocities = scene.getGlobalVelocities();
 	double[] masses = scene.getGlobalMasses();
 		
@@ -51,6 +51,7 @@ public class VelocityVerlet extends Integrator<VelocityVerlet> {
 
     // No side-effect changes to scene
     public double[] predictPositions() {
+	Scene scene = super.getScene();
 	double[] newPositions = new double[scene.getGlobalPositions().length];
 	double[] F = scene.globalForceMagnitude();
 	ArrayList<Particle> parts = scene.getMesh().getParticles();
@@ -69,20 +70,22 @@ public class VelocityVerlet extends Integrator<VelocityVerlet> {
 
     // No side-effect changes to scene
     public double[] predictVelocities() {
+	Scene scene = super.getScene();
 	ArrayList<Particle> parts = scene.getMesh().getParticles();
-	double F_1 ; scene.getForcePotential(predictPositions(), scene.getGlobalVelocities(), scene.getGlobalMasses());
-	double[] newVel = new double[scene.getGlobalVelocities()];
+	double[] F = scene.globalForceMagnitude();
+	double[] F_1 = scene.getForcePotential(predictPositions(), scene.getGlobalVelocities(), scene.getGlobalMasses());
+	double[] newVelocities = new double[scene.getGlobalVelocities().length];
 	for (int i = 0; i < parts.size(); i++) { 
 	    if(!parts.get(i).isFixed()) {
 		Vector3d force = new Vector3d(F[3*i],F[3*i+1],F[3*i+2]);
 		Vector3d newForce = new Vector3d(F_1[3*i],F_1[3*i+1],F_1[3*i+2]);
 		Vector3d newVel = parts.get(i).getVel().plus((force.dot(0.5*h/parts.get(i).getMass())
 							      .plus(newForce.dot(0.5*h/parts.get(i).getMass()))));
-		newVel[i] = newVel.x();
-		newVel[i+1] = newVel.y();
-		newVel[i+2] = newVel.z();
+		newVelocities[i] = newVel.x();
+		newVelocities[i+1] = newVel.y();
+		newVelocities[i+2] = newVel.z();
 	    }
 	}
-	return newVel;
+	return newVelocities;
     }
 }

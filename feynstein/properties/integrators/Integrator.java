@@ -10,7 +10,6 @@ public abstract class Integrator<E extends Integrator> extends Property<E> {
 	super(scene);
 	objectType = "Integrator";
 	h = 0.01;
-	newPos
     }
 
     public Integrator set_stepSize(double step) {

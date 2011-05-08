@@ -48,8 +48,8 @@ public abstract class Scene {
 	propertyMap = new HashMap<Class, Property>();
 	detectorList = new ArrayList<NarrowPhaseDetector>();
 
-	integrator = new SemiImplicitEuler(this);
-	hasInteg = false;
+	//integrator = new SemiImplicitEuler(this);
+	//hasInteg = false;
 
 	createShapes();
 	setProperties();
@@ -86,8 +86,8 @@ public abstract class Scene {
 	if (p instanceof CollisionResponder) {
 	    responders.add(p);
 	} else if (p instanceof Integrator) {
-	    if (hasInteg)
-		integrator = (Integrator) p;
+	    // if (hasInteg)
+	    integrator = (Integrator) p;
 	} else {
 	    properties.add(p);
 	}
@@ -196,8 +196,7 @@ public abstract class Scene {
 	    property.update();
 	for (Property property : responders)
 	    property.update();
-	for (Property property : integrators)
-	    property.update();
+	integrator.update();
 
 	onFrame();
     }
