@@ -58,6 +58,9 @@ public class SpringPenaltyResponder extends CollisionResponder<SpringPenaltyResp
 
 		//get barycentric coords
 		double[] bc = col.getBaryCoords();
+		double u = bc[0];
+		double v = bc[1];
+		double w = bc[2];
 
 		//get collision point and collision velocities
 		Vector3d xa = new Vector3d(); //was Vector3d xa, xb, va, vb;
@@ -66,18 +69,20 @@ public class SpringPenaltyResponder extends CollisionResponder<SpringPenaltyResp
 		Vector3d vb = new Vector3d();
 
 		xa.set(X[3*p], X[3*p + 1], X[3*p + 2]);
-		xb.set(bc[0] * X[3*a] + bc[1]*X[3*b] + bc[2]*X[3*c],
-		       bc[0] * X[3*a + 1] + bc[1] * X[3*b + 1] + bc[2] * X[3*c + 1],
-		       bc[0] * X[3*a + 2] + bc[1] * X[3*b + 2] + bc[2] * X[3*c + 2]);
+		xb.set(u*X[3*a] + v*X[3*b] + w*X[3*c],
+		       u*X[3*a + 1] + v*X[3*b + 1] + w*X[3*c + 1],
+		       u*X[3*a + 2] + v*X[3*b + 2] + w*X[3*c + 2]);
 		va.set(V[3*p], V[3*p + 1], V[3*p + 2]);
-		vb.set(bc[0] * V[3*a] + bc[1] * V[3*b] + bc[1] * V[3*c],
-		       bc[0] * V[3*a + 1] + bc[1] * V[3*b + 1] + bc[2] * V[3*c + 1],
-		       bc[0] * V[3*a + 2] + bc[1] * V[3*b + 2] + bc[1] * V[3*c + 2]);
+		vb.set(u*V[3*a] + v*V[3*b] + w*V[3*c],
+		       u*V[3*a + 1] + v*V[3*b + 1] + w*V[3*c + 1],
+		       u*V[3*a + 2] + v*V[3*b + 2] + w*V[3*c + 2]);
 
 		/*if the objects have do not have
 		  a seperating velocity, apply the 
 		  local spring penalty */
 		if(xa.minus(xb).dot(va.minus(vb)) < 0) {
+		    System.out.print("\n\n\n\n\n\n\n\n\n Applying Spring"
+				     + " penalty to VF collision\n\n\n\n\n\n\n\n\n");
 		    double[] local_penalty = springPenalty(xa, xb, col.getDistance());
 		    //apply to vertex
 		    penalty[3*p] += local_penalty[0];

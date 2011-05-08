@@ -14,6 +14,6 @@ MyScene {
       property VelocityVerlet(stepSize=.01);
         property BoundingVolumeHierarchy(margin=0.1);
         property ProximityDetector(proximity=0.1);
-        property SpringPenaltyResponder(detector=0, stiffness=1000, proximity=0.1);
+        property SpringPenaltyResponder(detector=0, stiffness=10000, proximity=0.5);
    }
 }
