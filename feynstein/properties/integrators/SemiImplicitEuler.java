@@ -34,6 +34,19 @@ public class SemiImplicitEuler extends Integrator<SemiImplicitEuler> {
 	}
     }
 
+    public void update(double[] newPositions, double[] newVelocities) {
+	Scene scene = super.getScene();
+	ArrayList<Particle> parts = scene.getMesh().getParticles();
+	for (int i = 0; i < parts.size(); i++) {
+	    if(!parts.get(i).isFixed()) {
+		Vector3d newVel = new Vector3d(newVelocities[3*i], newVelocities[3*i+1], newVelocities[3*i+2]);
+		// x[1] = x[0] + v*dt
+		Vector3d newPos = new Vector3d(newPositions[3*i], newPositions[3*i+1], newPositions[3*i+2]);
+		parts.get(i).update(newPos, newVel);
+	    }
+	}
+    }
+
     public double[] predictPositions() {
 	Scene scene = super.getScene();
 	// This is a list of applied force values (in Newtons), in 
@@ -50,9 +63,9 @@ public class SemiImplicitEuler extends Integrator<SemiImplicitEuler> {
 		Vector3d newVel = parts.get(i).getVel().plus(force.dot(h/parts.get(i).getMass()));
 		Vector3d newPos = parts.get(i).getPos().plus(newVel.dot(h));
 		
-		newPositions[i] = newPos.x();
-		newPositions[i] = newPos.y();
-		newPositions[i] = newPos.z();
+		newPositions[3*i] = newPos.x();
+		newPositions[3*i+1] = newPos.y();
+		newPositions[3*i+2] = newPos.z();
 	    }
 	}
 	return newPositions;
@@ -71,9 +84,9 @@ public class SemiImplicitEuler extends Integrator<SemiImplicitEuler> {
 		Vector3d force = new Vector3d(F[3*i],F[3*i+1],F[3*i+2]);
 		Vector3d newVel = parts.get(i).getVel().plus(force.dot(h/parts.get(i).getMass()));
 		
-		newVelocities[i] = newVel.x();
-		newVelocities[i+1] = newVel.y();
-		newVelocities[i+2] = newVel.z();
+		newVelocities[3*i] = newVel.x();
+		newVelocities[3*i+1] = newVel.y();
+		newVelocities[3*i+2] = newVel.z();
 	    }
 	}
 	return newVelocities;
