@@ -81,7 +81,7 @@ properties of the shape just like you would for any object.
 
 \subsection{Forces}
 No simulation package would be complete without a full array of forces
-at its users disposal, and Feynstein is no exception to this
+at its users' disposal, and Feynstein is no exception to this
 rule. With eight built-in forces, the user can specify almost any
 real-world scenario by just specifying parameters. An example program
 that includes forces is shown below.
@@ -96,7 +96,7 @@ ForceScene {
     forces {
       force GravityForce(gx=0, gy=0, gz=-9.81);
       force SpringForce(restLength=1m, k=1, 
-        actsOn=”sphere1”, fixedAt=(0, 0, 2m));
+        actsOn=#sphere1, fixedAt=(0, 0, 2m));
     }
  }
 \end{lstlisting}
@@ -192,7 +192,7 @@ ForceScene {
 
     forces {
       force GravityForce(gx=0, gy=0, gz=-9.81);
-      force SpringForce(restLength=1m, k=1, actsOn=”sphere1”, fixedAt=(0, 0, 2m));
+      force SpringForce(restLength=1m, k=1, actsOn=#sphere1, fixedAt=(0, 0, 2m));
     }
 
     onFrame {
@@ -296,7 +296,7 @@ modules: detection and response. You can add a collision detector to
 your scene without necessarily having a collision responder, but all
 collision responders need a detector to find collisions to respond
 to. Collision handling doesn't need to be tied to specific
-objects--detectors and responders will check all objects in a scene if
+objects -- detectors and responders will check all objects in a scene if
 they are defined.
 
 \subsubsection{Collision Detection}
@@ -356,7 +356,7 @@ CollisionScene {
 
     forces {
       force GravityForce(gx=0, gy=0, gz=-9.81);
-      force SpringForce(restLength=1m, k=1, actsOn=”sphere1”, fixedAt=(0, 0, 2m));
+      force SpringForce(restLength=1m, k=1, actsOn=#sphere1, fixedAt=(0, 0, 2m));
     }
 
     properties {

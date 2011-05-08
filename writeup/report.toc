@@ -77,8 +77,8 @@
 \contentsline {subsection}{\numberline {4.5}Project Log}{35}
 \contentsline {section}{\numberline {5}Language Evolution}{35}
 \contentsline {section}{\numberline {6}Language Architecture}{37}
-\contentsline {subsection}{\numberline {6.1}Translator}{37}
-\contentsline {subsection}{\numberline {6.2}Execution Environment}{39}
+\contentsline {subsection}{\numberline {6.1}Translator}{38}
+\contentsline {subsection}{\numberline {6.2}Execution Environment}{38}
 \contentsline {section}{\numberline {7}Development Tools}{39}
 \contentsline {subsection}{\numberline {7.1}Source Code Management}{39}
 \contentsline {subsection}{\numberline {7.2}Languages, Tools and Libraries Used}{39}
@@ -88,6 +88,7 @@
 \contentsline {subsection}{\numberline {9.2}Individual Lessons}{41}
 \contentsline {subsection}{\numberline {9.3}Advice for Future Teams}{43}
 \contentsline {subsection}{\numberline {9.4}Instructor Feedback}{44}
+\contentsline {section}{Appendices}{45}
 \contentsline {section}{\numberline {A}Project Contributions}{45}
 \contentsline {subsection}{\numberline {A.1}Contribution Summary}{45}
 \contentsline {subsection}{\numberline {A.2}File-Level Breakdown}{45}

@@ -98,7 +98,7 @@ gravity pulls on the sphere.
 
 \begin{verbatim}
 forces {
-  force SpringForce(actsOn="sphere1", length=40cm, strength=4);
+  force SpringForce(actsOn=#sphere1, length=40cm, strength=4);
   force GravityForce(gx=0, gy=0, gz=9.81N);
 }
 \end{verbatim}
@@ -147,7 +147,7 @@ MyScene {
    }
    
    forces {
-     force SpringForce(actsOn="cylinder1", attachesAt=(0,0), 
+     force SpringForce(actsOn=#cylinder1, attachesAt=(0,0), 
        pullsTowards=(-10, -10), strength=4N);
    }
    
@@ -229,7 +229,7 @@ They are assigned and operated on in the same way as the corresponding
 Java types.  The number types, ints and decimals, are both declared
 using literals as described in Section \ref{sec:numliterals}.
 
-int decimal string boolean void shape force property
+\code{int decimal string boolean void shape force property}
 
 \paragraph{Section Declaration}
 
@@ -257,9 +257,9 @@ same way as the other two special primitives: with the key word
 followed by the specific form the primitive is taking (i.e. Cylinder,
 SemiImplicitEuler), and the parameters required to instantiate it.
 
-The possible properties are EndTime, AssertStability, CameraView,
-StabilityAssertTolerance, BoundingVolumeHierarchy, ProximityDetector,
-VideoOutput and FileOutput.
+The possible properties are \code{ImpulseResponder, SemiImplicitEuler,
+  VelocityVerlet, ContinuousTimeDetector, BoundingVolumeHierarchy,
+  ProximityDetector} and \code{SpringPenaltyResponder}.
 
 \paragraph{Other Keywords}
 
@@ -919,7 +919,8 @@ shape ::= 'shape' 'Sphere' '(' sphereParams ')'
 
 shapeParams ::= 'name' '=' STRING
   | 'location' '=' point
-  | 'velocity' '=' '(' NUMBER velocityLiteral ',' NUMBER velocityLiteral ',' NUMBER velocityLiteral ')'
+  | 'velocity' '=' '(' NUMBER velocityLiteral ',' NUMBER 
+     velocityLiteral ',' NUMBER velocityLiteral ')'
   | 'mass' '=' NUMBER massLiteral
   | 'particleRadius' '=' NUMBER spatialLiteral
   | 'fixed' '=' NUMBER
@@ -939,12 +940,15 @@ cylOpt ::= ',' 'accuracy=' NUMBER | epsilon
 
 planeParams ::= planeParams 'normal '=' point
 
-tetParams ::= 'point1' '=' point ',' 'point2' '=' point ',' 'point3' '=' point ',' 'point4' '=' point ','
+tetParams ::= 'point1' '=' point ',' 'point2' '=' point ',' 
+    'point3' '=' point ',' 'point4' '=' point ','
 
-cubeParams ::= 'sides' '=' '(' NUMBER spatialLiteral ',' NUMBER spatialLiteral ',' NUMBER spatialLiteral ')'
+cubeParams ::= 'sides' '=' '(' NUMBER spatialLiteral ',' 
+    NUMBER spatialLiteral ',' NUMBER spatialLiteral ')'
   | 'allSides' '=' NUMBER spatialLiteral
 
-fPlaneParams ::= 'lengthX' '=' NUMBER spatialLiteral fPlaneOpt ',' 'lengthY' '=' NUMBER spatialLiteral fPlaneOpt
+fPlaneParams ::= 'lengthX' '=' NUMBER spatialLiteral 
+    fPlaneOpt ',' 'lengthY' '=' NUMBER spatialLiteral fPlaneOpt
   | fPlaneParams 'length' '=' NUMBER spatialLiteral fPlaneOpt
 fPlaneOpt ::= ',' 'subdivisions' '=' NUMBER | epsilon
 
@@ -952,7 +956,8 @@ pSetParams ::= vert pSetOpt
 vert ::= vert 'vert' '=' point | epsilon
 pSetOpt ::= ',' 'fixed' '=' NUMBER | epsilon
 
-regPolyParams ::= 'vertices' '=' NUMBER ',' regPolyParams 'radius' '=' NUMBER spatialLiteral
+regPolyParams ::= 'vertices' '=' NUMBER ',' regPolyParams 
+    'radius' '=' NUMBER spatialLiteral
   |  regPolyParams 'radius' '=' NUMBER spatialLiteral ',' 'vertices' '=' NUMBER
 
 pointMassParams ::= 'pos' '=' NUMBER
@@ -1022,10 +1027,12 @@ cameraParams ::= 'location' '=' '(' NUMBER ',' NUMBER ',' NUMBER ')'
 
 proximityParams ::= 'proximity' '=' 'NUMBER'
 
-bvhParams ::= 'margin' '=' NUMBER | 'margin' '=' NUMBER ',' 'type' '=' 'BoundingVolumeHierarchy.' 'volumeType'
+bvhParams ::= 'margin' '=' NUMBER | 'margin' '=' NUMBER ',' 
+    'type' '=' 'BoundingVolumeHierarchy.' 'volumeType'
 volumeType ::= 'AABB'
 
-springPenaltyParams ::= 'proximity' '=' NUMBER springOpt ',' 'detector' '=' NUMBER springOpt
+springPenaltyParams ::= 'proximity' '=' NUMBER springOpt ',' 
+     'detector' '=' NUMBER springOpt
   |  'detector' '=' NUMBER springOpt ',' 'proximity' '=' NUMBER springOpt
 springOpt ::= ',' stiffness' '=' NUMBER 
 
