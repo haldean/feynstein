@@ -32,6 +32,9 @@ import com.jogamp.opengl.util.gl2.GLUT;
 import com.jogamp.opengl.util.Animator;
 
 
+/*
+ * The Feynstein Render using Java OpenGL (JOGL)
+ */
 public class Renderer implements GLEventListener, KeyListener, MouseListener, MouseMotionListener {
     float rotateT = 0.0f;
 	
@@ -71,50 +74,49 @@ public class Renderer implements GLEventListener, KeyListener, MouseListener, Mo
         gl.glClear(GL.GL_COLOR_BUFFER_BIT);
         gl.glClear(GL.GL_DEPTH_BUFFER_BIT);
         gl.glLoadIdentity();
-	// gl.glTranslatef(0.0f, 0.0f, -5.0f);
-	gl.glPushMatrix();
-	// moving the camera to zpos is the same as moving all the drawn
-	// primitives to -zpos:
-	gl.glTranslated(0, 0, -zpos);
-	// rotate primitives relative to the camera
-	gl.glRotated(theta_Y, 0.0, 1.0, 0.0);
-	gl.glRotated(theta_X, 1.0, 0.0, 0.0);
+		gl.glPushMatrix();
+		// moving the camera to zpos is the same as moving all the drawn
+	    // primitives to -zpos:
+	    gl.glTranslated(0, 0, -zpos);
+	    // rotate primitives relative to the camera
+	    gl.glRotated(theta_Y, 0.0, 1.0, 0.0);
+	    gl.glRotated(theta_X, 1.0, 0.0, 0.0);
       
-	Vector3d pos;
+	    Vector3d pos;
 		
-	// render tris
-	gl.glPolygonMode(GL.GL_FRONT_AND_BACK, GL2GL3.GL_FILL);
-	gl.glColor3f(0.4f, 1.0f, 0.0f);
-	gl.glBegin(GL.GL_TRIANGLES);
+	    // render tris
+	    gl.glPolygonMode(GL.GL_FRONT_AND_BACK, GL2GL3.GL_FILL);
+	    gl.glColor3f(0.4f, 1.0f, 0.0f);
+	    gl.glBegin(GL.GL_TRIANGLES);
 
-	for (Triangle tri: scene.getMesh().getTriangles()) {
-	    pos = scene.getMesh().getParticles().get(tri.getIdx(0)).getPos();
-	    gl.glVertex3d(pos.x(), pos.y(), pos.z());
+	    for (Triangle tri: scene.getMesh().getTriangles()) {
+	      pos = scene.getMesh().getParticles().get(tri.getIdx(0)).getPos();
+	      gl.glVertex3d(pos.x(), pos.y(), pos.z());
 
-	    pos = scene.getMesh().getParticles().get(tri.getIdx(1)).getPos();
-	    gl.glVertex3d(pos.x(), pos.y(), pos.z());
+	      pos = scene.getMesh().getParticles().get(tri.getIdx(1)).getPos();
+	      gl.glVertex3d(pos.x(), pos.y(), pos.z());
 
-	    pos = scene.getMesh().getParticles().get(tri.getIdx(2)).getPos();
-	    gl.glVertex3d(pos.x(), pos.y(), pos.z());
-	}
+	      pos = scene.getMesh().getParticles().get(tri.getIdx(2)).getPos();
+	      gl.glVertex3d(pos.x(), pos.y(), pos.z());
+	  }
 
-	gl.glEnd();
+	  gl.glEnd();
 		
-	// render edges
-	gl.glColor3f(1.0f, 1.0f, 1.0f);
-	gl.glBegin(GL.GL_LINES);
-	for (Edge e: scene.getMesh().getEdges()) {
-	    pos = scene.getMesh().getParticles().get(e.getIdx(0)).getPos();
-	    gl.glVertex3d(pos.x(), pos.y(), pos.z());
+	  // render edges
+	  gl.glColor3f(1.0f, 1.0f, 1.0f);
+	  gl.glBegin(GL.GL_LINES);
+	  for (Edge e: scene.getMesh().getEdges()) {
+	      pos = scene.getMesh().getParticles().get(e.getIdx(0)).getPos();
+	      gl.glVertex3d(pos.x(), pos.y(), pos.z());
 
-	    pos = scene.getMesh().getParticles().get(e.getIdx(1)).getPos();
-	    gl.glVertex3d(pos.x(), pos.y(), pos.z());
-	}
-	gl.glEnd();
+	      pos = scene.getMesh().getParticles().get(e.getIdx(1)).getPos();
+	      gl.glVertex3d(pos.x(), pos.y(), pos.z());
+	  }
+	  gl.glEnd();
 		
-	gl.glPolygonMode(GL.GL_FRONT_AND_BACK, GL2GL3.GL_FILL);
-	// render particles
-	for (Particle p: scene.getMesh().getParticles()) {
+	  gl.glPolygonMode(GL.GL_FRONT_AND_BACK, GL2GL3.GL_FILL);
+	  // render particles
+	  for (Particle p: scene.getMesh().getParticles()) {
 	    if (p.getSize() > 0) {
 		if (p.isFixed())
 		    gl.glColor3f(1.0f, 0.4f, 0.0f);
@@ -128,11 +130,10 @@ public class Renderer implements GLEventListener, KeyListener, MouseListener, Mo
 	    }
 	}
 
-	gl.glEnd();
-	gl.glPopMatrix();
-        // increasing rotation for the next iteration                                 
-        rotateT += 0.2f; 
-	if(!paused)
+	  gl.glEnd();
+	  gl.glPopMatrix();
+      
+	  if(!paused)
 	    scene.update();
     }
  
@@ -149,39 +150,38 @@ public class Renderer implements GLEventListener, KeyListener, MouseListener, Mo
         gl.glHint(GL2ES1.GL_PERSPECTIVE_CORRECTION_HINT, GL.GL_NICEST);
 
         ((Component) gLDrawable).addKeyListener(this);
-	((Component) gLDrawable).addMouseListener(this);
-	((Component) gLDrawable).addMouseMotionListener(this);
-	// turn on lighting
-	gl.glEnable (gl.GL_LIGHTING);
+		((Component) gLDrawable).addMouseListener(this);
+	    ((Component) gLDrawable).addMouseMotionListener(this);
+	    // turn on lighting
+	    gl.glEnable (gl.GL_LIGHTING);
 		
-	// Setup and enable light 0
-	gl.glEnable (gl.GL_LIGHT0);
+       	// Setup and enable light 0
+	    gl.glEnable (gl.GL_LIGHT0);
 		
-	// specify the values for the ambient, specular, and diffuse terms:
-	float  ambLight[] = { 0.1f, 0.1f, 0.1f, 1.0f };
-	float  specLight[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-	float  diffLight[] = { 0.25f, 0.25f, 0.25f, 1.0f };
+	    // specify the values for the ambient, specular, and diffuse terms:
+	    float  ambLight[] = { 0.1f, 0.1f, 0.1f, 1.0f };
+	    float  specLight[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+	    float  diffLight[] = { 0.25f, 0.25f, 0.25f, 1.0f };
 		
-	// set light 0 to use those values:
-	gl.glLightfv (gl.GL_LIGHT0, gl.GL_AMBIENT, ambLight, 0);
-	gl.glLightfv (gl.GL_LIGHT0, gl.GL_SPECULAR, specLight, 0);
-	gl.glLightfv (gl.GL_LIGHT0, gl.GL_DIFFUSE, diffLight, 0);
+	    // set light 0 to use those values:
+	    gl.glLightfv (gl.GL_LIGHT0, gl.GL_AMBIENT, ambLight, 0);
+		gl.glLightfv (gl.GL_LIGHT0, gl.GL_SPECULAR, specLight, 0);
+	    gl.glLightfv (gl.GL_LIGHT0, gl.GL_DIFFUSE, diffLight, 0);
 		
-	// after this call, any color you set on an object becomes the
-	// color for the material, a very useful shortcut:
-	gl.glEnable (gl.GL_COLOR_MATERIAL);
+	    // set material color
+	    gl.glEnable (gl.GL_COLOR_MATERIAL);
 		
-	// after this call, all the materials used will have specular++
-	// on the front side of geometry
-	gl.glMaterialfv (gl.GL_FRONT, gl.GL_SPECULAR, specLight, 0);
-	gl.glMateriali (gl.GL_FRONT, gl.GL_SHININESS, 100);
+		// add to materials specular on the front side of geometry
+	    gl.glMaterialfv (gl.GL_FRONT, gl.GL_SPECULAR, specLight, 0);
+	    gl.glMateriali (gl.GL_FRONT, gl.GL_SHININESS, 100);
 		
-	// put the light in a fixed position RELATIVE TO THE CAMERA
-	float     lightXYZ[] = { 50.f, 50.0f, 100.0f, 0.0f };
-	gl.glLightfv (gl.GL_LIGHT0, gl.GL_POSITION, lightXYZ, 0);
+	    // put the light in a fixed position RELATIVE TO THE CAMERA
+	    float lightXYZ[] = { 50.f, 50.0f, 100.0f, 0.0f };
+	    gl.glLightfv (gl.GL_LIGHT0, gl.GL_POSITION, lightXYZ, 0);
 		
     }
  
+	/* Resize open gl window */
     public void reshape(GLAutoDrawable gLDrawable, int x, int y, int width, int height) {
         GL2 gl = gLDrawable.getGL().getGL2();
         if (height <= 0) {
@@ -195,21 +195,22 @@ public class Renderer implements GLEventListener, KeyListener, MouseListener, Mo
         gl.glLoadIdentity();
     }
  
+	/* Key controls for zoom in/out */
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-            exit();
-        }
-	if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-	    paused = !paused;
-	}
-	//zoom out
-	if (e.getKeyCode() == 'X') {
+	  if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+	    exit();
+	  }
+	  if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+	     paused = !paused;
+	  }
+	  //zoom out
+	  if (e.getKeyCode() == 'X') {
 	    zpos++;
-	}
-	//zoom in
-	if (e.getKeyCode() == 'Z') {
+	  }
+	  //zoom in
+	  if (e.getKeyCode() == 'Z') {
 	    zpos--;
-	}
+	  }
     }
  
     public void keyReleased(KeyEvent e) {
@@ -232,33 +233,36 @@ public class Renderer implements GLEventListener, KeyListener, MouseListener, Mo
     }
 	
     public void	mousePressed(MouseEvent e) {
-	mouse_X = e.getX();
-	mouse_Y = e.getY();
-	//rotateCamera = true;
+	  mouse_X = e.getX();
+	  mouse_Y = e.getY();
     }
 	
+	/*
+	 * Sets new camera rotation 
+	 */
     public void	mouseReleased(MouseEvent e) {
-	// update the elevation and roll of the camera
-	theta_X += delta_X;
-	theta_Y += delta_Y;
+	  // update the elevation and roll of the camera
+	  theta_X += delta_X;
+	  theta_Y += delta_Y;
 				
-	// reset the change in elevation and roll of the camera
-	delta_X = delta_Y = 0.0;
-	//rotateCamera = false;
+	  // reset the change in elevation and roll of the camera
+	  delta_X = delta_Y = 0.0;
     }
 	
-    // mouse motion
+	/*
+	 * Rotates the camera on mouse move 
+	 */
     public void	mouseDragged(MouseEvent e) {
-	double mouse_dx = e.getX() - mouse_X;
-	double mouse_dy = e.getY() - mouse_Y;
-	delta_X =  mouse_dy/5.0;
-	delta_Y = mouse_dx/5.0;
-	theta_X += delta_X;
-	theta_Y += delta_Y;
-	// reset the change in elevation and roll of the camera
-	delta_X = delta_Y = 0.0;
-	mouse_X = e.getX();
-	mouse_Y = e.getY();
+	  double mouse_dx = e.getX() - mouse_X;
+	  double mouse_dy = e.getY() - mouse_Y;
+	  delta_X =  mouse_dy/5.0;
+	  delta_Y = mouse_dx/5.0;
+	  theta_X += delta_X;
+	  theta_Y += delta_Y;
+	  // reset the change in elevation and roll of the camera
+	  delta_X = delta_Y = 0.0;
+	  mouse_X = e.getX();
+	 mouse_Y = e.getY();
     }
 	
     public void	mouseMoved(MouseEvent e) {
