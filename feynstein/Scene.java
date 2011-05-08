@@ -49,8 +49,7 @@ public abstract class Scene {
 	propertyMap = new HashMap<Class, Property>();
 	detectorList = new ArrayList<NarrowPhaseDetector>();
 
-	//integrator = new SemiImplicitEuler(this);
-	//hasInteg = false;
+	steppedInResponse = false;
 
 	createShapes();
 	setProperties();
@@ -197,9 +196,9 @@ public abstract class Scene {
 	    property.update();
 	for (Property property : responders) {
 	    property.update();
-	    if (!steppedInResponse)
-		integrator.update();
 	}
+	if (!steppedInResponse)
+	    integrator.update();
 	onFrame();
 	steppedInResponse = false;
     }
