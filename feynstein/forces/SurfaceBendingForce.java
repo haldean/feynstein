@@ -13,6 +13,15 @@ public class SurfaceBendingForce extends Force<SurfaceBendingForce> {
 	private double [] forceScale;
 	private double [] undefAngles;
 	
+	/*
+	 * A SurfaceBendingForce is a constraint force that resists the bending
+	 * of a four-particle surface along its diagonal. The force energy is
+	 * based on the dihedral angle, which is the signed angle between
+	 * the normals of the two triangles in the configuration. The
+	 * SurfaceBendingForce class is thus parameterized by the undeformed
+	 * dihedralangles, the undeformed triangle edge lengths and the force
+	 * stiffness constant. 
+	 */
     public SurfaceBendingForce() {
 		super(4);
 		strength = 1.0;
@@ -26,6 +35,9 @@ public class SurfaceBendingForce extends Force<SurfaceBendingForce> {
 		int idx2 = 0;
 		int idx3 = 0;
 
+		/*
+		 * For each triangle pair in the mesh, add a stencil configuration
+		 */
 		for(int i = 0; i < s.getLocalMesh().getTriangles().size(); i++) {
 			for(int j = i+1; j < s.getLocalMesh().getTriangles().size(); j++) {
 				t1 = s.getLocalMesh().getTriangles().get(i);

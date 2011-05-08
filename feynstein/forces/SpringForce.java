@@ -11,6 +11,12 @@ public class SpringForce extends Force<SpringForce> {
     private double restLength, strength;
 	private double undefLengths[];
 	
+	/*
+	 * A SpringForce is a constraint force between two particles. The energy associated to 
+	 * the spring force comes from Hooke's law, F=-kx, where k is the spring stiffness, 
+	 * and x is the amount of compression (difference between current and rest lengths
+	 * for the spring).
+	 */
     public SpringForce() {
 		super(2);
 		restLength = 0.0;
@@ -19,6 +25,7 @@ public class SpringForce extends Force<SpringForce> {
     }
 
     public SpringForce set_actsOn(Shape s) {
+		// add spring force for each edge
 		for(Edge e : s.getLocalMesh().getEdges()) {
 			stencil.add(e.getIdx(0));
 			stencil.add(e.getIdx(1));

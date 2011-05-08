@@ -8,87 +8,105 @@ import java.util.ArrayList;
 
 public class SemiImplicitEuler extends Integrator<SemiImplicitEuler> {
 
+	/**
+	 * An Integrator that uses the semi-implicit Euler
+	 * method of integration.
+	 */
     public SemiImplicitEuler(Scene scene) {
 	super(scene);
 	objectType = "SemiImplicitEuler";
     }
 	
-    public void update() {
-	Scene scene = super.getScene();
-	// This is a list of applied force values (in Newtons), in 
-	// the x, y, and z directions. The size of this list will
-	// be the size of the number of particles in the simulation
-	double[] F = scene.globalForceMagnitude();
-	// grab global list of particles for the scene
-	ArrayList<Particle> parts = scene.getMesh().getParticles();
+	/*
+	 * Semi-implicit integration updates velocities first and then positions.
+	 */
+	public void update() {
+		Scene scene = super.getScene();
+		// This is a list of applied force values (in Newtons), in 
+		// the x, y, and z directions. The size of this list will
+		// be the size of the number of particles in the simulation
+		double[] F = scene.globalForceMagnitude();
 	
-	for (int i = 0; i < parts.size(); i++) {
-	    if(!parts.get(i).isFixed()) {
-		Vector3d force = new Vector3d(F[3*i],F[3*i+1],F[3*i+2]);
-		// v[1] = v[0] + a*dt = v[0] + dt*f/m
-		Vector3d newVel = parts.get(i).getVel().plus(force.dot(h/parts.get(i).getMass()));
-		// x[1] = x[0] + v*dt
-		Vector3d newPos = parts.get(i).getPos().plus(newVel.dot(h));
-		parts.get(i).update(newPos, newVel);
-	    }
-	}
+		// grab global list of particles for the scene
+		ArrayList<Particle> parts = scene.getMesh().getParticles();
+	
+		for (int i = 0; i < parts.size(); i++) {
+			if(!parts.get(i).isFixed()) {
+				Vector3d force = new Vector3d(F[3*i],F[3*i+1],F[3*i+2]);
+				// v[1] = v[0] + a*dt = v[0] + dt*f/m
+				Vector3d newVel = parts.get(i).getVel().plus(force.dot(h/parts.get(i).getMass()));
+				// x[1] = x[0] + v*dt
+				Vector3d newPos = parts.get(i).getPos().plus(newVel.dot(h));
+				parts.get(i).update(newPos, newVel);
+			}
+		}
     }
 
+	/*
+	 * Semi-implicit integration updates velocities first and then positions.
+	 */
     public void update(double[] newPositions, double[] newVelocities) {
-	Scene scene = super.getScene();
-	ArrayList<Particle> parts = scene.getMesh().getParticles();
-	for (int i = 0; i < parts.size(); i++) {
-	    if(!parts.get(i).isFixed()) {
-		Vector3d newVel = new Vector3d(newVelocities[3*i], newVelocities[3*i+1], newVelocities[3*i+2]);
-		// x[1] = x[0] + v*dt
-		Vector3d newPos = new Vector3d(newPositions[3*i], newPositions[3*i+1], newPositions[3*i+2]);
-		parts.get(i).update(newPos, newVel);
-	    }
-	}
+		Scene scene = super.getScene();
+		ArrayList<Particle> parts = scene.getMesh().getParticles();
+		for (int i = 0; i < parts.size(); i++) {
+			if(!parts.get(i).isFixed()) {
+			// v[1] = v[0] + f/m*dt
+			Vector3d newVel = new Vector3d(newVelocities[3*i], newVelocities[3*i+1], newVelocities[3*i+2]);
+			// x[1] = x[0] + v*dt
+			Vector3d newPos = new Vector3d(newPositions[3*i], newPositions[3*i+1], newPositions[3*i+2]);
+			parts.get(i).update(newPos, newVel);
+			}
+		}
     }
 
+	/*
+	 * Predicts the positions on the next update
+	 */
     public double[] predictPositions() {
-	Scene scene = super.getScene();
-	// This is a list of applied force values (in Newtons), in 
-	// the x, y, and z directions. The size of this list will
-	// be the size of the number of particles in the simulation
-	double[] F = scene.globalForceMagnitude();
-	// grab global list of particles for the scene
-	ArrayList<Particle> parts = scene.getMesh().getParticles();
-	double[] newPositions = new double[3 * scene.getMesh().size()];
-	
-	for (int i = 0; i < parts.size(); i++) {
-	    if(!parts.get(i).isFixed()) {
-		Vector3d force = new Vector3d(F[3*i],F[3*i+1],F[3*i+2]);
-		Vector3d newVel = parts.get(i).getVel().plus(force.dot(h/parts.get(i).getMass()));
-		Vector3d newPos = parts.get(i).getPos().plus(newVel.dot(h));
+		Scene scene = super.getScene();
 		
-		newPositions[3*i] = newPos.x();
-		newPositions[3*i+1] = newPos.y();
-		newPositions[3*i+2] = newPos.z();
-	    }
-	}
-	return newPositions;
-    }
-    
-    public double[] predictVelocities() {
-	Scene scene = super.getScene();
-	double[] newVelocities = new double[scene.getGlobalVelocities().length];
+		double[] F = scene.globalForceMagnitude();
+		
+		// grab global list of particles for the scene
+		ArrayList<Particle> parts = scene.getMesh().getParticles();
+		
+		double[] newPositions = new double[3 * scene.getMesh().size()];
 
-	double[] F = scene.globalForceMagnitude();
-	// grab global list of particles for the scene
-	ArrayList<Particle> parts = scene.getMesh().getParticles();
+		for (int i = 0; i < parts.size(); i++) {
+			if(!parts.get(i).isFixed()) {
+			Vector3d force = new Vector3d(F[3*i],F[3*i+1],F[3*i+2]);
+			Vector3d newVel = parts.get(i).getVel().plus(force.dot(h/parts.get(i).getMass()));
+			Vector3d newPos = parts.get(i).getPos().plus(newVel.dot(h));
+			
+			newPositions[3*i] = newPos.x();
+			newPositions[3*i+1] = newPos.y();
+			newPositions[3*i+2] = newPos.z();
+			}
+		}
+		return newPositions;
+    }
 	
-	for (int i = 0; i < parts.size(); i++) {
-	    if(!parts.get(i).isFixed()) {
-		Vector3d force = new Vector3d(F[3*i],F[3*i+1],F[3*i+2]);
-		Vector3d newVel = parts.get(i).getVel().plus(force.dot(h/parts.get(i).getMass()));
+    /*
+	 * Predicts the velocities on the next update
+	 */
+    public double[] predictVelocities() {
+		Scene scene = super.getScene();
+		double[] newVelocities = new double[scene.getGlobalVelocities().length];
+
+		double[] F = scene.globalForceMagnitude();
+		// grab global list of particles for the scene
+		ArrayList<Particle> parts = scene.getMesh().getParticles();
 		
-		newVelocities[3*i] = newVel.x();
-		newVelocities[3*i+1] = newVel.y();
-		newVelocities[3*i+2] = newVel.z();
-	    }
-	}
-	return newVelocities;
+		for (int i = 0; i < parts.size(); i++) {
+			if(!parts.get(i).isFixed()) {
+			Vector3d force = new Vector3d(F[3*i],F[3*i+1],F[3*i+2]);
+			Vector3d newVel = parts.get(i).getVel().plus(force.dot(h/parts.get(i).getMass()));
+			
+			newVelocities[3*i] = newVel.x();
+			newVelocities[3*i+1] = newVel.y();
+			newVelocities[3*i+2] = newVel.z();
+			}
+		}
+		return newVelocities;
     }
 }

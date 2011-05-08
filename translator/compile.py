@@ -14,23 +14,19 @@ def error_gen(err,javamap):
     err = err.split('\\n')
     errorlist = []
     errormessage = ''
-    for e in err:
-        #print(e)
+    for ind,e in enumerate(err):
         if re.search('java:',e):
             m = re.search(':[0-9]+',e)
             n = re.search('[0-9]+',m.group())
-            errorlist.append(int(n.group()))
-    #print(str(len(errorlist)))
+            errorlist.append([int(n.group()),err[ind]+'\n'+err[ind+1]+'\n'+err[ind+2]])
+            
 
-    #for el in errorlist:
-        #print(str(el))
     if len(errorlist) > 0:
         errormessage = 'Feynstein errors:\n'
         for er in errorlist:
             for j in javamap:
-                #print(str(j[0])+' '+str(j[1])+'\n')
-                if j[1] == er:
-                    errormessage=errormessage+'Check error in line ' + str(j[0]) + '.\n'
+                if j[1] == er[0]:
+                    errormessage=errormessage+'Feynstein error in line ' + str(j[0]) + '.\nJava error:\n '+er[1]+'\n'
 
     return errormessage
 
