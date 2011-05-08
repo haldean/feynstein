@@ -1,0 +1,19 @@
+Because there are so many components to Feynstein above and beyond
+merely translating the code, much of the testing methodology was
+geared towards validating the implementation of the physics of the
+program. Testing for these elements involves rendering actual scenes
+written in Feynstein in order to visually verify that the math in the
+code is working. The Feynstein tests for built-in forces were modelled
+after XML files used by our Language Guru in her physical simulation
+work. As new forces and physics functions are added to the program,
+the suite of visually-verifiable test programs can expand accordingly,
+and is re-run in order to assure that the new code has not caused an
+unintended change in the functioning of the old.
+
+The Feynstein translator test consists of a Feynstein source code and
+corresponding output in java. By running the code through a new
+version of the translator and saving it before it is compiled and run,
+one can verify that the new translator performs equivalent
+transformation. Once this new output is compiled and executed to
+ensure its validity, it can be saved as the test for the next
+generation Feynstein translator.

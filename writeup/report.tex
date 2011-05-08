@@ -7,9 +7,11 @@
 
 \newtoggle{tutorial}
 \newtoggle{manual}
+\newtoggle{listing}
 
-\togglefalse{tutorial}
-\togglefalse{manual}
+\toggletrue{tutorial}
+\toggletrue{manual}
+\toggletrue{listing}
 
 \begin{document}
 \maketitle
@@ -65,21 +67,48 @@ complex compression force on a custom shape.
 }{}
 
 \section{Project Plan}
+\emph{Colleen McKenzie, Project Manager}
+
 \input{colleen.tex}
 
 \section{Language Evolution}
+\emph{Samantha Ainsley, Language Guru} \\
+
 \input{sam.tex}
 
 \section{Language Architecture}
+\emph{William Brown, System Architect} \\
+
 \input{will.tex}
 
-\section{Lessons Learned}
+\section{Development Tools}
+\emph{William Brown, System Architect}
+
+\input{rob.tex}
+
+\section{Testing Plan}
+\emph{Eva Asplund, System Tester} \\
+
+\input{eva.tex}
+
+\section{Conclusion}
 \input{lessons.tex}
 
 \appendix
 
+\section{Project Contributions}
+\label{sec:whowhat}
+\input{whowhat.appendix.tex}
+
 \section{Project Log}
 \label{sec:projectlog}
 \input{log.appendix.tex}
+
+\section{Source Code Listing}
+\label{sec:listing}
+\iftoggle{listing}{
+  \input{feynstein.listing.tex}
+  \input{tests.listing.tex}
+  \input{translator.listing.tex}}{}
 
 \end{document}

@@ -1,0 +1,42 @@
+\subsection{Source Code Management}
+
+In order to manage our team's source code, we used Git, which is a
+distributed version control system. Will set up a Git repository on
+his server, to which everyone on the team was given SSH access. It
+allowed all of us to simultaneously work on Feynstein and then easily
+merge our changes together. Git also allowed us to easily track
+peoples' contributions to the code base, as it allows a user to see
+exactly who wrote each line of code in a repository. Will wrote a
+shell script that allowed us to see exactly who wrote how much, as
+well, which helped for the final calculations to ensure that everyone
+had written at least 500 lines of code.
+
+\subsection{Languages, Tools and Libraries Used}
+
+We wrote our execution environment in Java, as this was the only
+language with which the entire team was familiar. It also provided us
+with the portability inherent in Java, which was important for a team
+of two Mac users, a Windows user and two Linux users.
+
+We make heavy use of OpenGL for our graphics, but there isn't a
+native OpenGL implementation in Java, as it requires many
+``bare-metal'' computations that aren't possible in a virtual
+machine. Instead, we used Java OpenGL\footnote{
+ \url{http://jogamp.org}} (or ``JOGL''), which uses JNI to call native
+C libraries on the machine. JNI is notorious for being difficult to
+set up, and JOGL lived up to this expectation; while we found it was
+easy to install for the members of our team who use Linux, it was
+extremely difficult to install on OSX. 
+
+However, the installation procedure was worth it; JOGL gave us the
+full power of OpenGL, and allowed us to use OpenGL at near-native
+speeds and efficiency. Without it, this project would not have been
+possible.
+
+On the translator side, we used
+PLY\footnote{http://www.dabeaz.com/ply/} (Python Lex-Yacc) for lexing
+and parsing. We wanted to use an implementation of Yacc in a scripting
+language, as most of the actions in our parser were string
+manipulations, and string processing tends to be easier in scripting
+languages. We used Python as this is what Will and Rob were more
+familiar with.

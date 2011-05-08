@@ -1,17 +1,93 @@
-\contentsline {section}{\numberline {1}Introduction}{2}
-\contentsline {section}{\numberline {2}Project Plan}{2}
-\contentsline {subsection}{\numberline {2.1}Development Process}{2}
-\contentsline {subsection}{\numberline {2.2}Roles and responsibilities}{3}
-\contentsline {subsection}{\numberline {2.3}Implementation Stylesheet}{3}
-\contentsline {subsection}{\numberline {2.4}Project Timeline}{4}
-\contentsline {subsection}{\numberline {2.5}Project Log}{4}
-\contentsline {section}{\numberline {3}Language Evolution}{5}
-\contentsline {section}{\numberline {4}Language Architecture}{7}
-\contentsline {subsection}{\numberline {4.1}Translator}{7}
-\contentsline {subsection}{\numberline {4.2}Execution Environment}{8}
-\contentsline {section}{\numberline {5}Lessons Learned}{10}
-\contentsline {subsection}{\numberline {5.1}Team Lessons}{10}
-\contentsline {subsection}{\numberline {5.2}Individual Lessons}{10}
-\contentsline {subsection}{\numberline {5.3}Advice for Future Teams}{10}
-\contentsline {subsection}{\numberline {5.4}Instructor Feedback}{11}
-\contentsline {section}{\numberline {A}Project Log}{11}
+\contentsline {section}{\numberline {1}Introduction}{4}
+\contentsline {section}{\numberline {2}Language Tutorial}{4}
+\contentsline {subsection}{\numberline {2.1}Simple Program}{4}
+\contentsline {subsection}{\numberline {2.2}Forces}{5}
+\contentsline {subsection}{\numberline {2.3}Outputs}{7}
+\contentsline {subsection}{\numberline {2.4}Frame Updates}{8}
+\contentsline {subsection}{\numberline {2.5}Integration Methods and Error Bounds}{9}
+\contentsline {section}{\numberline {3}Language Reference Manual}{10}
+\contentsline {subsection}{\numberline {3.1}Introduction}{10}
+\contentsline {subsubsection}{\numberline {3.1.1}Motivation}{10}
+\contentsline {subsubsection}{\numberline {3.1.2}Extensibility}{11}
+\contentsline {subsection}{\numberline {3.2}Top-Level Elements}{11}
+\contentsline {subsubsection}{\numberline {3.2.1}Feynstein File Sections}{11}
+\contentsline {paragraph}{\numberline {3.2.1.1}Shapes}{11}
+\contentsline {paragraph}{\numberline {3.2.1.2}Forces}{12}
+\contentsline {paragraph}{\numberline {3.2.1.3}Properties}{12}
+\contentsline {subsubsection}{\numberline {3.2.2}Frame Update Methods}{12}
+\contentsline {subsubsection}{\numberline {3.2.3}Code Sample}{13}
+\contentsline {subsection}{\numberline {3.3}Lexical Conventions}{13}
+\contentsline {subsubsection}{\numberline {3.3.1}Statements}{13}
+\contentsline {subsubsection}{\numberline {3.3.2}Whitespace}{13}
+\contentsline {subsubsection}{\numberline {3.3.3}Comments}{14}
+\contentsline {subsubsection}{\numberline {3.3.4}Identifiers and Keywords}{14}
+\contentsline {paragraph}{\numberline {3.3.4.1}Primitive Types}{14}
+\contentsline {paragraph}{\numberline {3.3.4.2}Section Declaration}{15}
+\contentsline {subparagraph}{\numberline {3.3.4.2.1}Properties}{15}
+\contentsline {paragraph}{\numberline {3.3.4.3}Other Keywords}{15}
+\contentsline {subsubsection}{\numberline {3.3.5}Builder Syntax}{15}
+\contentsline {subsubsection}{\numberline {3.3.6}Literals}{16}
+\contentsline {paragraph}{\numberline {3.3.6.1}Number literals}{16}
+\contentsline {paragraph}{\numberline {3.3.6.2}Boolean literals}{16}
+\contentsline {paragraph}{\numberline {3.3.6.3}String literals}{16}
+\contentsline {paragraph}{\numberline {3.3.6.4}Time literals}{16}
+\contentsline {paragraph}{\numberline {3.3.6.5}Spatial literals}{17}
+\contentsline {paragraph}{\numberline {3.3.6.6}Mass literals}{17}
+\contentsline {paragraph}{\numberline {3.3.6.7}Force literals}{17}
+\contentsline {subsubsection}{\numberline {3.3.7}Delimiters}{17}
+\contentsline {subsection}{\numberline {3.4}Expressions}{17}
+\contentsline {subsubsection}{\numberline {3.4.1}Arithmetic Operations}{17}
+\contentsline {subsubsection}{\numberline {3.4.2}Comparison Operations}{18}
+\contentsline {subsubsection}{\numberline {3.4.3}Boolean Operations}{18}
+\contentsline {subsection}{\numberline {3.5}Language model}{18}
+\contentsline {subsubsection}{\numberline {3.5.1}Subsection types}{18}
+\contentsline {subsubsection}{\numberline {3.5.2}Shapes}{18}
+\contentsline {paragraph}{\numberline {3.5.2.1}Shape accessors}{19}
+\contentsline {paragraph}{\numberline {3.5.2.2}Transformation operators}{19}
+\contentsline {paragraph}{\numberline {3.5.2.3}Predefined shapes}{19}
+\contentsline {paragraph}{\numberline {3.5.2.4}Custom shapes}{19}
+\contentsline {subsubsection}{\numberline {3.5.3}Forces}{20}
+\contentsline {paragraph}{\numberline {3.5.3.1}Predefined forces}{20}
+\contentsline {subparagraph}{\numberline {3.5.3.1.1}GravityForce}{20}
+\contentsline {subparagraph}{\numberline {3.5.3.1.2}DampingForce}{20}
+\contentsline {subparagraph}{\numberline {3.5.3.1.3}SpringForce}{20}
+\contentsline {subparagraph}{\numberline {3.5.3.1.4}RodBendingForce}{20}
+\contentsline {subparagraph}{\numberline {3.5.3.1.5}ConstantStrainTriangleForce}{21}
+\contentsline {subparagraph}{\numberline {3.5.3.1.6}SurfaceBendingForce}{21}
+\contentsline {subsubsection}{\numberline {3.5.4}Properties}{21}
+\contentsline {paragraph}{\numberline {3.5.4.1}Predefined time integrators}{23}
+\contentsline {paragraph}{\numberline {3.5.4.2}Predefined renderers}{23}
+\contentsline {paragraph}{\numberline {3.5.4.3}Predefined collision handlers}{23}
+\contentsline {subparagraph}{\numberline {3.5.4.3.1}Detectors}{23}
+\contentsline {subparagraph}{\numberline {3.5.4.3.2}Responders}{24}
+\contentsline {paragraph}{\numberline {3.5.4.4}Camera Location and Orientation}{25}
+\contentsline {subsection}{\numberline {3.6}Execution Model}{26}
+\contentsline {subsubsection}{\numberline {3.6.1}Code Blocks}{26}
+\contentsline {subsubsection}{\numberline {3.6.2}Stability Analyzers}{26}
+\contentsline {subsection}{\numberline {3.7}Grammar}{26}
+\contentsline {subsubsection}{\numberline {3.7.1}Tokens}{26}
+\contentsline {subsubsection}{\numberline {3.7.2}File Structure and Expressions}{27}
+\contentsline {section}{\numberline {4}Project Plan}{31}
+\contentsline {subsection}{\numberline {4.1}Development Process}{31}
+\contentsline {subsection}{\numberline {4.2}Roles and responsibilities}{32}
+\contentsline {subsection}{\numberline {4.3}Implementation Stylesheet}{33}
+\contentsline {subsection}{\numberline {4.4}Project Timeline}{33}
+\contentsline {subsection}{\numberline {4.5}Project Log}{34}
+\contentsline {section}{\numberline {5}Language Evolution}{34}
+\contentsline {section}{\numberline {6}Language Architecture}{36}
+\contentsline {subsection}{\numberline {6.1}Translator}{36}
+\contentsline {subsection}{\numberline {6.2}Execution Environment}{38}
+\contentsline {section}{\numberline {7}Development Tools}{38}
+\contentsline {subsection}{\numberline {7.1}Source Code Management}{38}
+\contentsline {subsection}{\numberline {7.2}Languages, Tools and Libraries Used}{38}
+\contentsline {section}{\numberline {8}Testing Plan}{39}
+\contentsline {section}{\numberline {9}Conclusion}{39}
+\contentsline {subsection}{\numberline {9.1}Team Lessons}{39}
+\contentsline {subsection}{\numberline {9.2}Individual Lessons}{40}
+\contentsline {subsection}{\numberline {9.3}Advice for Future Teams}{42}
+\contentsline {subsection}{\numberline {9.4}Instructor Feedback}{42}
+\contentsline {section}{\numberline {A}Project Contributions}{43}
+\contentsline {subsection}{\numberline {A.1}Contribution Summary}{43}
+\contentsline {subsection}{\numberline {A.2}File-Level Breakdown}{43}
+\contentsline {section}{\numberline {B}Project Log}{47}
+\contentsline {section}{\numberline {C}Source Code Listing}{53}

@@ -12,6 +12,9 @@ def split(source):
     comments. blocks.Block identifiers have not yet been removed from the
     expressions at the end of this pass.
     '''
+      
+    sourceLines = source
+    sourceLines = re.sub(matchers.braces, r'\1;',sourceLines)
 
     # Replace all single line comments before we mangle whitespace
     source = re.sub(matchers.line_comments, '', source)
@@ -29,8 +32,25 @@ def split(source):
 
     # Remove trailing whitespace.
     exprs = [x.strip() for x in source.split(';')]
-    return exprs
-        
+
+    exprs2 = exprs
+    exprslines = []
+    
+    lines = sourceLines.split('\n')
+    
+
+    #Maps expressions to line numbers and associate it with a java line number.
+    javaline = 12
+    for index, l in enumerate(lines):
+        if re.search(';',l):
+            javaline += 1
+            exprslines.append([index+1,javaline])
+            if re.search('none',l):
+                javaline += 1
+                exprslines.append([index+1,javaline])
+
+    return exprs, exprslines
+
 def is_open_block(expr):
     '''
     Returns true if an expression opens a block -- i.e., if an

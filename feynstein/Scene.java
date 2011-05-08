@@ -26,7 +26,6 @@ public abstract class Scene {
     protected Map<String, Shape> shapes;
     protected List<Force> forces;
     protected Map<Class, Property> propertyMap;
-    //protected Map<String, NarrowPhaseDetector> detectorMap;
     protected ArrayList<NarrowPhaseDetector> detectorList;
     protected List<Property> properties; //without collision responders, integrators
     protected List<Property> responders;
@@ -47,7 +46,6 @@ public abstract class Scene {
 	responders = new ArrayList<Property>();
 	integrators = new ArrayList<Property>();
 	propertyMap = new HashMap<Class, Property>();
-	//detectorMap = new HashMap<String, NarrowPhaseDetector>();
 	detectorList = new ArrayList<NarrowPhaseDetector>();
 
 	createShapes();
@@ -94,19 +92,12 @@ public abstract class Scene {
 
 	if (p instanceof NarrowPhaseDetector)
 	    detectorList.add((NarrowPhaseDetector) p);
-
-	    //detectorMap.put(((NarrowPhaseDetector) p).getName(), (NarrowPhaseDetector) p);
     }
 
     @SuppressWarnings("unchecked")
     public <E extends Property> E getProperty(Class c) {
 	return (E) propertyMap.get(c);
     }
-    
-    /*
-    public NarrowPhaseDetector getDetectorByName(String name) {
-	return detectorMap.get(name);
-	} */
 
     public NarrowPhaseDetector getDetectorByIndex(int index) {
 	return detectorList.get(index);
