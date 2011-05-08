@@ -126,7 +126,6 @@ public class ImpulseResponder extends CollisionResponder<ImpulseResponder> {
 					   u*V[3*a+2]+v*V[3*b+2]+w*V[3*c+2]);
 		
 		//weighted mass
-		//TODO haven't touched this line
 		double m = 1 / M[3*p] + u*u / M[3*a] + v*v / M[3*b] + w*w / M[3*c];
 
 		//collision normal
@@ -136,6 +135,7 @@ public class ImpulseResponder extends CollisionResponder<ImpulseResponder> {
 		    norm = norm.dot(1 / norm.norm());
 
 		//impulse
+		//TODO check math here?
 		double I = va.minus(vb).minus(.000001).dot(norm.dot(1 / m));
 		
 		//Apply impulse
@@ -195,6 +195,7 @@ public class ImpulseResponder extends CollisionResponder<ImpulseResponder> {
 		    norm = norm.dot(1 / norm.norm());
 		
 		//impulse
+		//TODO check math here?
 		double I = va.minus(vb).minus(.000001).dot(norm.dot(1/m));
 		
 		//apply to first edge
