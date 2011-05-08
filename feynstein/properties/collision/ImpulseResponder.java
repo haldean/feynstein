@@ -19,26 +19,26 @@ import java.util.*;
    Does this mean we need to update scene.globalVelocities here? If we 
    don't update it, I don't see the point of iterating this while loop.
 
-   4. Lines 142 and 202 subtract a scalar from a vector. I assume that just
-   means subtract that value from every coordinate in the vector, but I wanted
-   to double-check before I implement that.
-
-   5. Stupid-proof check: in filter method, double[] M == scene.globalMasses, yes?
-
 */
 
 public class ImpulseResponder extends CollisionResponder<ImpulseResponder> {
 
+    Integrator integrator;
     int iter;
 
     double X[];
-    double M[];
+    double M[];	
+    double[] newPos; //q
+    double[] newVels; //q_dot
+    double[] midStepPos; //Q
+    double[] midStepVel; //Q_dot
 
     public ImpulseResponder(Scene aScene) {
 	super(aScene);
+	integrator = scene.getIntegrator();
 	iter = 100;
-	X = new double[scene.getGlobalPositions()];
-	M = new double[scene.getGlobalMasses()];
+	midStepPos = new double[X.length];
+	midStepVel = new double[X.length];
     }
 
     public set_iterations(int iterations) {
@@ -46,15 +46,14 @@ public class ImpulseResponder extends CollisionResponder<ImpulseResponder> {
     }
     
     public void update() {
-	//TODO physicsSim.cpp l308 has semi-implicit time stepping happening
-	//before impulse stuff gets called. Whaaaaat
-	//...(I'm ignoring it for now and just copying impulse stuff
-	/*
-	//semi-implicit Euler time-stepping
-	Vector q (dof);
-	Vector q_dot (dof);
-	Vector Q (dof);
-	Vector Q_dot (dof);
+	X = scene.getGlobalPositions();
+	M = scene.getGlobalMasses();
+
+	// No updating side effects, just calculation:
+	double[] newPos = integrator.predictPositions();
+	double[] newVels = integrator.predictVelocities();
+
+	/* old C++ for reference
 	//update velocity
 	for(int j = 0; j < dof; j ++){
 	  q_dot[j] = V[j] + (h/M[j])*(F)[j];
@@ -62,9 +61,12 @@ public class ImpulseResponder extends CollisionResponder<ImpulseResponder> {
 	//update position
 	q = X + h*q_dot; */
 
-	//Also what the hell does this do:
+	double h = integrator.getStepSize()
+
 	//midstep velocity
-	Q_dot = (q-X)*(1/h);
+	for (int i = 0; i < midStepVel.length; i++) {
+	    midStepVel[i] = (newPos[i] - X[i]) * (1 / h); //was: Q_dot = (q-X)*(1/h);
+	}
 	
 	HashSet<Collision> cSet = detector.getCollisions();
 	
@@ -72,24 +74,22 @@ public class ImpulseResponder extends CollisionResponder<ImpulseResponder> {
 	int j = 0;
 	if (cSet.size() > 0) {
 	    //if count < max iterations or no cap
-	    while ( (collisions && j < iter) || (collisions && iter ==-1) ) {
+	    while ( (collisions && j < iter) || (collisions && iter == -1) ) {
 		j++;
 		
 		X = scene.getGlobalPositions();
 		M = scene.getGlobalMasses();
 
 		//filter velocities
-		//TODO do we need to set scene.globalVelocities = V here?
-		double[] V = filter(Q_dot, X, M, cSet);
+		scene.setGlobalVelocities(filter(midStepVel, X, M, cSet));
 
 		//step forward
-		Q = X + h*Q_dot;
+		integrator.update(); // Q = X + h*Q_dot;
 
 		detector.update();
 		cSet = detector.getCollisions();
 		
-		/*
-		  Following lines implemented above as update() and getCollisions()
+		/* old C++ for reference
 		//clear collision record
 		col_rec.clear();
 
@@ -97,8 +97,9 @@ public class ImpulseResponder extends CollisionResponder<ImpulseResponder> {
 		collisions = broad_phase_I(X, Q, col_rec);*/
 
 	    }
-	    q_dot = Q_dot; 
-	    q = Q;
+	    //TODO is this correct or do i ask the integrator for these again?
+	    newVels = midStepVel; //q_dot = Q_dot; 
+	    newPos = midStepPos; //q = Q;
 	}	
     }
 
@@ -140,7 +141,7 @@ public class ImpulseResponder extends CollisionResponder<ImpulseResponder> {
 		    norm = norm / norm.norm();
 		//impulse
 		//TODO: vector3d != scalar...
-		double I = (va.minus(vb) - .000001) * norm / m;
+		double I = (va.subtract(vb).minus(.000001)).dot(norm / m);
 		
 		//TODO haven't touched any of this, either...
 		//Apply impulse
@@ -200,7 +201,7 @@ public class ImpulseResponder extends CollisionResponder<ImpulseResponder> {
 		
 		//impulse
 		//TODO vector 3d != scalar
-		double I= (va-vb - .000001) * norm/m;
+		double I = (va.subtract(vb).minus(.000001)).dot(norm/m);
 		
 		//TODO haven't touched this either...
 		//apply to first edge

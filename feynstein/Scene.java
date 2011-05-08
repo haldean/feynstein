@@ -26,12 +26,12 @@ public abstract class Scene {
     protected Map<String, Shape> shapes;
     protected List<Force> forces;
     protected Map<Class, Property> propertyMap;
-    //protected Map<String, NarrowPhaseDetector> detectorMap;
     protected ArrayList<NarrowPhaseDetector> detectorList;
     protected List<Property> properties; //without collision responders, integrators
     protected List<Property> responders;
-    protected List<Property> integrators;
     protected Mesh mesh;
+    protected Integrator integrator;
+    private boolean hasInteg; //whether user's defined default already
 	
     double[] globalForces;
     double[] globalPositions;
@@ -45,10 +45,11 @@ public abstract class Scene {
 	forces = new ArrayList<Force>();
 	properties = new ArrayList<Property>();
 	responders = new ArrayList<Property>();
-	integrators = new ArrayList<Property>();
 	propertyMap = new HashMap<Class, Property>();
-	//detectorMap = new HashMap<String, NarrowPhaseDetector>();
 	detectorList = new ArrayList<NarrowPhaseDetector>();
+
+	integrator = new SemiImplicitEuler(this);
+	hasInteg = false;
 
 	createShapes();
 	setProperties();
@@ -85,7 +86,8 @@ public abstract class Scene {
 	if (p instanceof CollisionResponder) {
 	    responders.add(p);
 	} else if (p instanceof Integrator) {
-	    integrators.add(p);
+	    if (hasInteg)
+		integrator = (Integrator) p;
 	} else {
 	    properties.add(p);
 	}
@@ -94,22 +96,19 @@ public abstract class Scene {
 
 	if (p instanceof NarrowPhaseDetector)
 	    detectorList.add((NarrowPhaseDetector) p);
-
-	    //detectorMap.put(((NarrowPhaseDetector) p).getName(), (NarrowPhaseDetector) p);
     }
 
     @SuppressWarnings("unchecked")
     public <E extends Property> E getProperty(Class c) {
 	return (E) propertyMap.get(c);
     }
-    
-    /*
-    public NarrowPhaseDetector getDetectorByName(String name) {
-	return detectorMap.get(name);
-	} */
 
     public NarrowPhaseDetector getDetectorByIndex(int index) {
 	return detectorList.get(index);
+    }
+
+    public Integrator getIntegrator() {
+	return integrator;
     }
 	
     public Mesh getMesh() {
@@ -180,6 +179,10 @@ public abstract class Scene {
 
     public double[] getGlobalVelocities() {
 	return globalVelocities;
+    }
+
+    public void setGlobalVelocities(double[] newVels) {
+	globalVelocities = newVels;
     }
 	
 	public double[] getGlobalMasses() {

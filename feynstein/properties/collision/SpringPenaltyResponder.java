@@ -25,7 +25,6 @@ public class SpringPenaltyResponder extends CollisionResponder<SpringPenaltyResp
 	return this;
     }
 
-    //TODO why the hell am I getting a warning on the cSet = detector.getCollisions() line?
     @SuppressWarnings("unchecked")
     public void update() {
 	// (responders always updated after detectors--see Scene.java)

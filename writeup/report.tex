@@ -7,9 +7,11 @@
 
 \newtoggle{tutorial}
 \newtoggle{manual}
+\newtoggle{listing}
 
-\togglefalse{tutorial}
-\togglefalse{manual}
+\toggletrue{tutorial}
+\toggletrue{manual}
+\toggletrue{listing}
 
 \begin{document}
 \maketitle
@@ -80,22 +82,33 @@ complex compression force on a custom shape.
 \input{will.tex}
 
 \section{Development Tools}
-\emph{William Brown, System Architect} \\
+\emph{William Brown, System Architect}
 
-\input{will2.tex}
+\input{rob.tex}
 
 \section{Testing Plan}
 \emph{Eva Asplund, System Tester} \\
 
 \input{eva.tex}
 
-\section{Lessons Learned}
+\section{Conclusion}
 \input{lessons.tex}
 
 \appendix
 
+\section{Project Contributions}
+\label{sec:whowhat}
+\input{whowhat.appendix.tex}
+
 \section{Project Log}
 \label{sec:projectlog}
 \input{log.appendix.tex}
+
+\section{Source Code Listing}
+\label{sec:listing}
+\iftoggle{listing}{
+  \input{feynstein.listing.tex}
+  \input{tests.listing.tex}
+  \input{translator.listing.tex}}{}
 
 \end{document}
