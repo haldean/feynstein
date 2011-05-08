@@ -90,9 +90,6 @@ public class ImpulseResponder extends CollisionResponder<ImpulseResponder> {
 		cSet = detector.getCollisions();
 
 	    }
-	    //TODO is this correct or do i ask the integrator for these again?
-	    newVels = midStepVel; //q_dot = Q_dot; 
-	    newPos = midStepPos; //q = Q;
 	}	
     }
 
