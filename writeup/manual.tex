@@ -111,15 +111,13 @@ declared here. Unlike the force and shapes sections, the properties
 section has a default configuration if left empty. The default time
 integration method is semi-implicit Euler and the default rendering
 method is on-screen display. User defined properties that change the
-appearance of the simulation -- such as textures and lighting -- find a
-place in this section. An example of a simulation using Verlet
-time integration and video output (i.e. offline rendering) is shown
-below.
+appearance of the simulation -- such as textures and lighting -- find
+a place in this section. An example of a simulation using Verlet time
+integration is shown below.
 
 \begin{verbatim}
 properties {
   property VelocityVerlet(stepSize = 10ms);
-  property FileOutput(name = "myScene.mov");
 }
 \end{verbatim}
  
@@ -153,8 +151,6 @@ MyScene {
    
    properties {
      property SemiImplicitEuler(stepSize=10tms);
-     property VideoOutput();
-     property FileOutput("myScene.avi");
      property AssertStability(margin=4);
    }
 
@@ -632,7 +628,7 @@ a time-stepping method that defines force integration with each
 update; and every simulation requires a method of outputting the
 rendered scene. The property type can additionally be used to define
 simulation features such as collision detection and response
-frameworks, textures, lighting, and camera controls.
+frameworks, textures and lighting.
 
 \paragraph{Predefined time integrators}
 
@@ -653,32 +649,6 @@ properties {
   property SemiImplicitEuler(stepSize = 5ms);
 }
 \end{verbatim}
-
-\paragraph{Predefined renderers}
-
-Feynstein supports both online and offline methods of video output.
-Online rendering means that when a Feynstein program runs, it displays
-output directly on the screen. Online rendering produces an
-interactive video output that lets the user use the mouse to change
-the location of the camera, pan, tilt, and zoom during the
-simulation. By default, Feynstein uses online rendering.  The use of
-online rendering does not need to be explicitly specified.  If online
-rendering is not wanted, how Feynstein should render the video needs
-to be specified.  Offline rendering outputs a video file to a
-specified file.
-
-\begin{verbatim}
-properties {
-  property FileOutput(file="myScene.avi");
-  property CameraView(location=(5m, 0, 0), 
-    lookingAt=(0, 0, 0), fieldOfView=50);
-}
-\end{verbatim}
-
-The user specifies where Feynstein should render the video using
-the \texttt{FileOutput} property. The parameter of \texttt{File\-Output} is a
-string specifying the file. Using offline rendering requires that the
-camera position is specified using the \texttt{CameraView} property.
 
 \paragraph{Predefined collision handlers}
 Efficient collision detection and effective collision response are
@@ -792,25 +762,6 @@ includes two methods for responding to collisions. The first method, \texttt{Spr
         property ProximityDetector(proximity=0.1);
         property ImpulseResponder(iterations=100, detector=0);
    }
-\end{verbatim}
-
-
-\paragraph{Camera Location and Orientation}
-
-The CameraView property defines how the scene will appear to the
-viewer. The location of the camera is given by a location (x, y, z) in
-the scene. The camera has a default field of view of 45º, but this can
-be changed when the camera is defined. By default, the camera is
-located at the midpoint of the xy-projection of the objects in the
-scene, and the default z value is calculated so that the camera can
-see all objects in the scene.
-
-\begin{verbatim}
-properties {
-  /*other property declarations */
-  property CameraView(location=(0, 0, 3m), 
-    lookingAt=(0, 0, 0), fieldOfView=30);
-}
 \end{verbatim}
 
 \subsection{Execution Model}
@@ -1001,18 +952,14 @@ surfaceBendingParams ::= 'strength' '=' NUMBER | epsilon
 
 propertyBlock ::= 'properties' '{' properties '}'
 properties ::= properties property ';' |  epsilon
-property ::= 'property' 'renderTo' '(' renderParams ')' 
-  | 'property' 'endTime' '(' endParams ')' 
+property ::= 'property' 'endTime' '(' endParams ')' 
   |  'property' 'assertStability' '(' assertParams ')' 
   | 'property' eulerMethod '(' eulerParams ')' 
-  | 'property' 'CameraView' '(' cameraParams ')' 
   | 'property' 'ProximityDetector' '(' 'proximityParams' ')' 
   | 'property' 'ContinuousTimeDetector' '(' cTParams ')'
   | 'property' 'BoundingVolumeHierarchy' '(' 'bvhParams' ')'
   | 'property' 'SpringPenaltyResponder' '(' springPenaltyParams ')'
   | 'property' 'ImpulseResponder' '(' impulseParams ')'
-
-renderParams ::= 'VideoOutput' | 'FileOutput' '(' STRING ')' | epsilon
 
 endParams ::= 'endAt' '=' timeLiteral | epsilon 
 
@@ -1020,10 +967,6 @@ assertParams ::= epsilon | 'margin=' NUMBER
 
 eulerMethod ::= 'VelocityVerlet' | 'SemiImplicitEuler'
 eulerParams ::= 'stepSize' '=' timeLiteral
-
-cameraParams ::= 'location' '=' '(' NUMBER ',' NUMBER ',' NUMBER ')'
-  ',' 'lookingAt' '=' '(' NUMBER ',' NUMBER ',' NUMBER ')' 
-  ',' 'fieldOfView' '=' NUMBER
 
 proximityParams ::= 'proximity' '=' 'NUMBER'
 

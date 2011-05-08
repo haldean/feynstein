@@ -58,39 +58,37 @@
 \contentsline {subparagraph}{\numberline {3.5.3.1.6}SurfaceBendingForce}{22}
 \contentsline {subsubsection}{\numberline {3.5.4}Properties}{22}
 \contentsline {paragraph}{\numberline {3.5.4.1}Predefined time integrators}{22}
-\contentsline {paragraph}{\numberline {3.5.4.2}Predefined renderers}{24}
-\contentsline {paragraph}{\numberline {3.5.4.3}Predefined collision handlers}{24}
-\contentsline {subparagraph}{\numberline {3.5.4.3.1}Detectors}{24}
-\contentsline {subparagraph}{\numberline {3.5.4.3.2}Responders}{25}
-\contentsline {paragraph}{\numberline {3.5.4.4}Camera Location and Orientation}{26}
+\contentsline {paragraph}{\numberline {3.5.4.2}Predefined collision handlers}{24}
+\contentsline {subparagraph}{\numberline {3.5.4.2.1}Detectors}{24}
+\contentsline {subparagraph}{\numberline {3.5.4.2.2}Responders}{25}
 \contentsline {subsection}{\numberline {3.6}Execution Model}{26}
 \contentsline {subsubsection}{\numberline {3.6.1}Code Blocks}{26}
-\contentsline {subsubsection}{\numberline {3.6.2}Stability Analyzers}{27}
-\contentsline {subsection}{\numberline {3.7}Grammar}{27}
-\contentsline {subsubsection}{\numberline {3.7.1}Tokens}{27}
-\contentsline {subsubsection}{\numberline {3.7.2}File Structure and Expressions}{28}
-\contentsline {section}{\numberline {4}Project Plan}{32}
-\contentsline {subsection}{\numberline {4.1}Development Process}{32}
-\contentsline {subsection}{\numberline {4.2}Roles and Responsibilities}{33}
-\contentsline {subsection}{\numberline {4.3}Implementation Stylesheet}{34}
-\contentsline {subsection}{\numberline {4.4}Project Timeline}{34}
-\contentsline {subsection}{\numberline {4.5}Project Log}{35}
-\contentsline {section}{\numberline {5}Language Evolution}{35}
-\contentsline {section}{\numberline {6}Language Architecture}{37}
-\contentsline {subsection}{\numberline {6.1}Translator}{38}
-\contentsline {subsection}{\numberline {6.2}Execution Environment}{38}
-\contentsline {section}{\numberline {7}Development Tools}{39}
-\contentsline {subsection}{\numberline {7.1}Source Code Management}{39}
+\contentsline {subsubsection}{\numberline {3.6.2}Stability Analyzers}{26}
+\contentsline {subsection}{\numberline {3.7}Grammar}{26}
+\contentsline {subsubsection}{\numberline {3.7.1}Tokens}{26}
+\contentsline {subsubsection}{\numberline {3.7.2}File Structure and Expressions}{27}
+\contentsline {section}{\numberline {4}Project Plan}{31}
+\contentsline {subsection}{\numberline {4.1}Development Process}{31}
+\contentsline {subsection}{\numberline {4.2}Roles and Responsibilities}{32}
+\contentsline {subsection}{\numberline {4.3}Implementation Stylesheet}{33}
+\contentsline {subsection}{\numberline {4.4}Project Timeline}{33}
+\contentsline {subsection}{\numberline {4.5}Project Log}{34}
+\contentsline {section}{\numberline {5}Language Evolution}{34}
+\contentsline {section}{\numberline {6}Language Architecture}{36}
+\contentsline {subsection}{\numberline {6.1}Translator}{37}
+\contentsline {subsection}{\numberline {6.2}Execution Environment}{37}
+\contentsline {section}{\numberline {7}Development Tools}{38}
+\contentsline {subsection}{\numberline {7.1}Source Code Management}{38}
 \contentsline {subsection}{\numberline {7.2}Languages, Tools and Libraries Used}{39}
-\contentsline {section}{\numberline {8}Testing Plan}{40}
+\contentsline {section}{\numberline {8}Testing Plan}{39}
 \contentsline {section}{\numberline {9}Conclusion}{40}
 \contentsline {subsection}{\numberline {9.1}Team Lessons}{40}
-\contentsline {subsection}{\numberline {9.2}Individual Lessons}{41}
-\contentsline {subsection}{\numberline {9.3}Advice for Future Teams}{43}
-\contentsline {subsection}{\numberline {9.4}Instructor Feedback}{44}
-\contentsline {section}{Appendices}{45}
-\contentsline {section}{\numberline {A}Project Contributions}{45}
-\contentsline {subsection}{\numberline {A.1}Contribution Summary}{45}
-\contentsline {subsection}{\numberline {A.2}File-Level Breakdown}{45}
-\contentsline {section}{\numberline {B}Project Log}{48}
-\contentsline {section}{\numberline {C}Source Code Listing}{55}
+\contentsline {subsection}{\numberline {9.2}Individual Lessons}{40}
+\contentsline {subsection}{\numberline {9.3}Advice for Future Teams}{42}
+\contentsline {subsection}{\numberline {9.4}Instructor Feedback}{43}
+\contentsline {section}{Appendices}{44}
+\contentsline {section}{\numberline {A}Project Contributions}{44}
+\contentsline {subsection}{\numberline {A.1}Contribution Summary}{44}
+\contentsline {subsection}{\numberline {A.2}File-Level Breakdown}{44}
+\contentsline {section}{\numberline {B}Project Log}{47}
+\contentsline {section}{\numberline {C}Source Code Listing}{54}
