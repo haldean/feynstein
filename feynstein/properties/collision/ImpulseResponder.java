@@ -7,22 +7,6 @@ import feynstein.properties.integrators.*;
 import feynstein.utilities.*;
 import java.util.*;
 
-/* Questions for Sam, revised to be less angry and more intellible
-   1. Semi-implicit time stepping seems to happen before impulse response,
-   and arrays needed for impulse response (the q/Q/_dot stuff) seem to be
-   defined as a result of time stepping. Do we need to have time stepping 
-   happen before impulse response? If not, how do we define those arrays?
-   
-   2. Lines 88 - 89: please double-check that this is what we want--that
-   the detector checks again for collisions and then we grab the new set.
-   (The only reason I'm confused about this is because of question 3.)
-
-   3. Line 83: original c++ filter() method took a reference to array V. 
-   Does this mean we need to update scene.globalVelocities here? If we 
-   don't update it, I don't see the point of iterating this while loop.
-
-*/
-
 public class ImpulseResponder extends CollisionResponder<ImpulseResponder> {
 
     Integrator integrator;
@@ -57,14 +41,6 @@ public class ImpulseResponder extends CollisionResponder<ImpulseResponder> {
 	// No updating side effects, just calculation:
 	double[] newPos = integrator.predictPositions();
 	double[] newVels = integrator.predictVelocities();
-
-	/* old C++ for reference
-	//update velocity
-	for(int j = 0; j < dof; j ++){
-	  q_dot[j] = V[j] + (h/M[j])*(F)[j];
-	}
-	//update position
-	q = X + h*q_dot; */
 
 	double h = integrator.getStepSize();
 
@@ -146,8 +122,7 @@ public class ImpulseResponder extends CollisionResponder<ImpulseResponder> {
 		    //following line was: norm = norm / norm.norm();
 		    norm = norm.dot(1 / norm.norm());
 
-		//impulse
-		//TODO check math here?
+		//impulse	       
 		double I = va.minus(vb).minus(.000001).dot(norm.dot(1 / m));
 		
 		//Apply impulse
@@ -197,7 +172,6 @@ public class ImpulseResponder extends CollisionResponder<ImpulseResponder> {
 
 		
 		//weighted mass
-		//TODO haven't touched this...
 		double m = s*s/M[3*p1]+(1-s)*(1-s)/M[3*q1]+t*t/M[3*p2]+(1-t)*(1-t)/M[3*q2];
 		
 		//collision norm
@@ -207,7 +181,6 @@ public class ImpulseResponder extends CollisionResponder<ImpulseResponder> {
 		    norm = norm.dot(1 / norm.norm());
 		
 		//impulse
-		//TODO check math here?
 		double I = va.minus(vb).minus(.000001).dot(norm.dot(1/m));
 		
 		//apply to first edge

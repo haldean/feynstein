@@ -98,7 +98,7 @@ gravity pulls on the sphere.
 
 \begin{verbatim}
 forces {
-  force SpringForce(actsOn="sphere1", length=40cm, strength=4);
+  force SpringForce(actsOn=#sphere1, length=40cm, strength=4);
   force GravityForce(gx=0, gy=0, gz=9.81N);
 }
 \end{verbatim}
@@ -111,15 +111,13 @@ declared here. Unlike the force and shapes sections, the properties
 section has a default configuration if left empty. The default time
 integration method is semi-implicit Euler and the default rendering
 method is on-screen display. User defined properties that change the
-appearance of the simulation -- such as textures and lighting -- find a
-place in this section. An example of a simulation using verlet
-time integration and video output (i.e. offline rendering) is shown
-below.
+appearance of the simulation -- such as textures and lighting -- find
+a place in this section. An example of a simulation using Verlet time
+integration is shown below.
 
 \begin{verbatim}
 properties {
   property VelocityVerlet(stepSize = 10ms);
-  property FileOutput(name = "myScene.mov");
 }
 \end{verbatim}
  
@@ -147,14 +145,12 @@ MyScene {
    }
    
    forces {
-     force SpringForce(actsOn="cylinder1", attachesAt=(0,0), 
+     force SpringForce(actsOn=#cylinder1, attachesAt=(0,0), 
        pullsTowards=(-10, -10), strength=4N);
    }
    
    properties {
      property SemiImplicitEuler(stepSize=10tms);
-     property VideoOutput();
-     property FileOutput("myScene.avi");
      property AssertStability(margin=4);
    }
 
@@ -229,7 +225,7 @@ They are assigned and operated on in the same way as the corresponding
 Java types.  The number types, ints and decimals, are both declared
 using literals as described in Section \ref{sec:numliterals}.
 
-int decimal string boolean void shape force property
+\code{int decimal string boolean void shape force property}
 
 \paragraph{Section Declaration}
 
@@ -257,9 +253,9 @@ same way as the other two special primitives: with the key word
 followed by the specific form the primitive is taking (i.e. Cylinder,
 SemiImplicitEuler), and the parameters required to instantiate it.
 
-The possible properties are EndTime, AssertStability, CameraView,
-StabilityAssertTolerance, BoundingVolumeHierarchy, ProximityDetector,
-VideoOutput and FileOutput.
+The possible properties are \code{ImpulseResponder, SemiImplicitEuler,
+  VelocityVerlet, ContinuousTimeDetector, BoundingVolumeHierarchy,
+  ProximityDetector} and \code{SpringPenaltyResponder}.
 
 \paragraph{Other Keywords}
 
@@ -632,7 +628,7 @@ a time-stepping method that defines force integration with each
 update; and every simulation requires a method of outputting the
 rendered scene. The property type can additionally be used to define
 simulation features such as collision detection and response
-frameworks, textures, lighting, and camera controls.
+frameworks, textures and lighting.
 
 \paragraph{Predefined time integrators}
 
@@ -653,32 +649,6 @@ properties {
   property SemiImplicitEuler(stepSize = 5ms);
 }
 \end{verbatim}
-
-\paragraph{Predefined renderers}
-
-Feynstein supports both online and offline methods of video output.
-Online rendering means that when a Feynstein program runs, it displays
-output directly on the screen. Online rendering produces an
-interactive video output that lets the user use the mouse to change
-the location of the camera, pan, tilt, and zoom during the
-simulation. By default, Feynstein uses online rendering.  The use of
-online rendering does not need to be explicitly specified.  If online
-rendering is not wanted, how Feynstein should render the video needs
-to be specified.  Offline rendering outputs a video file to a
-specified file.
-
-\begin{verbatim}
-properties {
-  property FileOutput(file="myScene.avi");
-  property CameraView(location=(5m, 0, 0), 
-    lookingAt=(0, 0, 0), fieldOfView=50);
-}
-\end{verbatim}
-
-The user specifies where Feynstein should render the video using
-the \texttt{FileOutput} property. The parameter of \texttt{File\-Output} is a
-string specifying the file. Using offline rendering requires that the
-camera position is specified using the \texttt{CameraView} property.
 
 \paragraph{Predefined collision handlers}
 Efficient collision detection and effective collision response are
@@ -794,25 +764,6 @@ includes two methods for responding to collisions. The first method, \texttt{Spr
    }
 \end{verbatim}
 
-
-\paragraph{Camera Location and Orientation}
-
-The CameraView property defines how the scene will appear to the
-viewer. The location of the camera is given by a location (x, y, z) in
-the scene. The camera has a default field of view of 45º, but this can
-be changed when the camera is defined. By default, the camera is
-located at the midpoint of the xy-projection of the objects in the
-scene, and the default z value is calculated so that the camera can
-see all objects in the scene.
-
-\begin{verbatim}
-properties {
-  /*other property declarations */
-  property CameraView(location=(0, 0, 3m), 
-    lookingAt=(0, 0, 0), fieldOfView=30);
-}
-\end{verbatim}
-
 \subsection{Execution Model}
 
 \subsubsection{Code Blocks}
@@ -919,7 +870,8 @@ shape ::= 'shape' 'Sphere' '(' sphereParams ')'
 
 shapeParams ::= 'name' '=' STRING
   | 'location' '=' point
-  | 'velocity' '=' '(' NUMBER velocityLiteral ',' NUMBER velocityLiteral ',' NUMBER velocityLiteral ')'
+  | 'velocity' '=' '(' NUMBER velocityLiteral ',' NUMBER 
+     velocityLiteral ',' NUMBER velocityLiteral ')'
   | 'mass' '=' NUMBER massLiteral
   | 'particleRadius' '=' NUMBER spatialLiteral
   | 'fixed' '=' NUMBER
@@ -939,12 +891,15 @@ cylOpt ::= ',' 'accuracy=' NUMBER | epsilon
 
 planeParams ::= planeParams 'normal '=' point
 
-tetParams ::= 'point1' '=' point ',' 'point2' '=' point ',' 'point3' '=' point ',' 'point4' '=' point ','
+tetParams ::= 'point1' '=' point ',' 'point2' '=' point ',' 
+    'point3' '=' point ',' 'point4' '=' point ','
 
-cubeParams ::= 'sides' '=' '(' NUMBER spatialLiteral ',' NUMBER spatialLiteral ',' NUMBER spatialLiteral ')'
+cubeParams ::= 'sides' '=' '(' NUMBER spatialLiteral ',' 
+    NUMBER spatialLiteral ',' NUMBER spatialLiteral ')'
   | 'allSides' '=' NUMBER spatialLiteral
 
-fPlaneParams ::= 'lengthX' '=' NUMBER spatialLiteral fPlaneOpt ',' 'lengthY' '=' NUMBER spatialLiteral fPlaneOpt
+fPlaneParams ::= 'lengthX' '=' NUMBER spatialLiteral 
+    fPlaneOpt ',' 'lengthY' '=' NUMBER spatialLiteral fPlaneOpt
   | fPlaneParams 'length' '=' NUMBER spatialLiteral fPlaneOpt
 fPlaneOpt ::= ',' 'subdivisions' '=' NUMBER | epsilon
 
@@ -952,7 +907,8 @@ pSetParams ::= vert pSetOpt
 vert ::= vert 'vert' '=' point | epsilon
 pSetOpt ::= ',' 'fixed' '=' NUMBER | epsilon
 
-regPolyParams ::= 'vertices' '=' NUMBER ',' regPolyParams 'radius' '=' NUMBER spatialLiteral
+regPolyParams ::= 'vertices' '=' NUMBER ',' regPolyParams 
+    'radius' '=' NUMBER spatialLiteral
   |  regPolyParams 'radius' '=' NUMBER spatialLiteral ',' 'vertices' '=' NUMBER
 
 pointMassParams ::= 'pos' '=' NUMBER
@@ -996,18 +952,14 @@ surfaceBendingParams ::= 'strength' '=' NUMBER | epsilon
 
 propertyBlock ::= 'properties' '{' properties '}'
 properties ::= properties property ';' |  epsilon
-property ::= 'property' 'renderTo' '(' renderParams ')' 
-  | 'property' 'endTime' '(' endParams ')' 
+property ::= 'property' 'endTime' '(' endParams ')' 
   |  'property' 'assertStability' '(' assertParams ')' 
   | 'property' eulerMethod '(' eulerParams ')' 
-  | 'property' 'CameraView' '(' cameraParams ')' 
   | 'property' 'ProximityDetector' '(' 'proximityParams' ')' 
   | 'property' 'ContinuousTimeDetector' '(' cTParams ')'
   | 'property' 'BoundingVolumeHierarchy' '(' 'bvhParams' ')'
   | 'property' 'SpringPenaltyResponder' '(' springPenaltyParams ')'
   | 'property' 'ImpulseResponder' '(' impulseParams ')'
-
-renderParams ::= 'VideoOutput' | 'FileOutput' '(' STRING ')' | epsilon
 
 endParams ::= 'endAt' '=' timeLiteral | epsilon 
 
@@ -1016,16 +968,14 @@ assertParams ::= epsilon | 'margin=' NUMBER
 eulerMethod ::= 'VelocityVerlet' | 'SemiImplicitEuler'
 eulerParams ::= 'stepSize' '=' timeLiteral
 
-cameraParams ::= 'location' '=' '(' NUMBER ',' NUMBER ',' NUMBER ')'
-  ',' 'lookingAt' '=' '(' NUMBER ',' NUMBER ',' NUMBER ')' 
-  ',' 'fieldOfView' '=' NUMBER
-
 proximityParams ::= 'proximity' '=' 'NUMBER'
 
-bvhParams ::= 'margin' '=' NUMBER | 'margin' '=' NUMBER ',' 'type' '=' 'BoundingVolumeHierarchy.' 'volumeType'
+bvhParams ::= 'margin' '=' NUMBER | 'margin' '=' NUMBER ',' 
+    'type' '=' 'BoundingVolumeHierarchy.' 'volumeType'
 volumeType ::= 'AABB'
 
-springPenaltyParams ::= 'proximity' '=' NUMBER springOpt ',' 'detector' '=' NUMBER springOpt
+springPenaltyParams ::= 'proximity' '=' NUMBER springOpt ',' 
+     'detector' '=' NUMBER springOpt
   |  'detector' '=' NUMBER springOpt ',' 'proximity' '=' NUMBER springOpt
 springOpt ::= ',' stiffness' '=' NUMBER 
 

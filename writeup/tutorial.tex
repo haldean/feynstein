@@ -18,20 +18,21 @@ mouse and keyboard, just like most popular 3D editing software. There
 are a few things to note, just from this short code example:
 
 \begin{enumerate}
-\item The source file has a `.f` extension. This is necessary
+\item The source file has a \code{.f} extension. This is necessary
   for the compiler and interpreter to compile and run your Feynstein
   source file.
-\item The scene has a name: `ShapeScene`. This name needs
+\item The scene has a name: \code{ShapeScene}. This name needs
   to match the name of the source file, and it is the name you will
   pass in to the interpreter to render your scene.
-\item There is block called `shapes`. Within this block, the user can
+\item There is block called \code{shapes}. Within this block, the user can
   define the shapes she would like to place in the scene. Anything
-  goes in this block, though; anything not preceded by the `shape`
+  goes in this block, though; anything not preceded by the \code{shape}
   keyword will be treated as standard Java code.
-\item There is a `shape` keyword. The `shape` keyword defines a type
-  in Feynstein -- any kind of shape you add to the scene inherits from
-  `shape`. In the `shapes` block, any `shape` defined on a line by
-  itself is automatically added to the scene.
+\item There is a \code{shape} keyword. The \code{shape} keyword
+  defines a type in Feynstein -- any kind of shape you add to the
+  scene inherits from \code{shape}. In the \code{shapes} block, any
+  \code{shape} defined on a line by itself is automatically added to
+  the scene.
 \end{enumerate}
 
 There is also a syntactical oddity here, as well. Most Java users will
@@ -42,12 +43,12 @@ object. Each object needs an identity, size and location at the
 minimum, and to make matters worse, both the size and location of
 every object have dimensions. Feynstein adds a new way to create
 objects, called “Builder Syntax”, which lets you use key-value pairs
-to initialize an object. You can see this in `ShapeScene.f`; we create
-a new sphere by calling `shape Sphere(name=”sphere1”, radius=20cm,
-location=(0,0));`. Builder syntax allows you to set only the
-properties you want, allowing the rest to remain at their default
-value. In addition, Feynstein recognizes most standard units for
-length, mass, force, velocity and acceleration; commonly used
+to initialize an object. You can see this in \code{ShapeScene.f}; we
+create a new sphere by calling \code{shape Sphere(name=”sphere1”,
+  radius=20cm, location=(0,0));}. Builder syntax allows you to set
+only the properties you want, allowing the rest to remain at their
+default value. In addition, Feynstein recognizes most standard units
+for length, mass, force, velocity and acceleration; commonly used
 S.I. (meter, centimeter, gram, Newton, etc) and Imperial units (foot,
 inch, mile, pound) are all supported. For a full list of supported
 units, consult the Feynstein User Manual.
@@ -55,7 +56,7 @@ units, consult the Feynstein User Manual.
 There are many shapes a user can add that come built into Feynstein,
 and it's also really easy to import a 3D model from somewhere
 else. The included shapes are shown in the table below. Note that
-every shape has the parameters `location` and `mass`.
+every shape has the parameters \code{location} and \code{mass}.
 
 \begin{table}\centering
   \begin{tabular}{r|l}
@@ -68,19 +69,19 @@ every shape has the parameters `location` and `mass`.
     CustomObj & file, location, mass, name \\
   \end{tabular} 
 \caption{Built-in shapes and their supported parameters}
-\label{tab:shapes}
+\label{tab:shapestut}
 \end{table}
 
 You can also import objects created in other 3D programs into
 Feynstein if they're in a .OBJ format. Adding OBJ files is easy; you
-just add a `CustomObj` shape in the same way you'd add any shape, and
-you pass the file name of model as the `file` parameter. Feynstein
-imports it for you, and you can set the `location` and `mass`
+just add a \code{CustomObj} shape in the same way you'd add any shape, and
+you pass the file name of model as the \code{file} parameter. Feynstein
+imports it for you, and you can set the \code{location} and \code{mass}
 properties of the shape just like you would for any object.
 
 \subsection{Forces}
 No simulation package would be complete without a full array of forces
-at its users disposal, and Feynstein is no exception to this
+at its users' disposal, and Feynstein is no exception to this
 rule. With eight built-in forces, the user can specify almost any
 real-world scenario by just specifying parameters. An example program
 that includes forces is shown below.
@@ -95,7 +96,7 @@ ForceScene {
     forces {
       force GravityForce(gx=0, gy=0, gz=-9.81);
       force SpringForce(restLength=1m, k=1, 
-        actsOn=”sphere1”, fixedAt=(0, 0, 2m));
+        actsOn=#sphere1, fixedAt=(0, 0, 2m));
     }
  }
 \end{lstlisting}
@@ -115,25 +116,25 @@ which it acts).
 These two forces are the most intuitive, but there are many forces you
 might be interested in using. In addition to GravityForce and
 SpringForce, Feynstein has the following forces at your disposal. Note
-that for all forces, the parameter `actsOn` specifies an object (or
+that for all forces, the parameter \code{actsOn} specifies an object (or
 objects) which that force acts upon.
 
 \begin{description}
 \item[DampingForce] A DampingForce is a frictional force which resists
   motion, and is a function of mass. You can attach a DampingForce to
   any object, and that object's motion will be resisted. The magnitude
-  of its resistance is given by a single parameter, `lambda`.
+  of its resistance is given by a single parameter, \code{lambda}.
 
 \item[RodBendingForce] A RodBendingForce acts upon three particles, which
   together act like a hinge, to resist the bending of these
   particles. It has three parameters: the rest length between the
-  first pair of particles `restLength1`, the rest length between the
-  second pair of particles `restLength2`, and the rest angle `theta`.
+  first pair of particles \code{restLength1}, the rest length between the
+  second pair of particles \code{restLength2}, and the rest angle \code{theta}.
 
-\item[ConstantStrainTriangleForce] This is a force that acts against the
+\item[TriangleForce] This is a force that acts against the
   deformation of a triangle. Given the side lengths of the triangle,
-  the stiffness of the resistance `stiffness`, and the
-  compression-to-expansion ratio `poisson`, it will act against any
+  the stiffness of the resistance \code{stiffness}, and the
+  compression-to-expansion ratio \code{poisson}, it will act against any
   force that attempts to skew the triangle in any way.
 
 \item[SurfaceBendingForce] A SurfaceBendingForce is a constraint force that
@@ -141,82 +142,20 @@ objects) which that force acts upon.
   These four particles are arranged in two triangles which share an
   edge. The strength of the force is a function of the angle between
   these two triangles, and is parameterized by the resistance to
-  bending, `stiffness`, rest angle of the two triangles, `theta`, and
+  bending, \code{stiffness}, rest angle of the two triangles, \code{theta}, and
   the shape of both triangles.
-
-\item[TetrahedralConstraintForce] A force based on a tetrahedron
-  configuration involving four particles. It is essentially the
-  ConstantStrainTriangleForce, except acting to resist deformation in
-  three dimensions instead of two. Like the
-  ConstantStrainTriangleForce, this force is configured by a tensile
-  modulus `stiffness`, a Poisson ratio `poisson`, and the undeformed
-  lengths of the four (rather than three) edge vectors.
 
 \item[ContactForce] A ContactForce is derived from a SpringForce and acts
   upon two triangles to resist a collision between them. An equal and
   opposite force is applied to both triangles which pushes them apart,
   which is analogous to a collision. A contact force is configured by
-  a spring force stiffness `stiffness` and a minimum distance
-  (`minDist`) that must be maintained between the colliding pairs.
+  a spring force stiffness \code{stiffness} and a minimum distance
+  (\code{minDist}) that must be maintained between the colliding pairs.
 \end{description}
 
 If none of these forces satisfy your simulation needs, it's easy to
 define your own, as well! We'll discuss how to define your own forces
 in the Advanced Topics subsection.
-
-\subsection{Outputs}
-
-Up until now, we've implicitly defined our output to be the
-screen, so that you can interact with the scene and see the results of
-your rendering as they happen. However, what if you want to save your
-rendered movie and send it to someone else to show off?  Feynstein's
-got you covered.
-
-\begin{lstlisting}{caption=OutputScene.f}
-OutputScene {
-    properties {
-      renderTo FileOutput(file=”myScene.avi”);
-      property CameraView(location=(5m, 0, 0), 
-        lookingAt=(0, 0, 0), fieldOfView=50);
-    }
-
-    shapes {
-      shape Sphere(name="sphere1", radius=20cm, 
-        location=(0, 0, 0));
-    }
-
-    forces {
-      force GravityForce(gx=0, gy=0, gz=-9.81);
-      force SpringForce(restLength=1m, k=1, 
-        actsOn=”sphere1”, fixedAt=(0, 0, 2m));
-    }
- }
-\end{lstlisting}
-
-In `OutputScene`, we've introduced another block: the `properties`
-block. This block contains scene-wide properties that you want to set
-before the scene starts rendering. In this case, we're setting a new
-output for our scene, and we're setting the default location of the
-camera as well. Feynstein comes with two outputs built-in, with easy
-ways to define new ones.
-
-If no output is specified, Feynstein defaults to using `VideoOutput`,
-which is the output you've implicitly been using since we
-started. This is the output in the window that lets you explore the
-scene interactively. However, if you want to write the video output to
-a file, instead, you can use the `FileOutput` rendering target, as
-shown in `OutputScene`. `FileOutput` takes one argument, `file`, which
-is the file to write the scene to.
-
-If you want to write your own rendering target, it's incredibly
-simple; writing plugins for Feynstein is a breeze thanks to it's
-object-oriented architecture. Simply write a standard Java class that
-extends the built-in class `RenderTarget`. This is an abstract class
-that contains the abstract method `onFrame` which takes a single
-parameter (the OpenGL representation of the current scene) as a
-parameter. Your render target can do whatever it wants to with the
-scene -- for example, it could generate an image and then send it to a
-different computer over the network.
 
 \subsection{Frame Updates}
 
@@ -239,7 +178,7 @@ import java.io.*;
 ForceScene {
     FileWriter writer;
 
-    create {
+    static {
       try {
         writer = new FileWriter(“output.csv”);
       } catch (IOException) {
@@ -253,7 +192,7 @@ ForceScene {
 
     forces {
       force GravityForce(gx=0, gy=0, gz=-9.81);
-      force SpringForce(restLength=1m, k=1, actsOn=”sphere1”, fixedAt=(0, 0, 2m));
+      force SpringForce(restLength=1m, k=1, actsOn=#sphere1, fixedAt=(0, 0, 2m));
     }
 
     onFrame {
@@ -270,37 +209,38 @@ then wanted to go away and do further processing on that data in
 Matlab or Mathematica, it's in easy, machine-readable format.
 
 There's lots of new syntax and features in this snippet, so we'll
-start at the top. The first thing you'll notice is the `import`
+start at the top. The first thing you'll notice is the \code{import}
 statement -- imports work exactly the same in Feynstein as they do in
 Java, and you have the full Java standard library at your
 disposal. You can also see we've defined a scene-wide variable,
 outside the scope of any of our blocks. Anything that isn't in a
 predefined block is treated as if it were in a standard Java class. In
-this case, that means our `FileWriter` is an instance variable of our
+this case, that means our \code{FileWriter} is an instance variable of our
 scene.
 
-There's also two new blocks: `create` and `onFrame`. `create` is
-called after the system has been initialized and properties have been
-set set, but before any shapes or forces are created. This is a good
-time to read input from the user, if any, or to initialize instance
-variables you want to use in other blocks. That's exactly what we do
-here, initializing our `FileWriter` so we can write to it during
-`onFrame`.
+There's also two new blocks: \code{static} and
+\code{onFrame}. \code{static} is called after the system has been
+initialized and properties have been set set, but before any shapes or
+forces are created. This is a good time to read input from the user,
+if any, or to initialize instance variables you want to use in other
+blocks. That's exactly what we do here, initializing our
+\code{FileWriter} so we can write to it during \code{onFrame}.
 
-`onFrame` is the frame update method we discussed in the introduction
+\code{onFrame} is the frame update method we discussed in the introduction
 to this subsection -- it is the method that gets run after all of the
 forces are applied to the shapes in the scene, but before the scene is
 rendered. Here, you can set or read any of the properties of a shape;
 in our case, we're accessing the height of our sphere in the
 scene. Within the onFrame block, you have access to a special
-variable, `time`, which represents the number of milliseconds that
+variable, \code{time}, which represents the number of milliseconds that
 have passed in scene time.
 
 To get the properties of an object, you have to have a reference to
 the object itself, but since we created the object in the shapes
 block, we didn't store a reference to it in a variable. Instead, we
 access it using its name with the \#-operator. We then can treat it
-like a regular object and call instance methods on it, like `getZ()`.
+like a regular object and call instance methods on it, like
+\code{getZ()}.
 
 \subsection{Integration Methods and Error Bounds}
 
@@ -308,7 +248,7 @@ Unfortunately for the users of any simulation system, physical
 simulation isn't perfect. While, given the right parameters, it can
 approximate the real world extraordinarily well, sometimes it fails to
 do so quite dramatically. The most common source of failure in
-physical simulation is the systematic error (or “instability”)
+physical simulation is the systematic error (or ``instability'')
 inherent in time stepping.
 
 Time stepping is the process by which the simulator figures out the
@@ -325,11 +265,11 @@ an error message.
 
 Feynstein comes with two different time-stepping methods, each with
 advantages and disadvantages. These are all properties; for example,
-if I wanted to use Implicit Euler with a step size of 2 milliseconds,
-I would add `property ImplicitEuler(stepSize=2ms);` to my `properties`
-block. It is important to note that the stability of any method is
-dependent upon the step size used; a larger step size means lower
-stability, and vice-versa.
+if I wanted to use Velocity Verlet with a step size of 2 milliseconds,
+I would add \code{property VelocityVerlet(stepSize=2ms);} to my
+\code{properties} block. It is important to note that the stability of
+any method is dependent upon the step size used; a larger step size
+means lower stability, and vice-versa.
 
 \begin{description}
 \item[SemiImplicitEuler] The semi-implicit Euler method of time integration
@@ -343,11 +283,86 @@ stability, and vice-versa.
   good trade-off between speed and stability, and is a good choice for
   everyday rendering tasks.
 
-\item[ImplicitEuler] By far the slowest of the three, the implicit Euler
-  method is also by far the most accurate. It expresses the future
-  velocity and location in terms of each other, then does a numerical
-  root solve to find a solution to the resulting system of
-  equations. This is very expensive, but it makes for a very stable
-  simulation. This is the best choice for scientific purposes, where
-  highly accurate results are worth waiting for.
+\item[VelocityVerlet] Although the semi-implicit Euler and velocity
+  Verlet techniques are similar, velocity Verlet is more accurate over
+  long periods of time. Verlet integration updates velocities in two
+  stages, and uses the intermediate velocity to calculate new particle
+  positions.
 \end{description}
+
+\subsection{Collision Handling}
+Collision handling in implemented in Feynstein in through two discrete
+modules: detection and response. You can add a collision detector to
+your scene without necessarily having a collision responder, but all
+collision responders need a detector to find collisions to respond
+to. Collision handling doesn't need to be tied to specific
+objects -- detectors and responders will check all objects in a scene if
+they are defined.
+
+\subsubsection{Collision Detection}
+Feynstein supports two predefined options for collision detection:
+proximity-based detection with \code{ProximityDetector} and a more
+thorough, continuous method, \code{ContinuousTimeDetector}, which uses
+time steps to check for collisions. Both of these methods extend the
+abstract \code{NarrowPhaseDetector} class because both are part of the
+narrow phase of collision detection, where all possible collisions
+between objects in a scene are monitored.
+
+Broad-phase collision detection constitutes a helpful, but not
+mandatory, optimization for narrow-phase detection: broad-phase
+detection uses a \code{BoundingVolumeHierarchy} to store probable
+collisions based on a VolumeHierarchy heuristic. To use this
+optimization method, add a \code{BoundingVolumeHierarchy} property to
+your properties list, before you specify a \code{ProximityDetector}
+property. Note that just a \code{BoundingVolumeHierarchy} isn't enough
+to detect collisions: you also need to have a narrow-phase detector.
+
+\begin{lstlisting}
+    properties {
+      property BoundingVolumeHierarchy(margin=0.1, 
+             type=BoundingVolumeHierarchy.AABB);
+      property ProximityDetector(proximity=0.1);
+    }
+\end{lstlisting}
+
+\subsubsection{Collision Response}
+
+Feynstein offers two predefined methods of collision response,
+extending the abstract \code{CollisionResponder}: the
+\code{SpringPenaltyResponder}, which uses spring forces of a high
+strength to model elastic collisions between shapes in a scene, and
+the \code{ImpulseResponder}, which applies small impulses to
+neighboring objects to prevent them from colliding. Both responders
+must have a \code{CollisionDetector} to function properly; failing to
+define one will create a compile-time error. Detectors are indexed by
+the order in which they appear in your properties block, starting with
+0, and this integer index is the value for the \code{detector}
+parameter in both \code{CollisionResponder}s.
+
+The \code{SpringPenaltyResponder} takes a proximity (how close objects
+must be before it responds to a collision) and a strength for the
+spring force as parameters, while the \code{ImpulseResponder} takes
+only a number of iterations over which to apply impulses to colliding
+objects. All of these parameters have default values, so if you're not
+sure how precise you want your collision responders to be, specifying
+only a detector in your builder syntax will cause Feynstein to operate
+with the values we've defined.
+
+\begin{lstlisting}{caption=CollisionScene.f}
+CollisionScene {
+    shapes {
+      shape Sphere(name="sphere1", radius=20cm, location=(0,0,0));
+    }
+
+    forces {
+      force GravityForce(gx=0, gy=0, gz=-9.81);
+      force SpringForce(restLength=1m, k=1, actsOn=#sphere1, fixedAt=(0, 0, 2m));
+    }
+
+    properties {
+      property SemiImplicitEuler(stepSize=0.01);
+      property BoundingVolumeHierarchy(margin=0.1, type=BoundingVolumeHierarchy.AABB);
+      property ProximityDetector(proximity=0.1);
+      property SpringPenaltyResponder(detector=0, proximity=0.1, stiffness=1000)
+ }
+\end{lstlisting}

@@ -300,32 +300,31 @@ def get_jvm_vars():
 
 def error_gen(err,javamap):
     err = str(err)
-    err = err.split('\n')
+    err = err.split('\\n')
     errorlist = []
-    errormessage = 'Feynstein Errors:\n'
-    for e in err:
+    errormessage = ''
+    for ind,e in enumerate(err):
         if re.search('java:',e):
-            m = re.search('[0-9]+',e)
-            errorlist.append(int(m.group()))
-    
+            m = re.search(':[0-9]+',e)
+            n = re.search('[0-9]+',m.group())
+            errorlist.append([int(n.group()),err[ind]+'\n'+err[ind+1]+'\n'+err[ind+2]])
+            
+
     if len(errorlist) > 0:
+        errormessage = 'Feynstein errors:\n'
         for er in errorlist:
             for j in javamap:
-                
-                if j[1] == er:
-                    errormessage=errormessage+'Syntax error in line ' + str(j[0]) + '.\n'
+                if j[1] == er[0]:
+                    errormessage=errormessage+'Feynstein error in line ' + str(j[0]) + '.\nJava error:\n '+er[1]+'\n'
 
     return errormessage
 
 def compile_feynstein(infile):
     java_source,javamap = translator.main(infile)
     p = subprocess.Popen(['javac', '-classpath', get_classpath(), 
-                     '-Xlint:unchecked', java_source],stdout = subprocess.PIPE)
+                     '-Xlint:unchecked', java_source],stderr = subprocess.PIPE)
     out,err = p.communicate()
-    
-    
-    
-    print(error_gen(out,javamap))
+    print(error_gen(err,javamap))
 
     return java_source
 

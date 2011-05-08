@@ -12,8 +12,8 @@ MyScene {
 
     properties { 
         property SemiImplicitEuler(stepSize=0.01);
-//        property BoundingVolumeHierarchy(margin=0.1);
-        property ProximityDetector(proximity=0.1);
-        property SpringPenaltyResponder(detector=0, stiffness=10000, proximity=.5);
+        //property BoundingVolumeHierarchy(margin=0.1);
+        property ContinuousTimeDetector(stepSize=.01);
+        property SpringPenaltyResponder(detector=0, stiffness=1000, proximity=.1);
    }
 }
