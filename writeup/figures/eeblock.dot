@@ -9,7 +9,7 @@ digraph eeblock {
 	feynstein -> Built;
 	feynstein -> ClassGetter;
 	
-	feynstein -> collision;
+	properties -> collision;
 	collision -> AxisAlignedBoundingBox;
 	collision -> BoundingVolume;
 	collision -> BoundingVolumeHierarchy;
@@ -43,6 +43,7 @@ digraph eeblock {
 	properties -> Property;
 	Property -> Integrator;
 	Integrator -> SemiImplicitEuler;
+	Integrator -> VelocityVerlet;
 
 	feynstein -> renderer;
 	renderer -> Renderer;
