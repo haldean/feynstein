@@ -81,8 +81,6 @@ public class SpringPenaltyResponder extends CollisionResponder<SpringPenaltyResp
 		  a seperating velocity, apply the 
 		  local spring penalty */
 		if(xa.minus(xb).dot(va.minus(vb)) < 0) {
-		    System.out.print("\n\n\n\n\n\n\n\n\n Applying Spring"
-				     + " penalty to VF collision\n\n\n\n\n\n\n\n\n");
 		    double[] local_penalty = springPenalty(xa, xb, col.getDistance());
 		    //apply to vertex
 		    penalty[3*p] += local_penalty[0];

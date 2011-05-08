@@ -51,7 +51,8 @@ public class ImpulseResponder extends CollisionResponder<ImpulseResponder> {
     public void update() {
 	X = scene.getGlobalPositions();
 	M = scene.getGlobalMasses();
-
+	
+	
 	// No updating side effects, just calculation:
 	double[] newPos = integrator.predictPositions();
 	double[] newVels = integrator.predictVelocities();
