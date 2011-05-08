@@ -162,7 +162,7 @@ public class BoundingVolumeHierarchy extends Property<BoundingVolumeHierarchy> {
 	checkOverlap(root, root, collisions);
 
 	if (collisions.size() > 0) {
-	    System.out.println(collisions.size() + " broad-phase collisions detected");
+	    //System.out.println(collisions.size() + " broad-phase collisions detected");
 	}
     }
 

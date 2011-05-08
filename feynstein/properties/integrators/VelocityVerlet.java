@@ -49,6 +49,19 @@ public class VelocityVerlet extends Integrator<VelocityVerlet> {
 	}
     }
 
+    public void update(double[] newPositions, double[] newVelocities) {
+	Scene scene = super.getScene();
+	ArrayList<Particle> parts = scene.getMesh().getParticles();
+	for (int i = 0; i < parts.size(); i++) {
+	    if(!parts.get(i).isFixed()) {
+		Vector3d newVel = new Vector3d(newVelocities[3*i], newVelocities[3*i+1], newVelocities[3*i+2]);
+		// x[1] = x[0] + v*dt
+		Vector3d newPos = new Vector3d(newPositions[3*i], newPositions[3*i+1], newPositions[3*i+2]);
+		parts.get(i).update(newPos, newVel);
+	    }
+	}
+    }
+
     // No side-effect changes to scene
     public double[] predictPositions() {
 	Scene scene = super.getScene();
@@ -81,9 +94,9 @@ public class VelocityVerlet extends Integrator<VelocityVerlet> {
 		Vector3d newForce = new Vector3d(F_1[3*i],F_1[3*i+1],F_1[3*i+2]);
 		Vector3d newVel = parts.get(i).getVel().plus((force.dot(0.5*h/parts.get(i).getMass())
 							      .plus(newForce.dot(0.5*h/parts.get(i).getMass()))));
-		newVelocities[i] = newVel.x();
-		newVelocities[i+1] = newVel.y();
-		newVelocities[i+2] = newVel.z();
+		newVelocities[3*i] = newVel.x();
+		newVelocities[3*i+1] = newVel.y();
+		newVelocities[3*i+2] = newVel.z();
 	    }
 	}
 	return newVelocities;

@@ -32,6 +32,7 @@ public abstract class Scene {
     protected Mesh mesh;
     protected Integrator integrator;
     private boolean hasInteg; //whether user's defined default already
+    private boolean steppedInResponse;
 	
     double[] globalForces;
     double[] globalPositions;
@@ -194,11 +195,17 @@ public abstract class Scene {
 
 	for (Property property : properties) 
 	    property.update();
-	for (Property property : responders)
+	for (Property property : responders) {
 	    property.update();
-	integrator.update();
-
+	    if (!steppedInResponse)
+		integrator.update();
+	}
 	onFrame();
+	steppedInResponse = false;
+    }
+
+    public void hasStepped(boolean b) {
+	steppedInResponse = b;
     }
 
     public abstract void setProperties();

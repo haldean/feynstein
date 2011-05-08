@@ -85,10 +85,11 @@ public class ImpulseResponder extends CollisionResponder<ImpulseResponder> {
 		M = scene.getGlobalMasses();
 
 		//filter velocities
-		scene.setGlobalVelocities(filter(midStepVel, X, M, cSet));
+		midStepVel = filter(midStepVel, X, M, cSet);
 
 		//step forward
-		integrator.update(); // Q = X + h*Q_dot;
+		integrator.update(midStepPos, midStepVel); // Q = X + h*Q_dot;
+		scene.hasStepped(true);
 
 		detector.update();
 		cSet = detector.getCollisions();

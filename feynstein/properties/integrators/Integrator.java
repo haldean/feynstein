@@ -22,7 +22,9 @@ public abstract class Integrator<E extends Integrator> extends Property<E> {
     public abstract double[] predictVelocities();
 
     public abstract void update();
-    
+
+    public abstract void update(double[] newPositions, double[] newVelocities);
+
     public double getStepSize() {
 	return h;
     }
