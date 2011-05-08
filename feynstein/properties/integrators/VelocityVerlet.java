@@ -8,8 +8,8 @@ import java.util.ArrayList;
 
 public class VelocityVerlet extends Integrator<VelocityVerlet> {
     public VelocityVerlet(Scene scene) {
-		super(scene);
-		objectType = "VelocityVerlet";
+	super(scene);
+	objectType = "VelocityVerlet";
     }
 	
     public void update() {
@@ -49,6 +49,7 @@ public class VelocityVerlet extends Integrator<VelocityVerlet> {
 	}
     }
 
+    // No side-effect changes to scene
     public double[] predictPositions() {
 	double[] newPositions = new double[scene.getGlobalPositions().length];
 	double[] F = scene.globalForceMagnitude();
@@ -63,10 +64,25 @@ public class VelocityVerlet extends Integrator<VelocityVerlet> {
 		newPositions[3*i+2] += initialVelocities[3*i+2]*h+F[3*i+2]/masses[3*i]*0.5*h*h;
 	    }
 	}
+	return newPositions;
     }
 
+    // No side-effect changes to scene
     public double[] predictVelocities() {
-	//TODO I can't find where the velocities are changed in the update method...:(
+	ArrayList<Particle> parts = scene.getMesh().getParticles();
+	double F_1 ; scene.getForcePotential(predictPositions(), scene.getGlobalVelocities(), scene.getGlobalMasses());
+	double[] newVel = new double[scene.getGlobalVelocities()];
+	for (int i = 0; i < parts.size(); i++) { 
+	    if(!parts.get(i).isFixed()) {
+		Vector3d force = new Vector3d(F[3*i],F[3*i+1],F[3*i+2]);
+		Vector3d newForce = new Vector3d(F_1[3*i],F_1[3*i+1],F_1[3*i+2]);
+		Vector3d newVel = parts.get(i).getVel().plus((force.dot(0.5*h/parts.get(i).getMass())
+							      .plus(newForce.dot(0.5*h/parts.get(i).getMass()))));
+		newVel[i] = newVel.x();
+		newVel[i+1] = newVel.y();
+		newVel[i+2] = newVel.z();
+	    }
+	}
+	return newVel;
     }
-
 }

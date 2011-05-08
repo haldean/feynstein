@@ -5,8 +5,6 @@ import feynstein.properties.*;
 
 public abstract class Integrator<E extends Integrator> extends Property<E> {
     double h;
-    double[] newPositions;
-    double[] newVelocities;
 	
     public Integrator(Scene scene) {
 	super(scene);

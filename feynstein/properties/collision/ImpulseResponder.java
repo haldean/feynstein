@@ -88,13 +88,6 @@ public class ImpulseResponder extends CollisionResponder<ImpulseResponder> {
 
 		detector.update();
 		cSet = detector.getCollisions();
-		
-		/* old C++ for reference
-		//clear collision record
-		col_rec.clear();
-
-		//check for collisions
-		collisions = broad_phase_I(X, Q, col_rec);*/
 
 	    }
 	    //TODO is this correct or do i ask the integrator for these again?
@@ -139,8 +132,8 @@ public class ImpulseResponder extends CollisionResponder<ImpulseResponder> {
 		Vector3d norm = xa.minus(xb);
 		if(norm.norm() != 0)
 		    norm = norm / norm.norm();
+
 		//impulse
-		//TODO: vector3d != scalar...
 		double I = (va.subtract(vb).minus(.000001)).dot(norm / m);
 		
 		//TODO haven't touched any of this, either...
@@ -200,7 +193,6 @@ public class ImpulseResponder extends CollisionResponder<ImpulseResponder> {
 		    norm = norm / norm.norm();
 		
 		//impulse
-		//TODO vector 3d != scalar
 		double I = (va.subtract(vb).minus(.000001)).dot(norm/m);
 		
 		//TODO haven't touched this either...
