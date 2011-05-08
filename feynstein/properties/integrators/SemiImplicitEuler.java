@@ -13,24 +13,27 @@ public class SemiImplicitEuler extends Integrator<SemiImplicitEuler> {
     }
 	
     public void update() {
-		Scene scene = super.getScene();
-		// This is a list of applied force values (in Newtons), in 
-		// the x, y, and z directions. The size of this list will
-		// be the size of the number of particles in the simulation
-		double[] F = scene.globalForceMagnitude();
-		// grab global list of particles for the scene
-		ArrayList<Particle> parts = scene.getMesh().getParticles();
+	Scene scene = super.getScene();
+	// This is a list of applied force values (in Newtons), in 
+	// the x, y, and z directions. The size of this list will
+	// be the size of the number of particles in the simulation
+	double[] F = scene.globalForceMagnitude();
+	// grab global list of particles for the scene
+	ArrayList<Particle> parts = scene.getMesh().getParticles();
 	
-		for (int i = 0; i < parts.size(); i++) {
-			if(!parts.get(i).isFixed()) {
-				Vector3d force = new Vector3d(F[3*i],F[3*i+1],F[3*i+2]);
-				// v[1] = v[0] + a*dt = v[0] + dt*f/m
-				Vector3d newVel = parts.get(i).getVel().plus(force.dot(h/parts.get(i).getMass()));
-				// x[1] = x[0] + v*dt
-				Vector3d newPos = parts.get(i).getPos().plus(newVel.dot(h));
-				parts.get(i).update(newPos, newVel);
-			}
-		}
+	for (int i = 0; i < parts.size(); i++) {
+	    if(!parts.get(i).isFixed()) {
+		Vector3d force = new Vector3d(F[3*i],F[3*i+1],F[3*i+2]);
+		// v[1] = v[0] + a*dt = v[0] + dt*f/m
+		Vector3d newVel = parts.get(i).getVel().plus(force.dot(h/parts.get(i).getMass()));
+		// x[1] = x[0] + v*dt
+		Vector3d newPos = parts.get(i).getPos().plus(newVel.dot(h));
+		parts.get(i).update(newPos, newVel);
+	    }
+	}
+	newPositions = scene.getGlobalPositions();
+	newVelocities = scene.getGlobalVelocities();
     }
 
+    public double[]
 }

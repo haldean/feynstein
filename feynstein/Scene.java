@@ -29,8 +29,9 @@ public abstract class Scene {
     protected ArrayList<NarrowPhaseDetector> detectorList;
     protected List<Property> properties; //without collision responders, integrators
     protected List<Property> responders;
-    protected List<Property> integrators;
     protected Mesh mesh;
+    protected Integrator integrator;
+    private boolean hasInteg; //whether user's defined default already
 	
     double[] globalForces;
     double[] globalPositions;
@@ -44,9 +45,11 @@ public abstract class Scene {
 	forces = new ArrayList<Force>();
 	properties = new ArrayList<Property>();
 	responders = new ArrayList<Property>();
-	integrators = new ArrayList<Property>();
 	propertyMap = new HashMap<Class, Property>();
 	detectorList = new ArrayList<NarrowPhaseDetector>();
+
+	integrator = new SemiImplicitEuler(this);
+	hasInteg = false;
 
 	createShapes();
 	setProperties();
@@ -83,7 +86,8 @@ public abstract class Scene {
 	if (p instanceof CollisionResponder) {
 	    responders.add(p);
 	} else if (p instanceof Integrator) {
-	    integrators.add(p);
+	    if (hasInteg)
+		integrator = (Integrator) p;
 	} else {
 	    properties.add(p);
 	}
@@ -101,6 +105,10 @@ public abstract class Scene {
 
     public NarrowPhaseDetector getDetectorByIndex(int index) {
 	return detectorList.get(index);
+    }
+
+    public Integrator getIntegrator() {
+	return integrator;
     }
 	
     public Mesh getMesh() {
@@ -171,6 +179,10 @@ public abstract class Scene {
 
     public double[] getGlobalVelocities() {
 	return globalVelocities;
+    }
+
+    public void setGlobalVelocities(double[] newVels) {
+	globalVelocities = newVels;
     }
 	
 	public double[] getGlobalMasses() {
