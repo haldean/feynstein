@@ -347,7 +347,7 @@ public class ContinuousTimeDetector extends NarrowPhaseDetector<ContinuousTimeDe
 			q2[2] = z3+hit_t*vz3;
 
 			//check for false-positive
-			double[] distAndCoords = DistanceFinder.edgeEdgeDistance(p, a, b, c, s, t);
+			double[] distAndCoords = DistanceFinder.edgeEdgeDistance(p1, q1, p2, q2, s, t);
 			if (distAndCoords[0] < .000001) {
 			    s = distAndCoords[0];
 			    t = distAndCoords[1];
