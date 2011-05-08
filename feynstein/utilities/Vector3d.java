@@ -68,8 +68,16 @@ public class Vector3d {
 	z += other.z;
     }
 	
+	public Vector3d add(double s) {
+		return new Vector3d(x+s, y+s, z+s);
+    }
+
     public Vector3d minus(Vector3d other) {
 	return new Vector3d(x-other.x, y-other.y, z-other.z);
+    }
+	
+	public Vector3d minus(double s) {
+		return new Vector3d(x-s, y-s, z-s);
     }
 
     public void subtract(Vector3d other) {
