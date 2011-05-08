@@ -6,7 +6,7 @@ import feynstein.*;
 import feynstein.properties.*;
 import java.util.*;
 
-import com.numericalmethod.suanshu.analysis.function.polynomial.root.*;
+import com.numericalmethod.suanshu.analysis.function.polynomial.root.jenkinstraub.*;
 import com.numericalmethod.suanshu.analysis.function.polynomial.*;
 import com.numericalmethod.suanshu.datastructure.list.*;
 import com.numericalmethod.suanshu.license.*;
@@ -15,7 +15,7 @@ import java.lang.Number;
 
 public class ContinuousTimeDetector extends NarrowPhaseDetector<ContinuousTimeDetector> {
 
-    Cubic cubic;
+    JenkinsTraubReal cubic;
     double[] op;
     double[] time;
     double[] zeroi;
@@ -32,7 +32,7 @@ public class ContinuousTimeDetector extends NarrowPhaseDetector<ContinuousTimeDe
 
     public ContinuousTimeDetector(Scene aScene) {
 	super(aScene);
-	cubic = new Cubic();
+	cubic = new JenkinsTraubReal();
 	op = new double[4];
 	time = new double[3];
 	zeroi = new double[3];
@@ -258,25 +258,41 @@ public class ContinuousTimeDetector extends NarrowPhaseDetector<ContinuousTimeDe
 	    time[1] = -1.0;
 	    time[2] = -1.0;
 		
+		boolean print = (vertex==4&&tri.getIdx(0)==0&&tri.getIdx(1)==1&&tri.getIdx(2)==2);
+		if(print) {
+			System.out.println("COEFF "+op[0]+" "+op[1]+" "+op[2]+" "+op[3]+" "
+							   +vertex+" "+tri.getIdx(0)+" "+tri.getIdx(1)+" "+tri.getIdx(2));
+		}//else {
+			//System.out.println("COEFF "+op[0]+" "+op[1]+" "+op[2]+" "+op[3]+" "
+			//				   +p_1+" "+q_1+" "+p_2+" "+q_2);
+		//}
 	    // Creates a Polynomial from a list of coefficients and solves
 	    // for its roots.
 	    // root-finder fails if op[0]==0, and polynomial is not cubic
-	    if (op[0] != 0.0) {
-		NumberList list = cubic.solve(new Polynomial(op));
-		Object[] roots = list.toArray();
-		int timeIndex = 0;
-		// Looks through the root list for real-number roots and,
-		// if there are any, stores them in the time array.
-		for (int j = 0; j < roots.length; j++) {
-		    try {
-			time[timeIndex] = ((Number) roots[j]).doubleValue();
-			timeIndex++;
-		    } catch (IllegalArgumentException iae) {
-		    }
-		}
+	    if (Math.abs(op[0]) > 1E-10) {
+			try{
+				NumberList list = cubic.solve(new Polynomial(op));
+				Object[] roots = list.toArray();
+				int timeIndex = 0;
+				// Looks through the root list for real-number roots and,
+				// if there are any, stores them in the time array.
+				for (int j = 0; j < roots.length; j++) {
+					try {
+						time[timeIndex] = ((Number) roots[j]).doubleValue();
+						timeIndex++;
+					} catch (IllegalArgumentException iae) {
+					}
+				}
+			} catch (Exception e) {
+				
+			}
+			//if(print)
+			//	System.out.println("Root "+list.toString())
+				
+		
 	    }
 	    //quadratic roots: (if (b != 0)) 
-	    else if(op[1]!=0){
+	    else if(Math.abs(op[1]) > 1E-10){
 		time[0] = (-1*op[2]+Math.sqrt(op[2]*op[2]-4*op[1]*op[3]))/(2*op[1]);
 		time[1] = (-1*op[2]-Math.sqrt(op[2]*op[2]-4*op[1]*op[3]))/(2*op[1]);
 	    }
@@ -287,23 +303,25 @@ public class ContinuousTimeDetector extends NarrowPhaseDetector<ContinuousTimeDe
 			
 	    //if any roots are between 0 and time h
 	    //collision = true;
-	    if(time[0] > 0 && time[0] <= h ){
+	    if(time[0] >= 0 && time[0] <= h+1e-3){
 		collision = true;
 		hit_t = time[0];
 	    }
-	    if(time[1] > 0 && time[1] <= h ){
+	    if(time[1] >= 0 && time[1] <= h+1e-3){
 		collision = true;
 		hit_t = time[1];
 	    }
-	    if(time[2] > 0 && time[2] <= h ){
+	    if(time[2] >= 0 && time[2] <= h+1e-3){
 		collision = true;
 		hit_t = time[2];
 	    }
+		
+		if(print)
+			System.out.println("TIMES "+time[0]+" "+time[1]+" "+time[2]+" "+collision);
 				
 	    //store collision
 	    if (collision) {
 			
-			System.out.println("TIMES "+time[0]+" "+time[1]+" "+time[2]+" "+collision);
 
 		//vertex-face collision point
 		if(i < 6) {
@@ -325,7 +343,15 @@ public class ContinuousTimeDetector extends NarrowPhaseDetector<ContinuousTimeDe
 			u = distAndCoords[1];
 			v = distAndCoords[2];
 			w = distAndCoords[3];
-			cSet.add(new Collision(Collision.VERTEX_FACE, u, v, w, vertex, tri.getIdx(0), tri. getIdx(1), tri.getIdx(2), 0.0));
+				//if(print) {
+					System.out.println(distAndCoords[0]);
+					System.out.println(p[0]+" "+p[1]+" "+p[2]+", "+a[0]+" "+a[1]+" "+a[2]+", "
+									   +b[0]+" "+b[1]+" "+b[2]+", "+c[0]+" "+c[1]+" "+c[2]+", ");
+					System.out.println(vx3+" "+vy3+" "+vz3+", "+vx0+" "+vy0+" "+vz0+", "
+									   +vx1+" "+vy1+" "+vz1+", "+vx2+" "+vy2+" "+vz2+", ");
+					
+				//}
+			cSet.add(new Collision(Collision.VERTEX_FACE, u, v, w, vertex, tri.getIdx(0), tri.getIdx(1), tri.getIdx(2), 0.0));
 				 }
 					
 		    }

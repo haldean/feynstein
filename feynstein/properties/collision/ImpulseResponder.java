@@ -1,6 +1,7 @@
 package feynstein.properties.collision;
 
 import feynstein.*;
+import feynstein.geometry.*;
 import feynstein.properties.*;
 import feynstein.properties.integrators.*;
 import feynstein.utilities.*;
@@ -94,6 +95,15 @@ public class ImpulseResponder extends CollisionResponder<ImpulseResponder> {
 
 	    }
 	}	
+		ArrayList<Particle> parts = scene.getMesh().getParticles();
+		newPos = scene.getGlobalPositions();
+		newVels = scene.getGlobalVelocities();
+		for (int i = 0; i < parts.size(); i++) {
+			if(!parts.get(i).isFixed()) {
+				parts.get(i).update(new Vector3d(newPos[3*i], newPos[3*i+1], newPos[3*i+2]), 
+									new Vector3d(newVels[3*i], newVels[3*i+1], newVels[3*i+2]));
+			}
+		}
     }
 
     @SuppressWarnings("unchecked")
