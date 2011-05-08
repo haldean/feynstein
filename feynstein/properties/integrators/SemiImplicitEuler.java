@@ -51,8 +51,8 @@ public class SemiImplicitEuler extends Integrator<SemiImplicitEuler> {
 		Vector3d newPos = parts.get(i).getPos().plus(newVel.dot(h));
 		
 		newPositions[i] = newPos.x();
-		newPositions[i] = newPos.y();
-		newPositions[i] = newPos.z();
+		newPositions[i+1] = newPos.y();
+		newPositions[i+2] = newPos.z();
 	    }
 	}
 	return newPositions;
