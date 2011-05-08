@@ -130,7 +130,7 @@ objects) which that force acts upon.
   first pair of particles `restLength1`, the rest length between the
   second pair of particles `restLength2`, and the rest angle `theta`.
 
-\item[ConstantStrainTriangleForce] This is a force that acts against the
+\item[TriangleForce] This is a force that acts against the
   deformation of a triangle. Given the side lengths of the triangle,
   the stiffness of the resistance `stiffness`, and the
   compression-to-expansion ratio `poisson`, it will act against any
@@ -143,14 +143,6 @@ objects) which that force acts upon.
   these two triangles, and is parameterized by the resistance to
   bending, `stiffness`, rest angle of the two triangles, `theta`, and
   the shape of both triangles.
-
-\item[TetrahedralConstraintForce] A force based on a tetrahedron
-  configuration involving four particles. It is essentially the
-  ConstantStrainTriangleForce, except acting to resist deformation in
-  three dimensions instead of two. Like the
-  ConstantStrainTriangleForce, this force is configured by a tensile
-  modulus `stiffness`, a Poisson ratio `poisson`, and the undeformed
-  lengths of the four (rather than three) edge vectors.
 
 \item[ContactForce] A ContactForce is derived from a SpringForce and acts
   upon two triangles to resist a collision between them. An equal and
@@ -325,8 +317,8 @@ an error message.
 
 Feynstein comes with two different time-stepping methods, each with
 advantages and disadvantages. These are all properties; for example,
-if I wanted to use Implicit Euler with a step size of 2 milliseconds,
-I would add `property ImplicitEuler(stepSize=2ms);` to my `properties`
+if I wanted to use Velocity Verlet with a step size of 2 milliseconds,
+I would add `property VelocityVerlet(stepSize=2ms);` to my `properties`
 block. It is important to note that the stability of any method is
 dependent upon the step size used; a larger step size means lower
 stability, and vice-versa.
@@ -343,11 +335,51 @@ stability, and vice-versa.
   good trade-off between speed and stability, and is a good choice for
   everyday rendering tasks.
 
-\item[ImplicitEuler] By far the slowest of the three, the implicit Euler
-  method is also by far the most accurate. It expresses the future
-  velocity and location in terms of each other, then does a numerical
-  root solve to find a solution to the resulting system of
-  equations. This is very expensive, but it makes for a very stable
-  simulation. This is the best choice for scientific purposes, where
-  highly accurate results are worth waiting for.
+\item[VelocityVerlet] Although the semi-implicit Euler and velocity 
+Verlet techniques are similar, velocity Verlet is more accurate over
+long periods of time. Verlet integration updates velocities in two stages, and
+uses the intermediate velocity to calculate new particle positions.
 \end{description}
+
+\subsection{Collision Handling}
+Collision handling in implemented in Feynstein in through two discrete modules: detection and response. You can add a collision detector to your scene without necessarily having a collision responder, but all collision responders need a detector to find collisions to respond to. Collision handling doesn't need to be tied to specific objects--detectors and responders will check all objects in a scene if they are defined.
+
+\subsubsection{Collision Detection}
+Feynstein supports two predefined options for collision detection: proximity-based detection with `ProximityDetector` and a more thorough, continuous method, `ContinuousTimeDetector`, which uses time steps to check for collisions. Both of these methods extend the abstract `NarrowPhaseDetector` class because both are part of the narrow phase of collision detection, where all possible collisions between objects in a scene are monitored.
+
+Broad-phase collision detection constitutes a helpful, but not mandatory, optimization for narrow-phase detection: broad-phase detection uses a `BoundingVolumeHierarchy` to store probable collisions based on a VolumeHierarchy heuristic. The current implementation of VolumeHierarchy WILL FILL ME IN.
+
+\begin{lstlisting}
+    properties {
+      property BoundingVolumeHierarchy(margin=0.1, 
+             type=BoundingVolumeHierarchy.AABB);
+      property ProximityDetector(proximity=0.1);
+    }
+\end{lstlisting}
+
+\subsubsection{Collision Response}
+
+Feynstein offers two predefined methods of collision response, extending the abstract `CollisionResponder`: the `SpringPenaltyResponder`, which uses spring forces of a high strength to model elastic collisions between shapes in a scene, and the `ImpulseResponder`, which applies small impulses to neighboring objects to prevent them from colliding. Both responders must have a `CollisionDetector` to function properly; failing to define one will create a compile-time error. Detectors are indexed by the order in which they appear in your properties block, starting with 0, and this integer index is the value for the `detector` parameter in both `CollisionResponder`s.
+
+The `SpringPenaltyResponder` takes a proximity (how close objects must be before it responds to a collision) and a strength for the spring force as parameters, while the `ImpulseResponder` takes only a number of iterations over which to apply impulses to colliding objects. All of these parameters have default values, so if you're not sure how precise you want your collision responders to be, specifying only a detector in your builder syntax will cause Feynstein to operate with the values we've defined.
+
+\begin{lstlisting}{caption=CollisionScene.f}
+
+CollisionScene {
+
+    shapes {
+      shape Sphere(name="sphere1", radius=20cm, location=(0,0,0));
+    }
+
+    forces {
+      force GravityForce(gx=0, gy=0, gz=-9.81);
+      force SpringForce(restLength=1m, k=1, actsOn=”sphere1”, fixedAt=(0, 0, 2m));
+    }
+
+    properties {
+      property SemiImplicitEuler(stepSize=0.01);
+      property BoundingVolumeHierarchy(margin=0.1, type=BoundingVolumeHierarchy.AABB);
+      property ProximityDetector(proximity=0.1);
+      property SpringPenaltyResponder(detector=0, proximity=0.1, stiffness=1000)
+ }
+\end{lstlisting}
