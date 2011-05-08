@@ -32,9 +32,9 @@ public class ContinuousTimeDetector extends NarrowPhaseDetector<ContinuousTimeDe
 
     public ContinuousTimeDetector(Scene aScene) {
 	super(aScene);
-	Cubic cubic = new Cubic();
+	cubic = new Cubic();
 	op = new double[4];
-        time = new double[3];
+	time = new double[3];
 	zeroi = new double[3];
 	a = new double[3];
 	b = new double[3];
@@ -287,20 +287,24 @@ public class ContinuousTimeDetector extends NarrowPhaseDetector<ContinuousTimeDe
 			
 	    //if any roots are between 0 and time h
 	    //collision = true;
-	    if(time[0] > 0 && time[0] <= h + .001){
+	    if(time[0] > 0 && time[0] <= h ){
 		collision = true;
 		hit_t = time[0];
 	    }
-	    if(time[1] > 0 && time[1] <= h + .001){
+	    if(time[1] > 0 && time[1] <= h ){
 		collision = true;
 		hit_t = time[1];
 	    }
-	    if(time[2] > 0 && time[2] <= h + .001){
+	    if(time[2] > 0 && time[2] <= h ){
 		collision = true;
 		hit_t = time[2];
 	    }
+				
 	    //store collision
 	    if (collision) {
+			
+			System.out.println("TIMES "+time[0]+" "+time[1]+" "+time[2]+" "+collision);
+
 		//vertex-face collision point
 		if(i < 6) {
 		    p[0] = x3+hit_t*vx3;
@@ -343,7 +347,7 @@ public class ContinuousTimeDetector extends NarrowPhaseDetector<ContinuousTimeDe
 			q2[2] = z3+hit_t*vz3;
 
 			//check for false-positive
-			double[] distAndCoords = DistanceFinder.edgeEdgeDistance(p, a, b, c, s, t);
+			double[] distAndCoords = DistanceFinder.edgeEdgeDistance(p1, q1, p2, q2, s, t);
 			if (distAndCoords[0] < .000001) {
 			    s = distAndCoords[0];
 			    t = distAndCoords[1];
