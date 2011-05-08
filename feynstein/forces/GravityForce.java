@@ -5,6 +5,10 @@ import feynstein.shapes.*;
 
 import java.util.ArrayList;
 
+/*
+ * A global GravityForce that applies a constant acceleration in
+ * one of more of three direction to all particles in the Scene.
+ */
 public class GravityForce extends Force<GravityForce> {
 	private double gx;
 	private double gy;

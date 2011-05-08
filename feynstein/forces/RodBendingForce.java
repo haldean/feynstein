@@ -9,6 +9,13 @@ public class RodBendingForce extends Force<RodBendingForce> {
 	private double[] undefLengths;
     private double thetaBar, strength;
 
+	/*
+	 * A RodBendingForce is a constraint force acting open three particles
+	 * that come to form a single hinge. The energy associated to the
+	 * rod-bending force depends upon the current angle, as well as
+	 * the undeformed lenghts of the edges, the undeformed-angle, and
+	 * the force stiffness.
+	 */
     public RodBendingForce() {
 		super(3);
 		thetaBar = 0.0;
@@ -21,6 +28,7 @@ public class RodBendingForce extends Force<RodBendingForce> {
 		int idx1 = 0;
 		int idx2 = 0;
 		int idx3 = 0;
+		// add a stencil configuration for each pair of connected edges
 		for(int i = 0; i < s.getLocalMesh().getEdges().size(); i++) {
 			for(int j = i+1; j < s.getLocalMesh().getEdges().size(); j++) {
 					e1 = s.getLocalMesh().getEdges().get(i);
@@ -54,9 +62,6 @@ public class RodBendingForce extends Force<RodBendingForce> {
 					}
 			}
 		}
-		//System.out.println("STENCIL "+stencil.size());
-		//for(Integer i : stencil)
-		//		System.out.println(i);
 		actsOn = s;
 		return this;
     }

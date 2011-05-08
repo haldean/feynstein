@@ -5,6 +5,11 @@ import feynstein.shapes.*;
 
 import java.util.ArrayList;
 
+/*
+ * A global DampingForce that acts opposite the velocities of
+ * All particles in the scene. Configured by a single damping
+ * coefficient.
+ */
 public class DampingForce extends Force<DampingForce> {
 	private double coefficient;
 

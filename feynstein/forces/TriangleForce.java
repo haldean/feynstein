@@ -11,12 +11,21 @@ public class TriangleForce extends Force<TriangleForce> {
     private double nu, Y;
 	private double [] undefVerts;
 	
+	/*
+	 * The TriangleForce is based on a triangle stencil
+	 * involving three particles. This force resists both stretching and
+	 * compressing the triangular formation and depends upon the undeformed
+	 * lengths of the triangle edges, as well as the forces tensile modulus,
+	 * a measure of material stiffness, and its Poisson ratio, which relates
+	 * material compression to extraction.
+	 */
     public TriangleForce() {
 		super(3);
 		objectType = "TriangleForce";
     }
 
     public TriangleForce set_actsOn(Shape s) {
+		// add a force for each triangle in the mesh
 		for(Triangle t : s.getLocalMesh().getTriangles()) {
 			for (int i = 0; i < 3; i++) {
 				stencil.add(t.getIdx(i));
