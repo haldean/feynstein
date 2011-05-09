@@ -12,7 +12,7 @@ MyScene {
 
     properties { 
       property SemiImplicitEuler(stepSize=.01);
-        property BoundingVolumeHierarchy(margin=0.1);
+//        property BoundingVolumeHierarchy(margin=0.1);
         property ProximityDetector(proximity=0.1);
         property ImpulseResponder(detector=0, iterations=100);
    }
