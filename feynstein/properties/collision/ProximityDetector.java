@@ -30,7 +30,7 @@ public class ProximityDetector extends NarrowPhaseDetector<ProximityDetector> {
 	if (t1.getIdx(0) == t2.getIdx(0) || t1.getIdx(0) == t2.getIdx(1) 
 	    || t1.getIdx(0) == t2.getIdx(2) || t1.getIdx(1) == t2.getIdx(0) 
 	    || t1.getIdx(1) == t2.getIdx(1) || t1.getIdx(1) == t2.getIdx(2) 
-	    || t1.getIdx(2) == t2.getIdx(1) || t1.getIdx(2) == t2.getIdx(1) 
+	    || t1.getIdx(2) == t2.getIdx(0) || t1.getIdx(2) == t2.getIdx(1) 
 	    || t1.getIdx(2) == t2.getIdx(2)) {
 	    return cSet; //can't hit self
 	}
