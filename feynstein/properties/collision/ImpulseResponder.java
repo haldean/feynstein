@@ -13,7 +13,9 @@ public class ImpulseResponder extends CollisionResponder<ImpulseResponder> {
     int iter;
 
     double X[];
+	double V[];
     double M[];	
+	double F[];
     double[] newPos; //q
     double[] newVels; //q_dot
     double[] midStepPos; //Q
@@ -32,59 +34,108 @@ public class ImpulseResponder extends CollisionResponder<ImpulseResponder> {
 	return this;
     }
     
-    @SuppressWarnings("unchecked")
+    //@SuppressWarnings("unchecked")
     public void update() {
-	X = scene.getGlobalPositions();
-	M = scene.getGlobalMasses();
-	
+		X = scene.getGlobalPositions();
+		V = scene.getGlobalVelocities();
+		F = scene.globalForceMagnitude();
+		M = scene.getGlobalMasses();
 	
 	// No updating side effects, just calculation:
-	double[] newPos = integrator.predictPositions();
-	double[] newVels = integrator.predictVelocities();
+	// q_dot[j] = V[j] + (h/M[j])*(F)[j];
+	// TODO: here, you need to have a method that takes
+	// the current v, m, x, f, and returns, x' and v'
+	// would have to be a double[][]
+	double[][] newState = integrator.peek(X, V, M, F);
+	// q = X + h*q_dot;
+		// is this using q_dot?
+		newPos = newState[0];
+		newVels = newState[1];
+		//double[] newVels = integrator.predictVelocities();
 
 	double h = integrator.getStepSize();
 
 	//midstep velocity
+	// Q_dot = (q-X)*(1/h);
 	for (int i = 0; i < midStepVel.length; i++) {
 	    midStepVel[i] = (newPos[i] - X[i]) * (1 / h); //was: Q_dot = (q-X)*(1/h);
 	}
 	
-	HashSet<Collision> cSet = detector.getCollisions();
+	// TODO: right a method for the detector that takes X and Q as input
+	// alternatives, you could probably just update the scene vel to Q before
+	// calling this
+	// is the detector receiving X and V = (q-X)/h ?
+		for(int i = 0; i < X.length; i++) {
+			V[i] = (newPos[i]-X[i])/h;
+		}
+		
+	HashSet<Collision> cSet = detector.getPotentialCollisions(X, V);
 	
 	//iteration counter
 	int j = 0;
 	if (cSet.size() > 0) {
 	    //if count < max iterations or no cap
 	    while ( (cSet.size() > 0 && j < iter) || (cSet.size() > 0 && iter == -1) ) {
+		
 		j++;
 		
-		X = scene.getGlobalPositions();
-		M = scene.getGlobalMasses();
+		// we dont need to grab these again
+		//X = scene.getGlobalPositions();
+		//M = scene.getGlobalMasses();
 
 		//filter velocities
+		//what is this supposed to modify
 		midStepVel = filter(midStepVel, X, M, cSet);
 
 		//step forward
-		integrator.update(midStepPos, midStepVel); // Q = X + h*Q_dot;
-		scene.hasStepped(true);
+		// TODO: find out how this differs from predictPos/Vel 
+		// does this store the update?
+		// update positions with constant velocity
+			for(int i = 0; i < midStepVel.length; i++)
+				midStepPos[i] = X[i]+h*midStepVel[i];
+		//newState = integrator.peek(midStepPos, midStepVel, M , new double[M.length]); // Q = X + h*Q_dot;
+		//midStepPos = newState[0];
+		//scene.hasStepped(true);
 
-		detector.update();
-		cSet = detector.getCollisions();
+		//detector.update();
+		for(int i = 0; i < X.length; i++) {
+			V[i] = (midStepPos[i]-X[i])/h;
+		}
+		cSet = detector.getPotentialCollisions(X, V);
 
+		// q_dot = Q_dot; 
+		//	q = Q;
 	    }
+		
+		newVels = midStepVel;
+		newPos = midStepPos;
+		//col_rec.clear();
 	}	
+		// grab q_dot here 
+		/*
+		 _parts[i].fixed){
+		 (&g_parts[i])->v[0]= q_dot[3*i];
+		 (&g_parts[i])->v[1]= q_dot[3*i+1];
+		 (&g_parts[i])->v[2]= q_dot[3*i+2];
+		 (&g_parts[i])->x[0] = q[3*i];
+		 (&g_parts[i])->x[1] = q[3*i+1];
+		 (&g_parts[i])->x[2] = q[3*i+2];
+		 */
 		ArrayList<Particle> parts = scene.getMesh().getParticles();
-		newPos = scene.getGlobalPositions();
-		newVels = scene.getGlobalVelocities();
+		//newPos = scene.getGlobalPositions();
+		//newVels = scene.getGlobalVelocities();
 		for (int i = 0; i < parts.size(); i++) {
 			if(!parts.get(i).isFixed()) {
-				parts.get(i).update(new Vector3d(newPos[3*i], newPos[3*i+1], newPos[3*i+2]), 
-									new Vector3d(newVels[3*i], newVels[3*i+1], newVels[3*i+2]));
+				Vector3d newX = new Vector3d(newPos[3*i], newPos[3*i+1], newPos[3*i+2]); 
+				Vector3d newV = new Vector3d(newVels[3*i], newVels[3*i+1], newVels[3*i+2]);
+				parts.get(i).update(newX, newV);
 			}
 		}
+		
+		scene.hasStepped(true);
     }
 
-    @SuppressWarnings("unchecked")
+    //@SuppressWarnings("unchecked")
     private double[] filter(double[] V, double[] X, double[] M, HashSet<Collision> cSet) {
 	for (Collision col : cSet) {
 	    //if vertex-face collision
@@ -115,7 +166,6 @@ public class ImpulseResponder extends CollisionResponder<ImpulseResponder> {
 		
 		//weighted mass
 		double m = 1 / M[3*p] + u*u / M[3*a] + v*v / M[3*b] + w*w / M[3*c];
-
 		//collision normal
 		Vector3d norm = xa.minus(xb);
 		if(norm.norm() != 0)
@@ -125,6 +175,8 @@ public class ImpulseResponder extends CollisionResponder<ImpulseResponder> {
 		//impulse	       
 		double I = va.minus(vb).minus(.000001).dot(norm.dot(1 / m));
 		
+		//	System.out.println("impulse "+I+" "+m+norm);
+			
 		//Apply impulse
 		//apply to vertex
 		V[3*p] -= I/M[3*p]*norm.x();

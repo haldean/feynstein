@@ -24,13 +24,14 @@ public abstract class Integrator<E extends Integrator> extends Property<E> {
 		return this;
     }
     
-    public abstract double[] predictPositions();
+    //public abstract double[] predictPositions();
 
-    public abstract double[] predictVelocities();
+    //public abstract double[] predictVelocities();
 
     public abstract void update();
 
-    public abstract void update(double[] newPositions, double[] newVelocities);
+	public abstract double[][] peek(double[] X, double[] V, double[] M, double[] F);
+    //public abstract void update(double[] newPositions, double[] newVelocities);
 
     public double getStepSize() {
 		return h;

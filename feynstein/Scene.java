@@ -131,9 +131,15 @@ public abstract class Scene {
 			globalVelocities[3*i+1] = mesh.getParticles().get(i).getVel().y();
 			globalVelocities[3*i+2] = mesh.getParticles().get(i).getVel().z();
 			// get global masses
-			globalMasses[3*i] = mesh.getParticles().get(i).getMass();
-			globalMasses[3*i+1] = mesh.getParticles().get(i).getMass();
-			globalMasses[3*i+2] = mesh.getParticles().get(i).getMass();
+			if(!mesh.getParticles().get(i).isFixed()) {
+				globalMasses[3*i] = mesh.getParticles().get(i).getMass();
+				globalMasses[3*i+1] = mesh.getParticles().get(i).getMass();
+				globalMasses[3*i+2] = mesh.getParticles().get(i).getMass();
+			} else {
+				globalMasses[3*i] = 1/0.0;
+				globalMasses[3*i+1] = 1/0.0;
+				globalMasses[3*i+2] = 1/0.0;
+			}
 		}		
 		globalForces = getForcePotential(globalPositions, globalVelocities, globalMasses);
 	}

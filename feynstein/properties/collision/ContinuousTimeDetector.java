@@ -51,13 +51,14 @@ public class ContinuousTimeDetector extends NarrowPhaseDetector<ContinuousTimeDe
 	return this;
     }
     
-    public HashSet<Collision> checkCollision(TrianglePair p, HashSet<Collision> cSet) {
-	return checkCollision(p.t1, p.t2, cSet);
+    public HashSet<Collision> checkCollision(TrianglePair p, double[] X, 
+											 double[] V, HashSet<Collision> cSet) {
+	return checkCollision(p.t1, p.t2, X, V, cSet);
     }
 
-    public HashSet<Collision> checkCollision(Triangle t1, Triangle t2, HashSet<Collision> cSet) {
-	double[] X = scene.getGlobalPositions();
-	double[] V = scene.getGlobalVelocities();
+    public HashSet<Collision> checkCollision(Triangle t1, Triangle t2, 
+											 double[] X, double[] V, 
+											 HashSet<Collision> cSet) {
 
 	if (t1.getIdx(0) == t2.getIdx(0) || t1.getIdx(0) == t2.getIdx(1) 
 	    || t1.getIdx(0) == t2.getIdx(2) || t1.getIdx(1) == t2.getIdx(0) 
@@ -258,7 +259,7 @@ public class ContinuousTimeDetector extends NarrowPhaseDetector<ContinuousTimeDe
 	    time[1] = -1.0;
 	    time[2] = -1.0;
 		
-		boolean print = (vertex==4&&tri.getIdx(0)==0&&tri.getIdx(1)==1&&tri.getIdx(2)==2);
+		boolean print = false; //(vertex==0&&tri.getIdx(0)==3&&tri.getIdx(1)==4&&tri.getIdx(2)==5);
 		if(print) {
 			System.out.println("COEFF "+op[0]+" "+op[1]+" "+op[2]+" "+op[3]+" "
 							   +vertex+" "+tri.getIdx(0)+" "+tri.getIdx(1)+" "+tri.getIdx(2));
@@ -343,14 +344,14 @@ public class ContinuousTimeDetector extends NarrowPhaseDetector<ContinuousTimeDe
 			u = distAndCoords[1];
 			v = distAndCoords[2];
 			w = distAndCoords[3];
-				//if(print) {
+				if(print) {
 					System.out.println(distAndCoords[0]);
 					System.out.println(p[0]+" "+p[1]+" "+p[2]+", "+a[0]+" "+a[1]+" "+a[2]+", "
 									   +b[0]+" "+b[1]+" "+b[2]+", "+c[0]+" "+c[1]+" "+c[2]+", ");
 					System.out.println(vx3+" "+vy3+" "+vz3+", "+vx0+" "+vy0+" "+vz0+", "
 									   +vx1+" "+vy1+" "+vz1+", "+vx2+" "+vy2+" "+vz2+", ");
 					
-				//}
+				}
 			cSet.add(new Collision(Collision.VERTEX_FACE, u, v, w, vertex, tri.getIdx(0), tri.getIdx(1), tri.getIdx(2), 0.0));
 				 }
 					

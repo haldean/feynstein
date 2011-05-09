@@ -19,12 +19,12 @@ public class ProximityDetector extends NarrowPhaseDetector<ProximityDetector> {
 	return this;
     }
     
-    public HashSet<Collision> checkCollision(TrianglePair p, HashSet<Collision> cSet) {
-	return checkCollision(p.t1, p.t2, cSet);
+    public HashSet<Collision> checkCollision(TrianglePair p, double[] X, 
+											 double[] V, HashSet<Collision> cSet) {
+	return checkCollision(p.t1, p.t2, X, V, cSet);
     }
 
-    public HashSet<Collision> checkCollision(Triangle t1, Triangle t2, HashSet<Collision> cSet) {
-	double[] globalPos = scene.getGlobalPositions();
+    public HashSet<Collision> checkCollision(Triangle t1, Triangle t2, double[] X, double[] V, HashSet<Collision> cSet) {
 
 	// make sure triangles are not connected:
 	if (t1.getIdx(0) == t2.getIdx(0) || t1.getIdx(0) == t2.getIdx(1) 
@@ -58,18 +58,18 @@ public class ProximityDetector extends NarrowPhaseDetector<ProximityDetector> {
 		if(i == 5) vertex = t2.getIdx(2);
 	    }
 
-	    p[0] = globalPos[3*vertex];
-	    p[1] = globalPos[3*vertex + 1];
-	    p[2] = globalPos[3*vertex + 2];
-	    a[0] = globalPos[3*t.getIdx(0)];	
-	    a[1] = globalPos[3*t.getIdx(0) + 1];
-	    a[2] = globalPos[3*t.getIdx(0) + 2];
-	    b[0] = globalPos[3*t.getIdx(1)];
-	    b[1] = globalPos[3*t.getIdx(1) + 1];
-	    b[2] = globalPos[3*t.getIdx(1) + 2];
-	    c[0] = globalPos[3*t.getIdx(2)];
-	    c[1] = globalPos[3*t.getIdx(2) + 1];
-	    c[2] = globalPos[3*t.getIdx(2) + 2];
+	    p[0] = X[3*vertex];
+	    p[1] = X[3*vertex + 1];
+	    p[2] = X[3*vertex + 2];
+	    a[0] = X[3*t.getIdx(0)];	
+	    a[1] = X[3*t.getIdx(0) + 1];
+	    a[2] = X[3*t.getIdx(0) + 2];
+	    b[0] = X[3*t.getIdx(1)];
+	    b[1] = X[3*t.getIdx(1) + 1];
+	    b[2] = X[3*t.getIdx(1) + 2];
+	    c[0] = X[3*t.getIdx(2)];
+	    c[1] = X[3*t.getIdx(2) + 1];
+	    c[2] = X[3*t.getIdx(2) + 2];
 
 	    //barycentric coordinates
 	    double u = -1, v = -1, w = -1;
@@ -128,18 +128,18 @@ public class ProximityDetector extends NarrowPhaseDetector<ProximityDetector> {
 	    }
 
 	    //get edge positions
-	    p1[0] = globalPos[3*p_1];
-	    p1[1] = globalPos[3*p_1+1];
-	    p1[2] = globalPos[3*p_1+2];
-	    q1[0] = globalPos[3*q_1];	
-	    q1[1] = globalPos[3*q_1+1];
-	    q1[2] = globalPos[3*q_1+2];
-	    p2[0] = globalPos[3*p_2];
-	    p2[1] = globalPos[3*p_2+1];
-	    p2[2] = globalPos[3*p_2+2];
-	    q2[0] = globalPos[3*q_2];
-	    q2[1] = globalPos[3*q_2+1];
-	    q2[2] = globalPos[3*q_2+2];
+	    p1[0] = X[3*p_1];
+	    p1[1] = X[3*p_1+1];
+	    p1[2] = X[3*p_1+2];
+	    q1[0] = X[3*q_1];	
+	    q1[1] = X[3*q_1+1];
+	    q1[2] = X[3*q_1+2];
+	    p2[0] = X[3*p_2];
+	    p2[1] = X[3*p_2+1];
+	    p2[2] = X[3*p_2+2];
+	    q2[0] = X[3*q_2];
+	    q2[1] = X[3*q_2+1];
+	    q2[2] = X[3*q_2+2];
 
 	    //barycentric coordinates
 	    double s = -1, t = -1; 

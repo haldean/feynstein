@@ -29,10 +29,32 @@ public abstract class NarrowPhaseDetector<E extends NarrowPhaseDetector> extends
 	enableBvh = bvh != null;
     }
 
-    public abstract HashSet<Collision> checkCollision(TrianglePair p, HashSet<Collision> cSet);
+    public abstract HashSet<Collision> checkCollision(TrianglePair p, double [] X, 
+													  double [] V, HashSet<Collision> cSet);
 
     public HashSet<Collision> getCollisions() {
 	return actualCollisions;
+    }
+	
+	public HashSet<Collision> getPotentialCollisions(double[] X, double[] V) {
+		HashSet<Collision> potentialCollisions = new HashSet<Collision>();
+		if (enableBvh) {
+			List<TrianglePair> collisions = bvh.getCollisions();
+			for (TrianglePair pair : collisions)
+				potentialCollisions = checkCollision(pair, X, V, potentialCollisions);
+			//(checkCollision adds the collision to the given set as a side effect
+		} else {
+			Triangle t1, t2;
+			for (int i = 0; i < mesh.getTriangles().size(); i++) {
+				for (int j = i+1; j < mesh.getTriangles().size(); j++) {
+					t1 = mesh.getTriangles().get(i);
+					t2 = mesh.getTriangles().get(j);
+					potentialCollisions = checkCollision(new TrianglePair(t1, t2), 
+														 X, V, potentialCollisions);
+				}
+			}
+		}
+		return potentialCollisions;
     }
 
     /*@SuppressWarnings("unchecked")
@@ -55,7 +77,9 @@ public abstract class NarrowPhaseDetector<E extends NarrowPhaseDetector> extends
 	if (enableBvh) {
 	    List<TrianglePair> collisions = bvh.getCollisions();
 	    for (TrianglePair pair : collisions)
-		checkCollision(pair, actualCollisions);
+			checkCollision(pair, scene.getGlobalPositions(), 
+						   scene.getGlobalVelocities(),
+						   actualCollisions);
 		//(checkCollision adds the collision to the given set as a side effect
 	} else {
 	    Triangle t1, t2;
@@ -63,7 +87,10 @@ public abstract class NarrowPhaseDetector<E extends NarrowPhaseDetector> extends
 		for (int j = i+1; j < mesh.getTriangles().size(); j++) {
 		    t1 = mesh.getTriangles().get(i);
 		    t2 = mesh.getTriangles().get(j);
-		    checkCollision(new TrianglePair(t1, t2), actualCollisions);
+		    checkCollision(new TrianglePair(t1, t2), 
+						   scene.getGlobalPositions(), 
+						   scene.getGlobalVelocities(), 
+						   actualCollisions);
 		}
 	    }
 	}

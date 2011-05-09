@@ -41,11 +41,39 @@ public class SemiImplicitEuler extends Integrator<SemiImplicitEuler> {
 			}
 		}
     }
+	
+	public double[][] peek(double[] X, double[] V, double[] M, double[] F) {
+		Scene scene = super.getScene();
+		double [][] newState = new double[2][X.length];
+		double [] newX = new double[X.length];
+		double [] newV = new double[V.length];
+		// grab global list of particles for the scene
+		ArrayList<Particle> parts = scene.getMesh().getParticles();
+		
+		for (int i = 0; i < parts.size(); i++) {
+			if(!parts.get(i).isFixed()) {
+				//Vector3d force = new Vector3d(F[3*i],F[3*i+1],F[3*i+2]);
+				// v[1] = v[0] + a*dt = v[0] + dt*f/m
+				newV[3*i] = V[3*i] + F[3*i]*h/M[3*i];
+				newV[3*i+1] = V[3*i+1] + F[3*i+1]*h/M[3*i];
+				newV[3*i+2] = V[3*i+2] + F[3*i+2]*h/M[3*i];
+				// x[1] = x[0] + v*dt
+				newX[3*i] = X[3*i] + V[3*i]*h;
+				newX[3*i+1] = X[3*i+1] + V[3*i+1]*h;
+				newX[3*i+2] = X[3*i+2] + V[3*i+2]*h;
+			}
+		}
+		
+		
+		newState[0] = newX;
+		newState[1] = newV;
+		return newState;
+	}
 
 	/*
 	 * Semi-implicit integration updates velocities first and then positions.
 	 */
-    public void update(double[] newPositions, double[] newVelocities) {
+    /*public void update(double[] newPositions, double[] newVelocities) {
 		Scene scene = super.getScene();
 		ArrayList<Particle> parts = scene.getMesh().getParticles();
 		for (int i = 0; i < parts.size(); i++) {
@@ -57,12 +85,14 @@ public class SemiImplicitEuler extends Integrator<SemiImplicitEuler> {
 			parts.get(i).update(newPos, newVel);
 			}
 		}
-    }
+    }*/
 
+	
+	
 	/*
 	 * Predicts the positions on the next update
 	 */
-    public double[] predictPositions() {
+    /*public double[] predictPositions() {
 		Scene scene = super.getScene();
 		
 		double[] F = scene.globalForceMagnitude();
@@ -84,12 +114,12 @@ public class SemiImplicitEuler extends Integrator<SemiImplicitEuler> {
 			}
 		}
 		return newPositions;
-    }
+    }*/
 	
     /*
 	 * Predicts the velocities on the next update
 	 */
-    public double[] predictVelocities() {
+    /*public double[] predictVelocities() {
 		Scene scene = super.getScene();
 		double[] newVelocities = new double[scene.getGlobalVelocities().length];
 
@@ -108,5 +138,5 @@ public class SemiImplicitEuler extends Integrator<SemiImplicitEuler> {
 			}
 		}
 		return newVelocities;
-    }
+    }*/
 }
