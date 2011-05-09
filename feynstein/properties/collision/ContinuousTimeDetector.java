@@ -51,19 +51,17 @@ public class ContinuousTimeDetector extends NarrowPhaseDetector<ContinuousTimeDe
 	return this;
     }
     
-    public HashSet<Collision> checkCollision(TrianglePair p, double[] X, 
-											 double[] V, HashSet<Collision> cSet) {
+    public HashSet<Collision> checkCollision(TrianglePair p, double[] X, double[] V, HashSet<Collision> cSet) {
 	return checkCollision(p.t1, p.t2, X, V, cSet);
     }
 
-    public HashSet<Collision> checkCollision(Triangle t1, Triangle t2, 
-											 double[] X, double[] V, 
+    public HashSet<Collision> checkCollision(Triangle t1, Triangle t2, double[] X, double[] V, 
 											 HashSet<Collision> cSet) {
 
 	if (t1.getIdx(0) == t2.getIdx(0) || t1.getIdx(0) == t2.getIdx(1) 
 	    || t1.getIdx(0) == t2.getIdx(2) || t1.getIdx(1) == t2.getIdx(0) 
 	    || t1.getIdx(1) == t2.getIdx(1) || t1.getIdx(1) == t2.getIdx(2) 
-	    || t1.getIdx(2) == t2.getIdx(1) || t1.getIdx(2) == t2.getIdx(1) 
+	    || t1.getIdx(2) == t2.getIdx(0) || t1.getIdx(2) == t2.getIdx(1) 
 	    || t1.getIdx(2) == t2.getIdx(2)) {
 	    return cSet; // because you can't hit yourself
 	}
