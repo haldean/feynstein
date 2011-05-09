@@ -203,7 +203,7 @@ public abstract class Scene {
 	for (Property property : responders) {
 	    property.update();
 	}
-	if (!steppedInResponse)
+	if (!steppedInResponse && integrator != null)
 	    integrator.update();
 	onFrame();
 	steppedInResponse = false;
