@@ -32,6 +32,7 @@ public class ContinuousTimeDetector extends NarrowPhaseDetector<ContinuousTimeDe
 
     public ContinuousTimeDetector(Scene aScene) {
 	super(aScene);
+	objectType = "ContinuousTimeDetector";
 	cubic = new JenkinsTraubReal();
 	op = new double[4];
 	time = new double[3];

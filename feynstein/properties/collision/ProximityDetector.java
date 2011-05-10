@@ -12,6 +12,7 @@ public class ProximityDetector extends NarrowPhaseDetector<ProximityDetector> {
 
     public ProximityDetector(Scene aScene) {
 	super(aScene);
+	objectType = "ProximityDetector";
     }
 
     public ProximityDetector set_proximity(double p) {

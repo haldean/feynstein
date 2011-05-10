@@ -20,6 +20,7 @@ public abstract class NarrowPhaseDetector<E extends NarrowPhaseDetector> extends
 
     public NarrowPhaseDetector(Scene aScene) {
 	super(aScene);
+	objectType = "NarrowPhaseDetector";
 	actualCollisions = new HashSet<Collision>();
 
 	scene = aScene;

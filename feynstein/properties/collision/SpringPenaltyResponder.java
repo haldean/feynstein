@@ -12,6 +12,7 @@ public class SpringPenaltyResponder extends CollisionResponder<SpringPenaltyResp
 
     public SpringPenaltyResponder(Scene aScene) {
 	super(aScene);
+	objectType = "SpringPenaltyResponder";
 	k = 500;
     }
 

@@ -24,6 +24,7 @@ public class ImpulseResponder extends CollisionResponder<ImpulseResponder> {
     public ImpulseResponder(Scene aScene) {
 	super(aScene);
 	integrator = scene.getIntegrator();
+	objectType = "ImpulseResponder";
 	iter = 100;
 	midStepPos = new double[scene.getMesh().size() * 3];
 	midStepVel = new double[midStepPos.length];

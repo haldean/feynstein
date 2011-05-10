@@ -10,6 +10,7 @@ public abstract class CollisionResponder<E extends CollisionResponder> extends P
 
     public CollisionResponder(Scene aScene) {
 	super(aScene);
+	objectType = "CollisionResponder";
 	scene = aScene;
     }
 
