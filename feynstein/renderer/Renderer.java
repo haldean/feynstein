@@ -91,11 +91,21 @@ public class Renderer implements GLEventListener, KeyListener, MouseListener, Mo
 
 	    for (Triangle tri: scene.getMesh().getTriangles()) {
 	      pos = scene.getMesh().getParticles().get(tri.getIdx(0)).getPos();
+		  if (scene.getMesh().getParticles().get(tri.getIdx(0)).isFixed())
+			gl.glColor3f(1.0f, 0.4f, 0.0f);
+		  else
+			gl.glColor3f(0.0f, 1.0f, 0.4f);
 	      gl.glVertex3d(pos.x(), pos.y(), pos.z());
-
+		  if (scene.getMesh().getParticles().get(tri.getIdx(0)).isFixed())
+			gl.glColor3f(1.0f, 0.4f, 0.0f);
+		  else
+			gl.glColor3f(0.0f, 1.0f, 0.4f);
 	      pos = scene.getMesh().getParticles().get(tri.getIdx(1)).getPos();
 	      gl.glVertex3d(pos.x(), pos.y(), pos.z());
-
+		  if (scene.getMesh().getParticles().get(tri.getIdx(0)).isFixed())
+			gl.glColor3f(1.0f, 0.4f, 0.0f);
+		  else
+			gl.glColor3f(0.0f, 1.0f, 0.4f);
 	      pos = scene.getMesh().getParticles().get(tri.getIdx(2)).getPos();
 	      gl.glVertex3d(pos.x(), pos.y(), pos.z());
 	  }

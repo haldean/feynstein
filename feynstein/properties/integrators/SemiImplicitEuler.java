@@ -58,9 +58,17 @@ public class SemiImplicitEuler extends Integrator<SemiImplicitEuler> {
 				newV[3*i+1] = V[3*i+1] + F[3*i+1]*h/M[3*i];
 				newV[3*i+2] = V[3*i+2] + F[3*i+2]*h/M[3*i];
 				// x[1] = x[0] + v*dt
-				newX[3*i] = X[3*i] + V[3*i]*h;
-				newX[3*i+1] = X[3*i+1] + V[3*i+1]*h;
-				newX[3*i+2] = X[3*i+2] + V[3*i+2]*h;
+				newX[3*i] = X[3*i] + newV[3*i]*h;
+				newX[3*i+1] = X[3*i+1] + newV[3*i+1]*h;
+				newX[3*i+2] = X[3*i+2] + newV[3*i+2]*h;
+			} else {
+				newV[3*i] = V[3*i];
+				newV[3*i+1] = V[3*i+1];
+				newV[3*i+2] = V[3*i+2];
+			
+				newX[3*i] = X[3*i];
+				newX[3*i+1] = X[3*i+1];
+				newX[3*i+2] = X[3*i+2];
 			}
 		}
 		
