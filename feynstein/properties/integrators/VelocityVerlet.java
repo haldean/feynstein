@@ -69,14 +69,16 @@ public class VelocityVerlet extends Integrator<VelocityVerlet> {
 		Scene scene = super.getScene();
 		// grab global list of particles for the scene
 		ArrayList<Particle> parts = scene.getMesh().getParticles();
-
+		double[] newX = new double[X.length];
+		double[] newV = new double[X.length];
+		
 		for (int i = 0; i < parts.size(); i++) {
 			if(!parts.get(i).isFixed()) {
 				// a[0] = f(x[0])/m
 				// x[1] = x[0] + v[0]*dt + 0.5*a[0]*dt^2
-				X[3*i] += V[3*i]*h+F[3*i]/masses[3*i]*0.5*h*h;
-				X[3*i+1] += V[3*i+1]*h+F[3*i+1]/masses[3*i]*0.5*h*h;
-				X[3*i+2] += V[3*i+2]*h+F[3*i+2]/masses[3*i]*0.5*h*h;
+				newX[3*i] = X[3*i] + V[3*i]*h+F[3*i]/M[3*i]*0.5*h*h;
+				newX[3*i+1] = X[3*i+1] + V[3*i+1]*h+F[3*i+1]/M[3*i]*0.5*h*h;
+				newX[3*i+2] = X[3*i+2] + V[3*i+2]*h+F[3*i+2]/M[3*i]*0.5*h*h;
 			}
 		}
 		
@@ -85,15 +87,23 @@ public class VelocityVerlet extends Integrator<VelocityVerlet> {
 		for (int i = 0; i < parts.size(); i++) {
 			if(!parts.get(i).isFixed()) {
 				// v[1] = v[0] + 0.5*(a[0]+a[1])*dt
-				V[3*i] += 0.5*(F[3*i]+F_1[3*i])*h/M[3*i];
-				V[3*i+1] += 0.5*(F[3*i+1]+F_1[3*i+1])*h/M[3*i];
-				V[3*i+2] += 0.5*(F[3*i+2]+F_1[3*i+2])*h/M[3*i];
+				newV[3*i] = V[3*i]; + 0.5*(F[3*i]+F_1[3*i])*h/M[3*i];
+				newV[3*i+1] = V[3*i+1] + 0.5*(F[3*i+1]+F_1[3*i+1])*h/M[3*i];
+				newV[3*i+2] = V[3*i+2] + 0.5*(F[3*i+2]+F_1[3*i+2])*h/M[3*i];
+			} else {
+				newV[3*i] = V[3*i];
+				newV[3*i+1] = V[3*i+1];
+				newV[3*i+2] = V[3*i+2];
+				
+				newX[3*i] = X[3*i];
+				newX[3*i+1] = X[3*i+1];
+				newX[3*i+2] = X[3*i+2];
 			}
 		}
 		
 		double [][] newState = new double[2][X.length];
-		newState[0] = X;
-		newState[1] = V;
+		newState[0] = newX;
+		newState[1] = newV;
 		return newState;
 	 }
 	

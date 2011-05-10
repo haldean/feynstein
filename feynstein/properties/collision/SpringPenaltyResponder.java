@@ -50,7 +50,7 @@ public class SpringPenaltyResponder extends CollisionResponder<SpringPenaltyResp
 	    //Collision col = col_rec[i];
 	    //vertex-face collision
 	    if(col.getType() == Collision.VERTEX_FACE){
-			System.out.println("VERTEX-FACE");
+		//	System.out.println("VERTEX-FACE");
 		//get indicies
 		int[] parts = col.getParticles();
 		int p = parts[0];
@@ -79,8 +79,8 @@ public class SpringPenaltyResponder extends CollisionResponder<SpringPenaltyResp
 		       u*V[3*a + 1] + v*V[3*b + 1] + w*V[3*c + 1],
 		       u*V[3*a + 2] + v*V[3*b + 2] + w*V[3*c + 2]);
 
-			System.out.println("REL VEL "+xa.minus(xb).dot(va.minus(vb))+" "+va+" "+vb+" "+xa+" "+xb);
-			System.out.println("REL VEL2 "+xb.minus(xa).dot(vb.minus(va)));
+			//System.out.println("REL VEL "+xa.minus(xb).dot(va.minus(vb))+" "+va+" "+vb+" "+xa+" "+xb);
+			//System.out.println("REL VEL2 "+xb.minus(xa).dot(vb.minus(va)));
 		/*if the objects have do not have
 		  a seperating velocity, apply the 
 		  local spring penalty */

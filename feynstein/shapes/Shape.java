@@ -55,6 +55,10 @@ public abstract class Shape<E extends Shape> extends Built<E> {
 	return (E) this;
     }
 
+    public Vector3d getLocation() {
+	return location;
+    }
+
     @SuppressWarnings("unchecked")
     public E set_velocity(double x, double y, double z) {
 	velocity = new Vector3d(x, y, z);

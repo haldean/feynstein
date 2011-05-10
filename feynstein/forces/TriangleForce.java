@@ -2019,9 +2019,7 @@ public class TriangleForce extends Force<TriangleForce> {
 			localForce[3*i+6]   = Fx3;
 			localForce[3*i+7] = Fy3;
 			localForce[3*i+8] = Fz3;
-			
 		}
-		
 		return localForce;
 	}
 	

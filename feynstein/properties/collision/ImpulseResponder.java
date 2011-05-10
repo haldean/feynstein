@@ -52,8 +52,12 @@ public class ImpulseResponder extends CollisionResponder<ImpulseResponder> {
 		// is this using q_dot?
 		newPos = newState[0];
 		newVels = newState[1];
+		
 		//double[] newVels = integrator.predictVelocities();
-
+		/*for (int i = 0; i < scene.getMesh().getParticles().size(); i++) {
+			System.out.println(i+" NEW POS ["+newPos[3*i]+" "+newPos[3*i+1]+" "+newPos[3*i+2]);
+			System.out.println(i+" NEW VEL ["+newVels[3*i]+" "+newVels[3*i+1]+" "+newVels[3*i+2]);
+		}*/
 	double h = integrator.getStepSize();
 
 	//midstep velocity
@@ -61,6 +65,11 @@ public class ImpulseResponder extends CollisionResponder<ImpulseResponder> {
 	for (int i = 0; i < midStepVel.length; i++) {
 	    midStepVel[i] = (newPos[i] - X[i]) * (1 / h); //was: Q_dot = (q-X)*(1/h);
 	}
+		//double[] newVels = integrator.predictVelocities();
+		/*for (int i = 0; i < scene.getMesh().getParticles().size(); i++) {
+			//System.out.println(i+" MID POS ["+newPos[3*i]+" "+newPos[3*i+1]+" "+newPos[3*i+2]);
+			System.out.println(i+" MID VEL ["+midStepVel[3*i]+" "+midStepVel[3*i+1]+" "+midStepVel[3*i+2]);
+		}*/
 	
 	// TODO: right a method for the detector that takes X and Q as input
 	// alternatives, you could probably just update the scene vel to Q before
@@ -72,8 +81,15 @@ public class ImpulseResponder extends CollisionResponder<ImpulseResponder> {
 		
 	HashSet<Collision> cSet = detector.getPotentialCollisions(X, V);
 	
+		//double[] newVels = integrator.predictVelocities();
+		/*for (int i = 0; i < scene.getMesh().getParticles().size(); i++) {
+			System.out.println(i+" NEW POS 2["+newPos[3*i]+" "+newPos[3*i+1]+" "+newPos[3*i+2]);
+			System.out.println(i+" NEW VEL 2["+newVels[3*i]+" "+newVels[3*i+1]+" "+newVels[3*i+2]);
+		}*/
+		
 	//iteration counter
 	int j = 0;
+		//System.out.println("COLS "+cSet.size());
 	if (cSet.size() > 0) {
 	    //if count < max iterations or no cap
 	    while ( (cSet.size() > 0 && j < iter) || (cSet.size() > 0 && iter == -1) ) {
@@ -112,6 +128,11 @@ public class ImpulseResponder extends CollisionResponder<ImpulseResponder> {
 		newPos = midStepPos;
 		//col_rec.clear();
 	}	
+		//double[] newVels = integrator.predictVelocities();
+		/*for (int i = 0; i < scene.getMesh().getParticles().size(); i++) {
+			System.out.println(i+" NEW POS 3["+newPos[3*i]+" "+newPos[3*i+1]+" "+newPos[3*i+2]);
+			System.out.println(i+" NEW VEL 3["+newVels[3*i]+" "+newVels[3*i+1]+" "+newVels[3*i+2]);
+		}*/
 		// grab q_dot here 
 		/*
 		 _parts[i].fixed){
@@ -129,6 +150,7 @@ public class ImpulseResponder extends CollisionResponder<ImpulseResponder> {
 			if(!parts.get(i).isFixed()) {
 				Vector3d newX = new Vector3d(newPos[3*i], newPos[3*i+1], newPos[3*i+2]); 
 				Vector3d newV = new Vector3d(newVels[3*i], newVels[3*i+1], newVels[3*i+2]);
+				//System.out.println("UPDATE "+i+": "+newX+" "+newV);
 				parts.get(i).update(newX, newV);
 			}
 		}

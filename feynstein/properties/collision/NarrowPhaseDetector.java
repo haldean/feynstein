@@ -55,6 +55,9 @@ public abstract class NarrowPhaseDetector<E extends NarrowPhaseDetector> extends
 				}
 			}
 		}
+		//TESTING PURPOSES ONLY:
+		//for (Collision c : potentialCollisions)
+		//	System.out.println(c.toString());
 		return potentialCollisions;
     }
 
@@ -97,8 +100,10 @@ public abstract class NarrowPhaseDetector<E extends NarrowPhaseDetector> extends
 	}
 	
 	//TESTING PURPOSES ONLY:
-	for (Collision c : actualCollisions)
+	/*for (Collision c : actualCollisions)
 	    System.out.println(c.toString());
-    }
+    
+	*/
+	}
 
 }
