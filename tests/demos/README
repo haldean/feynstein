@@ -1,0 +1,4 @@
+Demonstrations:
+-clothdrape.f: A FluidPlane falls, due to the force of gravity, onto a fixed Cube and drapes over it
+-clothstack.f: Multiple FluidPlanes fall onto a larger, fixed fluid plane due to the force of gravity
+-rodbending1.f: Rodbending and Spring forces operate on a SpringChain in an environment with downward gravitational pull.
