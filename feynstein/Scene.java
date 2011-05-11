@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.media.opengl.awt.*;
+import javax.media.opengl.awt.GLCanvas;
 import com.jogamp.opengl.util.*;
 
 public abstract class Scene {
@@ -51,6 +51,7 @@ public abstract class Scene {
 
 	steppedInResponse = false;
 
+	initialize();
 	createShapes();
 	setProperties();
 	createForces();
@@ -217,4 +218,5 @@ public abstract class Scene {
     public abstract void createShapes();
     public abstract void createForces();
     public abstract void onFrame();
+    public void initialize() {;}
 }
