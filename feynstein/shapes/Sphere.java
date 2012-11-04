@@ -74,7 +74,7 @@ public class Sphere extends Shape<Sphere> {
 			 * face. */
 			edges.add(new Edge(last_disc+i-1, index));
 			triangles.add(new Triangle(last_disc+i-1, index-1, index));
-			triangles.add(new Triangle(last_disc+i-1, last_disc+i, index));
+			triangles.add(new Triangle(last_disc+i-1, index, last_disc+i));
 		    }
 		}
 	    }
@@ -84,7 +84,7 @@ public class Sphere extends Shape<Sphere> {
 	    if (disc_start >= 0) {
 		edges.add(new Edge(disc_start, disc_start+1));
 		triangles.add(new Triangle(last_disc+1, disc_start, disc_start+1));
-		triangles.add(new Triangle(disc_start, disc_start+1, index));
+		triangles.add(new Triangle(disc_start, index, disc_start+1));
 	    }
 
 	    edges.add(new Edge(disc_start+1, index));

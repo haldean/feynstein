@@ -75,7 +75,7 @@ public class FluidPlane extends Shape<FluidPlane> {
 		if (i < subdivisions - 1 && j < subdivisions - 1) {
 		    edges.add(new Edge(grid[loc(i,j)], grid[loc(i+1,j+1)]));
 		    triangles.add(new Triangle(grid[loc(i,j)], grid[loc(i+1,j)], grid[loc(i+1,j+1)]));
-		    triangles.add(new Triangle(grid[loc(i,j)], grid[loc(i,j+1)], grid[loc(i+1,j+1)]));
+		    triangles.add(new Triangle(grid[loc(i,j)], grid[loc(i+1,j+1)], grid[loc(i,j+1)]));
 		}
 	    }
 	}

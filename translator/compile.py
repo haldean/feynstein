@@ -34,6 +34,8 @@ def compile_feynstein(infile):
     java_source,javamap = translator.main(infile)
     p = subprocess.Popen(['javac', '-classpath', get_classpath(), 
                      '-Xlint:unchecked', java_source],stderr = subprocess.PIPE)
+    print(' '.join(['javac', '-classpath', get_classpath(), '-Xlint:unchecked',
+      java_source]))
     out,err = p.communicate()
     print(error_gen(err,javamap))
 

@@ -18,7 +18,7 @@ public class ClothPiece extends ParticleSet<ClothPiece> {
 		for (int i = 0; i < localMesh.size(); i+=4) {
 			if(i < localMesh.size() - 2) {
 				localMesh.getTriangles().add(new Triangle(i, i+1, i+2));
-				localMesh.getTriangles().add(new Triangle(i+2, i+3, i));
+				localMesh.getTriangles().add(new Triangle(i+2, i, i+3));
 			}
 		}
 		return super.compileShape();
