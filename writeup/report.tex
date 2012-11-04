@@ -1,6 +1,51 @@
-\input{/home/haldean/Documents/latex_template.tex}
+\documentclass[letterpaper]{article}
+\usepackage{amsmath,amssymb,appendix,color,etoolbox,
+  graphicx,index,listings,lscape,natbib,url}
+
+\usepackage{mathpazo} % math & rm
+\linespread{1.05}        % Palatino needs more leading (space between lines)
+\usepackage[scaled]{helvet} % ss
+\normalfont
+\usepackage[T1]{fontenc}
+
+\newcommand\figref[1]{Figure \ref{fig:#1}}
+\newcommand\tabref[1]{Table \ref{tab:#1}}
+\newcommand\code[1]{\texttt{#1}}
+\newcommand\pipe[0]{\;|\;}
+\newcommand\st[0]{\;\mathrm{s.t.}\;}
+\newcommand\startappendix{\appendix\appendixpage\addappheadtotoc}
+
+\newcommand\imgfig[4]{
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=#2]{figures/#1}
+  \caption{#3}
+  \label{fig:#4}
+\end{figure}}
+
+\definecolor{gray}{gray}{0.95}
+
+\lstset{
+  language=Python,
+  basicstyle=\footnotesize\ttfamily,
+  numbersep=5pt,              
+  tabsize=2,                  
+  extendedchars=true,         
+  breaklines=true,            
+  stringstyle=\ttfamily, 
+  showspaces=false,      
+  showtabs=false,        
+  xleftmargin=17pt,
+  framexleftmargin=17pt,
+  framexrightmargin=5pt,
+  framexbottommargin=4pt,
+  backgroundcolor=\color{gray},
+  showstringspaces=false 
+ }
+
+
 \title{Team Seven Project Report: Feynstein}
-\subtitle{A Language for Physical Simulation}
+%\subtitle{A Language for Physical Simulation}
 
 \author{Samantha Ainsley \and Eva Asplund \and William Brown \and
   Colleen McKenzie \and Robert Post}
@@ -8,53 +53,51 @@
 \newtoggle{tutorial}
 \newtoggle{manual}
 \newtoggle{listing}
+\newtoggle{appendix}
 
 \toggletrue{tutorial}
 \toggletrue{manual}
 \toggletrue{listing}
+\toggletrue{appendix}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-  Feynstein is a language designed for making physical simulation
-  accessible to those who want to experiment with physics but who do not
-  have significant experience in computer science. Feynstein will make
-  the process of going from an experiment’s conception to its simulation
-  simple and fast, and will provide the end user with accurate video
-  renderings, either in a file or on screen.
+  Feynstein is a language designed for making physical simulation accessible to
+  those who want to experiment with physics but do not have significant
+  experience in computer science. Feynstein makes the process of going from an
+  experiment's conception to its simulation simple and fast, and provides the
+  end user with accurate video renderings, either in a file or on screen.
 \end{abstract}
 
 \tableofcontents
 
 \section{Introduction}
 
-Historically, if users wanted to have the power of a full physical
-simulation engine, they had to either purchase and learn very complex
-and expensive 3D simulation software, or write it themselves (usually
-in C++). Because these options are costly and time-consuming, often
-students of physics will learn simulation using a software package
-like Matlab or Mathematica. These tools have the benefit of
-abstracting much of the complexity of the task, but with the loss of
-complexity comes a loss of control. Feynstein attempts to be a
-midpoint between these two extremes; it is a language that allows for
-the full expressivity of a complex simulation package, but with the
-ease-of-use that comes with a tool like Matlab.
+Historically, if users wanted to have the power of a full physical simulation
+engine, they had to either purchase and learn very complex and expensive 3D
+simulation software, or write it themselves (usually in C++). Because these
+options are costly and time-consuming, often students of physics will learn
+simulation using a software package like Matlab or Mathematica. These tools have
+the benefit of abstracting much of the complexity of the task, but with the loss
+of complexity comes a loss of control. Feynstein attempts to be a midpoint
+between these two extremes; it is a language that allows for the full
+expressivity of a complex simulation package, but with the ease-of-use that
+comes with a tool like Matlab.
 
-Feynstein's native simulator and its simple and convenient syntax make
-it an ideal tool for researchers with limited programming experience
-for configuration simulations to test experimental
-hypothesis. Moreover, the language offers an excellent framework for
-teaching the fundamentals of physics-based computer simulation to
-students with limited understanding of mechanics or programming.
+Feynstein's native simulator and its simple and convenient syntax make it an
+ideal tool for researchers with limited programming experience for configuration
+simulations to test experimental hypothesis. Moreover, the language offers an
+excellent framework for teaching the fundamentals of physics-based computer
+simulation to students with limited understanding of mechanics or programming.
 
-Feynstein is fully object oriented, allowing for easy
-extensibility. Users can customize integration and rendering methods,
-giving them full control of how their animation is calculated and
-displayed. Finally, users can use the built-in forces and 3D solids
-and define their own. Feynstein is appropriate for all levels of user
-expertise, whether they want to simulate a sphere on a spring or a
-complex compression force on a custom shape.
+Feynstein is fully object oriented, allowing for easy extensibility. Users can
+customize integration and rendering methods, giving them full control of how
+their animation is calculated and displayed. Finally, users can use the built-in
+forces and 3D solids and define their own. Feynstein is appropriate for all
+levels of user expertise, whether they want to simulate a sphere on a spring or
+a complex compression force on a custom shape.
 
 \iftoggle{tutorial}{
 \section{Language Tutorial}
@@ -94,6 +137,7 @@ complex compression force on a custom shape.
 \section{Conclusion}
 \input{lessons.tex}
 
+\iftoggle{appendix}{
 \startappendix
 
 \section{Project Contributions}
@@ -109,6 +153,8 @@ complex compression force on a custom shape.
 \iftoggle{listing}{
   \input{feynstein.listing.tex}
   \input{tests.listing.tex}
-  \input{translator.listing.tex}}{}
+  \input{translator.listing.tex}}{
+  Source code can be found at \url{https://github.com/haldean/feynstein}}
+}
 
 \end{document}
